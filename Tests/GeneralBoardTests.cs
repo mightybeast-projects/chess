@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Chess.Tests;
 
 [TestFixture]
-public class BoardTests
+public class GeneralBoardTests
 {
     private Board _board;
     private TileColor _expectedColor;
@@ -49,7 +49,7 @@ public class BoardTests
     [Test]
     public void ZeroSevenTileIsWhite()
     {
-        Assert.AreEqual(TileColor.WHITE, _board.grid[0,7].color);
+        Assert.AreEqual(TileColor.WHITE, _board.grid[0, 7].color);
     }
 
     [Test]

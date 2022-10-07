@@ -9,6 +9,13 @@ class Board
         InitializeMatrix();
     }
 
+    internal Tile GetTile(string tileName)
+    {
+        int symbolIndex = ((int) char.ToUpper(tileName[0])) - 64; 
+        int numberIndex = tileName[1] - '0';
+        return grid[numberIndex - 1, symbolIndex - 1];
+    }
+
     private void InitializeMatrix()
     {
         grid = new Tile[8, 8];
