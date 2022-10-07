@@ -4,16 +4,9 @@ using NUnit.Framework;
 namespace Chess.Tests;
 
 [TestFixture]
-public class GeneralBoardTests
+class GeneralBoardTests : BoardSetUp
 {
-    private Board _board;
     private TileColor _expectedColor;
-
-    [SetUp]
-    public void SetUp()
-    {
-        _board = new Board();
-    }
 
     [Test]
     public void BoardGridInitialization()

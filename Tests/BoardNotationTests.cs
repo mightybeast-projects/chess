@@ -4,16 +4,8 @@ using NUnit.Framework;
 namespace Chess.Tests;
 
 [TestFixture]
-public class BoardNotationTests
+class BoardNotationTests : BoardSetUp
 {
-    private Board _board;
-
-    [SetUp]
-    public void SetUp()
-    {
-        _board = new Board();
-    }
-
     [Test]
     public void TileIsInMatrix()
     {
@@ -45,7 +37,7 @@ public class BoardNotationTests
     private void AssertLineNotation(int index)
     {
         Tile tile;
-        
+
         for (int i = 0; i < _board.grid.GetLength(0); i++)
         {
             char letter = (char) (i + 65);

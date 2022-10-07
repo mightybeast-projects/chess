@@ -1,12 +1,12 @@
 namespace Chess.Core;
 
-class Board
+public class Board
 {
     public Tile[,] grid;
 
     public Board()
     {
-        InitializeMatrix();
+        InitializeGrid();
     }
 
     internal Tile GetTile(string tileName)
@@ -16,7 +16,7 @@ class Board
         return grid[numberIndex - 1, symbolIndex - 1];
     }
 
-    private void InitializeMatrix()
+    private void InitializeGrid()
     {
         grid = new Tile[8, 8];
 

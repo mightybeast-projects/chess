@@ -1,6 +1,6 @@
 namespace Chess.Core;
 
-class Tile
+public class Tile
 {
     public TileColor color;
 }
