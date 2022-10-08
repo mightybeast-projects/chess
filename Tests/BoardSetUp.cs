@@ -9,7 +9,7 @@ class BoardSetUp
     protected Board _board;
 
     [SetUp]
-    public void SetUp()
+    public virtual void SetUp()
     {
         _board = new Board();
     }
