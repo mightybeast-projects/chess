@@ -9,11 +9,18 @@ public class Board
         InitializeGrid();
     }
 
-    internal Tile GetTile(string tileName)
+    public Tile GetTile(string tileName)
     {
         int symbolIndex = ((int) char.ToUpper(tileName[0])) - 64; 
         int numberIndex = tileName[1] - '0';
         return grid[numberIndex - 1, symbolIndex - 1];
+    }
+
+    public Pawn AddPawn(string tileName)
+    {
+        Pawn pawn = new Pawn();
+        pawn.tile = GetTile(tileName);
+        return pawn;
     }
 
     private void InitializeGrid()
