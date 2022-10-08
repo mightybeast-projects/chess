@@ -27,7 +27,7 @@ public class Board
 
     private void InitiializeTile(int i, int j)
     {
-        Tile tile = new Tile();
+        Tile tile = new Tile(i, j);
 
         if (j % 2 == 0 && i % 2 == 0)
             tile.color = TileColor.BLACK;
