@@ -1,3 +1,5 @@
+using Chess.Core.Exceptions;
+
 namespace Chess.Core;
 
 public class Board
@@ -11,15 +13,16 @@ public class Board
 
     public Tile GetTile(string tileName)
     {
-        int symbolIndex = ((int) char.ToUpper(tileName[0])) - 64; 
-        int numberIndex = tileName[1] - '0';
-        return grid[numberIndex - 1, symbolIndex - 1];
+        try { return ParseTileName(tileName); }
+        catch (Exception) { throw new IncorrectTileNotationException(); }
     }
 
-    public Pawn AddPawn(string tileName)
+    public Piece AddPiece(string tileName)
     {
-        Pawn pawn = new Pawn();
-        pawn.tile = GetTile(tileName);
+        Piece pawn = new Piece();
+        Tile tile = GetTile(tileName);
+        tile.isEmpty = false;
+        pawn.tile = tile;
         return pawn;
     }
 
@@ -46,5 +49,12 @@ public class Board
             tile.color = TileColor.BLACK;
 
         grid[i, j] = tile;
+    }
+
+    private Tile ParseTileName(string tileName)
+    {
+        int symbolIndex = ((int)char.ToUpper(tileName[0])) - 64;
+        int numberIndex = tileName[1] - '0';
+        return grid[numberIndex - 1, symbolIndex - 1];
     }
 }

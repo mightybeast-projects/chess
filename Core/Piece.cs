@@ -1,6 +1,6 @@
 namespace Chess.Core;
 
-public class Pawn
+public class Piece
 {
     public Tile tile;
 }
