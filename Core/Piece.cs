@@ -13,6 +13,8 @@ public class Piece
 
     public void Move(string tileName)
     {
-
+        tile.isEmpty = true;
+        tile = board.GetTile(tileName);
+        tile.isEmpty = false;
     }
 }

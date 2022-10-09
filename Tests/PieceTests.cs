@@ -21,6 +21,7 @@ class PieceTests : BoardSetUp
     {
         _tile = _board.GetTile("d4");
         _piece = new Piece(_board, _tile);
+        
         Assert.AreEqual(_board, _piece.board);
         Assert.AreEqual(_tile, _piece.tile);
     }
@@ -38,6 +39,7 @@ class PieceTests : BoardSetUp
     {
         _piece = _board.AddPiece("a1");
         Assert.AreEqual(_board.grid[0, 0], _piece.tile);
+
         _piece = _board.AddPiece("b1");
         Assert.AreEqual(_board.grid[0, 1], _piece.tile);
     }
@@ -52,5 +54,16 @@ class PieceTests : BoardSetUp
         Assert.IsFalse(_board.grid[0, 0].isEmpty);
         Assert.IsFalse(_board.grid[3, 3].isEmpty);
         Assert.IsFalse(_board.grid[3, 4].isEmpty);
+    }
+
+    [Test]
+    public void MovePiece()
+    {
+        _piece = _board.AddPiece("d4");
+        _piece.Move("d8");
+
+        Assert.IsTrue(_board.GetTile("d4").isEmpty);
+        Assert.AreEqual(_board.GetTile("d8"), _piece.tile);
+        Assert.IsFalse(_board.GetTile("d8").isEmpty);
     }
 }
