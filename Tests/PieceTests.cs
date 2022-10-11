@@ -10,7 +10,9 @@ class PieceTests : BoardSetUp
     [Test]
     public void PieceInitializationTest()
     {
-        CreatePiece("d4", Color.WHITE);
+        _tile = _board.GetTile("d4");
+        _color = Color.WHITE;
+        _piece = new Piece(_tile, _color);
         _piece.board = _board;
         
         AssertPiece();
@@ -19,26 +21,19 @@ class PieceTests : BoardSetUp
     [Test]
     public void AddPieceToBoard()
     {
-        CreatePiece("a1", Color.WHITE);
-        _board.AddPiece(_piece);
-
+        CreateAndAddPiece(typeof(Piece), "a1", Color.WHITE);
         AssertPiece();
 
-        CreatePiece("b1", Color.BLACK);
-        _board.AddPiece(_piece);
-
+        CreateAndAddPiece(typeof(Piece), "b1", Color.BLACK);
         AssertPiece();
     }
 
     [Test]
     public void TileWithPieceIsNotEmpty()
     {
-        CreatePiece("a1", Color.BLACK);
-        _board.AddPiece(_piece);
-        CreatePiece("e4", Color.BLACK);
-        _board.AddPiece(_piece);
-        CreatePiece("d4", Color.BLACK);
-        _board.AddPiece(_piece);
+        CreateAndAddPiece(typeof(Piece), "a1", Color.BLACK);
+        CreateAndAddPiece(typeof(Piece), "e4", Color.BLACK);
+        CreateAndAddPiece(typeof(Piece), "d4", Color.BLACK);
 
         Assert.IsFalse(_board.grid[0, 0].isEmpty);
         Assert.IsFalse(_board.grid[3, 3].isEmpty);
@@ -48,8 +43,8 @@ class PieceTests : BoardSetUp
     [Test]
     public void MovePiece()
     {
-        CreatePiece("d4", Color.WHITE);
-        _piece = _board.AddPiece(_piece);
+        CreateAndAddPiece(typeof(Piece), "d4", Color.WHITE);
+        
         _piece.Move("d8");
 
         Assert.IsTrue(_board.GetTile("d4").isEmpty);
