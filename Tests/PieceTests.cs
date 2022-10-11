@@ -7,8 +7,9 @@ namespace Chess.Tests;
 [TestFixture]
 class PieceTests : BoardSetUp
 {
-    private Tile _tile;
     private Piece _piece;
+    private Tile _tile;
+    private Color _color;
 
     [SetUp]
     public override void SetUp()
@@ -19,37 +20,35 @@ class PieceTests : BoardSetUp
     [Test]
     public void PieceInitializationTest()
     {
-        _tile = _board.GetTile("d4");
-        _piece = new Piece(_board, _tile);
+        CreatePiece("d4", Color.WHITE);
+        _piece.board = _board;
         
-        Assert.AreEqual(_board, _piece.board);
-        Assert.AreEqual(_tile, _piece.tile);
-    }
-
-    [Test]
-    public void AddPieceBeyondBoard()
-    {
-        Assert.Throws<IncorrectTileNotationException>(
-            () => _board.AddPiece("a0")
-        );
+        AssertPiece();
     }
 
     [Test]
     public void AddPieceToBoard()
     {
-        _piece = _board.AddPiece("a1");
-        Assert.AreEqual(_board.grid[0, 0], _piece.tile);
+        CreatePiece("a1", Color.WHITE);
+        _board.AddPiece(_piece);
 
-        _piece = _board.AddPiece("b1");
-        Assert.AreEqual(_board.grid[0, 1], _piece.tile);
+        AssertPiece();
+
+        CreatePiece("b1", Color.BLACK);
+        _board.AddPiece(_piece);
+
+        AssertPiece();
     }
 
     [Test]
     public void TileWithPieceIsNotEmpty()
     {
-        _board.AddPiece("a1");
-        _board.AddPiece("e4");
-        _board.AddPiece("d4");
+        CreatePiece("a1", Color.BLACK);
+        _board.AddPiece(_piece);
+        CreatePiece("e4", Color.BLACK);
+        _board.AddPiece(_piece);
+        CreatePiece("d4", Color.BLACK);
+        _board.AddPiece(_piece);
 
         Assert.IsFalse(_board.grid[0, 0].isEmpty);
         Assert.IsFalse(_board.grid[3, 3].isEmpty);
@@ -59,11 +58,26 @@ class PieceTests : BoardSetUp
     [Test]
     public void MovePiece()
     {
-        _piece = _board.AddPiece("d4");
+        CreatePiece("d4", Color.WHITE);
+        _piece = _board.AddPiece(_piece);
         _piece.Move("d8");
 
         Assert.IsTrue(_board.GetTile("d4").isEmpty);
         Assert.AreEqual(_board.GetTile("d8"), _piece.tile);
         Assert.IsFalse(_board.GetTile("d8").isEmpty);
+    }
+
+    private void CreatePiece(string tileName, Color color)
+    {
+        _tile = _board.GetTile(tileName);
+        _color = color;
+        _piece = new Piece(_tile, _color);
+    }
+
+    private void AssertPiece()
+    {
+        Assert.AreEqual(_board, _piece.board);
+        Assert.AreEqual(_tile, _piece.tile);
+        Assert.AreEqual(_color, _piece.color);
     }
 }

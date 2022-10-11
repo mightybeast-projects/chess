@@ -6,7 +6,7 @@ namespace Chess.Tests;
 [TestFixture]
 class GeneralBoardTests : BoardSetUp
 {
-    private TileColor _expectedColor;
+    private Color _expectedColor;
 
     [Test]
     public void BoardGridInitialization()
@@ -30,25 +30,25 @@ class GeneralBoardTests : BoardSetUp
     [Test]
     public void ZeroZeroTileIsBlack()
     {
-        Assert.AreEqual(TileColor.BLACK, _board.grid[0, 0].color);
+        Assert.AreEqual(Color.BLACK, _board.grid[0, 0].color);
     }
 
     [Test]
     public void ZeroOneTileIsWhite()
     {
-        Assert.AreEqual(TileColor.WHITE, _board.grid[0, 1].color);
+        Assert.AreEqual(Color.WHITE, _board.grid[0, 1].color);
     }
 
     [Test]
     public void ZeroSevenTileIsWhite()
     {
-        Assert.AreEqual(TileColor.WHITE, _board.grid[0, 7].color);
+        Assert.AreEqual(Color.WHITE, _board.grid[0, 7].color);
     }
 
     [Test]
     public void OneZeroTileIsWhite()
     {
-        Assert.AreEqual(TileColor.WHITE, _board.grid[1, 0].color);
+        Assert.AreEqual(Color.WHITE, _board.grid[1, 0].color);
     }
 
     [Test]
@@ -68,9 +68,9 @@ class GeneralBoardTests : BoardSetUp
         for (int i = 0; i < _board.grid.GetLength(0); i++)
         {
             if (i % 2 == 0)
-                _expectedColor = TileColor.BLACK;
+                _expectedColor = Color.BLACK;
             else
-                _expectedColor = TileColor.WHITE;
+                _expectedColor = Color.WHITE;
 
             AssertExpectedColor(lineIndex, i);
         }
@@ -81,9 +81,9 @@ class GeneralBoardTests : BoardSetUp
         for (int i = 0; i < _board.grid.GetLength(0); i++)
         {
             if (i % 2 == 0)
-                _expectedColor = TileColor.WHITE;
+                _expectedColor = Color.WHITE;
             else
-                _expectedColor = TileColor.BLACK;
+                _expectedColor = Color.BLACK;
 
             AssertExpectedColor(lineIndex, i);
         }

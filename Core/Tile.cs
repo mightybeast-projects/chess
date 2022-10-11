@@ -2,14 +2,14 @@ namespace Chess.Core;
 
 public class Tile
 {
-    public TileColor color => _color;
+    public Color color => _color;
     public string notation => _notation;
     public bool isEmpty = true;
 
-    private TileColor _color;
+    private Color _color;
     private string _notation;
 
-    public Tile(int i, int j, TileColor tileColor)
+    public Tile(int i, int j, Color tileColor)
     {
         char letter = (char) (j + 65);
         int number = i + 1;

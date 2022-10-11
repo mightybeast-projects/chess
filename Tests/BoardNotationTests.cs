@@ -27,14 +27,14 @@ class BoardNotationTests : BoardSetUp
     public void D4TileIsBlack()
     {
         _tile = _board.GetTile("d4");
-        Assert.AreEqual(TileColor.BLACK, _tile.color);
+        Assert.AreEqual(Color.BLACK, _tile.color);
     }
 
     [Test]
     public void E4TileIsWhite()
     {
         _tile = _board.GetTile("e4");
-        Assert.AreEqual(TileColor.WHITE, _tile.color);
+        Assert.AreEqual(Color.WHITE, _tile.color);
     }
 
     [Test]

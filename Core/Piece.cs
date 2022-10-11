@@ -3,12 +3,15 @@ namespace Chess.Core;
 public class Piece
 {
     public Tile tile;
-    public Board board;
+    public Board board { get; set; }
+    public Color color;
 
-    public Piece(Board board, Tile tile)
+    public Piece(Tile tile, Color color)
     {
-        this.board = board;
         this.tile = tile;
+        this.color = color;
+
+        tile.isEmpty = false;
     }
 
     public void Move(string tileName)

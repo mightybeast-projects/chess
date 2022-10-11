@@ -1,6 +1,6 @@
 namespace Chess.Core;
 
-public enum TileColor
+public enum Color
 {
     BLACK,
     WHITE

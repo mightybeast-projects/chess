@@ -19,13 +19,10 @@ public class Board
         catch (Exception) { throw new IncorrectTileNotationException(); }
     }
 
-    public Piece AddPiece(string tileName)
+    public Piece AddPiece(Piece piece)
     {
-        Tile tile = GetTile(tileName);
-        tile.isEmpty = false;
-        Piece pawn = new Piece(this, tile);
-        pawn.tile = tile;
-        return pawn;
+        piece.board = this;
+        return piece;
     }
 
     private void InitializeGrid()
@@ -39,16 +36,16 @@ public class Board
 
     private void InitiializeTile(int i, int j)
     {
-        TileColor chosenColor;
+        Color chosenColor;
 
         if (j % 2 == 0 && i % 2 == 0)
-            chosenColor = TileColor.BLACK;
+            chosenColor = Color.BLACK;
         else if (j % 2 == 0 && i % 2 > 0)
-            chosenColor = TileColor.WHITE;
+            chosenColor = Color.WHITE;
         else if (i % 2 == 0)
-            chosenColor = TileColor.WHITE;
+            chosenColor = Color.WHITE;
         else
-            chosenColor = TileColor.BLACK;
+            chosenColor = Color.BLACK;
 
         Tile tile = new Tile(i, j, chosenColor);
         _grid[i, j] = tile;
