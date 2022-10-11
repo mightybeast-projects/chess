@@ -5,12 +5,14 @@ namespace Chess.Core;
 public class Board
 {
     public Tile[,] grid => _grid;
+    public List<Piece> pieces;
 
     private Tile[,] _grid;
 
     public Board()
     {
         InitializeGrid();
+        pieces = new List<Piece>();
     }
 
     public Tile GetTile(string tileName)
@@ -22,6 +24,7 @@ public class Board
     public Piece AddPiece(Piece piece)
     {
         piece.board = this;
+        pieces.Add(piece);
         return piece;
     }
 

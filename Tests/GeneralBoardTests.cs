@@ -7,6 +7,13 @@ namespace Chess.Tests;
 class GeneralBoardTests : BoardSetUp
 {
     [Test]
+    public void TileInitialization()
+    {
+        Assert.IsTrue(_tile.isEmpty);
+        Assert.IsNull(_tile.piece);
+    }
+
+    [Test]
     public void BoardGridInitialization()
     {
         Assert.IsNotNull(_board.grid);
@@ -50,7 +57,7 @@ class GeneralBoardTests : BoardSetUp
     }
 
     [Test]
-    public void FullBoardTest()
+    public void FullBoardNotationIsCorrect()
     {
         for (int i = 0; i < _board.grid.GetLength(0); i++)
         {

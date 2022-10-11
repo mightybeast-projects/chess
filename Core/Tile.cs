@@ -2,9 +2,10 @@ namespace Chess.Core;
 
 public class Tile
 {
+    public Piece piece;
     public Color color => _color;
     public string notation => _notation;
-    public bool isEmpty = true;
+    public bool isEmpty => piece is null;
 
     private Color _color;
     private string _notation;

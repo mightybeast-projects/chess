@@ -6,18 +6,47 @@ public class Piece
     public Board board { get; set; }
     public Color color;
 
+    private Tile _targetTile;
+
     public Piece(Tile tile, Color color)
     {
         this.tile = tile;
         this.color = color;
 
-        tile.isEmpty = false;
+        tile.piece = this;
     }
 
     public void Move(string tileName)
     {
-        tile.isEmpty = true;
-        tile = board.GetTile(tileName);
-        tile.isEmpty = false;
+        _targetTile = board.GetTile(tileName);
+
+        try
+        {
+            HandleOccupiedTile();
+        }
+        catch (NullReferenceException)
+        {
+            ChangeCurrentPosition();
+        }
+    }
+
+    private void HandleOccupiedTile()
+    {
+        CheckTargetTile();
+        board.pieces.Remove(_targetTile.piece);
+        ChangeCurrentPosition();
+    }
+
+    private void ChangeCurrentPosition()
+    {
+        tile.piece = null!;
+        tile = _targetTile;
+        tile.piece = this;
+    }
+
+    private void CheckTargetTile()
+    {
+        if (_targetTile.piece.color == color)
+            throw new OccupiedByAllyException();
     }
 }

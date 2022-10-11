@@ -21,9 +21,10 @@ class BoardSetUp
     public virtual void SetUp()
     {
         _board = new Board();
+        _tile = new Tile(0, 0, Color.BLACK);
     }
 
-    protected void CreateAndAddPiece(Type pieceType, string tileName, Color color)
+    protected Piece CreateAndAddPiece(Type pieceType, string tileName, Color color)
     {
         _tile = _board.GetTile(tileName);
         _color = color;
@@ -36,17 +37,17 @@ class BoardSetUp
         };
         _ctor = pieceType.GetConstructor(_ctorTypes);
         _pieceObj = _ctor?.Invoke(_ctorArgs);
-        _piece = _pieceObj is null ?
-            new Piece(_tile, _color) :
-            (Piece)_pieceObj;
+        _piece = (Piece)_pieceObj!;
 
-        _board.AddPiece(_piece);
+        return _board.AddPiece(_piece);
     }
 
     protected void AssertPiece()
     {
         Assert.AreEqual(_board, _piece.board);
         Assert.AreEqual(_tile, _piece.tile);
+        Assert.AreEqual(_tile.piece, _piece);
         Assert.AreEqual(_color, _piece.color);
+        Assert.IsFalse(_board.GetTile(_tile.notation).isEmpty);
     }
 }
