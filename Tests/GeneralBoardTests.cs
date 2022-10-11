@@ -6,8 +6,6 @@ namespace Chess.Tests;
 [TestFixture]
 class GeneralBoardTests : BoardSetUp
 {
-    private Color _expectedColor;
-
     [Test]
     public void BoardGridInitialization()
     {
@@ -68,9 +66,9 @@ class GeneralBoardTests : BoardSetUp
         for (int i = 0; i < _board.grid.GetLength(0); i++)
         {
             if (i % 2 == 0)
-                _expectedColor = Color.BLACK;
+                _color = Color.BLACK;
             else
-                _expectedColor = Color.WHITE;
+                _color = Color.WHITE;
 
             AssertExpectedColor(lineIndex, i);
         }
@@ -81,14 +79,14 @@ class GeneralBoardTests : BoardSetUp
         for (int i = 0; i < _board.grid.GetLength(0); i++)
         {
             if (i % 2 == 0)
-                _expectedColor = Color.WHITE;
+                _color = Color.WHITE;
             else
-                _expectedColor = Color.BLACK;
+                _color = Color.BLACK;
 
             AssertExpectedColor(lineIndex, i);
         }
     }
 
     private void AssertExpectedColor(int i, int j) => 
-        Assert.AreEqual(_expectedColor, _board.grid[i, j].color);
+        Assert.AreEqual(_color, _board.grid[i, j].color);
 }

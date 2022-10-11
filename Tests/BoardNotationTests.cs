@@ -7,8 +7,6 @@ namespace Chess.Tests;
 [TestFixture]
 class BoardNotationTests : BoardSetUp
 {
-    private Tile _tile;
-
     [Test]
     public void BoardTileHasCorrectNotation()
     {

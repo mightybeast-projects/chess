@@ -7,16 +7,6 @@ namespace Chess.Tests;
 [TestFixture]
 class PieceTests : BoardSetUp
 {
-    private Piece _piece;
-    private Tile _tile;
-    private Color _color;
-
-    [SetUp]
-    public override void SetUp()
-    {
-        base.SetUp();
-    }
-
     [Test]
     public void PieceInitializationTest()
     {
@@ -65,19 +55,5 @@ class PieceTests : BoardSetUp
         Assert.IsTrue(_board.GetTile("d4").isEmpty);
         Assert.AreEqual(_board.GetTile("d8"), _piece.tile);
         Assert.IsFalse(_board.GetTile("d8").isEmpty);
-    }
-
-    private void CreatePiece(string tileName, Color color)
-    {
-        _tile = _board.GetTile(tileName);
-        _color = color;
-        _piece = new Piece(_tile, _color);
-    }
-
-    private void AssertPiece()
-    {
-        Assert.AreEqual(_board, _piece.board);
-        Assert.AreEqual(_tile, _piece.tile);
-        Assert.AreEqual(_color, _piece.color);
     }
 }
