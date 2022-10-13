@@ -2,20 +2,27 @@ namespace Chess.Core;
 
 public class Tile
 {
-    public Piece piece;
-    public Color color => _color;
-    public string notation => _notation;
+    public Piece piece { get; private set; }
+    public Color color { get; }
+    public string notation { get; private set; }
     public bool isEmpty => piece is null;
 
-    private Color _color;
-    private string _notation;
-
-    public Tile(int i, int j, Color tileColor)
+    public Tile(int i, int j, Color color)
     {
-        char letter = (char) (j + 65);
+        ParseNotation(i, j);
+        this.color = color;
+    }
+
+    public void SetPiece(Piece piece)
+    {
+        this.piece = piece;
+    }
+
+    private void ParseNotation(int i, int j)
+    {
+        char letter = (char)(j + 65);
         int number = i + 1;
-        _notation = letter.ToString().ToLower() + number;
-        _color = tileColor;
+        notation = letter.ToString().ToLower() + number;
     }
 
     public override string? ToString()

@@ -10,7 +10,7 @@ class Pawn : Piece
 
     protected override void AddHints()
     {
-        Tile hintTile = _board.GetTile("a3");
-        _hints.Add(hintTile);
+        Tile hintTile = board.GetTile("a3");
+        hints.Add(hintTile);
     }
 }

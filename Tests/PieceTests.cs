@@ -12,7 +12,7 @@ class PieceTests : BoardSetUp
         _tile = _board.GetTile("d4");
         _color = Color.WHITE;
         _piece = new Piece(_tile, _color);
-        _piece.board = _board;
+        _piece.SetBoard(_board);
         
         AssertPiece();
     }
