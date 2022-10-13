@@ -66,6 +66,7 @@ class PieceTests : BoardSetUp
         Assert.AreEqual(1, _board.pieces.Count);
         Assert.AreEqual(_board.GetTile("d5"), d4Piece.tile);
         Assert.AreEqual(_board.GetTile("d5").piece, d4Piece);
+        Assert.IsFalse(_board.pieces.Contains(d5Piece));
     }
 
     private void AssertBoardPiece()
