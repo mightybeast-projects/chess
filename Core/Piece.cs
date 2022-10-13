@@ -11,17 +11,21 @@ public class Piece
     
     public Piece(Tile tile, Color color)
     {
-        hints = new List<Tile>();
         this.tile = tile;
         this.color = color;
 
         tile.SetPiece(this);
     }
 
+    public virtual void UpdateHints()
+    {
+        hints = new List<Tile>();
+    }
+
     public void SetBoard(Board board)
     {
         this.board = board;
-        AddHints();
+        UpdateHints();
     }
 
     public void Move(string tileName)
@@ -37,8 +41,6 @@ public class Piece
             ChangeCurrentPosition();
         }
     }
-
-    protected virtual void AddHints() { }
 
     private void HandleOccupiedTile()
     {

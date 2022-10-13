@@ -25,6 +25,8 @@ public class Board
     {
         piece.SetBoard(this);
         pieces.Add(piece);
+        foreach (Piece p in pieces)
+            p.UpdateHints();
         return piece;
     }
 
