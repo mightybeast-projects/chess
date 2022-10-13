@@ -5,12 +5,17 @@ public class Tile
     public Piece piece { get; private set; }
     public Color color { get; }
     public string notation { get; private set; }
+    public int i { get; }
+    public int j { get; }
     public bool isEmpty => piece is null;
 
     public Tile(int i, int j, Color color)
     {
-        ParseNotation(i, j);
+        this.i = i;
+        this.j = j;
         this.color = color;
+
+        ParseNotation(i, j);
     }
 
     public void SetPiece(Piece piece)

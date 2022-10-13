@@ -2,32 +2,22 @@ using Chess.Core;
 
 class Pawn : Piece
 {
-    private string _currentPositionStr;
-    private string _newPositionStr;
-    private string _hintTileIndexStr;
-    private int _currentTileIndex;
-
     public Pawn(Tile tile, Color color) : base (tile, color) { }
 
     public override void UpdateHints()
     {
         base.UpdateHints();
 
-        _currentPositionStr = tile.notation;
-        _currentTileIndex = Int32.Parse(_currentPositionStr[1].ToString());
-
-        AddNewHintTileWithIndex(1);
+        AddNewHintTileWithIndex(1, 0);
         if (hints.Count == 0) return;
 
-        if (_currentTileIndex == 2)
-            AddNewHintTileWithIndex(2);
+        if (currentTile.i == 1)
+            AddNewHintTileWithIndex(2, 0);
     }
 
-    private void AddNewHintTileWithIndex(int tileIndex)
+    private void AddNewHintTileWithIndex(int i, int j)
     {
-        _hintTileIndexStr = (_currentTileIndex + tileIndex).ToString();
-        _newPositionStr = _currentPositionStr[0] + _hintTileIndexStr;
-        Tile hintTile = board.GetTile(_newPositionStr);
+        Tile hintTile = board.grid[currentTile.i + i, currentTile.j];
         if (hintTile.isEmpty)
             hints.Add(hintTile);
     }

@@ -4,14 +4,14 @@ public class Piece
 {
     public Board board { get; private set; }
     public List<Tile> hints { get; protected set; }
-    public Tile tile { get; protected set; }
+    public Tile currentTile { get; protected set; }
     public Color color { get; }
 
     private Tile _targetTile;
     
     public Piece(Tile tile, Color color)
     {
-        this.tile = tile;
+        this.currentTile = tile;
         this.color = color;
 
         tile.SetPiece(this);
@@ -51,9 +51,9 @@ public class Piece
 
     private void ChangeCurrentPosition()
     {
-        tile.SetPiece(null!);
-        tile = _targetTile;
-        tile.SetPiece(this);
+        currentTile.SetPiece(null!);
+        currentTile = _targetTile;
+        currentTile.SetPiece(this);
     }
 
     private void CheckTargetTile()

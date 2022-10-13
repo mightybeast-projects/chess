@@ -36,7 +36,7 @@ class PieceTests : BoardSetUp
 
         Assert.IsTrue(_board.GetTile("d4").isEmpty);
         Assert.IsNull(_board.GetTile("d4").piece);
-        Assert.AreEqual(_board.GetTile("d8"), _piece.tile);
+        Assert.AreEqual(_board.GetTile("d8"), _piece.currentTile);
         Assert.IsFalse(_board.GetTile("d8").isEmpty);
         Assert.AreEqual(_board.GetTile("d8").piece, _piece);
     }
@@ -51,8 +51,8 @@ class PieceTests : BoardSetUp
         Assert.Throws<OccupiedByAllyException>(
             () => d4Piece.Move("d5")
         );
-        Assert.AreEqual(_board.GetTile("d4"), d4Piece.tile);
-        Assert.AreEqual(_board.GetTile("d5"), d5Piece.tile);
+        Assert.AreEqual(_board.GetTile("d4"), d4Piece.currentTile);
+        Assert.AreEqual(_board.GetTile("d5"), d5Piece.currentTile);
     }
 
     [Test]
@@ -64,7 +64,7 @@ class PieceTests : BoardSetUp
 
         d4Piece.Move("d5");
         Assert.AreEqual(1, _board.pieces.Count);
-        Assert.AreEqual(_board.GetTile("d5"), d4Piece.tile);
+        Assert.AreEqual(_board.GetTile("d5"), d4Piece.currentTile);
         Assert.AreEqual(_board.GetTile("d5").piece, d4Piece);
         Assert.IsFalse(_board.pieces.Contains(d5Piece));
     }

@@ -45,7 +45,7 @@ class BoardSetUp
     protected void AssertPiece()
     {
         Assert.AreEqual(_board, _piece.board);
-        Assert.AreEqual(_tile, _piece.tile);
+        Assert.AreEqual(_tile, _piece.currentTile);
         Assert.AreEqual(_tile.piece, _piece);
         Assert.AreEqual(_color, _piece.color);
         Assert.IsFalse(_board.GetTile(_tile.notation).isEmpty);
