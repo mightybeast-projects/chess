@@ -2,14 +2,26 @@ namespace Chess.Core;
 
 public class Piece
 {
-    public Tile tile;
-    public Board board { get; set; }
+    public Board board
+    {
+        get => _board;
+        set
+        {
+            _board = value;
+            AddHints();
+        }
+    }
+    public List<Tile> hints => _hints;
+    public Tile tile { get; private set; }
     public Color color;
 
+    protected Board _board;
+    protected List<Tile> _hints;
     private Tile _targetTile;
-
+    
     public Piece(Tile tile, Color color)
     {
+        _hints = new List<Tile>();
         this.tile = tile;
         this.color = color;
 
@@ -18,7 +30,7 @@ public class Piece
 
     public void Move(string tileName)
     {
-        _targetTile = board.GetTile(tileName);
+        _targetTile = _board.GetTile(tileName);
 
         try
         {
@@ -30,10 +42,12 @@ public class Piece
         }
     }
 
+    protected virtual void AddHints() { }
+
     private void HandleOccupiedTile()
     {
         CheckTargetTile();
-        board.pieces.Remove(_targetTile.piece);
+        _board.pieces.Remove(_targetTile.piece);
         ChangeCurrentPosition();
     }
 
