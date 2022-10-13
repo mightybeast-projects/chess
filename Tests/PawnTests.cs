@@ -16,15 +16,15 @@ class PawnTests : BoardSetUp
     [Test]
     public void WhitePawnHasOneHintTile()
     {
-        AssertHintTiles("d4", new string[] { "d5" });
-        AssertHintTiles("e4", new string[] { "e5" });
+        CreatePawnAndAssertHintTiles("d4", new string[] { "d5" });
+        CreatePawnAndAssertHintTiles("e4", new string[] { "e5" });
     }
 
     [Test]
     public void WhitePawnHasTwoHintTiles()
     {
-        AssertHintTiles("a2", new string[] { "a3", "a4" });
-        AssertHintTiles("d2", new string[] { "d3", "d4" });
+        CreatePawnAndAssertHintTiles("d2", new string[] { "d3", "d4" });
+        CreatePawnAndAssertHintTiles("e2", new string[] { "e3", "e4" });
     }
 
     [Test]
@@ -36,12 +36,34 @@ class PawnTests : BoardSetUp
         Assert.IsEmpty(d2Pawn.hints);
     }
 
-    private void AssertHintTiles(string startingPosition, string[] hints)
+    [Test]
+    public void WhitePawnHasOneHintTileAndOneCapture()
+    {
+        CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
+        CreatePawnAndAssertHintTiles("d4", new string[] { "d5", "e5" });
+
+        CreateAndAddPiece(typeof(Pawn), "g5", Color.BLACK);
+        CreatePawnAndAssertHintTiles("h4", new string[] { "h5", "g5" });
+
+        CreateAndAddPiece(typeof(Pawn), "b3", Color.BLACK);
+        CreatePawnAndAssertHintTiles("a2", new string[] { "a3", "a4", "b3" });
+    }
+
+    [Test]
+    public void WhitePawnHasOneHintTileAndTwoCaptures()
+    {
+        CreateAndAddPiece(typeof(Pawn), "c5", Color.BLACK);
+        CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
+        CreatePawnAndAssertHintTiles("d4", new string[] { "c5", "d5", "e5" });
+    }
+
+    private void CreatePawnAndAssertHintTiles(string startingPosition, string[] hints)
     {
         CreateAndAddPiece(typeof(Pawn), startingPosition, Color.WHITE);
 
         foreach (string hintTileStr in hints)
             AssertHintTile(hintTileStr);
+        Assert.AreEqual(hints.Length, _piece.hints.Count);
     }
 
     private void AssertHintTile(string hintTileStr)
