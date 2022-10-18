@@ -11,21 +11,31 @@ class Pawn : Piece
         base.UpdateHints();
 
         if (color == Color.WHITE)
-        {
-            AddNeighbourCaptureHintTile(1, -1);
-            AddNeighbourCaptureHintTile(1, 1);
-
-            if (!AddNeighbourHintTile(1, 0)) return;
-
-            if (currentTile.i == 1)
-                AddNeighbourHintTile(2, 0);
-        }
+            UpdateWhitePawnHints();
         else
-        {
-            AddNeighbourHintTile(-1, 0);
-            if (currentTile.i == 6)
-                AddNeighbourHintTile(-2, 0);
-        }
+            UpdateBlackPawnHints();
+    }
+
+    private void UpdateWhitePawnHints()
+    {
+        AddNeighbourCaptureHintTile(1, -1);
+        AddNeighbourCaptureHintTile(1, 1);
+
+        if (!AddNeighbourHintTile(1, 0)) return;
+
+        if (currentTile.i == 1)
+            AddNeighbourHintTile(2, 0);
+    }
+
+    private void UpdateBlackPawnHints()
+    {
+        AddNeighbourCaptureHintTile(-1, -1);
+        AddNeighbourCaptureHintTile(-1, 1);
+
+        if (!AddNeighbourHintTile(-1, 0)) return;
+
+        if (currentTile.i == 6)
+            AddNeighbourHintTile(-2, 0);
     }
 
     private void AddNeighbourCaptureHintTile(int i, int j)

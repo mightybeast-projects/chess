@@ -27,19 +27,35 @@ class BlackPawnTests : PawnSetUp, IPawnTest
         CreateAndAssertPawnHintTiles("e7", new string[] { "e6", "e5" });
     }
 
+    [Test]
     public void PawnHasNoHintsWhenPathBlocked()
     {
-        throw new NotImplementedException();
+        Piece d7Pawn = CreateAndAddPiece(typeof(Pawn), "d7", Color.BLACK);
+        CreateAndAddPiece(typeof(Pawn), "d6", Color.WHITE);
+
+        Assert.IsEmpty(d7Pawn.hints);
     }
 
+    [Test]
     public void PawnHasOneHintTileAndOneCapture()
     {
-        throw new NotImplementedException();
+        CreateAndAddPiece(typeof(Pawn), "b4", Color.WHITE);
+        CreateAndAssertPawnHintTiles("a5", new string[] { "a4", "b4" });
+
+        CreateAndAddPiece(typeof(Pawn), "e4", Color.WHITE);
+        CreateAndAssertPawnHintTiles("d5", new string[] { "d4", "e4" });
+
+        CreateAndAddPiece(typeof(Pawn), "g5", Color.WHITE);
+        CreateAndAssertPawnHintTiles("h6", new string[] { "h5", "g5" });
     }
 
+    [Test]
     public void PawnHasOneHintTileAndTwoCaptures()
     {
-        throw new NotImplementedException();
+        CreateAndAddPiece(typeof(Pawn), "c4", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "e4", Color.WHITE);
+
+        CreateAndAssertPawnHintTiles("d5", new string[] { "c4", "d4", "e4" });
     }
 
     protected override void CreateAndAssertPawnHintTiles(

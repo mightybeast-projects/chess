@@ -39,14 +39,14 @@ class WhitePawnTests : PawnSetUp, IPawnTest
     [Test]
     public void PawnHasOneHintTileAndOneCapture()
     {
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
-        CreateAndAssertPawnHintTiles("d4", new string[] { "d5", "e5" });
+        CreateAndAddPiece(typeof(Pawn), "b5", Color.BLACK);
+        CreateAndAssertPawnHintTiles("a4", new string[] { "a5", "b5" });
 
         CreateAndAddPiece(typeof(Pawn), "g5", Color.BLACK);
         CreateAndAssertPawnHintTiles("h4", new string[] { "h5", "g5" });
 
-        CreateAndAddPiece(typeof(Pawn), "b3", Color.BLACK);
-        CreateAndAssertPawnHintTiles("a2", new string[] { "a3", "a4", "b3" });
+        CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
+        CreateAndAssertPawnHintTiles("d4", new string[] { "d5", "e5" });
     }
 
     [Test]
