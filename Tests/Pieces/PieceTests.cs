@@ -1,7 +1,7 @@
 using Chess.Core;
 using NUnit.Framework;
 
-namespace Chess.Tests;
+namespace Chess.Tests.Pieces;
 
 [TestFixture]
 class PieceTests : BoardSetUp
