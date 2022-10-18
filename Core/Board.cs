@@ -1,4 +1,5 @@
 using Chess.Core.Exceptions;
+using Chess.Core.Pieces;
 
 namespace Chess.Core;
 

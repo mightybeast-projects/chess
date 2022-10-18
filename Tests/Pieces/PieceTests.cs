@@ -1,4 +1,5 @@
 using Chess.Core;
+using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
@@ -9,10 +10,10 @@ class PieceTests : BoardSetUp
     [Test]
     public void PieceInitializationTest()
     {
-        _tile = _board.GetTile("d4");
-        _color = Color.WHITE;
-        _piece = new Piece(_tile, _color);
-        _piece.SetBoard(_board);
+        tile = board.GetTile("d4");
+        color = Color.WHITE;
+        piece = new Piece(tile, color);
+        piece.SetBoard(board);
         
         AssertPiece();
     }
@@ -32,13 +33,13 @@ class PieceTests : BoardSetUp
     {
         CreateAndAddPiece(typeof(Piece), "d4", Color.WHITE);
         
-        _piece.Move("d8");
+        piece.Move("d8");
 
-        Assert.IsTrue(_board.GetTile("d4").isEmpty);
-        Assert.IsNull(_board.GetTile("d4").piece);
-        Assert.AreEqual(_board.GetTile("d8"), _piece.currentTile);
-        Assert.IsFalse(_board.GetTile("d8").isEmpty);
-        Assert.AreEqual(_board.GetTile("d8").piece, _piece);
+        Assert.IsTrue(board.GetTile("d4").isEmpty);
+        Assert.IsNull(board.GetTile("d4").piece);
+        Assert.AreEqual(board.GetTile("d8"), piece.currentTile);
+        Assert.IsFalse(board.GetTile("d8").isEmpty);
+        Assert.AreEqual(board.GetTile("d8").piece, piece);
     }
 
     [Test]
@@ -51,8 +52,8 @@ class PieceTests : BoardSetUp
         Assert.Throws<OccupiedByAllyException>(
             () => d4Piece.Move("d5")
         );
-        Assert.AreEqual(_board.GetTile("d4"), d4Piece.currentTile);
-        Assert.AreEqual(_board.GetTile("d5"), d5Piece.currentTile);
+        Assert.AreEqual(board.GetTile("d4"), d4Piece.currentTile);
+        Assert.AreEqual(board.GetTile("d5"), d5Piece.currentTile);
     }
 
     [Test]
@@ -63,16 +64,16 @@ class PieceTests : BoardSetUp
         d5Piece = CreateAndAddPiece(typeof(Piece), "d5", Color.BLACK);
 
         d4Piece.Move("d5");
-        Assert.AreEqual(1, _board.pieces.Count);
-        Assert.AreEqual(_board.GetTile("d5"), d4Piece.currentTile);
-        Assert.AreEqual(_board.GetTile("d5").piece, d4Piece);
-        Assert.IsFalse(_board.pieces.Contains(d5Piece));
+        Assert.AreEqual(1, board.pieces.Count);
+        Assert.AreEqual(board.GetTile("d5"), d4Piece.currentTile);
+        Assert.AreEqual(board.GetTile("d5").piece, d4Piece);
+        Assert.IsFalse(board.pieces.Contains(d5Piece));
     }
 
     private void AssertBoardPiece()
     {
         AssertPiece();
 
-        Assert.IsTrue(_board.pieces.Contains(_piece));
+        Assert.IsTrue(board.pieces.Contains(piece));
     }
 }

@@ -1,4 +1,5 @@
 using Chess.Core;
+using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces.Pawns;
@@ -62,7 +63,7 @@ class WhitePawnTests : PawnSetUp, IPawnTest
         string startingPosition,
         string[] hints)
     {
-        _color = Color.WHITE;
+        color = Color.WHITE;
         base.CreateAndAssertPawnHintTiles(startingPosition, hints);
     }
 }

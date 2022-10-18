@@ -1,8 +1,9 @@
 using Chess.Core;
+using Chess.Core.Pieces;
 
-class Pawn : Piece
+public class Pawn : Piece
 {
-    private Tile _hintTile;
+    private Tile hintTile;
 
     public Pawn(Tile tile, Color color) : base (tile, color) { }
 
@@ -46,17 +47,17 @@ class Pawn : Piece
 
     private void TryGettingNeighbourCaptureHintTile(int i, int j)
     {
-        _hintTile = board.grid[currentTile.i + i, currentTile.j + j];
-        if (!_hintTile.isEmpty && _hintTile.piece.color != color)
-            hints.Add(_hintTile);
+        hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+        if (!hintTile.isEmpty && hintTile.piece.color != color)
+            hints.Add(hintTile);
     }
 
     private bool AddNeighbourHintTile(int i, int j)
     {
-        _hintTile = board.grid[currentTile.i + i, currentTile.j + j];
-        if (_hintTile.isEmpty)
+        hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+        if (hintTile.isEmpty)
         {
-            hints.Add(_hintTile);
+            hints.Add(hintTile);
             return true;
         }
         return false;

@@ -9,57 +9,57 @@ class GeneralBoardTests : BoardSetUp
     [Test]
     public void TileInitialization()
     {
-        Assert.IsTrue(_tile.isEmpty);
-        Assert.IsNull(_tile.piece);
+        Assert.IsTrue(tile.isEmpty);
+        Assert.IsNull(tile.piece);
     }
 
     [Test]
     public void BoardGridInitialization()
     {
-        Assert.IsNotNull(_board.grid);
+        Assert.IsNotNull(board.grid);
     }
 
     [Test]
     public void BoardGridLength()
     {
-        Assert.AreEqual(8, _board.grid.GetLength(0));
-        Assert.AreEqual(8, _board.grid.GetLength(1));
+        Assert.AreEqual(8, board.grid.GetLength(0));
+        Assert.AreEqual(8, board.grid.GetLength(1));
     }
 
     [Test]
     public void BoardGridIsTileMatrix()
     {
-        Assert.AreEqual(typeof(Tile), _board.grid[0, 0].GetType());
+        Assert.AreEqual(typeof(Tile), board.grid[0, 0].GetType());
     }
 
     [Test]
     public void ZeroZeroTileIsBlack()
     {
-        Assert.AreEqual(Color.BLACK, _board.grid[0, 0].color);
+        Assert.AreEqual(Color.BLACK, board.grid[0, 0].color);
     }
 
     [Test]
     public void ZeroOneTileIsWhite()
     {
-        Assert.AreEqual(Color.WHITE, _board.grid[0, 1].color);
+        Assert.AreEqual(Color.WHITE, board.grid[0, 1].color);
     }
 
     [Test]
     public void ZeroSevenTileIsWhite()
     {
-        Assert.AreEqual(Color.WHITE, _board.grid[0, 7].color);
+        Assert.AreEqual(Color.WHITE, board.grid[0, 7].color);
     }
 
     [Test]
     public void OneZeroTileIsWhite()
     {
-        Assert.AreEqual(Color.WHITE, _board.grid[1, 0].color);
+        Assert.AreEqual(Color.WHITE, board.grid[1, 0].color);
     }
 
     [Test]
     public void FullBoardNotationIsCorrect()
     {
-        for (int i = 0; i < _board.grid.GetLength(0); i++)
+        for (int i = 0; i < board.grid.GetLength(0); i++)
         {
             if (i % 2 == 0)
                 AssertPairedLine(i);
@@ -70,12 +70,12 @@ class GeneralBoardTests : BoardSetUp
 
     private void AssertPairedLine(int lineIndex)
     {
-        for (int i = 0; i < _board.grid.GetLength(0); i++)
+        for (int i = 0; i < board.grid.GetLength(0); i++)
         {
             if (i % 2 == 0)
-                _color = Color.BLACK;
+                color = Color.BLACK;
             else
-                _color = Color.WHITE;
+                color = Color.WHITE;
 
             AssertExpectedColor(lineIndex, i);
         }
@@ -83,17 +83,17 @@ class GeneralBoardTests : BoardSetUp
 
     private void AssertNonPairedLine(int lineIndex)
     {
-        for (int i = 0; i < _board.grid.GetLength(0); i++)
+        for (int i = 0; i < board.grid.GetLength(0); i++)
         {
             if (i % 2 == 0)
-                _color = Color.WHITE;
+                color = Color.WHITE;
             else
-                _color = Color.BLACK;
+                color = Color.BLACK;
 
             AssertExpectedColor(lineIndex, i);
         }
     }
 
     private void AssertExpectedColor(int i, int j) => 
-        Assert.AreEqual(_color, _board.grid[i, j].color);
+        Assert.AreEqual(color, board.grid[i, j].color);
 }

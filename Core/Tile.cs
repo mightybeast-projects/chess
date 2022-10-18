@@ -1,3 +1,5 @@
+using Chess.Core.Pieces;
+
 namespace Chess.Core;
 
 public class Tile

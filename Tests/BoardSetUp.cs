@@ -1,5 +1,6 @@
 using System.Reflection;
 using Chess.Core;
+using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests;
@@ -7,47 +8,47 @@ namespace Chess.Tests;
 [TestFixture]
 class BoardSetUp
 {
-    protected Board _board;
-    protected Piece _piece;
-    protected Tile _tile;
-    protected Color _color;
+    protected Board board;
+    protected Piece piece;
+    protected Tile tile;
+    protected Color color;
 
-    private ConstructorInfo? _ctor;
-    private object? _pieceObj;
-    private Type[] _ctorTypes;
-    private object[] _ctorArgs;
+    private ConstructorInfo? ctor;
+    private object? pieceObj;
+    private Type[] ctorTypes;
+    private object[] ctorArgs;
 
     [SetUp]
     public virtual void SetUp()
     {
-        _board = new Board();
-        _tile = new Tile(0, 0, Color.BLACK);
+        board = new Board();
+        tile = new Tile(0, 0, Color.BLACK);
     }
 
     protected Piece CreateAndAddPiece(Type pieceType, string tileName, Color color)
     {
-        _tile = _board.GetTile(tileName);
-        _color = color;
+        tile = board.GetTile(tileName);
+        this.color = color;
 
-        _ctorTypes = new[] {
+        ctorTypes = new[] {
             typeof(Tile), typeof(Color)
         };
-        _ctorArgs = new object[] {
-            _tile, _color
+        ctorArgs = new object[] {
+            tile, this.color
         };
-        _ctor = pieceType.GetConstructor(_ctorTypes);
-        _pieceObj = _ctor?.Invoke(_ctorArgs);
-        _piece = (Piece)_pieceObj!;
+        ctor = pieceType.GetConstructor(ctorTypes);
+        pieceObj = ctor?.Invoke(ctorArgs);
+        piece = (Piece)pieceObj!;
 
-        return _board.AddPiece(_piece);
+        return board.AddPiece(piece);
     }
 
     protected void AssertPiece()
     {
-        Assert.AreEqual(_board, _piece.board);
-        Assert.AreEqual(_tile, _piece.currentTile);
-        Assert.AreEqual(_tile.piece, _piece);
-        Assert.AreEqual(_color, _piece.color);
-        Assert.IsFalse(_board.GetTile(_tile.notation).isEmpty);
+        Assert.AreEqual(board, piece.board);
+        Assert.AreEqual(tile, piece.currentTile);
+        Assert.AreEqual(tile.piece, piece);
+        Assert.AreEqual(color, piece.color);
+        Assert.IsFalse(board.GetTile(tile.notation).isEmpty);
     }
 }

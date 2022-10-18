@@ -1,4 +1,4 @@
-namespace Chess.Core;
+namespace Chess.Core.Pieces;
 
 public class Piece
 {
@@ -7,8 +7,8 @@ public class Piece
     public Tile currentTile { get; protected set; }
     public Board board { get; private set; }
 
-    private Tile _targetTile;
-    
+    private Tile targetTile;
+
     public Piece(Tile tile, Color color)
     {
         this.currentTile = tile;
@@ -30,35 +30,29 @@ public class Piece
 
     public void Move(string tileName)
     {
-        _targetTile = board.GetTile(tileName);
+        targetTile = board.GetTile(tileName);
 
-        try
-        {
-            HandleOccupiedTile();
-        }
-        catch (NullReferenceException)
-        {
-            ChangeCurrentPosition();
-        }
+        try { HandleOccupiedTile(); }
+        catch (NullReferenceException) { ChangeCurrentPosition(); }
     }
 
     private void HandleOccupiedTile()
     {
         CheckTargetTile();
-        board.pieces.Remove(_targetTile.piece);
+        board.pieces.Remove(targetTile.piece);
         ChangeCurrentPosition();
     }
 
     private void ChangeCurrentPosition()
     {
         currentTile.SetPiece(null!);
-        currentTile = _targetTile;
+        currentTile = targetTile;
         currentTile.SetPiece(this);
     }
 
     private void CheckTargetTile()
     {
-        if (_targetTile.piece.color == color)
+        if (targetTile.piece.color == color)
             throw new OccupiedByAllyException();
     }
 }

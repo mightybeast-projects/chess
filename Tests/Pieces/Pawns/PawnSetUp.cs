@@ -8,16 +8,16 @@ abstract class PawnSetUp : BoardSetUp
         string startingPosition,
         string[] hints)
     {
-        CreateAndAddPiece(typeof(Pawn), startingPosition, _color);
+        CreateAndAddPiece(typeof(Pawn), startingPosition, color);
 
         foreach (string hintTileStr in hints)
             AssertHintTile(hintTileStr);
-        Assert.AreEqual(hints.Length, _piece.hints.Count);
+        Assert.AreEqual(hints.Length, piece.hints.Count);
     }
 
     protected void AssertHintTile(string hintTileStr)
     {
-        _tile = _board.GetTile(hintTileStr);
-        Assert.Contains(_tile, _piece.hints);
+        tile = board.GetTile(hintTileStr);
+        Assert.Contains(tile, piece.hints);
     }
 }
