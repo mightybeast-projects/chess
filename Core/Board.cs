@@ -4,8 +4,8 @@ namespace Chess.Core;
 
 public class Board
 {
-    public Tile[,] grid { get; }
-    public List<Piece> pieces { get; }
+    public readonly Tile[,] grid;
+    public readonly List<Piece> pieces;
 
     public Board()
     {
@@ -25,9 +25,14 @@ public class Board
     {
         piece.SetBoard(this);
         pieces.Add(piece);
+        UpdatePiecesHints();
+        return piece;
+    }
+
+    private void UpdatePiecesHints()
+    {
         foreach (Piece p in pieces)
             p.UpdateHints();
-        return piece;
     }
 
     private void InitializeGrid()

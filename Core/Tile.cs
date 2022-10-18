@@ -2,11 +2,11 @@ namespace Chess.Core;
 
 public class Tile
 {
+    public readonly Color color;
+    public readonly int i;
+    public readonly int j;
     public Piece piece { get; private set; }
-    public Color color { get; }
     public string notation { get; private set; }
-    public int i { get; }
-    public int j { get; }
     public bool isEmpty => piece is null;
 
     public Tile(int i, int j, Color color)

@@ -2,10 +2,10 @@ namespace Chess.Core;
 
 public class Piece
 {
-    public Board board { get; private set; }
+    public readonly Color color;
     public List<Tile> hints { get; protected set; }
     public Tile currentTile { get; protected set; }
-    public Color color { get; }
+    public Board board { get; private set; }
 
     private Tile _targetTile;
     
