@@ -6,6 +6,11 @@ namespace Chess.Tests;
 [TestFixture]
 class GeneralBoardTests : BoardSetUp
 {
+    private Color evenColor;
+    private Color oddColor;
+    private int i;
+    private int j;
+
     [Test]
     public void TileInitialization()
     {
@@ -57,41 +62,41 @@ class GeneralBoardTests : BoardSetUp
     }
 
     [Test]
-    public void FullBoardNotationIsCorrect()
+    public void BoardTileColorsAreCorrect()
     {
         for (int i = 0; i < board.grid.GetLength(0); i++)
-        {
-            if (i % 2 == 0)
-                AssertPairedLine(i);
-            else
-                AssertNonPairedLine(i);
-        }
+            AssertLine(i);
     }
 
-    private void AssertPairedLine(int lineIndex)
+    private void AssertLine(int i)
     {
-        for (int i = 0; i < board.grid.GetLength(0); i++)
-        {
-            if (i % 2 == 0)
-                color = Color.BLACK;
-            else
-                color = Color.WHITE;
+        this.i = i;
 
-            AssertExpectedColor(lineIndex, i);
-        }
+        if (i % 2 == 0)
+            AssertLine(Color.BLACK, Color.WHITE);
+        else
+            AssertLine(Color.WHITE, Color.BLACK);
     }
 
-    private void AssertNonPairedLine(int lineIndex)
+    private void AssertLine(Color evenColor, Color oddColor)
     {
-        for (int i = 0; i < board.grid.GetLength(0); i++)
-        {
-            if (i % 2 == 0)
-                color = Color.WHITE;
-            else
-                color = Color.BLACK;
+        this.evenColor = evenColor;
+        this.oddColor = oddColor;
+        
+        for (int j = 0; j < board.grid.GetLength(1); j++)
+            AssertPosition(j);
+    }
 
-            AssertExpectedColor(lineIndex, i);
-        }
+    private void AssertPosition(int j)
+    {
+        this.j = j;
+
+        if (j % 2 == 0)
+            color = evenColor;
+        else
+            color = oddColor;
+
+        AssertExpectedColor(i, j);
     }
 
     private void AssertExpectedColor(int i, int j) => 
