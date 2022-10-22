@@ -80,7 +80,7 @@ public class TerminalDrawer
         currentTile = board.grid[i, j];
         int tileColor = (int)currentTile.color;
 
-        if (hintPiece != null && hintPiece.hints.Contains(currentTile))
+        if (hintPiece != null && hintPiece.hintTiles.Contains(currentTile))
             bgColor = ConsoleColor.DarkGreen;
         else
             bgColor = 
