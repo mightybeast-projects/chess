@@ -4,9 +4,11 @@ using Chess.Core.Pieces;
 public class TerminalDrawer
 {
     private Board board;
+    private Piece? hintPiece;
+    private Piece currentPiece;
     private Tile currentTile;
     private ConsoleColor bgColor;
-    private Piece? hintPiece;
+    private int tileColorIndex;
 
     public TerminalDrawer(Board board)
     {
@@ -24,6 +26,11 @@ public class TerminalDrawer
     public void EnableHintsForPiece(Piece piece)
     {
         hintPiece = piece;
+    }
+
+    public void DisableHints()
+    {
+        hintPiece = null;
     }
 
     private void DisplayBoardLine(int i)
@@ -78,15 +85,8 @@ public class TerminalDrawer
     private void DisplayTile(int i, int j)
     {
         currentTile = board.grid[i, j];
-        int tileColor = (int)currentTile.color;
 
-        if (hintPiece != null && hintPiece.hintTiles.Contains(currentTile))
-            bgColor = ConsoleColor.DarkGreen;
-        else
-            bgColor = 
-                tileColor == 0 ? ConsoleColor.Black : ConsoleColor.White;
-        
-        Console.BackgroundColor = bgColor;
+        ChooseBackgroundColor();
 
         if (currentTile.isEmpty)
             Console.Write("  ");
@@ -94,8 +94,23 @@ public class TerminalDrawer
             DisplayTilePiece();
     }
 
+    private void ChooseBackgroundColor()
+    {
+        tileColorIndex = (int)currentTile.color;
+
+        if (hintPiece != null && hintPiece.hintTiles.Contains(currentTile))
+            bgColor = ConsoleColor.DarkGreen;
+        else
+            bgColor =
+                tileColorIndex == 0 ? ConsoleColor.Black : ConsoleColor.White;
+
+        Console.BackgroundColor = bgColor;
+    }
+
     private void DisplayTilePiece()
     {
+        currentPiece = currentTile.piece;
+
         if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.WHITE))
             DispayPawn(ConsoleColor.White, "♟ ");
         else if (CurrentTileAndPieceColorsAre(Color.WHITE, Color.WHITE))
@@ -114,32 +129,7 @@ public class TerminalDrawer
 
     private bool CurrentTileAndPieceColorsAre(Color tileColor, Color pieceColor)
         => currentTile.color == tileColor && 
-            currentTile.piece.color == pieceColor;
+            currentPiece.color == pieceColor;
 
     private bool IndexIsZero(int i) => i == 0;
-
-    private void PieceDispaySample()
-    {
-        Console.WriteLine();
-
-        //White on black
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("♟ ");
-
-        //White on white
-        Console.BackgroundColor = ConsoleColor.White;
-        Console.ForegroundColor = ConsoleColor.Black;
-        Console.Write("♙ ");
-
-        //Black on black
-        Console.BackgroundColor = ConsoleColor.Black;
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.Write("♙ ");
-
-        //Black on white
-        Console.BackgroundColor = ConsoleColor.White;
-        Console.ForegroundColor = ConsoleColor.Black;
-        Console.Write("♟ ");
-    }
 }

@@ -1,4 +1,5 @@
 using Chess.Core;
+using Chess.Core.Pieces;
 
 public class TerminalInputHandler
 {
@@ -21,8 +22,17 @@ public class TerminalInputHandler
     private void HandleInput()
     {
         input = Console.ReadLine()!;
+        
+        if (input.Length == 2 || (input.Length == 5 && input[4] == 'h'))
+            drawer.EnableHintsForPiece(board.GetTile(input).piece);
+        else if (input.Length == 8 && input[4] == 'm')
+        {
+            Piece chosenPiece = board.GetTile(input.Substring(0, 2)).piece;
+            chosenPiece.Move(input.Substring(6, 2));
+            drawer.DisableHints();
+        }
+
         Console.Clear();
-        drawer.EnableHintsForPiece(board.GetTile(input).piece);
         drawer.Draw();
     }
 
