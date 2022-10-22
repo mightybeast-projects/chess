@@ -21,7 +21,7 @@ public class TerminalDrawer
         Console.WriteLine("Waiting for input...");
     }
 
-    public void SetHintPiece(Piece piece)
+    public void EnableHintsForPiece(Piece piece)
     {
         hintPiece = piece;
     }

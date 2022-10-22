@@ -4,43 +4,20 @@ using Chess.Core.Pieces;
 public class Terminal
 {
     private TerminalDrawer drawer;
+    private TerminalInputHandler inputHandler;
     private Board board;
-    private string input;
 
     public void Run()
     {
         board = new Board();
         drawer = new TerminalDrawer(board);
+        inputHandler = new TerminalInputHandler(board, drawer);
 
         board.SetUp();
-        
         drawer.Draw();
 
-        while (true) 
-            RunGame();
-    }
-
-    private void RunGame()
-    {
-        try { HandleInput(); }
-        catch (Exception e) { HandleException(e); }
-    }
-
-    private void HandleInput()
-    {
-        input = Console.ReadLine()!;
-        Console.Clear();
-        drawer.SetHintPiece(board.GetTile(input).piece);
-        drawer.Draw();
-    }
-
-    private void HandleException(Exception e)
-    {
-        Console.Clear();
-        drawer.Draw();
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(e.Message);
-        Console.ResetColor();
+        while (true)
+            inputHandler.GetInput();
     }
 
     private void BoardPositionSmaple()
