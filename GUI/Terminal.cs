@@ -20,7 +20,7 @@ public class Terminal
             inputHandler.GetInput();
     }
 
-    private void BoardPositionSmaple()
+    private void BoardPositionSample()
     {
         Piece c5pawn = new Pawn(board.GetTile("c5"), Color.BLACK);
         Piece d4pawn = new Pawn(board.GetTile("d4"), Color.WHITE);

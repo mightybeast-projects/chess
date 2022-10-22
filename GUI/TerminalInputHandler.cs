@@ -5,6 +5,7 @@ public class TerminalInputHandler
 {
     private TerminalDrawer drawer;
     private Board board;
+    private Piece chosenPiece;
     private string input;
 
     public TerminalInputHandler(Board board, TerminalDrawer drawer)
@@ -23,17 +24,20 @@ public class TerminalInputHandler
     {
         input = Console.ReadLine()!;
         
-        if (input.Length == 2 || (input.Length == 5 && input[4] == 'h'))
-            drawer.EnableHintsForPiece(board.GetTile(input).piece);
-        else if (input.Length == 8 && input[4] == 'm')
-        {
-            Piece chosenPiece = board.GetTile(input.Substring(0, 2)).piece;
-            chosenPiece.Move(input.Substring(6, 2));
-            drawer.DisableHints();
-        }
+        if (input != null)
+            HandleChosenPiece();
 
-        Console.Clear();
         drawer.Draw();
+    }
+
+    private void HandleChosenPiece()
+    {
+        chosenPiece = board.GetTile(input.Substring(0, 2)).piece;
+
+        if (input.Length == 2 || InputHaveHintCommand())
+            drawer.EnableHintsForPiece(chosenPiece);
+        else if (InputHaveMoveCommand())
+            chosenPiece.Move(input.Substring(6, 2));
     }
 
     private void HandleException(Exception e)
@@ -44,4 +48,10 @@ public class TerminalInputHandler
         Console.WriteLine(e.Message);
         Console.ResetColor();
     }
+
+    private bool InputHaveMoveCommand() 
+        => input.Length == 8 && input[4] == 'm';
+
+    private bool InputHaveHintCommand()
+        => input.Length == 5 && input[4] == 'h';
 }

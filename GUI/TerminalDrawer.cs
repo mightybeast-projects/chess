@@ -17,9 +17,12 @@ public class TerminalDrawer
 
     public void Draw()
     {
+        Console.Clear();
+
         for (int i = board.grid.GetLength(0) - 1; i >= 0; i--)
             DisplayBoardLine(i);
         
+        DisableHints();
         Console.WriteLine("Waiting for input...");
     }
 
@@ -28,7 +31,7 @@ public class TerminalDrawer
         hintPiece = piece;
     }
 
-    public void DisableHints()
+    private void DisableHints()
     {
         hintPiece = null;
     }
