@@ -1,9 +1,12 @@
 using Chess.Core;
+using Chess.Core.Pieces;
 
 public class TerminalDrawer
 {
     private Board board;
     private Tile currentTile;
+    private ConsoleColor bgColor;
+    private Piece? hintPiece;
 
     public TerminalDrawer(Board board)
     {
@@ -14,6 +17,13 @@ public class TerminalDrawer
     {
         for (int i = board.grid.GetLength(0) - 1; i >= 0; i--)
             DisplayBoardLine(i);
+        
+        Console.WriteLine("Waiting for input...");
+    }
+
+    public void SetHintPiece(Piece piece)
+    {
+        hintPiece = piece;
     }
 
     private void DisplayBoardLine(int i)
@@ -33,6 +43,8 @@ public class TerminalDrawer
 
         for (int i = 0; i < board.grid.GetLength(0) + 1; i++)
             HandleLetterLinePosition(i);
+
+        Console.WriteLine();
     }
 
     private void HandleGridPosition(int i, int j)
@@ -68,9 +80,13 @@ public class TerminalDrawer
         currentTile = board.grid[i, j];
         int tileColor = (int)currentTile.color;
 
-        ConsoleColor consoleColor = tileColor == 0 ?
-            ConsoleColor.Black : ConsoleColor.White;
-        Console.BackgroundColor = consoleColor;
+        if (hintPiece != null && hintPiece.hints.Contains(currentTile))
+            bgColor = ConsoleColor.DarkGreen;
+        else
+            bgColor = 
+                tileColor == 0 ? ConsoleColor.Black : ConsoleColor.White;
+        
+        Console.BackgroundColor = bgColor;
 
         if (currentTile.isEmpty)
             Console.Write("  ");
