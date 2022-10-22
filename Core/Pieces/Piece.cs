@@ -36,6 +36,8 @@ public class Piece
             HandlePositionChange();
         else
             throw new WrongMoveException();
+
+        UpdateHints();
     }
 
     private void HandlePositionChange()

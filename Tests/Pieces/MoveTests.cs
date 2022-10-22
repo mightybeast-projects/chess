@@ -7,10 +7,13 @@ namespace Chess.Tests.Pieces;
 [TestFixture]
 class MoveTests : BoardSetUp
 {
+    private List<Tile> firstHintTiles;
+
     [Test]
     public void CorrectlyMovePiece()
     {
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
+        firstHintTiles = piece.hintTiles;
 
         piece.Move("d3");
 
@@ -19,12 +22,14 @@ class MoveTests : BoardSetUp
         Assert.AreEqual(board.GetTile("d3"), piece.currentTile);
         Assert.IsFalse(board.GetTile("d3").isEmpty);
         Assert.AreEqual(board.GetTile("d3").piece, piece);
+        Assert.AreNotEqual(firstHintTiles, piece.hintTiles);
     }
 
     [Test]
     public void IncorrectlyMovePiece()
     {
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
+        firstHintTiles = piece.hintTiles;
 
         Assert.Throws<WrongMoveException>(
             () => piece.Move("a3")
@@ -35,6 +40,7 @@ class MoveTests : BoardSetUp
         Assert.AreNotEqual(board.GetTile("a3"), piece.currentTile);
         Assert.IsTrue(board.GetTile("a3").isEmpty);
         Assert.AreNotEqual(board.GetTile("a3").piece, piece);
+        Assert.AreEqual(firstHintTiles, piece.hintTiles);
     }
 
     [Test]
