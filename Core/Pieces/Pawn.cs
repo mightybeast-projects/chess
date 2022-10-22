@@ -49,7 +49,7 @@ public class Pawn : Piece
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
         if (!hintTile.isEmpty && hintTile.piece.color != color)
-            hints.Add(hintTile);
+            hintTiles.Add(hintTile);
     }
 
     private bool AddNeighbourHintTile(int i, int j)
@@ -57,7 +57,7 @@ public class Pawn : Piece
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
         if (hintTile.isEmpty)
         {
-            hints.Add(hintTile);
+            hintTiles.Add(hintTile);
             return true;
         }
         return false;

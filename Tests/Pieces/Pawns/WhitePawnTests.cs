@@ -34,7 +34,7 @@ class WhitePawnTests : PawnSetUp, IPawnTest
         Piece d2Pawn = CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "d3", Color.BLACK);
 
-        Assert.IsEmpty(d2Pawn.hints);
+        Assert.IsEmpty(d2Pawn.hintTiles);
     }
 
     [Test]

@@ -12,12 +12,12 @@ abstract class PawnSetUp : BoardSetUp
 
         foreach (string hintTileStr in hints)
             AssertHintTile(hintTileStr);
-        Assert.AreEqual(hints.Length, piece.hints.Count);
+        Assert.AreEqual(hints.Length, piece.hintTiles.Count);
     }
 
     protected void AssertHintTile(string hintTileStr)
     {
         tile = board.GetTile(hintTileStr);
-        Assert.Contains(tile, piece.hints);
+        Assert.Contains(tile, piece.hintTiles);
     }
 }

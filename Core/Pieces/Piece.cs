@@ -3,7 +3,7 @@ namespace Chess.Core.Pieces;
 public class Piece
 {
     public readonly Color color;
-    public List<Tile> hints { get; protected set; }
+    public List<Tile> hintTiles { get; protected set; }
     public Tile currentTile { get; protected set; }
     public Board board { get; private set; }
 
@@ -19,7 +19,7 @@ public class Piece
 
     public virtual void UpdateHints()
     {
-        hints = new List<Tile>();
+        hintTiles = new List<Tile>();
     }
 
     public void SetBoard(Board board)
@@ -32,13 +32,22 @@ public class Piece
     {
         targetTile = board.GetTile(tileName);
 
-        try { HandleOccupiedTile(); }
-        catch (NullReferenceException) { ChangeCurrentPosition(); }
+        if (hintTiles.Contains(targetTile))
+            HandlePositionChange();
+        else
+            throw new WrongMoveException();
     }
 
-    private void HandleOccupiedTile()
+    private void HandlePositionChange()
     {
-        CheckTargetTile();
+        if (targetTile.isEmpty)
+            ChangeCurrentPosition();
+        else
+            HandleOccupiedPosition();
+    }
+
+    private void HandleOccupiedPosition()
+    {
         board.pieces.Remove(targetTile.piece);
         ChangeCurrentPosition();
     }
@@ -48,11 +57,5 @@ public class Piece
         currentTile.SetPiece(null!);
         currentTile = targetTile;
         currentTile.SetPiece(this);
-    }
-
-    private void CheckTargetTile()
-    {
-        if (targetTile.piece.color == color)
-            throw new OccupiedByAllyException();
     }
 }
