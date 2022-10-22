@@ -39,7 +39,7 @@ public class Board
         return piece;
     }
 
-    private void UpdatePiecesHints()
+    public void UpdatePiecesHints()
     {
         foreach (Piece p in pieces)
             p.UpdateHints();

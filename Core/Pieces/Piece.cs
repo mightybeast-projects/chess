@@ -37,7 +37,7 @@ public class Piece
         else
             throw new WrongMoveException();
 
-        UpdateHints();
+        board.UpdatePiecesHints();
     }
 
     private void HandlePositionChange()
