@@ -22,6 +22,15 @@ public class Board
         catch (Exception) { throw new IncorrectTileNotationException(); }
     }
 
+    public void SetUp()
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+            AddPiece(new Pawn(grid[1, i], Color.WHITE));
+        
+        for (int i = 0; i < grid.GetLength(0); i++)
+            AddPiece(new Pawn(grid[6, i], Color.BLACK));
+    }
+
     public Piece AddPiece(Piece piece)
     {
         piece.SetBoard(this);

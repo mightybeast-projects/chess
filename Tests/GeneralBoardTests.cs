@@ -62,10 +62,35 @@ class GeneralBoardTests : BoardSetUp
     }
 
     [Test]
+    public void BoardSetupIsCorrect()
+    {
+        board.SetUp();
+        Assert.AreEqual(16, board.pieces.Count);
+
+        AssertPawnRow(2);
+        AssertPawnRow(7);
+    }
+
+    [Test]
     public void BoardTileColorsAreCorrect()
     {
         for (int i = 0; i < board.grid.GetLength(0); i++)
             AssertLine(i);
+    }
+
+    private void AssertPawnRow(int rowIndex)
+    {
+        for (int i = 0; i < board.grid.GetLength(0); i++)
+            AssertPawnInRow(i, rowIndex);
+    }
+
+    private void AssertPawnInRow(int letterIndex, int rowIndex)
+    {
+        char letter = (char)(letterIndex+ 65);
+        string tileName = letter.ToString().ToLower() + rowIndex;
+        tile = board.GetTile(tileName);
+        Assert.AreEqual(typeof(Pawn), tile.piece.GetType());
+        Assert.IsFalse(tile.isEmpty);
     }
 
     private void AssertLine(int i)
