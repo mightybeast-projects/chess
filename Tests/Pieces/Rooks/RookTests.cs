@@ -55,4 +55,10 @@ class RookTests : PieceSetUp
         AssertPieceHintTiles(
             new string[] { "a7", "a6" });
     }
+
+    [Test]
+    public void RookHasEnemyOnTheWay()
+    {
+
+    }
 }
