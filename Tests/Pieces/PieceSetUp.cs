@@ -1,15 +1,11 @@
 using NUnit.Framework;
 
-namespace Chess.Tests.Pieces.Pawns;
+namespace Chess.Tests.Pieces;
 
-abstract class PawnSetUp : BoardSetUp
+class PieceSetUp : BoardSetUp
 {
-    protected virtual void CreateAndAssertPawnHintTiles(
-        string startingPosition,
-        string[] hints)
+    protected void AssertPieceHintTiles(string[] hints)
     {
-        CreateAndAddPiece(typeof(Pawn), startingPosition, color);
-
         foreach (string hintTileStr in hints)
             AssertHintTile(hintTileStr);
         Assert.AreEqual(hints.Length, piece.hintTiles.Count);

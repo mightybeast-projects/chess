@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Pawns;
 
 [TestFixture]
-class BlackPawnTests : PawnSetUp, IPawnTest
+class BlackPawnTests : PieceSetUp, IPawnTest
 {
     [Test]
     public void PawnInitialization()
@@ -17,15 +17,15 @@ class BlackPawnTests : PawnSetUp, IPawnTest
     [Test]
     public void PawnHasOneHintTile()
     {
-        CreateAndAssertPawnHintTiles("d5", new string[] { "d4" });
-        CreateAndAssertPawnHintTiles("e5", new string[] { "e4" });
+        CreateAndAssertBlackPawnHintTiles("d5", new string[] { "d4" });
+        CreateAndAssertBlackPawnHintTiles("e5", new string[] { "e4" });
     }
 
     [Test]
     public void PawnHasTwoHintTiles()
     {
-        CreateAndAssertPawnHintTiles("d7", new string[] { "d6", "d5" });
-        CreateAndAssertPawnHintTiles("e7", new string[] { "e6", "e5" });
+        CreateAndAssertBlackPawnHintTiles("d7", new string[] { "d6", "d5" });
+        CreateAndAssertBlackPawnHintTiles("e7", new string[] { "e6", "e5" });
     }
 
     [Test]
@@ -49,13 +49,13 @@ class BlackPawnTests : PawnSetUp, IPawnTest
     public void PawnHasOneHintTileAndOneCapture()
     {
         CreateAndAddPiece(typeof(Pawn), "b4", Color.WHITE);
-        CreateAndAssertPawnHintTiles("a5", new string[] { "a4", "b4" });
+        CreateAndAssertBlackPawnHintTiles("a5", new string[] { "a4", "b4" });
 
         CreateAndAddPiece(typeof(Pawn), "e4", Color.WHITE);
-        CreateAndAssertPawnHintTiles("d5", new string[] { "d4", "e4" });
+        CreateAndAssertBlackPawnHintTiles("d5", new string[] { "d4", "e4" });
 
         CreateAndAddPiece(typeof(Pawn), "g5", Color.WHITE);
-        CreateAndAssertPawnHintTiles("h6", new string[] { "h5", "g5" });
+        CreateAndAssertBlackPawnHintTiles("h6", new string[] { "h5", "g5" });
     }
 
     [Test]
@@ -64,14 +64,15 @@ class BlackPawnTests : PawnSetUp, IPawnTest
         CreateAndAddPiece(typeof(Pawn), "c4", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e4", Color.WHITE);
 
-        CreateAndAssertPawnHintTiles("d5", new string[] { "c4", "d4", "e4" });
+        CreateAndAssertBlackPawnHintTiles("d5", new string[] { "c4", "d4", "e4" });
     }
 
-    protected override void CreateAndAssertPawnHintTiles(
+    private void CreateAndAssertBlackPawnHintTiles(
         string startingPosition,
         string[] hints)
     {
         color = Color.BLACK;
-        base.CreateAndAssertPawnHintTiles(startingPosition, hints);
+        CreateAndAddPiece(typeof(Pawn), startingPosition, color);
+        AssertPieceHintTiles(hints);
     }
 }

@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Rooks;
 
 [TestFixture]
-class RookTests : BoardSetUp
+class RookTests : PieceSetUp
 {
     [Test]
     public void RookInitialization()
