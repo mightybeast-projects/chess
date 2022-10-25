@@ -29,6 +29,14 @@ class WhitePawnTests : PawnSetUp, IPawnTest
     }
 
     [Test]
+    public void PawnHasNoHintTilesOnTheEdgeOfTheBoard()
+    {
+        CreateAndAddPiece(typeof(Pawn), "a8", Color.WHITE);
+
+        Assert.AreEqual(0, piece.hintTiles.Count);
+    }
+
+    [Test]
     public void PawnHasNoHintsWhenPathBlocked()
     {
         Piece d2Pawn = CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);

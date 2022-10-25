@@ -54,12 +54,15 @@ public class Pawn : Piece
 
     private bool AddNeighbourHintTile(int i, int j)
     {
+        try { return GetNeighbourTile(i, j); }
+        catch (Exception) { return false; }
+    }
+
+    private bool GetNeighbourTile(int i, int j)
+    {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
-        if (hintTile.isEmpty)
-        {
-            hintTiles.Add(hintTile);
-            return true;
-        }
-        return false;
+        if (!hintTile.isEmpty) return false;
+        hintTiles.Add(hintTile);
+        return true;
     }
 }
