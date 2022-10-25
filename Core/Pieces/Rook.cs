@@ -14,15 +14,7 @@ public class Rook : Piece
         AddUpperVerticalHints();
         AddLowerVerticalHints();
         AddRightSideHorizontalHints();
-    }
-
-    private void AddRightSideHorizontalHints()
-    {
-        pathBlocked = false;
-
-        for (int j = currentTile.j + 1; j < board.grid.GetLength(0); j++)
-            if (!pathBlocked)
-                AddHorizontalHintTile(j);
+        AddLeftSideHorizontalHints();
     }
 
     private void AddUpperVerticalHints()
@@ -41,6 +33,24 @@ public class Rook : Piece
         for (int i = currentTile.i - 1; i >= 0; i--)
             if (!pathBlocked)
                 AddVerticalHintTile(i);
+    }
+
+    private void AddRightSideHorizontalHints()
+    {
+        pathBlocked = false;
+
+        for (int j = currentTile.j + 1; j < board.grid.GetLength(0); j++)
+            if (!pathBlocked)
+                AddHorizontalHintTile(j);
+    }
+
+    private void AddLeftSideHorizontalHints()
+    {
+        pathBlocked = false;
+
+        for (int j = currentTile.j - 1; j >= 0; j--)
+            if (!pathBlocked)
+                AddHorizontalHintTile(j);
     }
 
     private void AddVerticalHintTile(int i)

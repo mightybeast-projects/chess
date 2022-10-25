@@ -55,6 +55,16 @@ class RookTests : PieceSetUp
     }
 
     [Test]
+    public void RookHasCorrectLeftSideHintTiles()
+    {
+        CreateAndAddPiece(typeof(Pawn), "h2", Color.WHITE);
+        CreateAndAddPiece(typeof(Rook), "h1", Color.WHITE);
+
+        AssertPieceHintTiles(
+            new string[] { "a1", "b1", "c1", "d1", "e1", "f1", "g1" });
+    }
+
+    [Test]
     public void RookHasBlockedUpperVerticalPath()
     {
         CreateAndAddPiece(typeof(Rook), "b1", Color.WHITE);
