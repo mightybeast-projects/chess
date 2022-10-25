@@ -45,7 +45,7 @@ class RookTests : PieceSetUp
     }
 
     [Test]
-    public void RookHasCorrectRightSideHintTiles()
+    public void RookHasRightSideHintTiles()
     {
         CreateAndAddPiece(typeof(Pawn), "a2", Color.WHITE);
         CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
@@ -55,13 +55,23 @@ class RookTests : PieceSetUp
     }
 
     [Test]
-    public void RookHasCorrectLeftSideHintTiles()
+    public void RookHasLeftSideHintTiles()
     {
         CreateAndAddPiece(typeof(Pawn), "h2", Color.WHITE);
         CreateAndAddPiece(typeof(Rook), "h1", Color.WHITE);
 
         AssertPieceHintTiles(
             new string[] { "a1", "b1", "c1", "d1", "e1", "f1", "g1" });
+    }
+
+    [Test]
+    public void RookHasCorrectHorizontalHitTiles()
+    {
+        CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
+        CreateAndAddPiece(typeof(Rook), "d1", Color.WHITE);
+
+        AssertPieceHintTiles(
+            new string[] { "a1", "b1", "c1", "e1", "f1", "g1", "h1" });
     }
 
     [Test]
@@ -106,5 +116,49 @@ class RookTests : PieceSetUp
 
         AssertPieceHintTiles(
             new string[] { "a7", "a6", "a5" });
+    }
+
+    [Test]
+    public void RookHasBlockedRightSideHorizontalPath()
+    {
+        CreateAndAddPiece(typeof(Rook), "a2", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "d1", Color.WHITE);
+        CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
+
+        AssertPieceHintTiles(
+            new string[] { "b1", "c1" });
+    }
+
+    [Test]
+    public void RookHasBlockedLeftSideHorizontalPath()
+    {
+        CreateAndAddPiece(typeof(Rook), "h2", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "d1", Color.WHITE);
+        CreateAndAddPiece(typeof(Rook), "h1", Color.WHITE);
+
+        AssertPieceHintTiles(
+            new string[] { "e1", "f1", "g1" });
+    }
+
+    [Test]
+    public void RookHasEnemyOnRightSideHorizontalWay()
+    {
+        CreateAndAddPiece(typeof(Rook), "a2", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "d1", Color.BLACK);
+        CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
+
+        AssertPieceHintTiles(
+            new string[] { "b1", "c1", "d1" });
+    }
+
+    [Test]
+    public void RookHasEnemyOnLeftSideHorizontalWay()
+    {
+        CreateAndAddPiece(typeof(Rook), "h2", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "d1", Color.BLACK);
+        CreateAndAddPiece(typeof(Rook), "h1", Color.WHITE);
+
+        AssertPieceHintTiles(
+            new string[] { "d1", "e1", "f1", "g1" });
     }
 }
