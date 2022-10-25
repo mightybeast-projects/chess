@@ -12,5 +12,10 @@ public class Rook : Piece
         {
             hintTiles.Add(board.grid[i, currentTile.j]);
         }
+
+        for (int i = currentTile.i - 1; i >= 0; i--)
+        {
+            hintTiles.Add(board.grid[i, currentTile.j]);
+        }
     }
 }

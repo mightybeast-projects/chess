@@ -20,5 +20,9 @@ class RookTests : PieceSetUp
         CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
         AssertPieceHintTiles(
             new string[] { "a2", "a3", "a4", "a5", "a6", "a7", "a8" });
+
+        CreateAndAddPiece(typeof(Rook), "a8", Color.WHITE);
+        AssertPieceHintTiles(
+            new string[] { "a1", "a2", "a3", "a4", "a5", "a6", "a7" });
     }
 }
