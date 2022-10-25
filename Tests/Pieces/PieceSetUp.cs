@@ -11,7 +11,7 @@ class PieceSetUp : BoardSetUp
         Assert.AreEqual(hints.Length, piece.hintTiles.Count);
     }
 
-    protected void AssertHintTile(string hintTileStr)
+    private void AssertHintTile(string hintTileStr)
     {
         tile = board.GetTile(hintTileStr);
         Assert.Contains(tile, piece.hintTiles);
