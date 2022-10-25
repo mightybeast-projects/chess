@@ -59,6 +59,9 @@ class RookTests : PieceSetUp
     [Test]
     public void RookHasEnemyOnTheWay()
     {
-
+        CreateAndAddPiece(typeof(Pawn), "a5", Color.BLACK);
+        CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
+        AssertPieceHintTiles(
+            new string[] { "a2", "a3", "a4", "a5"});
     }
 }
