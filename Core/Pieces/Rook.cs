@@ -10,12 +10,16 @@ public class Rook : Piece
 
         for (int i = currentTile.i + 1; i < board.grid.GetLength(0); i++)
         {
-            hintTiles.Add(board.grid[i, currentTile.j]);
+            Tile hintTile = board.grid[i, currentTile.j];
+            if (!hintTile.isEmpty) break;
+            hintTiles.Add(hintTile);
         }
 
         for (int i = currentTile.i - 1; i >= 0; i--)
         {
-            hintTiles.Add(board.grid[i, currentTile.j]);
+            Tile hintTile = board.grid[i, currentTile.j];
+            if (!hintTile.isEmpty) break;
+            hintTiles.Add(hintTile);
         }
     }
 }
