@@ -57,11 +57,20 @@ class RookTests : PieceSetUp
     }
 
     [Test]
-    public void RookHasEnemyOnTheWay()
+    public void RookHasEnemyOnTheUpperVerticalWay()
     {
         CreateAndAddPiece(typeof(Pawn), "a5", Color.BLACK);
         CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
         AssertPieceHintTiles(
             new string[] { "a2", "a3", "a4", "a5"});
+    }
+
+    [Test]
+    public void RookHasEnemyOnTheLowerVerticalWay()
+    {
+        CreateAndAddPiece(typeof(Pawn), "a5", Color.BLACK);
+        CreateAndAddPiece(typeof(Rook), "a8", Color.WHITE);
+        AssertPieceHintTiles(
+            new string[] { "a7", "a6", "a5" });
     }
 }
