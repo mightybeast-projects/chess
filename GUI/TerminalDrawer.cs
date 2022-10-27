@@ -5,7 +5,7 @@ using Chess.GUI;
 public class TerminalDrawer
 {
     private Board board;
-    private IPieceDrawerVisitor terminalPieceDrawerVisitor;
+    private IPieceDrawerVisitor pieceDrawerVisitor;
     private Piece? hintPiece;
     private Tile currentTile;
     private ConsoleColor bgColor;
@@ -14,7 +14,7 @@ public class TerminalDrawer
     public TerminalDrawer(Board board)
     {
         this.board = board;
-        terminalPieceDrawerVisitor = new TerminalPieceDrawerVisitor();
+        pieceDrawerVisitor = new TerminalPieceDrawerVisitor();
     }
 
     public void Draw()
@@ -96,21 +96,31 @@ public class TerminalDrawer
         if (currentTile.isEmpty)
             Console.Write("  ");
         else
-            currentTile.piece.Accept(terminalPieceDrawerVisitor);
+            currentTile.piece.Accept(pieceDrawerVisitor);
     }
 
     private void ChooseBackgroundColor()
     {
-        tileColorIndex = (int) currentTile.color;
+        tileColorIndex = (int)currentTile.color;
 
-        if (hintPiece != null && hintPiece.hintTiles.Contains(currentTile))
+        if (CurrentTileIsAHint())
             bgColor = ConsoleColor.DarkGreen;
         else
-            bgColor =
-                tileColorIndex == 0 ? ConsoleColor.Black : ConsoleColor.White;
+            ChooseSimpleTileColor();
 
         Console.BackgroundColor = bgColor;
     }
+
+    private void ChooseSimpleTileColor()
+    {
+        if (tileColorIndex == 0)
+            bgColor = ConsoleColor.Black;
+        else
+            bgColor = ConsoleColor.White;
+    }
+
+    private bool CurrentTileIsAHint() 
+        => hintPiece != null && hintPiece.hintTiles.Contains(currentTile);
 
     private bool IndexIsZero(int i) => i == 0;
 }

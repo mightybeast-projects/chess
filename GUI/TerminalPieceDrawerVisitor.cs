@@ -7,36 +7,44 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
 {
     private Tile currentTile;
     private Piece currentPiece;
+    private string filledPieceStr;
+    private string emptiedPieceStr;
 
     public void VisitPawn(Piece piece)
     {
-        DisplayTilePiece(piece);
+        filledPieceStr = "♟ ";
+        emptiedPieceStr = "♙ ";
+
+        DrawTilePiece(piece);
     }
 
     public void VisitRook(Piece piece)
     {
-        DisplayTilePiece(piece);
+        filledPieceStr = "♜ ";
+        emptiedPieceStr = "♖ ";
+
+        DrawTilePiece(piece);
     }
 
-    private void DisplayTilePiece(Piece piece)
+    private void DrawTilePiece(Piece piece)
     {
         currentPiece = piece;
         currentTile = piece.currentTile;
 
         if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.WHITE))
-            DispayPiece(ConsoleColor.White, "♟ ");
+            DrawPiece(ConsoleColor.White, filledPieceStr);
         else if (CurrentTileAndPieceColorsAre(Color.WHITE, Color.WHITE))
-            DispayPiece(ConsoleColor.Black, "♙ ");
+            DrawPiece(ConsoleColor.Black, emptiedPieceStr);
         else if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.BLACK))
-            DispayPiece(ConsoleColor.White, "♙ ");
+            DrawPiece(ConsoleColor.White, emptiedPieceStr);
         else
-            DispayPiece(ConsoleColor.Black, "♟ ");
+            DrawPiece(ConsoleColor.Black, filledPieceStr);
     }
 
-    private void DispayPiece(ConsoleColor foregroundColor, string pawnStr)
+    private void DrawPiece(ConsoleColor foregroundColor, string pieceStr)
     {
         Console.ForegroundColor = foregroundColor;
-        Console.Write(pawnStr);
+        Console.Write(pieceStr);
     }
 
     private bool CurrentTileAndPieceColorsAre(Color tileColor, Color pieceColor)
