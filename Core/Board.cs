@@ -29,6 +29,11 @@ public class Board
         
         for (int i = 0; i < grid.GetLength(0); i++)
             AddPiece(new Pawn(grid[6, i], Color.BLACK));
+
+        AddPiece(new Rook(grid[0, 0], Color.WHITE));
+        AddPiece(new Rook(grid[0, 7], Color.WHITE));
+        AddPiece(new Rook(grid[7, 0], Color.BLACK));
+        AddPiece(new Rook(grid[7, 7], Color.BLACK));
     }
 
     public Piece AddPiece(Piece piece)
