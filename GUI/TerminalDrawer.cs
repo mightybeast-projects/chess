@@ -22,7 +22,7 @@ public class TerminalDrawer
         Console.Clear();
 
         for (int i = board.grid.GetLength(0) - 1; i >= 0; i--)
-            DisplayBoardLine(i);
+            DrawBoardLine(i);
         
         DisableHints();
         Console.WriteLine("Waiting for input...");
@@ -38,7 +38,7 @@ public class TerminalDrawer
         hintPiece = null;
     }
 
-    private void DisplayBoardLine(int i)
+    private void DrawBoardLine(int i)
     {
         for (int j = 0; j < board.grid.GetLength(1) + 1; j++)
             HandleGridPosition(i, j);
@@ -46,10 +46,10 @@ public class TerminalDrawer
         Console.WriteLine();
 
         if (IndexIsZero(i))
-            DisplayLetterLine();
+            DrawLetterLine();
     }
 
-    private void DisplayLetterLine()
+    private void DrawLetterLine()
     {
         Console.ResetColor();
 
@@ -62,9 +62,9 @@ public class TerminalDrawer
     private void HandleGridPosition(int i, int j)
     {
         if (IndexIsZero(j))
-            DisplayNumber(i);
+            DrawNumber(i);
         else
-            DisplayTile(i, j - 1);
+            DrawTile(i, j - 1);
     }
 
     private void HandleLetterLinePosition(int i)
@@ -72,22 +72,22 @@ public class TerminalDrawer
         if (IndexIsZero(i))
             Console.Write("  ");
         else
-            DisplayLetter(i);
+            DrawLetter(i);
     }
 
-    private void DisplayNumber(int i)
+    private void DrawNumber(int i)
     {
         Console.ResetColor();
         Console.Write(Math.Abs(-1 - i) + " ");
     }
 
-    private void DisplayLetter(int i)
+    private void DrawLetter(int i)
     {
         char letter = (char)(i - 1 + 65);
         Console.Write(letter.ToString().ToLower() + " ");
     }
 
-    private void DisplayTile(int i, int j)
+    private void DrawTile(int i, int j)
     {
         currentTile = board.grid[i, j];
 

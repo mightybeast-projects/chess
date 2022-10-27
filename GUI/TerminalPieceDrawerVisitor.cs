@@ -24,18 +24,18 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
         currentTile = piece.currentTile;
 
         if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.WHITE))
-            DispayPawn(ConsoleColor.White, "♟ ");
+            DispayPiece(ConsoleColor.White, "♟ ");
         else if (CurrentTileAndPieceColorsAre(Color.WHITE, Color.WHITE))
-            DispayPawn(ConsoleColor.Black, "♙ ");
+            DispayPiece(ConsoleColor.Black, "♙ ");
         else if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.BLACK))
-            DispayPawn(ConsoleColor.White, "♙ ");
+            DispayPiece(ConsoleColor.White, "♙ ");
         else
-            DispayPawn(ConsoleColor.Black, "♟ ");
+            DispayPiece(ConsoleColor.Black, "♟ ");
     }
 
-    private void DispayPawn(ConsoleColor consoleColor, string pawnStr)
+    private void DispayPiece(ConsoleColor foregroundColor, string pawnStr)
     {
-        Console.ForegroundColor = consoleColor;
+        Console.ForegroundColor = foregroundColor;
         Console.Write(pawnStr);
     }
 
