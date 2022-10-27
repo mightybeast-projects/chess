@@ -1,11 +1,12 @@
 using Chess.Core;
 using Chess.Core.Pieces;
+using Chess.GUI;
 
 public class TerminalDrawer
 {
     private Board board;
+    private IPieceDrawerVisitor terminalPieceDrawerVisitor;
     private Piece? hintPiece;
-    private Piece currentPiece;
     private Tile currentTile;
     private ConsoleColor bgColor;
     private int tileColorIndex;
@@ -13,6 +14,7 @@ public class TerminalDrawer
     public TerminalDrawer(Board board)
     {
         this.board = board;
+        terminalPieceDrawerVisitor = new TerminalPieceDrawerVisitor();
     }
 
     public void Draw()
@@ -94,12 +96,12 @@ public class TerminalDrawer
         if (currentTile.isEmpty)
             Console.Write("  ");
         else
-            DisplayTilePiece();
+            currentTile.piece.Accept(terminalPieceDrawerVisitor);
     }
 
     private void ChooseBackgroundColor()
     {
-        tileColorIndex = (int)currentTile.color;
+        tileColorIndex = (int) currentTile.color;
 
         if (hintPiece != null && hintPiece.hintTiles.Contains(currentTile))
             bgColor = ConsoleColor.DarkGreen;
@@ -109,30 +111,6 @@ public class TerminalDrawer
 
         Console.BackgroundColor = bgColor;
     }
-
-    private void DisplayTilePiece()
-    {
-        currentPiece = currentTile.piece;
-
-        if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.WHITE))
-            DispayPawn(ConsoleColor.White, "♟ ");
-        else if (CurrentTileAndPieceColorsAre(Color.WHITE, Color.WHITE))
-            DispayPawn(ConsoleColor.Black, "♙ ");
-        else if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.BLACK))
-            DispayPawn(ConsoleColor.White, "♙ ");
-        else
-            DispayPawn(ConsoleColor.Black, "♟ ");
-    }
-
-    private void DispayPawn(ConsoleColor consoleColor, string pawnStr)
-    {
-        Console.ForegroundColor = consoleColor;
-        Console.Write(pawnStr);
-    }
-
-    private bool CurrentTileAndPieceColorsAre(Color tileColor, Color pieceColor)
-        => currentTile.color == tileColor && 
-            currentPiece.color == pieceColor;
 
     private bool IndexIsZero(int i) => i == 0;
 }
