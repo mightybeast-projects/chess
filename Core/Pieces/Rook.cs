@@ -7,6 +7,11 @@ public class Rook : Piece
 
     public Rook(Tile tile, Color color) : base(tile, color) { }
 
+    public override void Accept(IPieceDrawerVisitor visitor)
+    {
+        visitor.VisitRook(this);
+    }
+
     public override void UpdateHints()
     {
         base.UpdateHints();

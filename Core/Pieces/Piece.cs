@@ -1,6 +1,6 @@
 namespace Chess.Core.Pieces;
 
-public class Piece
+public abstract class Piece
 {
     public readonly Color color;
     public List<Tile> hintTiles { get; protected set; }
@@ -16,6 +16,8 @@ public class Piece
 
         tile.SetPiece(this);
     }
+
+    public abstract void Accept(IPieceDrawerVisitor visitor);
 
     public virtual void UpdateHints()
     {

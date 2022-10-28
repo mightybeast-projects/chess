@@ -12,7 +12,7 @@ class PieceTests : BoardSetUp
     {
         tile = board.GetTile("d4");
         color = Color.WHITE;
-        piece = new Piece(tile, color);
+        piece = new Pawn(tile, color);
         piece.SetBoard(board);
         
         AssertPiece();
@@ -21,10 +21,10 @@ class PieceTests : BoardSetUp
     [Test]
     public void AddPieceToBoard()
     {
-        CreateAndAddPiece(typeof(Piece), "a1", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "a1", Color.WHITE);
         AssertBoardPiece();
 
-        CreateAndAddPiece(typeof(Piece), "e4", Color.BLACK);
+        CreateAndAddPiece(typeof(Pawn), "e4", Color.BLACK);
         AssertBoardPiece();
     }
 

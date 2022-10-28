@@ -7,6 +7,11 @@ public class Pawn : Piece
 
     public Pawn(Tile tile, Color color) : base (tile, color) { }
 
+    public override void Accept(IPieceDrawerVisitor visitor)
+    {
+        visitor.VisitPawn(this);
+    }
+
     public override void UpdateHints()
     {
         base.UpdateHints();
