@@ -7,6 +7,8 @@ public abstract class Piece
     public Tile currentTile { get; protected set; }
     public Board board { get; private set; }
 
+    protected Tile hintTile;
+
     private Tile targetTile;
 
     public Piece(Tile tile, Color color)

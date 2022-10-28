@@ -3,8 +3,6 @@ using Chess.Core.Pieces;
 
 public class Pawn : Piece
 {
-    private Tile hintTile;
-
     public Pawn(Tile tile, Color color) : base (tile, color) { }
 
     public override void Accept(IPieceDrawerVisitor visitor)
@@ -24,46 +22,46 @@ public class Pawn : Piece
 
     private void UpdateWhitePawnHints()
     {
-        AddNeighbourCaptureHintTile(1, -1);
-        AddNeighbourCaptureHintTile(1, 1);
+        AddCaptureHintTile(1, -1);
+        AddCaptureHintTile(1, 1);
 
-        if (!AddNeighbourHintTile(1, 0)) return;
+        if (!AddHintTile(1, 0)) return;
 
         if (currentTile.i == 1)
-            AddNeighbourHintTile(2, 0);
+            AddHintTile(2, 0);
     }
 
     private void UpdateBlackPawnHints()
     {
-        AddNeighbourCaptureHintTile(-1, -1);
-        AddNeighbourCaptureHintTile(-1, 1);
+        AddCaptureHintTile(-1, -1);
+        AddCaptureHintTile(-1, 1);
 
-        if (!AddNeighbourHintTile(-1, 0)) return;
+        if (!AddHintTile(-1, 0)) return;
 
         if (currentTile.i == 6)
-            AddNeighbourHintTile(-2, 0);
+            AddHintTile(-2, 0);
     }
 
-    private void AddNeighbourCaptureHintTile(int i, int j)
+    private void AddCaptureHintTile(int i, int j)
     {
-        try { TryGettingNeighbourCaptureHintTile(i, j); }
+        try { TryGettingCaptureHintTile(i, j); }
         catch (IndexOutOfRangeException) { return; }
     }
 
-    private void TryGettingNeighbourCaptureHintTile(int i, int j)
+    private void TryGettingCaptureHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
         if (!hintTile.isEmpty && hintTile.piece.color != color)
             hintTiles.Add(hintTile);
     }
 
-    private bool AddNeighbourHintTile(int i, int j)
+    private bool AddHintTile(int i, int j)
     {
-        try { return GetNeighbourTile(i, j); }
+        try { return GetTile(i, j); }
         catch (Exception) { return false; }
     }
 
-    private bool GetNeighbourTile(int i, int j)
+    private bool GetTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
         if (!hintTile.isEmpty) return false;

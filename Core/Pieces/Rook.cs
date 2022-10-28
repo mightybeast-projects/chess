@@ -2,7 +2,6 @@ namespace Chess.Core.Pieces;
 
 public class Rook : Piece
 {
-    private Tile hintTile;
     private bool pathBlocked;
 
     public Rook(Tile tile, Color color) : base(tile, color) { }
