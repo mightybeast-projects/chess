@@ -64,4 +64,7 @@ public abstract class Piece
         currentTile = targetTile;
         currentTile.SetPiece(this);
     }
+
+    protected bool HintTileIsOccupiedByEnemy() 
+        => !hintTile.isEmpty && hintTile.piece.color != color;
 }

@@ -44,14 +44,14 @@ public class Pawn : Piece
 
     private void AddCaptureHintTile(int i, int j)
     {
-        try { TryGettingCaptureHintTile(i, j); }
+        try { TryToGetCaptureHintTile(i, j); }
         catch (IndexOutOfRangeException) { return; }
     }
 
-    private void TryGettingCaptureHintTile(int i, int j)
+    private void TryToGetCaptureHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
-        if (!hintTile.isEmpty && hintTile.piece.color != color)
+        if (HintTileIsOccupiedByEnemy())
             hintTiles.Add(hintTile);
     }
 
@@ -64,7 +64,8 @@ public class Pawn : Piece
     private bool GetTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
-        if (!hintTile.isEmpty) return false;
+        if (!hintTile.isEmpty)
+            return false;
         hintTiles.Add(hintTile);
         return true;
     }

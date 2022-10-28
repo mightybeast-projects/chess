@@ -77,15 +77,9 @@ public class Rook : Piece
 
     private void HandleOccupiedTile()
     {
-        if (hintTile.piece.color == color)
-            pathBlocked = true;
-        else
-            AddEnemyPieceToCapture();
-    }
-
-    private void AddEnemyPieceToCapture()
-    {
-        hintTiles.Add(hintTile);
+        if (HintTileIsOccupiedByEnemy())
+            hintTiles.Add(hintTile);
+        
         pathBlocked = true;
     }
 }
