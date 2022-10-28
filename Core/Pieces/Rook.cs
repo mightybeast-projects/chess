@@ -60,6 +60,7 @@ public class Rook : Piece
     private void AddVerticalHintTile(int i)
     {
         hintTile = board.grid[i, currentTile.j];
+
         if (!hintTile.isEmpty)
             HandleOccupiedTile();
         else
@@ -69,6 +70,7 @@ public class Rook : Piece
     private void AddHorizontalHintTile(int j)
     {
         hintTile = board.grid[currentTile.i, j];
+        
         if (!hintTile.isEmpty)
             HandleOccupiedTile();
         else
