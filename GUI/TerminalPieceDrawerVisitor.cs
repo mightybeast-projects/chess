@@ -26,6 +26,14 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
         DrawTilePiece(piece);
     }
 
+    public void VisitKnight(Piece piece)
+    {
+        filledPieceStr = "♞ ";
+        emptiedPieceStr = "♘ ";
+
+        DrawTilePiece(piece);
+    }
+
     private void DrawTilePiece(Piece piece)
     {
         currentPiece = piece;
@@ -50,4 +58,7 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
     private bool CurrentTileAndPieceColorsAre(Color tileColor, Color pieceColor)
         => currentTile.color == tileColor && 
             currentPiece.color == pieceColor;
+
+    // ♜ 	♞ 	♝ 	♛ 	♚ 	♝ 	♞ 	♜
+    // ♖ 	♘ 	♗ 	♕ 	♔ 	♗ 	♘ 	♖
 }
