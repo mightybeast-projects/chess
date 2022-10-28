@@ -11,17 +11,22 @@ class BoardSetupTests : BoardSetUp
     public void BoardSetupIsCorrect()
     {
         board.SetUp();
-        Assert.AreEqual(20, board.pieces.Count);
 
         color = Color.WHITE;
         AssertPawnRow(2);
         AssertSetupPiece(typeof(Rook), "a1");
         AssertSetupPiece(typeof(Rook), "h1");
+        AssertSetupPiece(typeof(Knight), "b1");
+        AssertSetupPiece(typeof(Knight), "g1");
 
         color = Color.BLACK;
         AssertPawnRow(7);
         AssertSetupPiece(typeof(Rook), "a8");
         AssertSetupPiece(typeof(Rook), "h8");
+        AssertSetupPiece(typeof(Knight), "b8");
+        AssertSetupPiece(typeof(Knight), "g8");
+
+        Assert.AreEqual(24, board.pieces.Count);
     }
 
     private void AssertPawnRow(int rowIndex)

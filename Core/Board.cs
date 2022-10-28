@@ -24,16 +24,8 @@ public class Board
 
     public void SetUp()
     {
-        for (int i = 0; i < grid.GetLength(0); i++)
-            AddPiece(new Pawn(grid[1, i], Color.WHITE));
-        
-        for (int i = 0; i < grid.GetLength(0); i++)
-            AddPiece(new Pawn(grid[6, i], Color.BLACK));
-
-        AddPiece(new Rook(grid[0, 0], Color.WHITE));
-        AddPiece(new Rook(grid[0, 7], Color.WHITE));
-        AddPiece(new Rook(grid[7, 0], Color.BLACK));
-        AddPiece(new Rook(grid[7, 7], Color.BLACK));
+        SetupWhitePieces();
+        SetupBlackPieces();
     }
 
     public Piece AddPiece(Piece piece)
@@ -79,5 +71,29 @@ public class Board
         int symbolIndex = ((int)char.ToUpper(tileName[0])) - 64;
         int numberIndex = tileName[1] - '0';
         return grid[numberIndex - 1, symbolIndex - 1];
+    }
+
+    private void SetupWhitePieces()
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+            AddPiece(new Pawn(grid[1, i], Color.WHITE));
+
+        AddPiece(new Rook(grid[0, 0], Color.WHITE));
+        AddPiece(new Rook(grid[0, 7], Color.WHITE));
+
+        AddPiece(new Knight(grid[0, 1], Color.WHITE));
+        AddPiece(new Knight(grid[0, 6], Color.WHITE));
+    }
+
+    private void SetupBlackPieces()
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+            AddPiece(new Pawn(grid[6, i], Color.BLACK));
+
+        AddPiece(new Rook(grid[7, 0], Color.BLACK));
+        AddPiece(new Rook(grid[7, 7], Color.BLACK));
+
+        AddPiece(new Knight(grid[7, 1], Color.BLACK));
+        AddPiece(new Knight(grid[7, 6], Color.BLACK));
     }
 }
