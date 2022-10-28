@@ -14,7 +14,12 @@ public class Bishop : Piece
     public override void UpdateHints()
     {
         base.UpdateHints();
+        
+        AddTopLeftDiagonalHintTiles();
+    }
 
+    private void AddTopLeftDiagonalHintTiles()
+    {
         pathBlocked = false;
 
         for (int i = currentTile.i + 1; i < board.grid.GetLength(0); i++)

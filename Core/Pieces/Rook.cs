@@ -15,13 +15,13 @@ public class Rook : Piece
     {
         base.UpdateHints();
 
-        AddUpperVerticalHints();
-        AddLowerVerticalHints();
-        AddRightSideHorizontalHints();
-        AddLeftSideHorizontalHints();
+        AddUpperVerticalHintTiles();
+        AddLowerVerticalHintTiles();
+        AddRightSideHorizontalHintTiles();
+        AddLeftSideHorizontalHintTiles();
     }
 
-    private void AddUpperVerticalHints()
+    private void AddUpperVerticalHintTiles()
     {
         pathBlocked = false;
 
@@ -30,7 +30,7 @@ public class Rook : Piece
                 AddVerticalHintTile(i);
     }
 
-    private void AddLowerVerticalHints()
+    private void AddLowerVerticalHintTiles()
     {
         pathBlocked = false;
 
@@ -39,7 +39,7 @@ public class Rook : Piece
                 AddVerticalHintTile(i);
     }
 
-    private void AddRightSideHorizontalHints()
+    private void AddRightSideHorizontalHintTiles()
     {
         pathBlocked = false;
 
@@ -48,7 +48,7 @@ public class Rook : Piece
                 AddHorizontalHintTile(j);
     }
 
-    private void AddLeftSideHorizontalHints()
+    private void AddLeftSideHorizontalHintTiles()
     {
         pathBlocked = false;
 
@@ -70,7 +70,7 @@ public class Rook : Piece
     private void AddHorizontalHintTile(int j)
     {
         hintTile = board.grid[currentTile.i, j];
-        
+
         if (!hintTile.isEmpty)
             HandleOccupiedTile();
         else
