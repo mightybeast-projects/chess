@@ -37,5 +37,14 @@ class GeneralBishopTests : PieceSetUp
         CreateAndAddPiece(typeof(Bishop), "h8", Color.WHITE);
         AssertPieceHintTiles(new string[] { "a1", "b2", "c3", "d4", "e5", "f6", "g7" });
 
+        CreateAndAddPiece(typeof(Bishop), "h2", Color.WHITE);
+        AssertPieceHintTiles(new string[] { "g1" });
+
+        CreateAndAddPiece(typeof(Bishop), "b8", Color.WHITE);
+        AssertPieceHintTiles(new string[] { "a7" });
+
+        CreateAndAddPiece(typeof(Pawn), "g5", Color.WHITE);
+        CreateAndAddPiece(typeof(Bishop), "f4", Color.WHITE);
+        AssertPieceHintTiles(new string[] { "e3", "d2", "c1" });
     }
 }

@@ -23,9 +23,8 @@ public class Bishop : Piece
     private void AddTopRightDiagonalHintTiles()
     {
         pathBlocked = false;
-        maxEdgeIndex = Math.Max(currentTile.i, currentTile.j);
 
-        for (int i = 1; i < board.grid.GetLength(1) - maxEdgeIndex; i++)
+        for (int i = 1; i < board.grid.GetLength(1); i++)
             if (!pathBlocked)
                 AddHintTile(i, i);
     }
@@ -42,7 +41,7 @@ public class Bishop : Piece
     private void AddHintTile(int i, int j)
     {
         try { TryToGetHintTile(i, j); }
-        catch (Exception) { return; }
+        catch (IndexOutOfRangeException) { pathBlocked = true; }
     }
 
     private void TryToGetHintTile(int i, int j)

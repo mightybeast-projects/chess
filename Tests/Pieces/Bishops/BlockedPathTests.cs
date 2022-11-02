@@ -26,4 +26,24 @@ class BlockedPathTests : PieceSetUp
 
         AssertPieceHintTiles(new string[] { "e5", "f6" });
     }
+
+    [Test]
+    public void BishopHasBlockedBottomLeftDiagonal()
+    {
+        CreateAndAddPiece(typeof(Pawn), "b2", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
+
+        AssertPieceHintTiles(new string[] { "c3" });
+    }
+
+    [Test]
+    public void BishopHasCaptureOnBottomLeftDiagonal()
+    {
+        CreateAndAddPiece(typeof(Pawn), "b2", Color.BLACK);
+        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
+
+        AssertPieceHintTiles(new string[] { "c3", "b2" });
+    }
 }
