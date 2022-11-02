@@ -15,61 +15,30 @@ public class Rook : Piece
     {
         base.UpdateHints();
 
-        AddUpperVerticalHintTiles();
-        AddLowerVerticalHintTiles();
-        AddRightSideHorizontalHintTiles();
-        AddLeftSideHorizontalHintTiles();
+        AddHintTilesInDirection(1, 0);
+        AddHintTilesInDirection(-1, 0);
+        AddHintTilesInDirection(0, 1);
+        AddHintTilesInDirection(0, -1);
     }
 
-    private void AddUpperVerticalHintTiles()
+    private void AddHintTilesInDirection(int x, int y)
     {
         pathBlocked = false;
 
-        for (int i = currentTile.i + 1; i < board.grid.GetLength(0); i++)
+        for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
-                AddVerticalHintTile(i);
+                AddHintTile(x * i, y * i);
     }
 
-    private void AddLowerVerticalHintTiles()
+    private void AddHintTile(int i, int j)
     {
-        pathBlocked = false;
-
-        for (int i = currentTile.i - 1; i >= 0; i--)
-            if (!pathBlocked)
-                AddVerticalHintTile(i);
+        try { TryToGetHintTile(i, j); }
+        catch (IndexOutOfRangeException) { pathBlocked = true; }
     }
 
-    private void AddRightSideHorizontalHintTiles()
+    private void TryToGetHintTile(int i, int j)
     {
-        pathBlocked = false;
-
-        for (int j = currentTile.j + 1; j < board.grid.GetLength(0); j++)
-            if (!pathBlocked)
-                AddHorizontalHintTile(j);
-    }
-
-    private void AddLeftSideHorizontalHintTiles()
-    {
-        pathBlocked = false;
-
-        for (int j = currentTile.j - 1; j >= 0; j--)
-            if (!pathBlocked)
-                AddHorizontalHintTile(j);
-    }
-
-    private void AddVerticalHintTile(int i)
-    {
-        hintTile = board.grid[i, currentTile.j];
-
-        if (!hintTile.isEmpty)
-            HandleOccupiedTile();
-        else
-            hintTiles.Add(hintTile);
-    }
-
-    private void AddHorizontalHintTile(int j)
-    {
-        hintTile = board.grid[currentTile.i, j];
+        hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (!hintTile.isEmpty)
             HandleOccupiedTile();
