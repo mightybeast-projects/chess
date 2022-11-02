@@ -65,7 +65,7 @@ class GeneralRookTests : PieceSetUp
     }
 
     [Test]
-    public void RookHasCorrectHorizontalHitTiles()
+    public void RookHasCorrectHorizontalHintTiles()
     {
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
         CreateAndAddPiece(typeof(Rook), "d1", Color.WHITE);

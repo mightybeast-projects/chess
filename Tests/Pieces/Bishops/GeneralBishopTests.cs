@@ -45,4 +45,15 @@ class GeneralBishopTests : PieceSetUp
         AssertPieceHintTiles(
             new string[] { "h1", "g2", "f3", "e4", "d5", "c6", "b7" });
     }
+
+    [Test]
+    public void BishopHasAllCorrectHintTiles()
+    {
+        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
+        AssertPieceHintTiles(
+            new string[] { "e5", "f6", "g7", "h8",
+                            "e3", "f2", "g1",
+                            "c3", "b2", "a1",
+                            "c5", "b6", "a7" });
+    }
 }
