@@ -19,16 +19,6 @@ class GeneralBishopTests : PieceSetUp
     {
         CreateAndAddPiece(typeof(Bishop), "a1", Color.WHITE);
         AssertPieceHintTiles(new string[] { "b2", "c3", "d4", "e5", "f6", "g7", "h8" });
-
-        CreateAndAddPiece(typeof(Bishop), "g1", Color.WHITE);
-        AssertPieceHintTiles(new string[] { "h2" });
-
-        CreateAndAddPiece(typeof(Bishop), "a7", Color.WHITE);
-        AssertPieceHintTiles(new string[] { "b8" });
-
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
-        CreateAndAddPiece(typeof(Bishop), "f4", Color.WHITE);
-        AssertPieceHintTiles(new string[] { "g5", "h6" });
     }
 
     [Test]
@@ -36,15 +26,12 @@ class GeneralBishopTests : PieceSetUp
     {
         CreateAndAddPiece(typeof(Bishop), "h8", Color.WHITE);
         AssertPieceHintTiles(new string[] { "a1", "b2", "c3", "d4", "e5", "f6", "g7" });
+    }
 
-        CreateAndAddPiece(typeof(Bishop), "h2", Color.WHITE);
-        AssertPieceHintTiles(new string[] { "g1" });
-
-        CreateAndAddPiece(typeof(Bishop), "b8", Color.WHITE);
-        AssertPieceHintTiles(new string[] { "a7" });
-
-        CreateAndAddPiece(typeof(Pawn), "g5", Color.WHITE);
-        CreateAndAddPiece(typeof(Bishop), "f4", Color.WHITE);
-        AssertPieceHintTiles(new string[] { "e3", "d2", "c1" });
+    [Test]
+    public void BishopHasTopLeftDiagonalHintTiles()
+    {
+        CreateAndAddPiece(typeof(Bishop), "h1", Color.WHITE);
+        AssertPieceHintTiles(new string[] { "g2", "f3", "e4", "d5", "c6", "b7", "a8" });
     }
 }

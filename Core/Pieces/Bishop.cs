@@ -3,7 +3,6 @@ namespace Chess.Core.Pieces;
 public class Bishop : Piece
 {
     private bool pathBlocked;
-    private int maxEdgeIndex;
 
     public Bishop(Tile tile, Color color) : base(tile, color) { }
 
@@ -16,8 +15,18 @@ public class Bishop : Piece
     {
         base.UpdateHints();
 
+        AddTopLeftDiagonalHintTiles();
         AddTopRightDiagonalHintTiles();
         AddBottomLeftDiagonalHintTiles();
+    }
+
+    private void AddTopLeftDiagonalHintTiles()
+    {
+        pathBlocked = false;
+
+        for (int i = 1; i < board.grid.GetLength(1); i++)
+            if (!pathBlocked)
+                AddHintTile(i, -i);
     }
 
     private void AddTopRightDiagonalHintTiles()
