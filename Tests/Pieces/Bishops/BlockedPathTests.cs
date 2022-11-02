@@ -8,10 +8,9 @@ namespace Chess.Tests.Pieces.Bishops;
 class BlockedPathTests : PieceSetUp
 {
     [Test]
-    public void BishopHasBlockedTopLeftDiagonal()
+    public void BishopHasBlockedTopRightDiagonal()
     {
         CreateAndAddPiece(typeof(Pawn), "f6", Color.WHITE);
-
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
         AssertPieceHintTiles(new string[] { "e5" });
