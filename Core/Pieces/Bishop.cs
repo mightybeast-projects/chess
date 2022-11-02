@@ -17,13 +17,7 @@ public class Bishop : Piece
 
         AddTopLeftDiagonalHintTiles();
         AddTopRightDiagonalHintTiles();
-
-        pathBlocked = false;
-
-        for (int i = 1; i < board.grid.GetLength(1); i++)
-            if (!pathBlocked)
-                AddHintTile(-i, i);
-
+        AddBottomRightDiagonalHintTiles();
         AddBottomLeftDiagonalHintTiles();
     }
 
@@ -31,7 +25,7 @@ public class Bishop : Piece
     {
         pathBlocked = false;
 
-        for (int i = 1; i < board.grid.GetLength(1); i++)
+        for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
                 AddHintTile(i, -i);
     }
@@ -40,18 +34,27 @@ public class Bishop : Piece
     {
         pathBlocked = false;
 
-        for (int i = 1; i < board.grid.GetLength(1); i++)
+        for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
                 AddHintTile(i, i);
+    }
+
+    private void AddBottomRightDiagonalHintTiles()
+    {
+        pathBlocked = false;
+
+        for (int i = 1; i < board.grid.GetLength(0); i++)
+            if (!pathBlocked)
+                AddHintTile(-i, i);
     }
 
     private void AddBottomLeftDiagonalHintTiles()
     {
         pathBlocked = false;
 
-        for (int i = -1; i > -board.grid.GetLength(1); i--)
+        for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
-                AddHintTile(i, i);
+                AddHintTile(-i, -i);
     }
 
     private void AddHintTile(int i, int j)

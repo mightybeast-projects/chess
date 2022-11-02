@@ -13,6 +13,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        
         CreateAndAddPiece(typeof(Pawn), "f6", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
@@ -25,6 +26,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+
         CreateAndAddPiece(typeof(Pawn), "f6", Color.BLACK);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
@@ -37,6 +39,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "b2", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+
         CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
@@ -49,6 +52,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "b2", Color.BLACK);
         CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+
         CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
@@ -61,6 +65,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+
         CreateAndAddPiece(typeof(Pawn), "b6", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
@@ -73,6 +78,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+
         CreateAndAddPiece(typeof(Pawn), "b6", Color.BLACK);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
@@ -85,6 +91,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+
         CreateAndAddPiece(typeof(Pawn), "f2", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
@@ -97,6 +104,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
         CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+
         CreateAndAddPiece(typeof(Pawn), "f2", Color.BLACK);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
