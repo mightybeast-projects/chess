@@ -15,46 +15,19 @@ public class Bishop : Piece
     {
         base.UpdateHints();
 
-        AddTopLeftDiagonalHintTiles();
-        AddTopRightDiagonalHintTiles();
-        AddBottomRightDiagonalHintTiles();
-        AddBottomLeftDiagonalHintTiles();
+        AddHintTilesInDirection(1, 1);
+        AddHintTilesInDirection(1, -1);
+        AddHintTilesInDirection(-1, -1);
+        AddHintTilesInDirection(-1, 1);
     }
 
-    private void AddTopLeftDiagonalHintTiles()
+    private void AddHintTilesInDirection(int x, int y)
     {
         pathBlocked = false;
 
         for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
-                AddHintTile(i, -i);
-    }
-
-    private void AddTopRightDiagonalHintTiles()
-    {
-        pathBlocked = false;
-
-        for (int i = 1; i < board.grid.GetLength(0); i++)
-            if (!pathBlocked)
-                AddHintTile(i, i);
-    }
-
-    private void AddBottomRightDiagonalHintTiles()
-    {
-        pathBlocked = false;
-
-        for (int i = 1; i < board.grid.GetLength(0); i++)
-            if (!pathBlocked)
-                AddHintTile(-i, i);
-    }
-
-    private void AddBottomLeftDiagonalHintTiles()
-    {
-        pathBlocked = false;
-
-        for (int i = 1; i < board.grid.GetLength(0); i++)
-            if (!pathBlocked)
-                AddHintTile(-i, -i);
+                AddHintTile(x * i, y * i);
     }
 
     private void AddHintTile(int i, int j)
