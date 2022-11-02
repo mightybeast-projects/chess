@@ -17,6 +17,13 @@ public class Bishop : Piece
 
         AddTopLeftDiagonalHintTiles();
         AddTopRightDiagonalHintTiles();
+
+        pathBlocked = false;
+
+        for (int i = 1; i < board.grid.GetLength(1); i++)
+            if (!pathBlocked)
+                AddHintTile(-i, i);
+
         AddBottomLeftDiagonalHintTiles();
     }
 
