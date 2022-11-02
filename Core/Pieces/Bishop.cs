@@ -8,7 +8,7 @@ public class Bishop : Piece
 
     public override void Accept(IPieceDrawerVisitor visitor)
     {
-        throw new NotImplementedException();
+        visitor.VisitBishop(this);
     }
 
     public override void UpdateHints()
