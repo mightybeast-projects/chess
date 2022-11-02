@@ -26,7 +26,16 @@ class GeneralBishopTests : PieceSetUp
         CreateAndAddPiece(typeof(Bishop), "a7", Color.WHITE);
         AssertPieceHintTiles(new string[] { "b8" });
 
+        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "f4", Color.WHITE);
         AssertPieceHintTiles(new string[] { "g5", "h6" });
+    }
+
+    [Test]
+    public void BishopHasBottomLeftDiagonalHintTiles()
+    {
+        CreateAndAddPiece(typeof(Bishop), "h8", Color.WHITE);
+        AssertPieceHintTiles(new string[] { "a1", "b2", "c3", "d4", "e5", "f6", "g7" });
+
     }
 }

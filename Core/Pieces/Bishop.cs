@@ -16,10 +16,11 @@ public class Bishop : Piece
     {
         base.UpdateHints();
 
-        AddTopLeftDiagonalHintTiles();
+        AddTopRightDiagonalHintTiles();
+        AddBottomLeftDiagonalHintTiles();
     }
 
-    private void AddTopLeftDiagonalHintTiles()
+    private void AddTopRightDiagonalHintTiles()
     {
         pathBlocked = false;
         maxEdgeIndex = Math.Max(currentTile.i, currentTile.j);
@@ -29,12 +30,27 @@ public class Bishop : Piece
                 AddHintTile(i, i);
     }
 
+    private void AddBottomLeftDiagonalHintTiles()
+    {
+        pathBlocked = false;
+
+        for (int i = -1; i > -board.grid.GetLength(1); i--)
+            if (!pathBlocked)
+                AddHintTile(i, i);
+    }
+
     private void AddHintTile(int i, int j)
+    {
+        try { TryToGetHintTile(i, j); }
+        catch (Exception) { return; }
+    }
+
+    private void TryToGetHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (!hintTile.isEmpty)
-            pathBlocked = true;
+            HandleOccupiedTile();
         else
             hintTiles.Add(hintTile);
     }
