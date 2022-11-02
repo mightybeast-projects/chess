@@ -14,8 +14,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "a5", Color.WHITE);
         CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "a2", "a3", "a4"});
+        AssertPieceHintTiles(new string[] { "a2", "a3", "a4"});
     }
 
     [Test]
@@ -25,8 +24,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "a5", Color.WHITE);
         CreateAndAddPiece(typeof(Rook), "a8", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "a7", "a6" });
+        AssertPieceHintTiles(new string[] { "a7", "a6" });
     }
 
     [Test]
@@ -36,8 +34,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "a5", Color.BLACK);
         CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "a2", "a3", "a4", "a5"});
+        AssertPieceHintTiles(new string[] { "a2", "a3", "a4", "a5"});
     }
 
     [Test]
@@ -47,8 +44,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "a5", Color.BLACK);
         CreateAndAddPiece(typeof(Rook), "a8", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "a7", "a6", "a5" });
+        AssertPieceHintTiles(new string[] { "a7", "a6", "a5" });
     }
 
     [Test]
@@ -58,8 +54,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "d1", Color.WHITE);
         CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "b1", "c1" });
+        AssertPieceHintTiles(new string[] { "b1", "c1" });
     }
 
     [Test]
@@ -69,8 +64,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "d1", Color.WHITE);
         CreateAndAddPiece(typeof(Rook), "h1", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "e1", "f1", "g1" });
+        AssertPieceHintTiles(new string[] { "e1", "f1", "g1" });
     }
 
     [Test]
@@ -80,8 +74,7 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "d1", Color.BLACK);
         CreateAndAddPiece(typeof(Rook), "a1", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "b1", "c1", "d1" });
+        AssertPieceHintTiles(new string[] { "b1", "c1", "d1" });
     }
 
     [Test]
@@ -91,7 +84,6 @@ class BlockedPathTests : PieceSetUp
         CreateAndAddPiece(typeof(Pawn), "d1", Color.BLACK);
         CreateAndAddPiece(typeof(Rook), "h1", Color.WHITE);
 
-        AssertPieceHintTiles(
-            new string[] { "d1", "e1", "f1", "g1" });
+        AssertPieceHintTiles(new string[] { "d1", "e1", "f1", "g1" });
     }
 }

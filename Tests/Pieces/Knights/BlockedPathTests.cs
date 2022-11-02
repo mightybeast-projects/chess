@@ -31,10 +31,11 @@ class BlockedPathTests : PieceSetUp
 
         CreateAndAddPiece(typeof(Knight), "d4", Color.WHITE);
 
-        AssertPieceHintTiles(
-                new string[] { "c6", "e6", 
-                                "f5", "f3", 
-                                "c2", "e2", 
-                                "b3", "b5"  });
+        AssertPieceHintTiles(new string[] { 
+            "c6", "e6", 
+            "f5", "f3", 
+            "c2", "e2", 
+            "b3", "b5"
+        });
     }
 }
