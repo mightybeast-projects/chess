@@ -83,6 +83,9 @@ public class Board
 
         AddPiece(new Knight(grid[0, 1], Color.WHITE));
         AddPiece(new Knight(grid[0, 6], Color.WHITE));
+
+        AddPiece(new Bishop(grid[0, 2], Color.WHITE));
+        AddPiece(new Bishop(grid[0, 5], Color.WHITE));
     }
 
     private void SetupBlackPieces()
@@ -95,5 +98,8 @@ public class Board
 
         AddPiece(new Knight(grid[7, 1], Color.BLACK));
         AddPiece(new Knight(grid[7, 6], Color.BLACK));
+
+        AddPiece(new Bishop(grid[7, 2], Color.BLACK));
+        AddPiece(new Bishop(grid[7, 5], Color.BLACK));
     }
 }

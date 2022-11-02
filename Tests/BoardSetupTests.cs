@@ -18,6 +18,8 @@ class BoardSetupTests : BoardSetUp
         AssertSetupPiece(typeof(Rook), "h1");
         AssertSetupPiece(typeof(Knight), "b1");
         AssertSetupPiece(typeof(Knight), "g1");
+        AssertSetupPiece(typeof(Bishop), "c1");
+        AssertSetupPiece(typeof(Bishop), "f1");
 
         color = Color.BLACK;
         AssertPawnRow(7);
@@ -25,8 +27,10 @@ class BoardSetupTests : BoardSetUp
         AssertSetupPiece(typeof(Rook), "h8");
         AssertSetupPiece(typeof(Knight), "b8");
         AssertSetupPiece(typeof(Knight), "g8");
+        AssertSetupPiece(typeof(Bishop), "c8");
+        AssertSetupPiece(typeof(Bishop), "f8");
 
-        Assert.AreEqual(24, board.pieces.Count);
+        Assert.AreEqual(28, board.pieces.Count);
     }
 
     private void AssertPawnRow(int rowIndex)
