@@ -3,6 +3,8 @@ using Chess.Core.Pieces;
 
 public class Pawn : Piece
 {
+    private bool pathBlocked;
+
     public Pawn(Tile tile, Color color) : base (tile, color) { }
 
     public override void Accept(IPieceDrawerVisitor visitor)
@@ -25,9 +27,9 @@ public class Pawn : Piece
         AddCaptureHintTile(1, -1);
         AddCaptureHintTile(1, 1);
 
-        if (!AddHintTile(1, 0)) return;
+        AddHintTile(1, 0);
 
-        if (currentTile.i == 1)
+        if (!pathBlocked && currentTile.i == 1)
             AddHintTile(2, 0);
     }
 
@@ -36,9 +38,9 @@ public class Pawn : Piece
         AddCaptureHintTile(-1, -1);
         AddCaptureHintTile(-1, 1);
 
-        if (!AddHintTile(-1, 0)) return;
+        AddHintTile(-1, 0);
 
-        if (currentTile.i == 6)
+        if (!pathBlocked && currentTile.i == 6)
             AddHintTile(-2, 0);
     }
 
@@ -51,22 +53,24 @@ public class Pawn : Piece
     private void TryToGetCaptureHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+
         if (HintTileIsOccupiedByEnemy())
             hintTiles.Add(hintTile);
     }
 
-    private bool AddHintTile(int i, int j)
+    private void AddHintTile(int i, int j)
     {
-        try { return GetTile(i, j); }
-        catch (Exception) { return false; }
+        try { TryToGetHintTile(i, j); }
+        catch (IndexOutOfRangeException) { return; }
     }
 
-    private bool GetTile(int i, int j)
+    private void TryToGetHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+
         if (!hintTile.isEmpty)
-            return false;
-        hintTiles.Add(hintTile);
-        return true;
+            pathBlocked = true;
+        else
+            hintTiles.Add(hintTile);
     }
 }

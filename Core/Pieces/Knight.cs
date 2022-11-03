@@ -46,12 +46,13 @@ public class Knight : Piece
     private void AddHintTile(int i, int j)
     {
         try { TryToGetHintTile(i, j); }
-        catch (Exception) { return; }
+        catch (IndexOutOfRangeException) { return; }
     }
 
     private void TryToGetHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+        
         if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())
             hintTiles.Add(hintTile);
     }
