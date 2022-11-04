@@ -14,5 +14,10 @@ public class Queen : DirectionalPiece
         AddHintTilesInDirection(1, -1);
         AddHintTilesInDirection(-1, -1);
         AddHintTilesInDirection(-1, 1);
+
+        AddHintTilesInDirection(1, 0);
+        AddHintTilesInDirection(-1, 0);
+        AddHintTilesInDirection(0, 1);
+        AddHintTilesInDirection(0, -1);
     }
 }
