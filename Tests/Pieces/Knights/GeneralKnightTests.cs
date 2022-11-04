@@ -17,9 +17,7 @@ class GeneralKnightTests : PieceSetUp
     [Test]
     public void KnightHasTopLHintTiles()
     {
-        BlockKnightLHintTiles("f3", "f5");
-        BlockKnightLHintTiles("c2", "e2");
-        BlockKnightLHintTiles("b3", "b5");
+        CreateAndAddPawns(Color.WHITE, "b3", "b5", "f5", "f3", "c2", "e2");
 
         CreateAndAddPiece(typeof(Knight), "d4", Color.WHITE);
 
@@ -29,9 +27,7 @@ class GeneralKnightTests : PieceSetUp
     [Test]
     public void KnightHasRightLHintTiles()
     {
-        BlockKnightLHintTiles("c6", "e6");
-        BlockKnightLHintTiles("c2", "e2");
-        BlockKnightLHintTiles("b3", "b5");
+        CreateAndAddPawns(Color.WHITE, "c6", "e6", "c2", "e2", "b3", "b5");
 
         CreateAndAddPiece(typeof(Knight), "d4", Color.WHITE);
 
@@ -41,9 +37,7 @@ class GeneralKnightTests : PieceSetUp
     [Test]
     public void KnightHasBottomLHintTiles()
     {
-        BlockKnightLHintTiles("c6", "e6");
-        BlockKnightLHintTiles("f5", "f3");
-        BlockKnightLHintTiles("b3", "b5");
+        CreateAndAddPawns(Color.WHITE, "c6", "e6", "f5", "f3", "b3", "b5");
 
         CreateAndAddPiece(typeof(Knight), "d4", Color.WHITE);
 
@@ -53,9 +47,7 @@ class GeneralKnightTests : PieceSetUp
     [Test]
     public void KnightHasLeftLHintTiles()
     {
-        BlockKnightLHintTiles("c6", "e6");
-        BlockKnightLHintTiles("f5", "f3");
-        BlockKnightLHintTiles("c2", "e2");
+        CreateAndAddPawns(Color.WHITE, "c6", "e6", "f5", "f3", "c2", "e2");
 
         CreateAndAddPiece(typeof(Knight), "d4", Color.WHITE);
 
@@ -73,11 +65,5 @@ class GeneralKnightTests : PieceSetUp
             "c2", "e2",
             "b3", "b5"
         });
-    }
-
-    private void BlockKnightLHintTiles(string s1, string s2)
-    {
-        CreateAndAddPiece(typeof(Pawn), s1, Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), s2, Color.WHITE);
     }
 }

@@ -10,8 +10,8 @@ class BlockedPathTets : PieceSetUp
     [Test]
     public void QueenHasBlockedDiagonals()
     {
-        AddPawns(Color.WHITE, "c4", "e4", "d5", "d3");
-        AddPawns(Color.WHITE, "b6", "f6", "b2", "f2");
+        CreateAndAddPawns(Color.WHITE, "c4", "e4", "d5", "d3");
+        CreateAndAddPawns(Color.WHITE, "b6", "f6", "b2", "f2");
 
         CreateAndAddPiece(typeof(Queen), "d4", Color.WHITE);
 
@@ -21,8 +21,8 @@ class BlockedPathTets : PieceSetUp
     [Test]
     public void QueenHasCapturesOnDiagonals()
     {
-        AddPawns(Color.WHITE, "c4", "e4", "d5", "d3");
-        AddPawns(Color.BLACK, "b6", "f6", "b2", "f2");
+        CreateAndAddPawns(Color.WHITE, "c4", "e4", "d5", "d3");
+        CreateAndAddPawns(Color.BLACK, "b6", "f6", "b2", "f2");
 
         CreateAndAddPiece(typeof(Queen), "d4", Color.WHITE);
 
@@ -35,8 +35,8 @@ class BlockedPathTets : PieceSetUp
     [Test]
     public void QueenHasBlockedAxises()
     {
-        AddPawns(Color.WHITE, "c5", "e5", "c3", "e3");
-        AddPawns(Color.WHITE, "b4", "f4", "d6", "d2");
+        CreateAndAddPawns(Color.WHITE, "c5", "e5", "c3", "e3");
+        CreateAndAddPawns(Color.WHITE, "b4", "f4", "d6", "d2");
 
         CreateAndAddPiece(typeof(Queen), "d4", Color.WHITE);
 
@@ -46,8 +46,8 @@ class BlockedPathTets : PieceSetUp
     [Test]
     public void QueenHasCapturesOnAxises()
     {
-        AddPawns(Color.WHITE, "c5", "e5", "c3", "e3");
-        AddPawns(Color.BLACK, "b4", "f4", "d6", "d2");
+        CreateAndAddPawns(Color.WHITE, "c5", "e5", "c3", "e3");
+        CreateAndAddPawns(Color.BLACK, "b4", "f4", "d6", "d2");
 
         CreateAndAddPiece(typeof(Queen), "d4", Color.WHITE);
 
@@ -55,11 +55,5 @@ class BlockedPathTets : PieceSetUp
             "d5", "d3", "c4", "e4",
             "b4", "f4", "d6", "d2"
         });
-    }
-
-    private void AddPawns(Color color, params string[] positions)
-    {
-        foreach (string position in positions)
-            CreateAndAddPiece(typeof(Pawn), position, color);
     }
 }

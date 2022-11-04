@@ -10,9 +10,7 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasBlockedTopRightDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "c3", "c5", "e3");
         
         CreateAndAddPiece(typeof(Pawn), "f6", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
@@ -23,9 +21,7 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasCaptureOnTopRightDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "c3", "c5", "e3");
 
         CreateAndAddPiece(typeof(Pawn), "f6", Color.BLACK);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
@@ -36,11 +32,9 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasBlockedBottomLeftDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "b2", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "e5", "c5", "e3");
 
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "b2", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
         AssertPieceHintTiles(new string[] { "c3" });
@@ -49,11 +43,9 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasCaptureOnBottomLeftDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "b2", Color.BLACK);
-        CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "e5", "c5", "e3");
 
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), "b2", Color.BLACK);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
 
         AssertPieceHintTiles(new string[] { "c3", "b2" });
@@ -62,9 +54,7 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasBlockedTopLeftDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "e5", "c3", "e3");
 
         CreateAndAddPiece(typeof(Pawn), "b6", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
@@ -75,9 +65,7 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasCaptureOnTopLeftDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "e5", "c3", "e3");
 
         CreateAndAddPiece(typeof(Pawn), "b6", Color.BLACK);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
@@ -88,9 +76,7 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasBlockedBottomRightDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "e5", "c3", "c5");
 
         CreateAndAddPiece(typeof(Pawn), "f2", Color.WHITE);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
@@ -101,9 +87,7 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void BishopHasCaptureOnBottomRightDiagonal()
     {
-        CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "e5", "c3", "c5");
 
         CreateAndAddPiece(typeof(Pawn), "f2", Color.BLACK);
         CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);

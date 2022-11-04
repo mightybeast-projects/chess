@@ -17,10 +17,7 @@ class GeneralQueenTests : PieceSetUp
     [Test]
     public void QueenHasCorrectDiagonalHintTiles()
     {
-        CreateAndAddPiece(typeof(Pawn), "d5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "d3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c4", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e4", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "d5", "d3", "c4", "e4");
 
         CreateAndAddPiece(typeof(Queen), "d4", Color.WHITE);
 
@@ -35,10 +32,7 @@ class GeneralQueenTests : PieceSetUp
     [Test]
     public void QueenHasCorrectAxisHintTiles()
     {
-        CreateAndAddPiece(typeof(Pawn), "c5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "c3", Color.WHITE);
-        CreateAndAddPiece(typeof(Pawn), "e3", Color.WHITE);
+        CreateAndAddPawns(Color.WHITE, "c5", "e5", "c3", "e3");
 
         CreateAndAddPiece(typeof(Queen), "d4", Color.WHITE);
 
