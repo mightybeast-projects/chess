@@ -5,15 +5,14 @@ namespace Chess.Core;
 
 public class Board
 {
+    public List<Piece> pieces => piecesDirector.pieces;
     public readonly Tile[,] grid;
-    public readonly List<Piece> pieces;
 
     private PiecesDirector piecesDirector;
 
     public Board()
     {
         grid = new Tile[8, 8];
-        pieces = new List<Piece>();
         piecesDirector = new PiecesDirector(this);
 
         InitializeGrid();
@@ -32,16 +31,12 @@ public class Board
 
     public Piece AddPiece(Piece piece)
     {
-        piece.SetBoard(this);
-        pieces.Add(piece);
-        UpdatePiecesHints();
-        return piece;
+        return piecesDirector.AddPiece(piece);
     }
 
-    public void UpdatePiecesHints()
+    public void Update()
     {
-        foreach (Piece p in pieces)
-            p.UpdateHints();
+        piecesDirector.UpdatePiecesHints();
     }
 
     private void InitializeGrid()

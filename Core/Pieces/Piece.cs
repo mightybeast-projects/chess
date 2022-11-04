@@ -43,7 +43,7 @@ public abstract class Piece
         else
             throw new WrongMoveException();
 
-        board.UpdatePiecesHints();
+        board.Update();
     }
 
     protected void TryToAddHintTile(int i, int j)

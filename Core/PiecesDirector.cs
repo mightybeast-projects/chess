@@ -4,13 +4,31 @@ namespace Chess.Core;
 
 public class PiecesDirector
 {
+    public readonly List<Piece> pieces;
+
     private Board board;
     private Tile[,] grid;
 
     public PiecesDirector(Board board)
     {
+        pieces = new List<Piece>();
         this.board = board;
         grid = board.grid;
+    }
+
+    public Piece AddPiece(Piece piece)
+    {
+        piece.SetBoard(board);
+        pieces.Add(piece);
+        UpdatePiecesHints();
+
+        return piece;
+    }
+
+    public void UpdatePiecesHints()
+    {
+        foreach (Piece p in pieces)
+            p.UpdateHints();
     }
 
     public void SetupPieces()
@@ -47,10 +65,5 @@ public class PiecesDirector
 
         AddPiece(new Bishop(grid[7, 2], Color.BLACK));
         AddPiece(new Bishop(grid[7, 5], Color.BLACK));
-    }
-
-    private void AddPiece(Piece piece)
-    {
-        board.AddPiece(piece);
     }
 }
