@@ -24,33 +24,33 @@ public class Pawn : Piece
 
     private void UpdateWhitePawnHints()
     {
-        AddCaptureHintTile(1, -1);
-        AddCaptureHintTile(1, 1);
+        TryToAddCaptureHintTile(1, -1);
+        TryToAddCaptureHintTile(1, 1);
 
-        AddHintTile(1, 0);
+        TryToAddHintTile(1, 0);
 
         if (!pathBlocked && currentTile.i == 1)
-            AddHintTile(2, 0);
+            TryToAddHintTile(2, 0);
     }
 
     private void UpdateBlackPawnHints()
     {
-        AddCaptureHintTile(-1, -1);
-        AddCaptureHintTile(-1, 1);
+        TryToAddCaptureHintTile(-1, -1);
+        TryToAddCaptureHintTile(-1, 1);
 
-        AddHintTile(-1, 0);
+        TryToAddHintTile(-1, 0);
 
         if (!pathBlocked && currentTile.i == 6)
-            AddHintTile(-2, 0);
+            TryToAddHintTile(-2, 0);
     }
 
-    private void AddCaptureHintTile(int i, int j)
+    private void TryToAddCaptureHintTile(int i, int j)
     {
-        try { TryToGetCaptureHintTile(i, j); }
+        try { AddCaptureHintTile(i, j); }
         catch (IndexOutOfRangeException) { return; }
     }
 
-    private void TryToGetCaptureHintTile(int i, int j)
+    private void AddCaptureHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
@@ -58,13 +58,7 @@ public class Pawn : Piece
             hintTiles.Add(hintTile);
     }
 
-    private void AddHintTile(int i, int j)
-    {
-        try { TryToGetHintTile(i, j); }
-        catch (IndexOutOfRangeException) { return; }
-    }
-
-    private void TryToGetHintTile(int i, int j)
+    protected override void AddHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 

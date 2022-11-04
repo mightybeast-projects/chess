@@ -7,34 +7,32 @@ public abstract class DirectionalPiece : Piece
     protected DirectionalPiece(Tile tile, Color color) 
         : base(tile, color) { }
 
-    public abstract override void Accept(IPieceDrawerVisitor visitor);
-
     protected void AddHintTilesInDirection(int x, int y)
     {
         pathBlocked = false;
 
         for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
-                AddHintTile(x * i, y * i);
+                TryToAddHintTile(x * i, y * i);
     }
 
-    private void AddHintTile(int i, int j)
+    private new void TryToAddHintTile(int i, int j)
     {
-        try { TryToGetHintTile(i, j); }
+        try { AddHintTile(i, j); }
         catch (IndexOutOfRangeException) { pathBlocked = true; }
     }
 
-    private void TryToGetHintTile(int i, int j)
+    protected override void AddHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (!hintTile.isEmpty)
-            HandleOccupiedTile();
+            HandleOccupiedHintTile();
         else
             hintTiles.Add(hintTile);
     }
 
-    private void HandleOccupiedTile()
+    private void HandleOccupiedHintTile()
     {
         if (HintTileIsOccupiedByEnemy())
             hintTiles.Add(hintTile);

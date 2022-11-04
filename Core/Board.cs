@@ -8,10 +8,13 @@ public class Board
     public readonly Tile[,] grid;
     public readonly List<Piece> pieces;
 
+    private PiecesDirector piecesDirector;
+
     public Board()
     {
         grid = new Tile[8, 8];
         pieces = new List<Piece>();
+        piecesDirector = new PiecesDirector(this);
 
         InitializeGrid();
     }
@@ -24,8 +27,7 @@ public class Board
 
     public void SetUp()
     {
-        SetupWhitePieces();
-        SetupBlackPieces();
+        piecesDirector.SetupPieces();
     }
 
     public Piece AddPiece(Piece piece)
@@ -71,35 +73,5 @@ public class Board
         int symbolIndex = ((int)char.ToUpper(tileName[0])) - 64;
         int numberIndex = tileName[1] - '0';
         return grid[numberIndex - 1, symbolIndex - 1];
-    }
-
-    private void SetupWhitePieces()
-    {
-        for (int i = 0; i < grid.GetLength(0); i++)
-            AddPiece(new Pawn(grid[1, i], Color.WHITE));
-
-        AddPiece(new Rook(grid[0, 0], Color.WHITE));
-        AddPiece(new Rook(grid[0, 7], Color.WHITE));
-
-        AddPiece(new Knight(grid[0, 1], Color.WHITE));
-        AddPiece(new Knight(grid[0, 6], Color.WHITE));
-
-        AddPiece(new Bishop(grid[0, 2], Color.WHITE));
-        AddPiece(new Bishop(grid[0, 5], Color.WHITE));
-    }
-
-    private void SetupBlackPieces()
-    {
-        for (int i = 0; i < grid.GetLength(0); i++)
-            AddPiece(new Pawn(grid[6, i], Color.BLACK));
-
-        AddPiece(new Rook(grid[7, 0], Color.BLACK));
-        AddPiece(new Rook(grid[7, 7], Color.BLACK));
-
-        AddPiece(new Knight(grid[7, 1], Color.BLACK));
-        AddPiece(new Knight(grid[7, 6], Color.BLACK));
-
-        AddPiece(new Bishop(grid[7, 2], Color.BLACK));
-        AddPiece(new Bishop(grid[7, 5], Color.BLACK));
     }
 }

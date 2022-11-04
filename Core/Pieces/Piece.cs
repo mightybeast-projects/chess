@@ -21,6 +21,8 @@ public abstract class Piece
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
+    protected abstract void AddHintTile(int i, int j);
+
     public virtual void UpdateHints()
     {
         hintTiles = new List<Tile>();
@@ -44,15 +46,21 @@ public abstract class Piece
         board.UpdatePiecesHints();
     }
 
+    protected void TryToAddHintTile(int i, int j)
+    {
+        try { AddHintTile(i, j); }
+        catch (IndexOutOfRangeException) { return; }
+    }
+
     private void HandlePositionChange()
     {
         if (targetTile.isEmpty)
             ChangeCurrentPosition();
         else
-            HandleOccupiedPosition();
+            HandleOccupiedTargetTile();
     }
 
-    private void HandleOccupiedPosition()
+    private void HandleOccupiedTargetTile()
     {
         board.pieces.Remove(targetTile.piece);
         ChangeCurrentPosition();

@@ -21,38 +21,32 @@ public class Knight : Piece
 
     private void AddTopLHintTiles()
     {
-        AddHintTile(2, -1);
-        AddHintTile(2, 1);
+        TryToAddHintTile(2, -1);
+        TryToAddHintTile(2, 1);
     }
 
     private void AddRightLHintTiles()
     {
-        AddHintTile(1, 2);
-        AddHintTile(-1, 2);
+        TryToAddHintTile(1, 2);
+        TryToAddHintTile(-1, 2);
     }
 
     private void AddBottomLHintTiles()
     {
-        AddHintTile(-2, -1);
-        AddHintTile(-2, 1);
+        TryToAddHintTile(-2, -1);
+        TryToAddHintTile(-2, 1);
     }
 
     private void AddLeftLHintTiles()
     {
-        AddHintTile(1, -2);
-        AddHintTile(-1, -2);
+        TryToAddHintTile(1, -2);
+        TryToAddHintTile(-1, -2);
     }
 
-    private void AddHintTile(int i, int j)
-    {
-        try { TryToGetHintTile(i, j); }
-        catch (IndexOutOfRangeException) { return; }
-    }
-
-    private void TryToGetHintTile(int i, int j)
+    protected override void AddHintTile(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
-        
+
         if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())
             hintTiles.Add(hintTile);
     }
