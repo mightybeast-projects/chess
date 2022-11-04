@@ -50,6 +50,8 @@ public class PiecesDirector
 
         AddPiece(new Bishop(grid[0, 2], Color.WHITE));
         AddPiece(new Bishop(grid[0, 5], Color.WHITE));
+
+        AddPiece(new Queen(grid[0, 3], Color.WHITE));
     }
 
     private void SetupBlackPieces()
@@ -65,5 +67,7 @@ public class PiecesDirector
 
         AddPiece(new Bishop(grid[7, 2], Color.BLACK));
         AddPiece(new Bishop(grid[7, 5], Color.BLACK));
+
+        AddPiece(new Queen(grid[7, 3], Color.BLACK));
     }
 }
