@@ -5,10 +5,10 @@ namespace Chess.Core;
 
 public class Board
 {
-    public List<Piece> pieces => piecesDirector.pieces;
     public readonly Tile[,] grid;
+    public List<Piece> pieces => piecesDirector.pieces;
 
-    private PiecesDirector piecesDirector;
+    private readonly PiecesDirector piecesDirector;
 
     public Board()
     {
