@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Knights;
 
 [TestFixture]
-class BlockedPathTests : PieceSetUp
+class BlockedKnightPathTests : PieceSetUp
 {
     [Test]
     public void KnightHasNoBottomAndLeftLHintTiles()
@@ -26,8 +26,12 @@ class BlockedPathTests : PieceSetUp
     [Test]
     public void KnightHasCaptureHintTiles()
     {
-        CreateAndAddPiece(typeof(Pawn), "c6", Color.BLACK);
-        CreateAndAddPiece(typeof(Pawn), "e6", Color.BLACK);
+        CreateAndAddPawns(Color.BLACK, 
+            "c6", "e6",
+            "f5", "f3",
+            "c2", "e2",
+            "b3", "b5"
+        );
 
         CreateAndAddPiece(typeof(Knight), "d4", Color.WHITE);
 

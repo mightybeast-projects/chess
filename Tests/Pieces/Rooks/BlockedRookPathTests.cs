@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Rooks;
 
 [TestFixture]
-class BlockedPathTests : PieceSetUp
+class BlockedRookPathTests : PieceSetUp
 {
     [Test]
     public void RookHasBlockedUpperVerticalPath()
