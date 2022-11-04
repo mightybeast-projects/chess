@@ -4,7 +4,10 @@ public class Queen : DirectionalPiece
 {
     public Queen(Tile tile, Color color) : base(tile, color) { }
 
-    public override void Accept(IPieceDrawerVisitor visitor) { }
+    public override void Accept(IPieceDrawerVisitor visitor)
+    {
+        visitor.VisitQueen(this);
+    }
 
     public override void UpdateHints()
     {

@@ -6,4 +6,5 @@ public interface IPieceDrawerVisitor
     void VisitRook(Piece piece);
     void VisitKnight(Piece piece);
     void VisitBishop(Piece piece);
+    void VisitQueen(Piece piece);
 }
