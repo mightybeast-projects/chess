@@ -42,6 +42,14 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
         DrawTilePiece(piece);
     }
 
+    public void VisitQueen(Piece piece)
+    {
+        filledPieceStr = "♛ ";
+        emptiedPieceStr = "♕ ";
+
+        DrawTilePiece(piece);
+    }
+
     private void DrawTilePiece(Piece piece)
     {
         currentPiece = piece;
