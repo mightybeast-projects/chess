@@ -17,6 +17,11 @@ public class King : Piece
         TryToAddHintTile(1, 1);
         TryToAddHintTile(-1, 1);
         TryToAddHintTile(-1, -1);
+
+        TryToAddHintTile(1, 0);
+        TryToAddHintTile(0, 1);
+        TryToAddHintTile(-1, 0);
+        TryToAddHintTile(0, -1);
     }
 
     protected override void AddHintTile(int i, int j)
