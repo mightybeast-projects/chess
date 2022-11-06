@@ -50,6 +50,14 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
         DrawTilePiece(piece);
     }
 
+    public void VisitKing(Piece piece)
+    {
+        filledPieceStr = "♚ ";
+        emptiedPieceStr = "♔ ";
+
+        DrawTilePiece(piece);
+    }
+
     private void DrawTilePiece(Piece piece)
     {
         currentPiece = piece;
