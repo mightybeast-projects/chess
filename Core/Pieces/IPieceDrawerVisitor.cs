@@ -7,4 +7,5 @@ public interface IPieceDrawerVisitor
     void VisitKnight(Piece piece);
     void VisitBishop(Piece piece);
     void VisitQueen(Piece piece);
+    void VisitKing(Piece piece);
 }

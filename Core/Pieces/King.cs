@@ -6,7 +6,7 @@ public class King : Piece
 
     public override void Accept(IPieceDrawerVisitor visitor)
     {
-        throw new NotImplementedException();
+        visitor.VisitKing(this);
     }
 
     public override void UpdateHints()
