@@ -7,34 +7,34 @@ namespace Chess.Tests;
 [TestFixture]
 class BoardSetupTests : BoardTestDataBuilder
 {
+    private char letter;
+    private string tileName;
+
     [Test]
     public void BoardSetupIsCorrect()
     {
         board.SetUp();
 
-        color = Color.WHITE;
-        AssertPawnRow(2);
-        AssertSetupPiece(typeof(Rook), "a1");
-        AssertSetupPiece(typeof(Rook), "h1");
-        AssertSetupPiece(typeof(Knight), "b1");
-        AssertSetupPiece(typeof(Knight), "g1");
-        AssertSetupPiece(typeof(Bishop), "c1");
-        AssertSetupPiece(typeof(Bishop), "f1");
-        AssertSetupPiece(typeof(Queen), "d1");
-        AssertSetupPiece(typeof(King), "e1");
-
-        color = Color.BLACK;
-        AssertPawnRow(7);
-        AssertSetupPiece(typeof(Rook), "a8");
-        AssertSetupPiece(typeof(Rook), "h8");
-        AssertSetupPiece(typeof(Knight), "b8");
-        AssertSetupPiece(typeof(Knight), "g8");
-        AssertSetupPiece(typeof(Bishop), "c8");
-        AssertSetupPiece(typeof(Bishop), "f8");
-        AssertSetupPiece(typeof(Queen), "d8");
-        AssertSetupPiece(typeof(King), "e8");
-
+        AssertPieceRows(Color.WHITE, 2, 1);
+        AssertPieceRows(Color.BLACK, 7, 8);
         Assert.AreEqual(32, board.pieces.Count);
+    }
+
+    private void AssertPieceRows(
+        Color color,
+        int pawnRowIndex,
+        int pieceRowIndex)
+    {
+        this.color = color;
+        AssertPawnRow(pawnRowIndex);
+        AssertSetupPiece(typeof(Rook), "a" + pieceRowIndex);
+        AssertSetupPiece(typeof(Knight), "b" + pieceRowIndex);
+        AssertSetupPiece(typeof(Bishop), "c" + pieceRowIndex);
+        AssertSetupPiece(typeof(Queen), "d" + pieceRowIndex);
+        AssertSetupPiece(typeof(King), "e" + pieceRowIndex);
+        AssertSetupPiece(typeof(Bishop), "f" + pieceRowIndex);
+        AssertSetupPiece(typeof(Knight), "g" + pieceRowIndex);
+        AssertSetupPiece(typeof(Rook), "h" + pieceRowIndex);
     }
 
     private void AssertPawnRow(int rowIndex)
@@ -45,8 +45,8 @@ class BoardSetupTests : BoardTestDataBuilder
 
     private void AssertPawnInRow(int letterIndex, int rowIndex)
     {
-        char letter = (char) (letterIndex+ 65);
-        string tileName = letter.ToString().ToLower() + rowIndex;
+        letter = (char) (letterIndex+ 65);
+        tileName = letter.ToString().ToLower() + rowIndex;
 
         AssertSetupPiece(typeof(Pawn), tileName);
     }

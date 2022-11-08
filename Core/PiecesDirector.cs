@@ -33,45 +33,25 @@ public class PiecesDirector
 
     public void SetupPieces()
     {
-        SetupWhitePieces();
-        SetupBlackPieces();
+        SetupPieces(Color.WHITE, 1, 0);
+        SetupPieces(Color.BLACK, 6, 7);
     }
 
-    private void SetupWhitePieces()
+    private void SetupPieces(
+        Color color,
+        int pawnRowIndex,
+        int pieceRowIndex)
     {
         for (int i = 0; i < grid.GetLength(0); i++)
-            AddPiece(new Pawn(grid[1, i], Color.WHITE));
+            AddPiece(new Pawn(grid[pawnRowIndex, i], color));
 
-        AddPiece(new Rook(grid[0, 0], Color.WHITE));
-        AddPiece(new Rook(grid[0, 7], Color.WHITE));
-
-        AddPiece(new Knight(grid[0, 1], Color.WHITE));
-        AddPiece(new Knight(grid[0, 6], Color.WHITE));
-
-        AddPiece(new Bishop(grid[0, 2], Color.WHITE));
-        AddPiece(new Bishop(grid[0, 5], Color.WHITE));
-
-        AddPiece(new Queen(grid[0, 3], Color.WHITE));
-
-        AddPiece(new King(grid[0, 4], Color.WHITE));
-    }
-
-    private void SetupBlackPieces()
-    {
-        for (int i = 0; i < grid.GetLength(0); i++)
-            AddPiece(new Pawn(grid[6, i], Color.BLACK));
-
-        AddPiece(new Rook(grid[7, 0], Color.BLACK));
-        AddPiece(new Rook(grid[7, 7], Color.BLACK));
-
-        AddPiece(new Knight(grid[7, 1], Color.BLACK));
-        AddPiece(new Knight(grid[7, 6], Color.BLACK));
-
-        AddPiece(new Bishop(grid[7, 2], Color.BLACK));
-        AddPiece(new Bishop(grid[7, 5], Color.BLACK));
-
-        AddPiece(new Queen(grid[7, 3], Color.BLACK));
-
-        AddPiece(new King(grid[7, 4], Color.BLACK));
+        AddPiece(new Rook(grid[pieceRowIndex, 0], color));
+        AddPiece(new Knight(grid[pieceRowIndex, 1], color));
+        AddPiece(new Bishop(grid[pieceRowIndex, 2], color));
+        AddPiece(new Queen(grid[pieceRowIndex, 3], color));
+        AddPiece(new King(grid[pieceRowIndex, 4], color));
+        AddPiece(new Bishop(grid[pieceRowIndex, 5], color));
+        AddPiece(new Knight(grid[pieceRowIndex, 6], color));
+        AddPiece(new Rook(grid[pieceRowIndex, 7], color));        
     }
 }

@@ -25,7 +25,7 @@ class GeneralBoardTests : BoardTestDataBuilder
     }
 
     [Test]
-    public void BoardGridLength()
+    public void BoardIsEightByEightSquare()
     {
         Assert.AreEqual(8, board.grid.GetLength(0));
         Assert.AreEqual(8, board.grid.GetLength(1));
@@ -37,28 +37,16 @@ class GeneralBoardTests : BoardTestDataBuilder
         Assert.AreEqual(typeof(Tile), board.grid[0, 0].GetType());
     }
 
+    [TestCase(0, 0, Color.BLACK)]
+    [TestCase(0, 1, Color.WHITE)]
+    [TestCase(1, 0, Color.WHITE)]
+    [TestCase(7, 0, Color.WHITE)]
+    [TestCase(6, 0, Color.BLACK)]
+    [TestCase(7, 1, Color.BLACK)]
     [Test]
-    public void ZeroZeroTileIsBlack()
+    public void TileIsOfColor(int i, int j, Color color)
     {
-        Assert.AreEqual(Color.BLACK, board.grid[0, 0].color);
-    }
-
-    [Test]
-    public void ZeroOneTileIsWhite()
-    {
-        Assert.AreEqual(Color.WHITE, board.grid[0, 1].color);
-    }
-
-    [Test]
-    public void ZeroSevenTileIsWhite()
-    {
-        Assert.AreEqual(Color.WHITE, board.grid[0, 7].color);
-    }
-
-    [Test]
-    public void OneZeroTileIsWhite()
-    {
-        Assert.AreEqual(Color.WHITE, board.grid[1, 0].color);
+        Assert.AreEqual(color, board.grid[i, j].color);
     }
 
     [Test]
