@@ -1,10 +1,10 @@
 namespace Chess.Core.Pieces;
 
-public abstract class DirectionalPiece : Piece
+public abstract class SlidingPiece : Piece
 {
     private bool pathBlocked;
 
-    protected DirectionalPiece(Tile tile, Color color) 
+    protected SlidingPiece(Tile tile, Color color) 
         : base(tile, color) { }
 
     protected void AddHintTilesInDirection(int x, int y)

@@ -1,6 +1,6 @@
 namespace Chess.Core.Pieces;
 
-public class Bishop : DirectionalPiece
+public class Bishop : SlidingPiece
 {
     public Bishop(Tile tile, Color color) : base(tile, color) { }
 

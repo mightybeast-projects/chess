@@ -1,6 +1,6 @@
 namespace Chess.Core.Pieces;
 
-public class Rook : DirectionalPiece
+public class Rook : SlidingPiece
 {
     public Rook(Tile tile, Color color) : base(tile, color) { }
 

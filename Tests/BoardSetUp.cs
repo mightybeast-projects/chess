@@ -25,11 +25,13 @@ class BoardSetUp
         tile = new Tile(0, 0, Color.BLACK);
     }
 
-    protected Piece CreateAndAddPiece(Type pieceType, string tileName, Color color)
+    protected void CreateAndAddPiece(
+        Type pieceType, 
+        string tileName, 
+        Color color)
     {
-        tile = board.GetTile(tileName);
         this.color = color;
-
+        tile = board.GetTile(tileName);
         ctorTypes = new[] {
             typeof(Tile), typeof(Color)
         };
@@ -40,7 +42,7 @@ class BoardSetUp
         pieceObj = ctor?.Invoke(ctorArgs);
         piece = (Piece)pieceObj!;
 
-        return board.AddPiece(piece);
+        board.AddPiece(piece);
     }
 
     protected void AssertPiece()

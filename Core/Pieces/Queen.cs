@@ -1,6 +1,6 @@
 namespace Chess.Core.Pieces;
 
-public class Queen : DirectionalPiece
+public class Queen : SlidingPiece
 {
     public Queen(Tile tile, Color color) : base(tile, color) { }
 

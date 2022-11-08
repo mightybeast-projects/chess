@@ -46,15 +46,13 @@ class MoveTests : BoardSetUp
     [Test]
     public void CaptureEnemyPiece()
     {
-        Piece d4Piece, e5Piece;
-        d4Piece = CreateAndAddPiece(typeof(Pawn), "d4", Color.WHITE);
-        e5Piece = CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
+        CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
+        CreateAndAddPiece(typeof(Pawn), "d4", Color.WHITE);
 
-        d4Piece.Move("e5");
+        piece.Move("e5");
 
         Assert.AreEqual(1, board.pieces.Count);
-        Assert.AreEqual(board.GetTile("e5"), d4Piece.currentTile);
-        Assert.AreEqual(board.GetTile("e5").piece, d4Piece);
-        Assert.IsFalse(board.pieces.Contains(e5Piece));
+        Assert.AreEqual(board.GetTile("e5"), piece.currentTile);
+        Assert.AreEqual(board.GetTile("e5").piece, piece);
     }
 }

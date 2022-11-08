@@ -7,12 +7,16 @@ namespace Chess.Tests;
 [TestFixture]
 class BoardNotationTests : BoardSetUp
 {
+    private char letter;
+    private string tileName;
+
+    [TestCase("a1", 0, 0)]
+    [TestCase("h1", 0, 7)]
+    [TestCase("d4", 3, 3)]
     [Test]
-    public void BoardTileHasCorrectNotation()
+    public void BoardTileHasCorrectNotation(string tileStr, int i, int j)
     {
-        Assert.AreEqual("a1", board.grid[0, 0].notation);
-        Assert.AreEqual("h1", board.grid[0, 7].notation);
-        Assert.AreEqual("d4", board.grid[3, 3].notation);
+        Assert.AreEqual(tileStr, board.grid[i, j].notation);
     }
 
     [Test]
@@ -21,27 +25,32 @@ class BoardNotationTests : BoardSetUp
         AssertBoardTileNotation(0, 0);
     }
 
+    [TestCase("d4")]
     [Test]
-    public void D4TileIsBlack()
+    public void TileIsBlack(string tileStr)
     {
-        tile = board.GetTile("d4");
+        tile = board.GetTile(tileStr);
+
         Assert.AreEqual(Color.BLACK, tile.color);
     }
 
+    [TestCase("e4")]
     [Test]
-    public void E4TileIsWhite()
+    public void TileIsWhite(string tileStr)
     {
-        tile = board.GetTile("e4");
+        tile = board.GetTile(tileStr);
+
         Assert.AreEqual(Color.WHITE, tile.color);
     }
 
+    [TestCase("")]
+    [TestCase("a")]
+    [TestCase("z-4")]
+    [TestCase("z9")]
     [Test]
-    public void IncorrectTileNotation()
+    public void TileHasIncorrectNotation(string tileStr)
     {
-        AssertIncorrectTileNotation("");
-        AssertIncorrectTileNotation("a");
-        AssertIncorrectTileNotation("z-4");
-        AssertIncorrectTileNotation("z9");
+        AssertIncorrectTileNotation(tileStr);
     }
 
     [Test]
@@ -54,9 +63,10 @@ class BoardNotationTests : BoardSetUp
 
     private void AssertBoardTileNotation(int i, int j)
     {
-        char letter = (char)(j + 65);
-        string tileName = letter.ToString().ToLower() + (i + 1);
+        letter = (char)(j + 65);
+        tileName = letter.ToString().ToLower() + (i + 1);
         tile = board.GetTile(tileName);
+
         Assert.AreEqual(board.grid[i, j], tile);
     }
 
