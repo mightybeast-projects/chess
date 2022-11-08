@@ -7,91 +7,75 @@ namespace Chess.Tests.Pieces.Bishops;
 [TestFixture]
 class BlockedBishopPathTests : PieceTestDataBuilder
 {
-    [Test]
-    public void BishopHasBlockedTopRightDiagonal()
-    {
-        CreateAndAddPawns(Color.WHITE, "c3", "c5", "e3");
-        
-        CreateAndAddPiece(typeof(Pawn), "f6", Color.WHITE);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
+    [TestCase(
+        new string[] { "c3", "c5", "e3" },
+        "f6", Color.WHITE,
+        "d4",
+        new string[] { "e5" }
+    )]
 
-        AssertPieceHintTiles(new string[] { "e5" });
-    }
-    
-    [Test]
-    public void BishopHasCaptureOnTopRightDiagonal()
-    {
-        CreateAndAddPawns(Color.WHITE, "c3", "c5", "e3");
+    [TestCase(
+        new string[] { "c3", "c5", "e3" },
+        "f6", Color.BLACK,
+        "d4",
+        new string[] { "e5", "f6" }
+    )]
 
-        CreateAndAddPiece(typeof(Pawn), "f6", Color.BLACK);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
+    [TestCase(
+        new string[] { "e5", "c5", "e3" },
+        "b2", Color.WHITE,
+        "d4",
+        new string[] { "c3" }
+    )]
 
-        AssertPieceHintTiles(new string[] { "e5", "f6" });
-    }
+    [TestCase(
+        new string[] { "e5", "c5", "e3" },
+        "b2", Color.BLACK,
+        "d4",
+        new string[] { "c3", "b2" }
+    )]
 
-    [Test]
-    public void BishopHasBlockedBottomLeftDiagonal()
-    {
-        CreateAndAddPawns(Color.WHITE, "e5", "c5", "e3");
+    [TestCase(
+        new string[] { "e5", "c3", "e3" },
+        "b6", Color.WHITE,
+        "d4",
+        new string[] { "c5" }
+    )]
 
-        CreateAndAddPiece(typeof(Pawn), "b2", Color.WHITE);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
+    [TestCase(
+        new string[] { "e5", "c3", "e3" },
+        "b6", Color.BLACK,
+        "d4",
+        new string[] { "b6", "c5" }
+    )]
 
-        AssertPieceHintTiles(new string[] { "c3" });
-    }
+    [TestCase(
+        new string[] { "e5", "c3", "c5" },
+        "f2", Color.WHITE,
+        "d4",
+        new string[] { "e3" }
+    )]
 
-    [Test]
-    public void BishopHasCaptureOnBottomLeftDiagonal()
-    {
-        CreateAndAddPawns(Color.WHITE, "e5", "c5", "e3");
-
-        CreateAndAddPiece(typeof(Pawn), "b2", Color.BLACK);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] { "c3", "b2" });
-    }
-
-    [Test]
-    public void BishopHasBlockedTopLeftDiagonal()
-    {
-        CreateAndAddPawns(Color.WHITE, "e5", "c3", "e3");
-
-        CreateAndAddPiece(typeof(Pawn), "b6", Color.WHITE);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] { "c5" });
-    }
-
-    [Test]
-    public void BishopHasCaptureOnTopLeftDiagonal()
-    {
-        CreateAndAddPawns(Color.WHITE, "e5", "c3", "e3");
-
-        CreateAndAddPiece(typeof(Pawn), "b6", Color.BLACK);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] { "b6", "c5" });
-    }
+    [TestCase(
+        new string[] { "e5", "c3", "c5" },
+        "f2", Color.BLACK,
+        "d4",
+        new string[] { "e3", "f2" }
+    )]
 
     [Test]
-    public void BishopHasBlockedBottomRightDiagonal()
+    public void BishopHasCorrectHintTilesWhilePathIsBlocked(
+        string[] pawnsPos,
+        string blockerPawnPos, Color blockerPawnColor,
+        string bishopPos,
+        string[] hintTiles)
     {
-        CreateAndAddPawns(Color.WHITE, "e5", "c3", "c5");
+        foreach (string pawnPos in pawnsPos)
+            CreateAndAddPiece(typeof(Pawn), pawnPos, Color.WHITE);
 
-        CreateAndAddPiece(typeof(Pawn), "f2", Color.WHITE);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
+        CreateAndAddPiece(typeof(Pawn), blockerPawnPos, blockerPawnColor);
+        CreateAndAddPiece(typeof(Bishop), bishopPos, Color.WHITE);
 
-        AssertPieceHintTiles(new string[] { "e3" });
-    }
-
-    [Test]
-    public void BishopHasCaptureOnBottomRightDiagonal()
-    {
-        CreateAndAddPawns(Color.WHITE, "e5", "c3", "c5");
-
-        CreateAndAddPiece(typeof(Pawn), "f2", Color.BLACK);
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] { "e3", "f2" });
+        AssertPieceHintTiles(hintTiles);
     }
 }

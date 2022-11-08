@@ -15,56 +15,37 @@ class GeneralBishopTests : PieceTestDataBuilder
         AssertPiece();
     }
 
-    [Test]
-    public void BishopHasTopRightDiagonalHintTiles()
-    {
-        CreateAndAddPiece(typeof(Bishop), "a1", Color.WHITE);
+    [TestCase(
+        "a1", new string[] { "b2", "c3", "d4", "e5", "f6", "g7", "h8" }
+    )]
 
-        AssertPieceHintTiles(new string[] {
-            "b2", "c3", "d4", "e5", "f6", "g7", "h8"
-        });
-    }
+    [TestCase(
+        "a8", new string[] { "h1", "g2", "f3", "e4", "d5", "c6", "b7" }
+    )]
 
-    [Test]
-    public void BishopHasBottomLeftDiagonalHintTiles()
-    {
-        CreateAndAddPiece(typeof(Bishop), "h8", Color.WHITE);
+    [TestCase(
+        "h1", new string[] { "g2", "f3", "e4", "d5", "c6", "b7", "a8" }
+    )]
 
-        AssertPieceHintTiles(new string[] {
-            "a1", "b2", "c3", "d4", "e5", "f6", "g7"
-        });
-    }
-
-    [Test]
-    public void BishopHasTopLeftDiagonalHintTiles()
-    {
-        CreateAndAddPiece(typeof(Bishop), "h1", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] {
-            "g2", "f3", "e4", "d5", "c6", "b7", "a8"
-        });
-    }
-
-    [Test]
-    public void BishopHasBottomRightDiagonalHintTiles()
-    {
-        CreateAndAddPiece(typeof(Bishop), "a8", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] {
-            "h1", "g2", "f3", "e4", "d5", "c6", "b7"
-        });
-    }
-
-    [Test]
-    public void BishopHasAllCorrectHintTiles()
-    {
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
-        
-        AssertPieceHintTiles(new string[] { 
+    [TestCase(
+        "h8", new string[] { "a1", "b2", "c3", "d4", "e5", "f6", "g7" }
+    )]
+    
+    [TestCase(
+        "d4",
+        new string[] {
             "e5", "f6", "g7", "h8",
             "e3", "f2", "g1",
             "c3", "b2", "a1",
-            "c5", "b6", "a7"
-        });
+            "c5", "b6", "a7" }
+    )]
+    [Test]
+    public void BishopAtPositionHasHintTiles(
+        string bishopPosition,
+        string[] hintTiles)
+    {
+        CreateAndAddPiece(typeof(Bishop), bishopPosition, Color.WHITE);
+
+        AssertPieceHintTiles(hintTiles);
     }
 }
