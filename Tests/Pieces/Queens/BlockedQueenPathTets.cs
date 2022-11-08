@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Queens;
 
 [TestFixture]
-class BlockedQueenPathTets : PieceSetUp
+class BlockedQueenPathTets : PieceTestDataBuilder
 {
     [Test]
     public void QueenHasBlockedDiagonals()

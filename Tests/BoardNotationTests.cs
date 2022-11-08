@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests;
 
 [TestFixture]
-class BoardNotationTests : BoardSetUp
+class BoardNotationTests : BoardTestDataBuilder
 {
     private char letter;
     private string tileName;

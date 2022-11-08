@@ -5,13 +5,13 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Rooks;
 
 [TestFixture]
-class GeneralRookTests : PieceSetUp
+class GeneralRookTests : PieceTestDataBuilder
 {
     [Test]
     public void RookInitialization()
     {
         CreateAndAddPiece(typeof(Rook), "d4", Color.WHITE);
-        
+
         AssertPiece();
     }
 

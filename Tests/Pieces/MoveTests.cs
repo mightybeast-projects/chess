@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces;
 
 [TestFixture]
-class MoveTests : BoardSetUp
+class MoveTests : BoardTestDataBuilder
 {
     private List<Tile> preMoveHintTiles;
 

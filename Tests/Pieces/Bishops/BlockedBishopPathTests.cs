@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Bishops;
 
 [TestFixture]
-class BlockedBishopPathTests : PieceSetUp
+class BlockedBishopPathTests : PieceTestDataBuilder
 {
     [Test]
     public void BishopHasBlockedTopRightDiagonal()

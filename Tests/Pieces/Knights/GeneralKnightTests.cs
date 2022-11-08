@@ -5,13 +5,13 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Knights;
 
 [TestFixture]
-class GeneralKnightTests : PieceSetUp
+class GeneralKnightTests : PieceTestDataBuilder
 {
     [Test]
     public void KnightInitialization()
     {
         CreateAndAddPiece(typeof(Knight), "d4", Core.Color.WHITE);
-        
+
         AssertPiece();
     }
 

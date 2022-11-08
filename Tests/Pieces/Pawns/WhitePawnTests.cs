@@ -4,13 +4,13 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Pawns;
 
 [TestFixture]
-class WhitePawnTests : PieceSetUp, IPawnTest
+class WhitePawnTests : PieceTestDataBuilder, IPawnTest
 {
     [Test]
     public void PawnInitialization()
     {
         CreateAndAddPiece(typeof(Pawn), "d4", Color.WHITE);
-        
+
         AssertPiece();
     }
 

@@ -5,13 +5,13 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Bishops;
 
 [TestFixture]
-class GeneralBishopTests : PieceSetUp
+class GeneralBishopTests : PieceTestDataBuilder
 {
     [Test]
     public void BishopInitialization()
     {
         CreateAndAddPiece(typeof(Bishop), "d4", Core.Color.WHITE);
-        
+
         AssertPiece();
     }
 

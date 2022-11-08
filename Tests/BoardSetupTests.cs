@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests;
 
 [TestFixture]
-class BoardSetupTests : BoardSetUp
+class BoardSetupTests : BoardTestDataBuilder
 {
     [Test]
     public void BoardSetupIsCorrect()

@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Knights;
 
 [TestFixture]
-class BlockedKnightPathTests : PieceSetUp
+class BlockedKnightPathTests : PieceTestDataBuilder
 {
     [Test]
     public void KnightHasNoBottomAndLeftLHintTiles()

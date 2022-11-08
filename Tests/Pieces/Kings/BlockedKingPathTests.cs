@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.Kings;
 
 [TestFixture]
-class BlockedKingPathTests : PieceSetUp
+class BlockedKingPathTests : PieceTestDataBuilder
 {
     [Test]
     public void KingHasAlliesOnDiagonalsAndAxises()

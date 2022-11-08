@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-class PieceSetUp : BoardSetUp
+class PieceTestDataBuilder : BoardTestDataBuilder
 {
     protected void AssertPieceHintTiles(string[] hints)
     {
