@@ -11,6 +11,7 @@ class GeneralBishopTests : PieceSetUp
     public void BishopInitialization()
     {
         CreateAndAddPiece(typeof(Bishop), "d4", Core.Color.WHITE);
+        
         AssertPiece();
     }
 

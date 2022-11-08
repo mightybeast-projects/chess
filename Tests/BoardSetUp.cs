@@ -52,5 +52,6 @@ class BoardSetUp
         Assert.AreEqual(tile.piece, piece);
         Assert.AreEqual(color, piece.color);
         Assert.IsFalse(board.GetTile(tile.notation).isEmpty);
+        Assert.IsTrue(board.pieces.Contains(piece));
     }
 }

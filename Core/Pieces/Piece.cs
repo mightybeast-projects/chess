@@ -1,3 +1,5 @@
+using Chess.Core.Exceptions;
+
 namespace Chess.Core.Pieces;
 
 public abstract class Piece
@@ -41,7 +43,7 @@ public abstract class Piece
         if (hintTiles.Contains(targetTile))
             HandlePositionChange();
         else
-            throw new WrongMoveException();
+            throw new IllegalMoveException();
 
         board.Update();
     }

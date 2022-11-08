@@ -11,6 +11,7 @@ class GeneralQueenTests : PieceSetUp
     public void QueenInitialization()
     {
         CreateAndAddPiece(typeof(Queen), "d4", Color.WHITE);
+        
         AssertPiece();
     }
 

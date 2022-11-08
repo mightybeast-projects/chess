@@ -21,6 +21,7 @@ class PieceSetUp : BoardSetUp
     private void AssertHintTile(string hintTileStr)
     {
         tile = board.GetTile(hintTileStr);
+        
         Assert.Contains(tile, piece.hintTiles);
     }
 }

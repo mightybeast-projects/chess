@@ -11,6 +11,7 @@ class GeneralKnightTests : PieceSetUp
     public void KnightInitialization()
     {
         CreateAndAddPiece(typeof(Knight), "d4", Core.Color.WHITE);
+        
         AssertPiece();
     }
 

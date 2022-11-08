@@ -11,6 +11,7 @@ class GeneralRookTests : PieceSetUp
     public void RookInitialization()
     {
         CreateAndAddPiece(typeof(Rook), "d4", Color.WHITE);
+        
         AssertPiece();
     }
 

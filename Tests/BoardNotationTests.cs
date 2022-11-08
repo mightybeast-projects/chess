@@ -26,6 +26,7 @@ class BoardNotationTests : BoardSetUp
     }
 
     [TestCase("d4")]
+    [TestCase("c3")]
     [Test]
     public void TileIsBlack(string tileStr)
     {
@@ -35,6 +36,7 @@ class BoardNotationTests : BoardSetUp
     }
 
     [TestCase("e4")]
+    [TestCase("d3")]
     [Test]
     public void TileIsWhite(string tileStr)
     {

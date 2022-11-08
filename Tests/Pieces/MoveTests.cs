@@ -1,5 +1,5 @@
 using Chess.Core;
-using Chess.Core.Pieces;
+using Chess.Core.Exceptions;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
@@ -7,13 +7,13 @@ namespace Chess.Tests.Pieces;
 [TestFixture]
 class MoveTests : BoardSetUp
 {
-    private List<Tile> firstHintTiles;
+    private List<Tile> preMoveHintTiles;
 
     [Test]
-    public void CorrectlyMovePiece()
+    public void PieceCanMakeLegalMove()
     {
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
-        firstHintTiles = piece.hintTiles;
+        preMoveHintTiles = piece.hintTiles;
 
         piece.Move("d3");
 
@@ -22,16 +22,16 @@ class MoveTests : BoardSetUp
         Assert.AreEqual(board.GetTile("d3"), piece.currentTile);
         Assert.IsFalse(board.GetTile("d3").isEmpty);
         Assert.AreEqual(board.GetTile("d3").piece, piece);
-        Assert.AreNotEqual(firstHintTiles, piece.hintTiles);
+        Assert.AreNotEqual(preMoveHintTiles, piece.hintTiles);
     }
 
     [Test]
-    public void IncorrectlyMovePiece()
+    public void PieceThrowsExceptionOnIllegalMove()
     {
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
-        firstHintTiles = piece.hintTiles;
+        preMoveHintTiles = piece.hintTiles;
 
-        Assert.Throws<WrongMoveException>(
+        Assert.Throws<IllegalMoveException>(
             () => piece.Move("a3")
         );
 
@@ -40,11 +40,11 @@ class MoveTests : BoardSetUp
         Assert.AreNotEqual(board.GetTile("a3"), piece.currentTile);
         Assert.IsTrue(board.GetTile("a3").isEmpty);
         Assert.AreNotEqual(board.GetTile("a3").piece, piece);
-        Assert.AreEqual(firstHintTiles, piece.hintTiles);
+        Assert.AreEqual(preMoveHintTiles, piece.hintTiles);
     }
 
     [Test]
-    public void CaptureEnemyPiece()
+    public void PieceWillCaptureEnemyIfTargetTileIsOccupiedByThem()
     {
         CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
         CreateAndAddPiece(typeof(Pawn), "d4", Color.WHITE);

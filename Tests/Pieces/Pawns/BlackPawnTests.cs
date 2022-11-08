@@ -10,6 +10,7 @@ class BlackPawnTests : PieceSetUp, IPawnTest
     public void PawnInitialization()
     {
         CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
+        
         AssertPiece();
     }
 

@@ -11,6 +11,7 @@ class GeneralKingTests : PieceSetUp
     public void KingInitialization()
     {
         CreateAndAddPiece(typeof(King), "d4", Color.WHITE);
+        
         AssertPiece();
     }
 
