@@ -1,29 +1,12 @@
-using Chess.Core;
 using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces.Bishops;
 
 [TestFixture]
-class GeneralBishopTests : PieceTestDataBuilder
+class GeneralBishopTests : GeneralPieceTest
 {
-    [Test]
-    public void BishopInitialization()
-    {
-        CreateAndAddPiece(typeof(Bishop), "d4", Core.Color.WHITE);
-
-        AssertPiece();
-    }
-    
-    [Test, TestCaseSource(nameof(cases))]
-    public void BishopAtPositionHasHintTiles(
-        string bishopPosition,
-        string[] hintTiles)
-    {
-        CreateAndAddPiece(typeof(Bishop), bishopPosition, Color.WHITE);
-
-        AssertPieceHintTiles(hintTiles);
-    }
+    protected override Type pieceType => typeof(Bishop);
 
     private static object[] cases = 
     {
