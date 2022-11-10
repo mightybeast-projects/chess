@@ -15,7 +15,7 @@ abstract class GeneralPieceTest : PieceTestDataBuilder
         AssertPiece();
     }
 
-    [Test, TestCaseSource("cases")]
+    [Test, TestCaseSource("generalCases")]
     public virtual void PieceAtPositionHasCorrectHintTiles(
         string piecePosition,
         string[] hintTiles)

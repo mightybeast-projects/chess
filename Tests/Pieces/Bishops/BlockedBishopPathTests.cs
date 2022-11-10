@@ -8,7 +8,7 @@ namespace Chess.Tests.Pieces.Bishops;
 class BlockedBishopPathTests : PieceTestDataBuilder
 {
     [Test, TestCaseSource(nameof(cases))]
-    public void BishopHasCorrectHintTilesWhilePathIsBlocked(
+    public void BishopAtPostionHasCorrectHintTilesWhilePathIsBlocked(
         Color blockerPawnsColor, string[] blockerPawnsPos,
         string bishopPos, string[] hintTiles)
     {

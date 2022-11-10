@@ -8,7 +8,7 @@ class GeneralBishopTests : GeneralPieceTest
 {
     protected override Type pieceType => typeof(Bishop);
 
-    private static object[] cases = 
+    private static object[] generalCases = 
     {
         new object[] {
             "a1", 
