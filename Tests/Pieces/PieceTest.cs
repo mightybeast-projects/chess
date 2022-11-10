@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-abstract class GeneralPieceTest : PieceTestDataBuilder
+abstract class PieceTest : PieceTestDataBuilder
 {
     protected abstract Type pieceType { get; }
 
@@ -21,6 +21,18 @@ abstract class GeneralPieceTest : PieceTestDataBuilder
         string[] hintTiles)
     {
         CreateAndAddPiece(pieceType, piecePosition, Color.WHITE);
+
+        AssertPieceHintTiles(hintTiles);
+    }
+
+    [Test, TestCaseSource("blockedPathCases")]
+    public void PieceAtPostionHasCorrectHintTilesWhilePathIsBlocked(
+        Color blockerPawnsColor, string[] blockerPawnsPos,
+        string piecePos, string[] hintTiles)
+    {
+        foreach (string pawnPos in blockerPawnsPos)
+            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
+        CreateAndAddPiece(pieceType, piecePos, Color.WHITE);
 
         AssertPieceHintTiles(hintTiles);
     }

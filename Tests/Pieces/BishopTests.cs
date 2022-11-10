@@ -1,10 +1,11 @@
+using Chess.Core;
 using Chess.Core.Pieces;
 using NUnit.Framework;
 
-namespace Chess.Tests.Pieces.Bishops;
+namespace Chess.Tests.Pieces;
 
 [TestFixture]
-class GeneralBishopTests : GeneralPieceTest
+class BishopTests : PieceTest
 {
     protected override Type pieceType => typeof(Bishop);
 
@@ -34,5 +35,17 @@ class GeneralBishopTests : GeneralPieceTest
                 "c3", "b2", "a1",
                 "c5", "b6", "a7" }
         }
+    };
+
+    private static object[] blockedPathCases = 
+    {
+        new object[] {
+            Color.WHITE, new string[] { "e5", "c3", "c5", "e3" },
+            "d4", new string[] { }
+        },
+        new object[] {
+            Color.BLACK, new string[] { "e5", "c3", "c5", "e3" },
+            "d4", new string[] { "e5", "c3", "c5", "e3" }, 
+        },
     };
 }
