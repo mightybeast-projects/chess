@@ -7,28 +7,33 @@ namespace Chess.Tests.Pieces.Kings;
 [TestFixture]
 class BlockedKingPathTests : PieceTestDataBuilder
 {
-    [Test]
-    public void KingHasAlliesOnDiagonalsAndAxises()
+    [Test, TestCaseSource(nameof(cases))]
+    public void KingHasCorrectHintTilesWhilePathIsBlocked(
+        Color blockerPawnsColor, string[] blockerPawnsPos,
+        string kingPos, string[] hintTiles)
     {
-        CreateAndAddPawns(Color.WHITE, "c4", "e4", "d5", "d3");
-        CreateAndAddPawns(Color.WHITE, "c5", "e5", "c3", "e3");
+        foreach (string pawnPos in blockerPawnsPos)
+            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
+        CreateAndAddPiece(typeof(King), kingPos, Color.WHITE);
 
-        CreateAndAddPiece(typeof(King), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] { });
+        AssertPieceHintTiles(hintTiles);
     }
 
-    [Test]
-    public void KingHasCaptureOnDiagonalsAndAxises()
+    private static object[] cases = 
     {
-        CreateAndAddPawns(Color.BLACK, "c4", "e4", "d5", "d3");
-        CreateAndAddPawns(Color.BLACK, "c5", "e5", "c3", "e3");
-
-        CreateAndAddPiece(typeof(King), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] {
-            "c5", "e5", "c3", "e3",
-            "c4", "e4", "d5", "d3"
-        });
-    }
+        new object[] {
+            Color.WHITE, new string[] {
+                "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
+            },
+            "d4", new string[] { }
+        },
+        new object[] {
+            Color.BLACK, new string[] {
+                "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
+            },
+            "d4", new string[] {
+                "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
+            } 
+        }
+    };
 }

@@ -9,11 +9,11 @@ class BlockedBishopPathTests : PieceTestDataBuilder
 {
     [Test, TestCaseSource(nameof(cases))]
     public void BishopHasCorrectHintTilesWhilePathIsBlocked(
-        Color blockerPawnColor, string[] blockerPawnsPos,
+        Color blockerPawnsColor, string[] blockerPawnsPos,
         string bishopPos, string[] hintTiles)
     {
         foreach (string pawnPos in blockerPawnsPos)
-            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnColor);
+            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
         CreateAndAddPiece(typeof(Bishop), bishopPos, Color.WHITE);
 
         AssertPieceHintTiles(hintTiles);

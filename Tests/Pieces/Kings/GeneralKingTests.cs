@@ -15,23 +15,36 @@ class GeneralKingTests : PieceTestDataBuilder
         AssertPiece();
     }
 
-    [Test]
-    public void KingHasDiagonalHintTiles()
+    [Test, TestCaseSource(nameof(cases))]
+    public void KingAtPositionHasHintTiles(
+        string kingPosition,
+        string[] hintTiles)
     {
-        CreateAndAddPawns(Color.WHITE, "c4", "e4", "d5", "d3");
+        CreateAndAddPiece(typeof(King), kingPosition, Color.WHITE);
 
-        CreateAndAddPiece(typeof(King), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] { "c5", "e5", "c3", "e3" });
+        AssertPieceHintTiles(hintTiles);
     }
 
-    [Test]
-    public void KingHasAxisHintTiles()
+    private static object[] cases =
     {
-        CreateAndAddPawns(Color.WHITE, "c5", "e5", "c3", "e3");
-
-        CreateAndAddPiece(typeof(King), "d4", Color.WHITE);
-
-        AssertPieceHintTiles(new string[] { "c4", "e4", "d5", "d3" });
-    }
+        new object[] {
+            "a1", new string[] { "a2", "b2", "b1" }
+        },
+        new object[] {
+            "a8", new string[] { "a7", "b8", "b7" }
+        },
+        new object[] {
+            "h1", new string[] { "h2", "g2", "g1" }
+        },
+        new object[] {
+            "h8", new string[] { "h7", "g8", "g7" }
+        },
+        new object[] {
+            "d4", new string[] {
+                "c5", "c4", "c4",
+                "d5", "d3",
+                "e5", "e4", "e3"
+            }
+        }
+    };
 }
