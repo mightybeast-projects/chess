@@ -3,14 +3,12 @@ using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-abstract class PieceTest : PieceTestDataBuilder
+abstract class PieceTest<TPiece> : PieceTestDataBuilder
 {
-    protected abstract Type pieceType { get; }
-
     [Test]
     public void PieceInitialization()
     {
-        CreateAndAddPiece(pieceType, "d4", Core.Color.WHITE);
+        CreateAndAddPiece(typeof(TPiece), "d4", Core.Color.WHITE);
 
         AssertPiece();
     }
@@ -20,7 +18,7 @@ abstract class PieceTest : PieceTestDataBuilder
         string piecePosition,
         string[] hintTiles)
     {
-        CreateAndAddPiece(pieceType, piecePosition, Color.WHITE);
+        CreateAndAddPiece(typeof(TPiece), piecePosition, Color.WHITE);
 
         AssertPieceHintTiles(hintTiles);
     }
@@ -32,7 +30,7 @@ abstract class PieceTest : PieceTestDataBuilder
     {
         foreach (string pawnPos in blockerPawnsPos)
             CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
-        CreateAndAddPiece(pieceType, piecePos, Color.WHITE);
+        CreateAndAddPiece(typeof(TPiece), piecePos, Color.WHITE);
 
         AssertPieceHintTiles(hintTiles);
     }
