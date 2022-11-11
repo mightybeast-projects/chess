@@ -17,31 +17,20 @@ public class Pawn : Piece
         base.UpdateHints();
 
         if (color == Color.WHITE)
-            UpdateWhitePawnHints();
+            UpdatePawnHints(1, 1);
         else
-            UpdateBlackPawnHints();
+            UpdatePawnHints(-1, 6);
     }
 
-    private void UpdateWhitePawnHints()
+    private void UpdatePawnHints(int colorMultiplier, int pawnRowIndex)
     {
-        TryToAddCaptureHintTile(1, -1);
-        TryToAddCaptureHintTile(1, 1);
+        TryToAddCaptureHintTile(colorMultiplier * 1, -1);
+        TryToAddCaptureHintTile(colorMultiplier * 1, 1);
 
-        TryToAddHintTile(1, 0);
+        TryToAddHintTile(colorMultiplier * 1, 0);
 
-        if (!pathBlocked && currentTile.i == 1)
-            TryToAddHintTile(2, 0);
-    }
-
-    private void UpdateBlackPawnHints()
-    {
-        TryToAddCaptureHintTile(-1, -1);
-        TryToAddCaptureHintTile(-1, 1);
-
-        TryToAddHintTile(-1, 0);
-
-        if (!pathBlocked && currentTile.i == 6)
-            TryToAddHintTile(-2, 0);
+        if (!pathBlocked && currentTile.i == pawnRowIndex)
+            TryToAddHintTile(colorMultiplier * 2, 0);
     }
 
     private void TryToAddCaptureHintTile(int i, int j)
