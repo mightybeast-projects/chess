@@ -7,6 +7,8 @@ namespace Chess.Tests.Pieces;
 [TestFixture]
 class KnightTests : PieceTest<Knight>
 {
+    protected override Color pieceColor => Color.WHITE;
+
     private static object[] generalCases = 
     {
         new object[] { "a1", new string[] { "b3", "c2" } },

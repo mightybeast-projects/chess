@@ -5,20 +5,22 @@ namespace Chess.Tests.Pieces;
 
 abstract class PieceTest<TPiece> : PieceTestDataBuilder
 {
+    protected abstract Color pieceColor { get; }
+
     [Test]
     public void PieceInitialization()
     {
-        CreateAndAddPiece(typeof(TPiece), "d4", Core.Color.WHITE);
+        CreateAndAddPiece(typeof(TPiece), "d4", pieceColor);
 
         AssertPiece();
     }
 
     [Test, TestCaseSource("generalCases")]
-    public virtual void PieceAtPositionHasCorrectHintTiles(
+    public void PieceAtPositionHasCorrectHintTiles(
         string piecePosition,
         string[] hintTiles)
     {
-        CreateAndAddPiece(typeof(TPiece), piecePosition, Color.WHITE);
+        CreateAndAddPiece(typeof(TPiece), piecePosition, pieceColor);
 
         AssertPieceHintTiles(hintTiles);
     }
@@ -30,7 +32,7 @@ abstract class PieceTest<TPiece> : PieceTestDataBuilder
     {
         foreach (string pawnPos in blockerPawnsPos)
             CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
-        CreateAndAddPiece(typeof(TPiece), piecePos, Color.WHITE);
+        CreateAndAddPiece(typeof(TPiece), piecePos, pieceColor);
 
         AssertPieceHintTiles(hintTiles);
     }
