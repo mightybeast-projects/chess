@@ -13,11 +13,20 @@ public class Queen : SlidingPiece
     {
         base.UpdateLegalMoves();
 
+        AddDiagonalLegalMoves();
+        AddAxisLegalMoves();
+    }
+
+    private void AddDiagonalLegalMoves()
+    {
         AddLegalMovesInDirection(1, 1);
         AddLegalMovesInDirection(1, -1);
         AddLegalMovesInDirection(-1, -1);
         AddLegalMovesInDirection(-1, 1);
+    }
 
+    private void AddAxisLegalMoves()
+    {
         AddLegalMovesInDirection(1, 0);
         AddLegalMovesInDirection(-1, 0);
         AddLegalMovesInDirection(0, 1);

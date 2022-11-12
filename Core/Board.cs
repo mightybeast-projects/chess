@@ -45,11 +45,7 @@ public class Board
     {
         Color chosenColor;
 
-        if (j % 2 == 0 && i % 2 == 0)
-            chosenColor = Color.BLACK;
-        else if (j % 2 == 0 && i % 2 > 0)
-            chosenColor = Color.WHITE;
-        else if (i % 2 == 0)
+        if (RowOrColIsOddWhileOtherIsNot(i, j))
             chosenColor = Color.WHITE;
         else
             chosenColor = Color.BLACK;
@@ -62,6 +58,10 @@ public class Board
     {
         int symbolIndex = ((int)char.ToUpper(tileName[0])) - 64;
         int numberIndex = tileName[1] - '0';
+        
         return grid[numberIndex - 1, symbolIndex - 1];
     }
+
+    private bool RowOrColIsOddWhileOtherIsNot(int i, int j) =>
+        j % 2 == 0 && i % 2 > 0 || j % 2 > 0 && i % 2 == 0;
 }

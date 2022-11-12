@@ -22,7 +22,7 @@ class KnightTests : PieceTest<Knight>
                 "c2", "e2",
                 "b3", "b5"
             }
-        },
+        }
     };
 
     private static object[] blockedPathCases = 

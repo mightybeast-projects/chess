@@ -13,11 +13,20 @@ public class King : Piece
     {
         base.UpdateLegalMoves();
 
+        AddDiagonalLegalMoves();
+        AddAxisLegalMoves();
+    }
+
+    private void AddDiagonalLegalMoves()
+    {
         TryToAddLegalMove(1, -1);
         TryToAddLegalMove(1, 1);
         TryToAddLegalMove(-1, 1);
         TryToAddLegalMove(-1, -1);
+    }
 
+    private void AddAxisLegalMoves()
+    {
         TryToAddLegalMove(1, 0);
         TryToAddLegalMove(0, 1);
         TryToAddLegalMove(-1, 0);

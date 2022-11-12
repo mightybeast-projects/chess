@@ -13,31 +13,31 @@ public class Knight : Piece
     {
         base.UpdateLegalMoves();
 
-        AddTopLHintTiles();
-        AddRightLHintTiles();
-        AddBottomLHintTiles();
-        AddLeftLHintTiles();
+        AddTopLegalMoves();
+        AddRightLegalMoves();
+        AddBottomLegalMoves();
+        AddLeftLegalMoves();
     }
 
-    private void AddTopLHintTiles()
+    private void AddTopLegalMoves()
     {
         TryToAddLegalMove(2, -1);
         TryToAddLegalMove(2, 1);
     }
 
-    private void AddRightLHintTiles()
+    private void AddRightLegalMoves()
     {
         TryToAddLegalMove(1, 2);
         TryToAddLegalMove(-1, 2);
     }
 
-    private void AddBottomLHintTiles()
+    private void AddBottomLegalMoves()
     {
         TryToAddLegalMove(-2, -1);
         TryToAddLegalMove(-2, 1);
     }
 
-    private void AddLeftLHintTiles()
+    private void AddLeftLegalMoves()
     {
         TryToAddLegalMove(1, -2);
         TryToAddLegalMove(-1, -2);

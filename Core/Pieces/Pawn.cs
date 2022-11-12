@@ -24,8 +24,8 @@ public class Pawn : Piece
 
     private void UpdatePawnHints(int colorMultiplier, int pawnRowIndex)
     {
-        TryToAddCaptureHintTile(colorMultiplier * 1, -1);
-        TryToAddCaptureHintTile(colorMultiplier * 1, 1);
+        TryToAddCaptureLegalMove(colorMultiplier * 1, -1);
+        TryToAddCaptureLegalMove(colorMultiplier * 1, 1);
 
         TryToAddLegalMove(colorMultiplier * 1, 0);
 
@@ -33,13 +33,13 @@ public class Pawn : Piece
             TryToAddLegalMove(colorMultiplier * 2, 0);
     }
 
-    private void TryToAddCaptureHintTile(int i, int j)
+    private void TryToAddCaptureLegalMove(int i, int j)
     {
-        try { AddCaptureHintTile(i, j); }
+        try { AddCaptureLegalMove(i, j); }
         catch (IndexOutOfRangeException) { return; }
     }
 
-    private void AddCaptureHintTile(int i, int j)
+    private void AddCaptureLegalMove(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
