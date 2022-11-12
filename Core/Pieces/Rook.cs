@@ -9,13 +9,13 @@ public class Rook : SlidingPiece
         visitor.VisitRook(this);
     }
 
-    public override void UpdateHints()
+    public override void UpdateLegalMoves()
     {
-        base.UpdateHints();
+        base.UpdateLegalMoves();
 
-        AddHintTilesInDirection(1, 0);
-        AddHintTilesInDirection(-1, 0);
-        AddHintTilesInDirection(0, 1);
-        AddHintTilesInDirection(0, -1);
+        AddLegalMovesInDirection(1, 0);
+        AddLegalMovesInDirection(-1, 0);
+        AddLegalMovesInDirection(0, 1);
+        AddLegalMovesInDirection(0, -1);
     }
 }

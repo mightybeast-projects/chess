@@ -5,9 +5,9 @@ namespace Chess.Core.Pieces;
 public abstract class Piece
 {
     public readonly Color color;
-    public List<Tile> hintTiles { get; protected set; }
     public Tile currentTile { get; protected set; }
     public Board board { get; private set; }
+    public List<Tile> legalMoves { get; protected set; }
 
     protected Tile hintTile;
 
@@ -23,34 +23,34 @@ public abstract class Piece
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
-    protected abstract void AddHintTile(int i, int j);
+    protected abstract void AddLegalMove(int i, int j);
 
-    public virtual void UpdateHints()
+    public virtual void UpdateLegalMoves()
     {
-        hintTiles = new List<Tile>();
+        legalMoves = new List<Tile>();
     }
 
     public void SetBoard(Board board)
     {
         this.board = board;
-        UpdateHints();
+        UpdateLegalMoves();
     }
 
     public void Move(string tileName)
     {
         targetTile = board.GetTile(tileName);
 
-        if (hintTiles.Contains(targetTile))
+        if (legalMoves.Contains(targetTile))
             HandlePositionChange();
         else
             throw new IllegalMoveException();
 
-        board.Update();
+        UpdateLegalMoves();
     }
 
-    protected void TryToAddHintTile(int i, int j)
+    protected void TryToAddLegalMove(int i, int j)
     {
-        try { AddHintTile(i, j); }
+        try { AddLegalMove(i, j); }
         catch (IndexOutOfRangeException) { return; }
     }
 

@@ -9,13 +9,13 @@ public class Bishop : SlidingPiece
         visitor.VisitBishop(this);
     }
 
-    public override void UpdateHints()
+    public override void UpdateLegalMoves()
     {
-        base.UpdateHints();
+        base.UpdateLegalMoves();
 
-        AddHintTilesInDirection(1, 1);
-        AddHintTilesInDirection(1, -1);
-        AddHintTilesInDirection(-1, -1);
-        AddHintTilesInDirection(-1, 1);
+        AddLegalMovesInDirection(1, 1);
+        AddLegalMovesInDirection(1, -1);
+        AddLegalMovesInDirection(-1, -1);
+        AddLegalMovesInDirection(-1, 1);
     }
 }

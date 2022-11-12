@@ -13,7 +13,7 @@ class MoveTests : BoardTestDataBuilder
     public void PieceCanMakeLegalMove()
     {
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
-        preMoveHintTiles = piece.hintTiles;
+        preMoveHintTiles = piece.legalMoves;
 
         piece.Move("d3");
 
@@ -22,14 +22,14 @@ class MoveTests : BoardTestDataBuilder
         Assert.AreEqual(board.GetTile("d3"), piece.currentTile);
         Assert.IsFalse(board.GetTile("d3").isEmpty);
         Assert.AreEqual(board.GetTile("d3").piece, piece);
-        Assert.AreNotEqual(preMoveHintTiles, piece.hintTiles);
+        Assert.AreNotEqual(preMoveHintTiles, piece.legalMoves);
     }
 
     [Test]
     public void PieceThrowsExceptionOnIllegalMove()
     {
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
-        preMoveHintTiles = piece.hintTiles;
+        preMoveHintTiles = piece.legalMoves;
 
         Assert.Throws<IllegalMoveException>(
             () => piece.Move("a3")
@@ -40,7 +40,7 @@ class MoveTests : BoardTestDataBuilder
         Assert.AreNotEqual(board.GetTile("a3"), piece.currentTile);
         Assert.IsTrue(board.GetTile("a3").isEmpty);
         Assert.AreNotEqual(board.GetTile("a3").piece, piece);
-        Assert.AreEqual(preMoveHintTiles, piece.hintTiles);
+        Assert.AreEqual(preMoveHintTiles, piece.legalMoves);
     }
 
     [Test]

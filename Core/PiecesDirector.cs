@@ -28,7 +28,7 @@ public class PiecesDirector
     public void UpdatePiecesHints()
     {
         foreach (Piece p in pieces)
-            p.UpdateHints();
+            p.UpdateLegalMoves();
     }
 
     public void SetupPieces()

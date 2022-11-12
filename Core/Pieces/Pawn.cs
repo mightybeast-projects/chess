@@ -12,9 +12,9 @@ public class Pawn : Piece
         visitor.VisitPawn(this);
     }
 
-    public override void UpdateHints()
+    public override void UpdateLegalMoves()
     {
-        base.UpdateHints();
+        base.UpdateLegalMoves();
 
         if (color == Color.WHITE)
             UpdatePawnHints(1, 1);
@@ -27,10 +27,10 @@ public class Pawn : Piece
         TryToAddCaptureHintTile(colorMultiplier * 1, -1);
         TryToAddCaptureHintTile(colorMultiplier * 1, 1);
 
-        TryToAddHintTile(colorMultiplier * 1, 0);
+        TryToAddLegalMove(colorMultiplier * 1, 0);
 
         if (!pathBlocked && currentTile.i == pawnRowIndex)
-            TryToAddHintTile(colorMultiplier * 2, 0);
+            TryToAddLegalMove(colorMultiplier * 2, 0);
     }
 
     private void TryToAddCaptureHintTile(int i, int j)
@@ -44,16 +44,16 @@ public class Pawn : Piece
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (HintTileIsOccupiedByEnemy())
-            hintTiles.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 
-    protected override void AddHintTile(int i, int j)
+    protected override void AddLegalMove(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (!hintTile.isEmpty)
             pathBlocked = true;
         else
-            hintTiles.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 }

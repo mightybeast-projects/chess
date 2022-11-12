@@ -9,9 +9,9 @@ public class Knight : Piece
         visitor.VisitKnight(this);
     }
 
-    public override void UpdateHints()
+    public override void UpdateLegalMoves()
     {
-        base.UpdateHints();
+        base.UpdateLegalMoves();
 
         AddTopLHintTiles();
         AddRightLHintTiles();
@@ -21,33 +21,33 @@ public class Knight : Piece
 
     private void AddTopLHintTiles()
     {
-        TryToAddHintTile(2, -1);
-        TryToAddHintTile(2, 1);
+        TryToAddLegalMove(2, -1);
+        TryToAddLegalMove(2, 1);
     }
 
     private void AddRightLHintTiles()
     {
-        TryToAddHintTile(1, 2);
-        TryToAddHintTile(-1, 2);
+        TryToAddLegalMove(1, 2);
+        TryToAddLegalMove(-1, 2);
     }
 
     private void AddBottomLHintTiles()
     {
-        TryToAddHintTile(-2, -1);
-        TryToAddHintTile(-2, 1);
+        TryToAddLegalMove(-2, -1);
+        TryToAddLegalMove(-2, 1);
     }
 
     private void AddLeftLHintTiles()
     {
-        TryToAddHintTile(1, -2);
-        TryToAddHintTile(-1, -2);
+        TryToAddLegalMove(1, -2);
+        TryToAddLegalMove(-1, -2);
     }
 
-    protected override void AddHintTile(int i, int j)
+    protected override void AddLegalMove(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())
-            hintTiles.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 }

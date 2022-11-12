@@ -9,26 +9,26 @@ public class King : Piece
         visitor.VisitKing(this);
     }
 
-    public override void UpdateHints()
+    public override void UpdateLegalMoves()
     {
-        base.UpdateHints();
+        base.UpdateLegalMoves();
 
-        TryToAddHintTile(1, -1);
-        TryToAddHintTile(1, 1);
-        TryToAddHintTile(-1, 1);
-        TryToAddHintTile(-1, -1);
+        TryToAddLegalMove(1, -1);
+        TryToAddLegalMove(1, 1);
+        TryToAddLegalMove(-1, 1);
+        TryToAddLegalMove(-1, -1);
 
-        TryToAddHintTile(1, 0);
-        TryToAddHintTile(0, 1);
-        TryToAddHintTile(-1, 0);
-        TryToAddHintTile(0, -1);
+        TryToAddLegalMove(1, 0);
+        TryToAddLegalMove(0, 1);
+        TryToAddLegalMove(-1, 0);
+        TryToAddLegalMove(0, -1);
     }
 
-    protected override void AddHintTile(int i, int j)
+    protected override void AddLegalMove(int i, int j)
     {
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())
-            hintTiles.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 }

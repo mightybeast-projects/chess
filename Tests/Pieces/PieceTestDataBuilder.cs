@@ -1,27 +1,20 @@
-using Chess.Core;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
 class PieceTestDataBuilder : BoardTestDataBuilder
 {
-    protected void AssertPieceHintTiles(string[] hints)
+    protected void AssertPieceLegalMoves(string[] legalMoves)
     {
-        foreach (string hintTileStr in hints)
-            AssertHintTile(hintTileStr);
-        Assert.AreEqual(hints.Length, piece.hintTiles.Count);
+        foreach (string legalMoveTileStr in legalMoves)
+            AssertLegalMove(legalMoveTileStr);
+        Assert.AreEqual(legalMoves.Length, piece.legalMoves.Count);
     }
 
-    protected void CreateAndAddPawns(Color color, params string[] positions)
+    private void AssertLegalMove(string legalMoveTileStr)
     {
-        foreach (string position in positions)
-            CreateAndAddPiece(typeof(Pawn), position, color);
-    }
-
-    private void AssertHintTile(string hintTileStr)
-    {
-        tile = board.GetTile(hintTileStr);
+        tile = board.GetTile(legalMoveTileStr);
         
-        Assert.Contains(tile, piece.hintTiles);
+        Assert.Contains(tile, piece.legalMoves);
     }
 }

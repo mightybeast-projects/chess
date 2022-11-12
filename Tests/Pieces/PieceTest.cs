@@ -16,24 +16,24 @@ abstract class PieceTest<TPiece> : PieceTestDataBuilder
     }
 
     [Test, TestCaseSource("generalCases")]
-    public void PieceAtPositionHasCorrectHintTiles(
+    public void PieceAtPositionHasCorrectLegalMoves(
         string piecePosition,
-        string[] hintTiles)
+        string[] legalMoves)
     {
         CreateAndAddPiece(typeof(TPiece), piecePosition, pieceColor);
 
-        AssertPieceHintTiles(hintTiles);
+        AssertPieceLegalMoves(legalMoves);
     }
 
     [Test, TestCaseSource("blockedPathCases")]
-    public void PieceAtPostionHasCorrectHintTilesWhilePathIsBlocked(
+    public void PieceAtPostionHasCorrectLegalMovesWhilePathIsBlocked(
         Color blockerPawnsColor, string[] blockerPawnsPos,
-        string piecePos, string[] hintTiles)
+        string piecePos, string[] legalMoves)
     {
         foreach (string pawnPos in blockerPawnsPos)
             CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
         CreateAndAddPiece(typeof(TPiece), piecePos, pieceColor);
 
-        AssertPieceHintTiles(hintTiles);
+        AssertPieceLegalMoves(legalMoves);
     }
 }
