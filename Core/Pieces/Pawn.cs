@@ -12,7 +12,7 @@ public class Pawn : Piece
         visitor.VisitPawn(this);
     }
 
-    public override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
         base.UpdateLegalMoves();
 
@@ -44,7 +44,7 @@ public class Pawn : Piece
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (HintTileIsOccupiedByEnemy())
-            legalMoves.Add(hintTile);
+            legalMovesField.Add(hintTile);
     }
 
     protected override void AddLegalMove(int i, int j)
@@ -54,6 +54,6 @@ public class Pawn : Piece
         if (!hintTile.isEmpty)
             pathBlocked = true;
         else
-            legalMoves.Add(hintTile);
+            legalMovesField.Add(hintTile);
     }
 }

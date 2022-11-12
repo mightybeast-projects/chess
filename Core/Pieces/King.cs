@@ -9,7 +9,7 @@ public class King : Piece
         visitor.VisitKing(this);
     }
 
-    public override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
         base.UpdateLegalMoves();
 
@@ -29,6 +29,6 @@ public class King : Piece
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())
-            legalMoves.Add(hintTile);
+            legalMovesField.Add(hintTile);
     }
 }

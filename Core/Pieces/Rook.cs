@@ -9,7 +9,7 @@ public class Rook : SlidingPiece
         visitor.VisitRook(this);
     }
 
-    public override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
         base.UpdateLegalMoves();
 

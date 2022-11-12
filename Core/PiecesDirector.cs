@@ -20,15 +20,8 @@ public class PiecesDirector
     {
         piece.SetBoard(board);
         pieces.Add(piece);
-        UpdatePiecesHints();
 
         return piece;
-    }
-
-    public void UpdatePiecesHints()
-    {
-        foreach (Piece p in pieces)
-            p.UpdateLegalMoves();
     }
 
     public void SetupPieces()

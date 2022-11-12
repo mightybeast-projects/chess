@@ -9,7 +9,7 @@ public class Queen : SlidingPiece
         visitor.VisitQueen(this);
     }
 
-    public override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
         base.UpdateLegalMoves();
 

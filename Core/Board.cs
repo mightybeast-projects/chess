@@ -34,11 +34,6 @@ public class Board
         return piecesDirector.AddPiece(piece);
     }
 
-    public void Update()
-    {
-        piecesDirector.UpdatePiecesHints();
-    }
-
     private void InitializeGrid()
     {
         for (int i = 0; i < grid.GetLength(0); i++)

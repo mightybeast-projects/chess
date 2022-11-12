@@ -9,7 +9,7 @@ public class Bishop : SlidingPiece
         visitor.VisitBishop(this);
     }
 
-    public override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
         base.UpdateLegalMoves();
 
