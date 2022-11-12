@@ -82,7 +82,4 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
     private bool CurrentTileAndPieceColorsAre(Color tileColor, Color pieceColor)
         => currentTile.color == tileColor && 
             currentPiece.color == pieceColor;
-
-    // ♜ 	♞ 	♝ 	♛ 	♚ 	♝ 	♞ 	♜
-    // ♖ 	♘ 	♗ 	♕ 	♔ 	♗ 	♘ 	♖
 }

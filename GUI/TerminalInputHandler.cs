@@ -32,6 +32,8 @@ public class TerminalInputHandler
 
     private void HandleChosenPiece()
     {
+        if (input.Length == 0) return;
+
         chosenPiece = board.GetTile(input.Substring(0, 2)).piece;
 
         if (input.Length == 2 || InputHaveHintCommand())

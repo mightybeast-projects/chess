@@ -120,7 +120,7 @@ public class TerminalDrawer
     }
 
     private bool CurrentTileIsAHint() 
-        => hintPiece != null && hintPiece.hintTiles.Contains(currentTile);
+        => hintPiece != null && hintPiece.legalMoves.Contains(currentTile);
 
     private bool IndexIsZero(int i) => i == 0;
 }
