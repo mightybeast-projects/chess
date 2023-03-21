@@ -19,10 +19,7 @@ class GeneralBoardTests : BoardTestDataBuilder
     }
 
     [Test]
-    public void BoardGridInitialization()
-    {
-        Assert.IsNotNull(board.grid);
-    }
+    public void BoardGridInitialization() => Assert.IsNotNull(board.grid);
 
     [Test]
     public void BoardIsEightByEightSquare()
@@ -31,23 +28,11 @@ class GeneralBoardTests : BoardTestDataBuilder
         Assert.AreEqual(8, board.grid.GetLength(1));
     }
 
-    [Test]
-    public void BoardGridIsTileMatrix()
-    {
-        Assert.AreEqual(typeof(Tile), board.grid[0, 0].GetType());
-    }
+    [Test(ExpectedResult = typeof(Tile))]
+    public Type BoardGridIsTileMatrix() => board.grid[0, 0].GetType();
 
-    [TestCase(0, 0, Color.BLACK)]
-    [TestCase(0, 1, Color.WHITE)]
-    [TestCase(1, 0, Color.WHITE)]
-    [TestCase(7, 0, Color.WHITE)]
-    [TestCase(6, 0, Color.BLACK)]
-    [TestCase(7, 1, Color.BLACK)]
-    [Test]
-    public void TileIsOfColor(int i, int j, Color color)
-    {
-        Assert.AreEqual(color, board.grid[i, j].color);
-    }
+    [Test, TestCaseSource(nameof(tileColorCases))]
+    public Color TileIsOfColor(int i, int j) => board.grid[i, j].color;
 
     [Test]
     public void BoardTileColorsAreCorrect()
@@ -89,4 +74,14 @@ class GeneralBoardTests : BoardTestDataBuilder
 
     private void AssertExpectedColor(int i, int j) => 
         Assert.AreEqual(color, board.grid[i, j].color);
+
+    private static TestCaseData[] tileColorCases =
+    {
+        new TestCaseData(0, 0).Returns(Color.BLACK),
+        new TestCaseData(0, 1).Returns(Color.WHITE),
+        new TestCaseData(1, 0).Returns(Color.WHITE),
+        new TestCaseData(7, 0).Returns(Color.WHITE),
+        new TestCaseData(6, 0).Returns(Color.BLACK),
+        new TestCaseData(7, 1).Returns(Color.BLACK),
+    };
 }

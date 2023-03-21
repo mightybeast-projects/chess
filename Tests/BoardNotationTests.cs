@@ -10,50 +10,20 @@ class BoardNotationTests : BoardTestDataBuilder
     private char letter;
     private string tileName;
 
-    [TestCase("a1", 0, 0)]
-    [TestCase("h1", 0, 7)]
-    [TestCase("d4", 3, 3)]
     [Test]
-    public void BoardTileHasCorrectNotation(string tileStr, int i, int j)
-    {
-        Assert.AreEqual(tileStr, board.grid[i, j].notation);
-    }
+    public void TileIsInBoardGrid() => AssertBoardTileNotation(0, 0);
 
-    [Test]
-    public void TileIsInBoardGrid()
-    {
-        AssertBoardTileNotation(0, 0);
-    }
+    [Test, TestCaseSource(nameof(tileColorCases))]
+    public Color TestTileColor(string tileStr) => 
+        board.GetTile(tileStr).color;
 
-    [TestCase("d4")]
-    [TestCase("c3")]
-    [Test]
-    public void TileIsBlack(string tileStr)
-    {
-        tile = board.GetTile(tileStr);
+    [Test, TestCaseSource(nameof(correctTileNotationCases))]
+    public string BoardTileHasCorrectNotation(int i, int j) =>
+        board.grid[i, j].notation;
 
-        Assert.AreEqual(Color.BLACK, tile.color);
-    }
-
-    [TestCase("e4")]
-    [TestCase("d3")]
-    [Test]
-    public void TileIsWhite(string tileStr)
-    {
-        tile = board.GetTile(tileStr);
-
-        Assert.AreEqual(Color.WHITE, tile.color);
-    }
-
-    [TestCase("")]
-    [TestCase("a")]
-    [TestCase("z-4")]
-    [TestCase("z9")]
-    [Test]
-    public void TileHasIncorrectNotation(string tileStr)
-    {
+    [Test, TestCaseSource(nameof(incorrectTileNotationCases))]
+    public void TileHasIncorrectNotation(string tileStr) =>
         AssertIncorrectTileNotation(tileStr);
-    }
 
     [Test]
     public void BoardHasCorrectNotation()
@@ -72,10 +42,31 @@ class BoardNotationTests : BoardTestDataBuilder
         Assert.AreEqual(board.grid[i, j], tile);
     }
 
-    private void AssertIncorrectTileNotation(string notation)
-    {
+    private void AssertIncorrectTileNotation(string notation) =>
         Assert.Throws<IncorrectTileNotationException>(
             () => board.GetTile(notation)
         );
-    }
+
+    private static TestCaseData[] tileColorCases =
+    {
+        new TestCaseData("d4").Returns(Color.BLACK),
+        new TestCaseData("c3").Returns(Color.BLACK),
+        new TestCaseData("e4").Returns(Color.WHITE),
+        new TestCaseData("d3").Returns(Color.WHITE)
+    };
+
+    private static TestCaseData[] correctTileNotationCases =
+    {
+        new TestCaseData(0, 0).Returns("a1"),
+        new TestCaseData(0, 7).Returns("h1"),
+        new TestCaseData(3, 3).Returns("d4")
+    };
+
+    private static TestCaseData[] incorrectTileNotationCases =
+    {
+        new TestCaseData(""),
+        new TestCaseData("a"),
+        new TestCaseData("z-4"),
+        new TestCaseData("z9"),
+    };
 }
