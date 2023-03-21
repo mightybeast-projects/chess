@@ -1,90 +1,60 @@
 using Chess.Core;
 using Chess.Core.Pieces;
-using Chess.GUI;
 
-public class TerminalDrawer
+namespace Chess.GUI.Drawer;
+
+public class TerminalBoardDrawer
 {
-    private Board board;
+    public Piece? hintPiece;
+
     private IPieceDrawerVisitor pieceDrawerVisitor;
-    private Piece? hintPiece;
+    private TerminalDrawerDecorator drawerDecorator;
+    private Board board;
     private Tile currentTile;
     private ConsoleColor bgColor;
     private int tileColorIndex;
 
-    public TerminalDrawer(Board board)
+    public TerminalBoardDrawer(Board board)
     {
         this.board = board;
+
         pieceDrawerVisitor = new TerminalPieceDrawerVisitor();
+        drawerDecorator = new TerminalDrawerDecorator(board);
     }
 
-    public void Draw()
+    public void DrawBoard()
     {
         Console.Clear();
 
         for (int i = board.grid.GetLength(0) - 1; i >= 0; i--)
-            DrawBoardLine(i);
+            DrawBoardRow(i);
         
         DisableHints();
-        Console.WriteLine("Waiting for input...");
     }
 
-    public void EnableHintsForPiece(Piece piece)
+    private void DrawBoardRow(int i)
     {
-        hintPiece = piece;
-    }
+        if (i == 7)
+            drawerDecorator.DrawLetterLine();
 
-    private void DisableHints()
-    {
-        hintPiece = null;
-    }
-
-    private void DrawBoardLine(int i)
-    {
-        for (int j = 0; j < board.grid.GetLength(1) + 1; j++)
+        for (int j = 0; j < board.grid.GetLength(1); j++)
             HandleGridPosition(i, j);
 
         Console.WriteLine();
 
-        if (IndexIsZero(i))
-            DrawLetterLine();
-    }
-
-    private void DrawLetterLine()
-    {
-        Console.ResetColor();
-
-        for (int i = 0; i < board.grid.GetLength(0) + 1; i++)
-            HandleLetterLinePosition(i);
-
-        Console.WriteLine();
+        if (i == 0)
+            drawerDecorator.DrawLetterLine();
     }
 
     private void HandleGridPosition(int i, int j)
     {
-        if (IndexIsZero(j))
-            DrawNumber(i);
-        else
-            DrawTile(i, j - 1);
-    }
+        if (j == 0)
+            drawerDecorator.DrawNumber(i);
+        
+        DrawTile(i, j);
 
-    private void HandleLetterLinePosition(int i)
-    {
-        if (IndexIsZero(i))
-            Console.Write("  ");
-        else
-            DrawLetter(i);
-    }
-
-    private void DrawNumber(int i)
-    {
-        Console.ResetColor();
-        Console.Write(Math.Abs(-1 - i) + " ");
-    }
-
-    private void DrawLetter(int i)
-    {
-        char letter = (char)(i - 1 + 65);
-        Console.Write(letter.ToString().ToLower() + " ");
+        if (j == 7)
+            drawerDecorator.DrawNumber(i);
     }
 
     private void DrawTile(int i, int j)
@@ -119,8 +89,11 @@ public class TerminalDrawer
             bgColor = ConsoleColor.White;
     }
 
+    private void DisableHints()
+    {
+        hintPiece = null;
+    }
+
     private bool CurrentTileIsAHint() 
         => hintPiece != null && hintPiece.legalMoves.Contains(currentTile);
-
-    private bool IndexIsZero(int i) => i == 0;
 }

@@ -1,14 +1,17 @@
 using Chess.Core;
 using Chess.Core.Pieces;
+using Chess.GUI.Drawer;
+
+namespace Chess.GUI;
 
 public class TerminalInputHandler
 {
-    private TerminalDrawer drawer;
+    private TerminalDrawerFacade drawer;
     private Board board;
     private Piece chosenPiece;
     private string input;
 
-    public TerminalInputHandler(Board board, TerminalDrawer drawer)
+    public TerminalInputHandler(Board board, TerminalDrawerFacade drawer)
     {
         this.board = board;
         this.drawer = drawer;

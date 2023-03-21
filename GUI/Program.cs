@@ -1,5 +1,3 @@
-using Chess.Core;
-
 namespace Chess.GUI;
 
 public class Program

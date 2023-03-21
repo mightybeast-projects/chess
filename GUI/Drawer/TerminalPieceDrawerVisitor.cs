@@ -1,7 +1,7 @@
 using Chess.Core;
 using Chess.Core.Pieces;
 
-namespace Chess.GUI;
+namespace Chess.GUI.Drawer;
 
 public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
 {
