@@ -10,31 +10,31 @@ class WhitePawnTests : PieceTest<Pawn>
 
     private static object[] generalCases = 
     {
-        new object[] { "d4", new string[] { "d5" } },
-        new object[] { "d2", new string[] { "d3", "d4" } },
+        new object[] { "d4", new[] { "d5" } },
+        new object[] { "d2", new[] { "d3", "d4" } },
         new object[] { "d8", new string[] { } }
     };
 
     private static object[] blockedPathCases = 
     {
         new object[] {
-            Color.BLACK, new string[] { "d3" },
+            Color.BLACK, new[] { "d3" },
             "d2", new string[] { }
         },
         new object[] {
-            Color.BLACK, new string[] { "d4" },
+            Color.BLACK, new[] { "d4" },
             "d2", new string[] { "d3" }
         },
         new object[] {
-            Color.BLACK, new string[] { "a5", "b5" },
+            Color.BLACK, new[] { "a5", "b5" },
             "a4", new string[] { "b5" }
         },
         new object[] {
-            Color.BLACK, new string[] { "h5", "g5" },
+            Color.BLACK, new[] { "h5", "g5" },
             "h4", new string[] { "g5" }
         },
         new object[] {
-            Color.BLACK, new string[] { "c5", "d5", "e5" },
+            Color.BLACK, new[] { "c5", "d5", "e5" },
             "d4", new string[] { "c5", "e5" }
         }
     };

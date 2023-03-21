@@ -11,12 +11,12 @@ class KnightTests : PieceTest<Knight>
 
     private static object[] generalCases = 
     {
-        new object[] { "a1", new string[] { "b3", "c2" } },
-        new object[] { "h1", new string[] { "g3", "f2" } },
-        new object[] { "a8", new string[] { "b6", "c7" } },
-        new object[] { "h8", new string[] { "g6", "f7" } },
+        new object[] { "a1", new[] { "b3", "c2" } },
+        new object[] { "h1", new[] { "g3", "f2" } },
+        new object[] { "a8", new[] { "b6", "c7" } },
+        new object[] { "h8", new[] { "g6", "f7" } },
         new object[] {
-            "d4", new string[] {
+            "d4", new[] {
                 "c6", "e6",
                 "f5", "f3",
                 "c2", "e2",
@@ -28,7 +28,7 @@ class KnightTests : PieceTest<Knight>
     private static object[] blockedPathCases = 
     {
         new object[] {
-            Color.WHITE, new string[] {
+            Color.WHITE, new[] {
                 "c6", "e6",
                 "f5", "f3",
                 "c2", "e2",
@@ -37,13 +37,13 @@ class KnightTests : PieceTest<Knight>
             "d4", new string[] { }
         },
         new object[] {
-            Color.BLACK, new string[] {
+            Color.BLACK, new[] {
                 "c6", "e6",
                 "f5", "f3",
                 "c2", "e2",
                 "b3", "b5"
             },
-            "d4", new string[] {
+            "d4", new[] {
                 "c6", "e6",
                 "f5", "f3",
                 "c2", "e2",

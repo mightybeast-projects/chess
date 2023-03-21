@@ -12,19 +12,19 @@ class KingTests : PieceTest<King>
     private static object[] generalCases =
     {
         new object[] {
-            "a1", new string[] { "a2", "b2", "b1" }
+            "a1", new[] { "a2", "b2", "b1" }
         }, 
         new object[] {
-            "a8", new string[] { "a7", "b8", "b7" }
+            "a8", new[] { "a7", "b8", "b7" }
         },
         new object[] {
-            "h1", new string[] { "h2", "g2", "g1" }
+            "h1", new[] { "h2", "g2", "g1" }
         },
         new object[] {
-            "h8", new string[] { "h7", "g8", "g7" }
+            "h8", new[] { "h7", "g8", "g7" }
         },
         new object[] {
-            "d4", new string[] {
+            "d4", new[] {
                 "c5", "c4", "c4",
                 "d5", "d3",
                 "e5", "e4", "e3"
@@ -35,13 +35,13 @@ class KingTests : PieceTest<King>
     private static object[] blockedPathCases = 
     {
         new object[] {
-            Color.WHITE, new string[] {
+            Color.WHITE, new[] {
                 "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
             },
             "d4", new string[] { }
         },
         new object[] {
-            Color.BLACK, new string[] {
+            Color.BLACK, new[] {
                 "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
             },
             "d4", new string[] {
