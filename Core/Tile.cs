@@ -32,7 +32,7 @@ public class Tile
         notation = letter.ToString().ToLower() + number;
     }
 
-    public override string? ToString()
+    public override string ToString()
     {
         return notation;
     }

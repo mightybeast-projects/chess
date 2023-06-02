@@ -5,7 +5,7 @@ namespace Chess.GUI.Drawer;
 
 public class TerminalBoardDrawer
 {
-    public Piece? hintPiece;
+    public Piece hintPiece;
 
     private IPieceDrawerVisitor pieceDrawerVisitor;
     private TerminalDrawerDecorator drawerDecorator;

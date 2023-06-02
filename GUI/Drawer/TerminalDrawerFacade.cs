@@ -14,6 +14,8 @@ public class TerminalDrawerFacade
 
     public void Draw()
     {
+        Console.OutputEncoding = System.Text.Encoding.Unicode;
+
         boardDrawer.DrawBoard();
 
         Console.WriteLine("Waiting for input...");

@@ -8,6 +8,7 @@ class PieceTestDataBuilder : BoardTestDataBuilder
     {
         foreach (string legalMoveTileStr in legalMoves)
             AssertLegalMove(legalMoveTileStr);
+            
         Assert.AreEqual(legalMoves.Length, piece.legalMoves.Count);
     }
 

@@ -13,8 +13,8 @@ class BoardTestDataBuilder
     protected Tile tile;
     protected Color color;
 
-    private ConstructorInfo? ctor;
-    private object? pieceObj;
+    private ConstructorInfo ctor;
+    private object pieceObj;
     private Type[] ctorTypes;
     private object[] ctorArgs;
 
