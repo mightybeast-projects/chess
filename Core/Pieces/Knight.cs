@@ -4,10 +4,8 @@ public class Knight : Piece
 {
     public Knight(Tile tile, Color color) : base(tile, color) { }
 
-    public override void Accept(IPieceDrawerVisitor visitor)
-    {
+    public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKnight(this);
-    }
 
     protected override void UpdateLegalMoves()
     {

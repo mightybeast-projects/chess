@@ -20,10 +20,7 @@ public class Tile
         ParseNotation(i, j);
     }
 
-    public void SetPiece(Piece piece)
-    {
-        this.piece = piece;
-    }
+    public void SetPiece(Piece piece) => this.piece = piece;
 
     private void ParseNotation(int i, int j)
     {
@@ -32,8 +29,5 @@ public class Tile
         notation = letter.ToString().ToLower() + number;
     }
 
-    public override string ToString()
-    {
-        return notation;
-    }
+    public override string ToString() => notation;
 }

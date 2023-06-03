@@ -24,15 +24,9 @@ public class Board
         catch (Exception) { throw new IncorrectTileNotationException(); }
     }
 
-    public void SetUp()
-    {
-        piecesDirector.SetupPieces();
-    }
+    public void SetUp() => piecesDirector.SetupPieces();
 
-    public Piece AddPiece(Piece piece)
-    {
-        return piecesDirector.AddPiece(piece);
-    }
+    public Piece AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
 
     private void InitializeGrid()
     {

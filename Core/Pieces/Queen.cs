@@ -4,10 +4,8 @@ public class Queen : SlidingPiece
 {
     public Queen(Tile tile, Color color) : base(tile, color) { }
 
-    public override void Accept(IPieceDrawerVisitor visitor)
-    {
+    public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitQueen(this);
-    }
 
     protected override void UpdateLegalMoves()
     {

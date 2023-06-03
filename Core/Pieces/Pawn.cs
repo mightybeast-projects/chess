@@ -7,10 +7,8 @@ public class Pawn : Piece
 
     public Pawn(Tile tile, Color color) : base (tile, color) { }
 
-    public override void Accept(IPieceDrawerVisitor visitor)
-    {
+    public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitPawn(this);
-    }
 
     protected override void UpdateLegalMoves()
     {

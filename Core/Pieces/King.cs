@@ -4,10 +4,8 @@ public class King : Piece
 {
     public King(Tile tile, Color color) : base(tile, color) { }
 
-    public override void Accept(IPieceDrawerVisitor visitor)
-    {
+    public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKing(this);
-    }
 
     protected override void UpdateLegalMoves()
     {

@@ -30,10 +30,7 @@ public class PiecesDirector
         SetupPieces(Color.BLACK, 6, 7);
     }
 
-    private void SetupPieces(
-        Color color,
-        int pawnRowIndex,
-        int pieceRowIndex)
+    private void SetupPieces( Color color, int pawnRowIndex, int pieceRowIndex)
     {
         for (int i = 0; i < grid.GetLength(0); i++)
             AddPiece(new Pawn(grid[pawnRowIndex, i], color));

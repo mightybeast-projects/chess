@@ -31,10 +31,8 @@ public abstract class Piece
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
-    protected virtual void UpdateLegalMoves()
-    {
+    protected virtual void UpdateLegalMoves() =>
         legalMovesField = new List<Tile>();
-    }
 
     public void SetBoard(Board board)
     {

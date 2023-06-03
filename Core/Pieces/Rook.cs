@@ -4,10 +4,8 @@ public class Rook : SlidingPiece
 {
     public Rook(Tile tile, Color color) : base(tile, color) { }
 
-    public override void Accept(IPieceDrawerVisitor visitor)
-    {
+    public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitRook(this);
-    }
 
     protected override void UpdateLegalMoves()
     {
