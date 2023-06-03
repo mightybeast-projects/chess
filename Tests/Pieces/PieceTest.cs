@@ -3,23 +3,16 @@ using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-abstract class PieceTest<TPiece> : PieceTestDataBuilder
+abstract class PieceTest : PieceTestDataBuilder
 {
-    protected abstract Color pieceColor { get; }
-
     [Test]
-    public void PieceInitialization()
-    {
-        CreateAndAddPiece(typeof(TPiece), "d4", pieceColor);
+    public abstract void PieceInitialization();
 
-        AssertPiece();
-    }
-
-    public abstract void PieceHasCorrectLegalMoves(
+    public abstract void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
         string[] legalMoves);
 
-    public abstract void PieceHasCorrectLegalMovesWhilePathIsBlocked(
+    public abstract void PieceHasCorrectLegalMoves_InEdgeCases(
         Color blockerPawnsColor,
         string[] blockerPawnsPos,
         string piecePos,

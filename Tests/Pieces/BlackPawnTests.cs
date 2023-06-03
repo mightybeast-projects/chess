@@ -4,22 +4,28 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces;
 
 [TestFixture]
-class BlackPawnTests : PieceTest<Pawn>
+class BlackPawnTests : PieceTest
 {
-    protected override Color pieceColor => Color.BLACK;
+    [Test]
+    public override void PieceInitialization()
+    {
+        CreateAndAddPiece(typeof(Pawn), "d4", Color.BLACK);
+
+        AssertPiece();
+    }
 
     [TestCaseSource(nameof(generalCases))]
-    public override void PieceHasCorrectLegalMoves(
+    public override void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
         string[] legalMoves)
     {
-        CreateAndAddPiece(typeof(Pawn), piecePosition, pieceColor);
+        CreateAndAddPiece(typeof(Pawn), piecePosition, Color.BLACK);
 
         AssertPieceLegalMoves(legalMoves);
     }
 
-    [TestCaseSource(nameof(blockedPathCases))]
-    public override void PieceHasCorrectLegalMovesWhilePathIsBlocked(
+    [TestCaseSource(nameof(edgeCases))]
+    public override void PieceHasCorrectLegalMoves_InEdgeCases(
         Color blockerPawnsColor,
         string[] blockerPawnsPos,
         string piecePos,
@@ -27,7 +33,7 @@ class BlackPawnTests : PieceTest<Pawn>
     {
         foreach (string pawnPos in blockerPawnsPos)
             CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
-        CreateAndAddPiece(typeof(Pawn), piecePos, pieceColor);
+        CreateAndAddPiece(typeof(Pawn), piecePos, Color.BLACK);
 
         AssertPieceLegalMoves(legalMoves);
     }
@@ -39,7 +45,7 @@ class BlackPawnTests : PieceTest<Pawn>
         new object[] { "d1", new string[] { } }
     };
 
-    private static object[] blockedPathCases = 
+    private static object[] edgeCases = 
     {
         new object[] {
             Color.WHITE, new[] { "d6" },

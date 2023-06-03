@@ -5,22 +5,28 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces;
 
 [TestFixture]
-class RookTests : PieceTest<Rook>
+class RookTests : PieceTest
 {
-    protected override Color pieceColor => Color.WHITE;
+    [Test]
+    public override void PieceInitialization()
+    {
+        CreateAndAddPiece(typeof(Rook), "d4", Color.WHITE);
+
+        AssertPiece();
+    }
 
     [TestCaseSource(nameof(generalCases))]
-    public override void PieceHasCorrectLegalMoves(
+    public override void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
         string[] legalMoves)
     {
-        CreateAndAddPiece(typeof(Rook), piecePosition, pieceColor);
+        CreateAndAddPiece(typeof(Rook), piecePosition, Color.WHITE);
 
         AssertPieceLegalMoves(legalMoves);
     }
 
-    [TestCaseSource(nameof(blockedPathCases))]
-    public override void PieceHasCorrectLegalMovesWhilePathIsBlocked(
+    [TestCaseSource(nameof(edgeCases))]
+    public override void PieceHasCorrectLegalMoves_InEdgeCases(
         Color blockerPawnsColor,
         string[] blockerPawnsPos,
         string piecePos,
@@ -28,7 +34,7 @@ class RookTests : PieceTest<Rook>
     {
         foreach (string pawnPos in blockerPawnsPos)
             CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
-        CreateAndAddPiece(typeof(Rook), piecePos, pieceColor);
+        CreateAndAddPiece(typeof(Rook), piecePos, Color.WHITE);
 
         AssertPieceLegalMoves(legalMoves);
     }
@@ -57,7 +63,7 @@ class RookTests : PieceTest<Rook>
         }
     };
 
-    private static object[] blockedPathCases = 
+    private static object[] edgeCases = 
     {
         new object[] {
             Color.WHITE, new[] { "d5", "d3", "e4","c4" },
