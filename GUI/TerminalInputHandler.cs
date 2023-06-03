@@ -25,7 +25,7 @@ public class TerminalInputHandler
 
     private void HandleInput()
     {
-        input = Console.ReadLine()!;
+        input = Console.ReadLine();
         
         if (input != null)
             HandleChosenPiece();
@@ -54,9 +54,7 @@ public class TerminalInputHandler
         Console.ResetColor();
     }
 
-    private bool InputHaveMoveCommand() 
-        => input.Length == 8 && input[4] == 'm';
+    private bool InputHaveMoveCommand() => input.Length == 8 && input[4] == 'm';
 
-    private bool InputHaveHintCommand()
-        => input.Length == 5 && input[4] == 'h';
+    private bool InputHaveHintCommand() => input.Length == 5 && input[4] == 'h';
 }

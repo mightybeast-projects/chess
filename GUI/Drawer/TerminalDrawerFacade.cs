@@ -7,10 +7,8 @@ public class TerminalDrawerFacade
 {
     private TerminalBoardDrawer boardDrawer;
 
-    public TerminalDrawerFacade(Board board)
-    {
+    public TerminalDrawerFacade(Board board) =>
         boardDrawer = new TerminalBoardDrawer(board);
-    }
 
     public void Draw()
     {
@@ -21,8 +19,6 @@ public class TerminalDrawerFacade
         Console.WriteLine("Waiting for input...");
     }
 
-    public void EnableHintsForPiece(Piece piece)
-    {
+    public void EnableHintsForPiece(Piece piece) =>
         boardDrawer.hintPiece = piece;
-    }
 }

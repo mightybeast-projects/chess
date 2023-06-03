@@ -6,10 +6,7 @@ public class TerminalDrawerDecorator
 {
     private Board board;
 
-    public TerminalDrawerDecorator(Board board)
-    {
-        this.board = board;
-    }
+    public TerminalDrawerDecorator(Board board) => this.board = board;
 
     public void DrawNumber(int i)
     {

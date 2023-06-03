@@ -89,11 +89,9 @@ public class TerminalBoardDrawer
             bgColor = ConsoleColor.White;
     }
 
-    private void DisableHints()
-    {
-        hintPiece = null;
-    }
+    private void DisableHints() => hintPiece = null;
 
-    private bool CurrentTileIsAHint() 
-        => hintPiece != null && hintPiece.legalMoves.Contains(currentTile);
+    private bool CurrentTileIsAHint() =>
+        hintPiece != null &&
+        hintPiece.legalMoves.Contains(currentTile);
 }
