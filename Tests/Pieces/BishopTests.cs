@@ -19,6 +19,20 @@ class BishopTests : PieceTest<Bishop>
         AssertPieceLegalMoves(legalMoves);
     }
 
+    [TestCaseSource(nameof(blockedPathCases))]
+    public override void PieceHasCorrectLegalMovesWhilePathIsBlocked(
+        Color blockerPawnsColor,
+        string[] blockerPawnsPos,
+        string piecePos,
+        string[] legalMoves)
+    {
+        foreach (string pawnPos in blockerPawnsPos)
+            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
+        CreateAndAddPiece(typeof(Bishop), piecePos, pieceColor);
+
+        AssertPieceLegalMoves(legalMoves);
+    }
+
     public static object[] generalCases = 
     {
         new object[] {

@@ -19,6 +19,20 @@ class KnightTests : PieceTest<Knight>
         AssertPieceLegalMoves(legalMoves);
     }
 
+    [TestCaseSource(nameof(blockedPathCases))]
+    public override void PieceHasCorrectLegalMovesWhilePathIsBlocked(
+        Color blockerPawnsColor,
+        string[] blockerPawnsPos,
+        string piecePos,
+        string[] legalMoves)
+    {
+        foreach (string pawnPos in blockerPawnsPos)
+            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
+        CreateAndAddPiece(typeof(Knight), piecePos, pieceColor);
+
+        AssertPieceLegalMoves(legalMoves);
+    }
+
     private static object[] generalCases = 
     {
         new object[] { "a1", new[] { "b3", "c2" } },
