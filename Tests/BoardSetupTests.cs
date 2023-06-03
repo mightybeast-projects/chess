@@ -20,10 +20,7 @@ class BoardSetupTests : BoardTestDataBuilder
         Assert.AreEqual(32, board.pieces.Count);
     }
 
-    private void AssertPieceRows(
-        Color color,
-        int pawnRowIndex,
-        int pieceRowIndex)
+    private void AssertPieceRows(Color color, int pawnRowIndex, int pieceRowIndex)
     {
         this.color = color;
         AssertPawnRow(pawnRowIndex);

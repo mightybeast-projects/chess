@@ -14,8 +14,7 @@ class BoardNotationTests : BoardTestDataBuilder
     public void TileIsInBoardGrid() => AssertBoardTileNotation(0, 0);
 
     [Test, TestCaseSource(nameof(tileColorCases))]
-    public Color TestTileColor(string tileStr) => 
-        board.GetTile(tileStr).color;
+    public Color TestTileColor(string tileStr) => board.GetTile(tileStr).color;
 
     [Test, TestCaseSource(nameof(correctTileNotationCases))]
     public string BoardTileHasCorrectNotation(int i, int j) =>
