@@ -1,4 +1,5 @@
 using Chess.Core;
+using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
@@ -15,18 +16,10 @@ abstract class PieceTest<TPiece> : PieceTestDataBuilder
         AssertPiece();
     }
 
-    [Test, TestCaseSource("generalCases")]
-    public void PieceAtPositionHasCorrectLegalMoves(
-        string piecePosition,
-        string[] legalMoves)
-    {
-        CreateAndAddPiece(typeof(TPiece), piecePosition, pieceColor);
-
-        AssertPieceLegalMoves(legalMoves);
-    }
+    public abstract void PieceHasCorrectLegalMoves(string piecePosition, string[] legalMoves);
 
     [Test, TestCaseSource("blockedPathCases")]
-    public void PieceAtPostionHasCorrectLegalMovesWhilePathIsBlocked(
+    public void PieceHasCorrectLegalMovesWhilePathIsBlocked(
         Color blockerPawnsColor, string[] blockerPawnsPos,
         string piecePos, string[] legalMoves)
     {

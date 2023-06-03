@@ -9,7 +9,17 @@ class BishopTests : PieceTest<Bishop>
 {
     protected override Color pieceColor => Color.WHITE;
 
-    private static object[] generalCases = 
+    [TestCaseSource(nameof(generalCases))]
+    public override void PieceHasCorrectLegalMoves(
+        string piecePosition,
+        string[] legalMoves)
+    {
+        CreateAndAddPiece(typeof(Bishop), piecePosition, pieceColor);
+
+        AssertPieceLegalMoves(legalMoves);
+    }
+
+    public static object[] generalCases = 
     {
         new object[] {
             "a1", new[] {

@@ -9,6 +9,16 @@ class KnightTests : PieceTest<Knight>
 {
     protected override Color pieceColor => Color.WHITE;
 
+    [TestCaseSource(nameof(generalCases))]
+    public override void PieceHasCorrectLegalMoves(
+        string piecePosition,
+        string[] legalMoves)
+    {
+        CreateAndAddPiece(typeof(Knight), piecePosition, pieceColor);
+
+        AssertPieceLegalMoves(legalMoves);
+    }
+
     private static object[] generalCases = 
     {
         new object[] { "a1", new[] { "b3", "c2" } },

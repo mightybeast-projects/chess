@@ -8,6 +8,16 @@ class BlackPawnTests : PieceTest<Pawn>
 {
     protected override Color pieceColor => Color.BLACK;
 
+    [TestCaseSource(nameof(generalCases))]
+    public override void PieceHasCorrectLegalMoves(
+        string piecePosition,
+        string[] legalMoves)
+    {
+        CreateAndAddPiece(typeof(Pawn), piecePosition, pieceColor);
+
+        AssertPieceLegalMoves(legalMoves);
+    }
+
     private static object[] generalCases = 
     {
         new object[] { "d5", new[] { "d4" } },
