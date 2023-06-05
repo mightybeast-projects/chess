@@ -25,44 +25,34 @@ internal class KingTests : PieceTest<King>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
-    private static object[] generalCases =
+    private static TestCaseData[] generalCases =
     {
-        new object[] {
-            "a1", new[] { "a2", "b2", "b1" }
-        }, 
-        new object[] {
-            "a8", new[] { "a7", "b8", "b7" }
-        },
-        new object[] {
-            "h1", new[] { "h2", "g2", "g1" }
-        },
-        new object[] {
-            "h8", new[] { "h7", "g8", "g7" }
-        },
-        new object[] {
+        new TestCaseData("a1", new[] { "a2", "b2", "b1" }),
+        new TestCaseData("a8", new[] { "a7", "b8", "b7" }),
+        new TestCaseData("h1", new[] { "h2", "g2", "g1" }),
+        new TestCaseData("h8", new[] { "h7", "g8", "g7" }),
+        new TestCaseData(
             "d4", new[] {
                 "c5", "c4", "c4",
                 "d5", "d3",
                 "e5", "e4", "e3"
-            }
-        }
+        })
     };
 
-    private static object[] edgeCases = 
+    private static TestCaseData[] edgeCases =
     {
-        new object[] {
+        new TestCaseData(
             Color.WHITE, new[] {
                 "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
             },
             "d4", new string[] { }
-        },
-        new object[] {
+        ),
+        new TestCaseData(
             Color.BLACK, new[] {
                 "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
             },
             "d4", new string[] {
                 "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
-            } 
-        }
+        })
     };
 }

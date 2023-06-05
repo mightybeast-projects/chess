@@ -24,34 +24,34 @@ internal class WhitePawnTests : PieceTest<Pawn>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
-    private static object[] generalCases = 
+    private static TestCaseData[] generalCases = 
     {
-        new object[] { "d4", new[] { "d5" } },
-        new object[] { "d2", new[] { "d3", "d4" } },
-        new object[] { "d8", new string[] { } }
+        new TestCaseData("d4", new[] { "d5" }),
+        new TestCaseData("d2", new[] { "d3", "d4" }),
+        new TestCaseData("d8", new string[] { })
     };
 
-    private static object[] edgeCases = 
+    private static TestCaseData[] edgeCases = 
     {
-        new object[] {
+        new TestCaseData(
             Color.BLACK, new[] { "d3" },
             "d2", new string[] { }
-        },
-        new object[] {
+        ),
+        new TestCaseData(
             Color.BLACK, new[] { "d4" },
             "d2", new string[] { "d3" }
-        },
-        new object[] {
+        ),
+        new TestCaseData(
             Color.BLACK, new[] { "a5", "b5" },
             "a4", new string[] { "b5" }
-        },
-        new object[] {
+        ),
+        new TestCaseData(
             Color.BLACK, new[] { "h5", "g5" },
             "h4", new string[] { "g5" }
-        },
-        new object[] {
+        ),
+        new TestCaseData(
             Color.BLACK, new[] { "c5", "d5", "e5" },
             "d4", new string[] { "c5", "e5" }
-        }
+        )
     };
 }

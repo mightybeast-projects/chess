@@ -25,25 +25,23 @@ internal class KnightTests : PieceTest<Knight>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
-    private static object[] generalCases = 
+    private static TestCaseData[] generalCases =
     {
-        new object[] { "a1", new[] { "b3", "c2" } },
-        new object[] { "h1", new[] { "g3", "f2" } },
-        new object[] { "a8", new[] { "b6", "c7" } },
-        new object[] { "h8", new[] { "g6", "f7" } },
-        new object[] {
-            "d4", new[] {
-                "c6", "e6",
-                "f5", "f3",
-                "c2", "e2",
-                "b3", "b5"
-            }
-        }
+        new TestCaseData("a1", new[] { "b3", "c2" }),
+        new TestCaseData("h1", new[] { "g3", "f2" }),
+        new TestCaseData("a8", new[] { "b6", "c7" }),
+        new TestCaseData("h8", new[] { "g6", "f7" }),
+        new TestCaseData("d4", new[] {
+            "c6", "e6",
+            "f5", "f3",
+            "c2", "e2",
+            "b3", "b5"
+        }),
     };
 
-    private static object[] edgeCases = 
+    private static TestCaseData[] edgeCases =
     {
-        new object[] {
+        new TestCaseData(
             Color.WHITE, new[] {
                 "c6", "e6",
                 "f5", "f3",
@@ -51,8 +49,8 @@ internal class KnightTests : PieceTest<Knight>
                 "b3", "b5"
             },
             "d4", new string[] { }
-        },
-        new object[] {
+        ),
+        new TestCaseData(
             Color.BLACK, new[] {
                 "c6", "e6",
                 "f5", "f3",
@@ -64,7 +62,6 @@ internal class KnightTests : PieceTest<Knight>
                 "f5", "f3",
                 "c2", "e2",
                 "b3", "b5"
-            }
-        }
+        }),
     };
 }
