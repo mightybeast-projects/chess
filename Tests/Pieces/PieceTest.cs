@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-internal abstract class PieceTest<TPiece> : PieceTestDataBuilder
+internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
     where TPiece : Piece
 {
     protected abstract Color pieceColor { get; }
@@ -37,5 +37,14 @@ internal abstract class PieceTest<TPiece> : PieceTestDataBuilder
         CreateAndAddPiece(typeof(TPiece), piecePos, pieceColor);
 
         AssertPieceLegalMoves(legalMoves);
+    }
+
+    private void AssertPieceLegalMoves(string[] legalMoves)
+    {
+        string[] pieceLegalMoves = new string[piece.legalMoves.Count];
+        for (int i = 0; i < piece.legalMoves.Count; i++)
+            pieceLegalMoves[i] = piece.legalMoves[i].notation;
+            
+        Assert.That(legalMoves, Is.SubsetOf(pieceLegalMoves));
     }
 }

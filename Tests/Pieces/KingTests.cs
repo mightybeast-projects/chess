@@ -33,7 +33,7 @@ internal class KingTests : PieceTest<King>
         new TestCaseData("h8", new[] { "h7", "g8", "g7" }),
         new TestCaseData(
             "d4", new[] {
-                "c5", "c4", "c4",
+                "c5", "c4", "c3",
                 "d5", "d3",
                 "e5", "e4", "e3"
         })
