@@ -11,12 +11,12 @@ public abstract class Piece
         get
         {
             UpdateLegalMoves();
-            return legalMovesField;
+            return _legalMoves;
         }
-        protected set => legalMovesField = value;
+        protected set => _legalMoves = value;
     }
 
-    protected List<Tile> legalMovesField;
+    protected List<Tile> _legalMoves;
     protected Tile hintTile;
 
     private Tile targetTile;
@@ -32,7 +32,7 @@ public abstract class Piece
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
     protected virtual void UpdateLegalMoves() =>
-        legalMovesField = new List<Tile>();
+        _legalMoves = new List<Tile>();
 
     public void SetBoard(Board board)
     {
@@ -44,7 +44,7 @@ public abstract class Piece
     {
         targetTile = board.GetTile(tileName);
 
-        if (legalMovesField.Contains(targetTile))
+        if (_legalMoves.Contains(targetTile))
             HandlePositionChange();
         else
             throw new IllegalMoveException();

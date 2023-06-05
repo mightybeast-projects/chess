@@ -31,9 +31,7 @@ internal class MoveTests : BoardTestDataBuilder
         CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
         preMoveHintTiles = piece.legalMoves;
 
-        Assert.Throws<IllegalMoveException>(
-            () => piece.Move("a3")
-        );
+        Assert.Throws<IllegalMoveException>(() => piece.Move("a3"));
 
         Assert.IsFalse(board.GetTile("d2").isEmpty);
         Assert.IsNotNull(board.GetTile("d2").piece);

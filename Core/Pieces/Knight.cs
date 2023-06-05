@@ -46,6 +46,6 @@ public class Knight : Piece
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())
-            legalMovesField.Add(hintTile);
+            _legalMoves.Add(hintTile);
     }
 }
