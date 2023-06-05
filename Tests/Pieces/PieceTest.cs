@@ -4,7 +4,8 @@ using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-abstract class PieceTest<TPiece> : PieceTestDataBuilder where TPiece : Piece
+internal abstract class PieceTest<TPiece> : PieceTestDataBuilder
+    where TPiece : Piece
 {
     protected abstract Color pieceColor { get; }
 

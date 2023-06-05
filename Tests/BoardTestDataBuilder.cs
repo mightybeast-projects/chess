@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Chess.Tests;
 
 [TestFixture]
-class BoardTestDataBuilder
+internal class BoardTestDataBuilder
 {
     protected Board board;
     protected Piece piece;

@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Chess.Tests;
 
 [TestFixture]
-class GeneralBoardTests : BoardTestDataBuilder
+internal class GeneralBoardTests : BoardTestDataBuilder
 {
     private Color evenColor;
     private Color oddColor;

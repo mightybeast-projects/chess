@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-class PieceTestDataBuilder : BoardTestDataBuilder
+internal class PieceTestDataBuilder : BoardTestDataBuilder
 {
     protected void AssertPieceLegalMoves(string[] legalMoves)
     {
