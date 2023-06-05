@@ -57,5 +57,6 @@ public class Board
     }
 
     private bool RowOrColIsOddWhileOtherIsNot(int i, int j) =>
-        j % 2 == 0 && i % 2 > 0 || j % 2 > 0 && i % 2 == 0;
+        j % 2 == 0 && i % 2 > 0 ||
+        j % 2 > 0 && i % 2 == 0;
 }

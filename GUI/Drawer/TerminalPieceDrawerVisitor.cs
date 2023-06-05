@@ -79,7 +79,7 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
         Console.Write(pieceStr);
     }
 
-    private bool CurrentTileAndPieceColorsAre(Color tileColor, Color pieceColor)
-        => currentTile.color == tileColor && 
-            currentPiece.color == pieceColor;
+    private bool CurrentTileAndPieceColorsAre(Color tileColor, Color pieceColor) =>
+        currentTile.color == tileColor &&
+        currentPiece.color == pieceColor;
 }

@@ -26,11 +26,11 @@ public class PiecesDirector
 
     public void SetupPieces()
     {
-        SetupPieces(Color.WHITE, 1, 0);
-        SetupPieces(Color.BLACK, 6, 7);
+        SetUpPieces(Color.WHITE, 1, 0);
+        SetUpPieces(Color.BLACK, 6, 7);
     }
 
-    private void SetupPieces( Color color, int pawnRowIndex, int pieceRowIndex)
+    private void SetUpPieces(Color color, int pawnRowIndex, int pieceRowIndex)
     {
         for (int i = 0; i < grid.GetLength(0); i++)
             AddPiece(new Pawn(grid[pawnRowIndex, i], color));
@@ -42,6 +42,6 @@ public class PiecesDirector
         AddPiece(new King(grid[pieceRowIndex, 4], color));
         AddPiece(new Bishop(grid[pieceRowIndex, 5], color));
         AddPiece(new Knight(grid[pieceRowIndex, 6], color));
-        AddPiece(new Rook(grid[pieceRowIndex, 7], color));        
+        AddPiece(new Rook(grid[pieceRowIndex, 7], color));
     }
 }
