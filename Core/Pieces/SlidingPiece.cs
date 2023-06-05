@@ -17,16 +17,10 @@ public abstract class SlidingPiece : Piece
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (currentTile.i + i < 0 ||
-            currentTile.i + i > board.grid.GetLength(0) - 1 ||
-            currentTile.j + j < 0 ||
-            currentTile.j + j  > board.grid.GetLength(0) - 1)
-                return;
+        if (HintTileIsBeyondTheBoard(currentTile.i + i, currentTile.j + j))
+            return;
 
-        int clampedI = Math.Clamp(currentTile.i + i, 0, board.grid.GetLength(0) - 1);
-        int clampedJ = Math.Clamp(currentTile.j + j, 0, board.grid.GetLength(0) - 1);
-
-        hintTile = board.grid[clampedI, clampedJ];
+        hintTile = GetClampedHintTile(currentTile.i + i, currentTile.j + j);
 
         if (!hintTile.isEmpty)
             HandleOccupiedHintTile();

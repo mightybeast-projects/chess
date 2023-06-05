@@ -75,6 +75,18 @@ public abstract class Piece
         currentTile.SetPiece(this);
     }
 
+    protected Tile GetClampedHintTile(int i, int j)
+    {
+        int clampedI = Math.Clamp(i, 0, board.grid.GetLength(0) - 1);
+        int clampedJ = Math.Clamp(j, 0, board.grid.GetLength(0) - 1);
+
+        return board.grid[clampedI, clampedJ];
+    }
+
+    protected bool HintTileIsBeyondTheBoard(int i, int j) =>
+        i < 0 || i > board.grid.GetLength(0) - 1 ||
+        j < 0 || j  > board.grid.GetLength(0) - 1;
+
     protected bool HintTileIsOccupiedByEnemy() =>
         !hintTile.isEmpty && hintTile.piece.color != color;
 }

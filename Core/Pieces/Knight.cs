@@ -11,43 +11,23 @@ public class Knight : Piece
     {
         base.UpdateLegalMoves();
 
-        AddTopLegalMoves();
-        AddRightLegalMoves();
-        AddBottomLegalMoves();
-        AddLeftLegalMoves();
-    }
-
-    private void AddTopLegalMoves()
-    {
         AddLegalMove(2, -1);
         AddLegalMove(2, 1);
-    }
-
-    private void AddRightLegalMoves()
-    {
+        
         AddLegalMove(1, 2);
         AddLegalMove(-1, 2);
-    }
-
-    private void AddBottomLegalMoves()
-    {
+        
         AddLegalMove(-2, -1);
         AddLegalMove(-2, 1);
-    }
-
-    private void AddLeftLegalMoves()
-    {
+        
         AddLegalMove(1, -2);
         AddLegalMove(-1, -2);
     }
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (currentTile.i + i < 0 ||
-            currentTile.i + i > board.grid.GetLength(0) - 1 ||
-            currentTile.j + j < 0 ||
-            currentTile.j + j  > board.grid.GetLength(0) - 1)
-                return;
+        if (HintTileIsBeyondTheBoard(currentTile.i + i, currentTile.j + j))
+            return;
 
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
