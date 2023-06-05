@@ -5,39 +5,25 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces;
 
 [TestFixture]
-class BishopTests : PieceTest
+class BishopTests : PieceTest<Bishop>
 {
-    [Test]
-    public override void PieceInitialization()
-    {
-        CreateAndAddPiece(typeof(Bishop), "d4", Color.WHITE);
-
-        AssertPiece();
-    }
+    protected override Color pieceColor => Color.WHITE;
 
     [TestCaseSource(nameof(generalCases))]
     public override void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
-        string[] legalMoves)
-    {
-        CreateAndAddPiece(typeof(Bishop), piecePosition, Color.WHITE);
-
-        AssertPieceLegalMoves(legalMoves);
-    }
+        string[] legalMoves) =>
+            base.PieceHasCorrectLegalMoves_InGeneralCases(
+                piecePosition, legalMoves);
 
     [TestCaseSource(nameof(edgeCases))]
     public override void PieceHasCorrectLegalMoves_InEdgeCases(
         Color blockerPawnsColor,
         string[] blockerPawnsPos,
         string piecePos,
-        string[] legalMoves)
-    {
-        foreach (string pawnPos in blockerPawnsPos)
-            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
-        CreateAndAddPiece(typeof(Bishop), piecePos, Color.WHITE);
-
-        AssertPieceLegalMoves(legalMoves);
-    }
+        string[] legalMoves) =>
+            base.PieceHasCorrectLegalMoves_InEdgeCases(
+                blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
     public static object[] generalCases = 
     {
