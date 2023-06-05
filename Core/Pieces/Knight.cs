@@ -19,30 +19,36 @@ public class Knight : Piece
 
     private void AddTopLegalMoves()
     {
-        TryToAddLegalMove(2, -1);
-        TryToAddLegalMove(2, 1);
+        AddLegalMove(2, -1);
+        AddLegalMove(2, 1);
     }
 
     private void AddRightLegalMoves()
     {
-        TryToAddLegalMove(1, 2);
-        TryToAddLegalMove(-1, 2);
+        AddLegalMove(1, 2);
+        AddLegalMove(-1, 2);
     }
 
     private void AddBottomLegalMoves()
     {
-        TryToAddLegalMove(-2, -1);
-        TryToAddLegalMove(-2, 1);
+        AddLegalMove(-2, -1);
+        AddLegalMove(-2, 1);
     }
 
     private void AddLeftLegalMoves()
     {
-        TryToAddLegalMove(1, -2);
-        TryToAddLegalMove(-1, -2);
+        AddLegalMove(1, -2);
+        AddLegalMove(-1, -2);
     }
 
     protected override void AddLegalMove(int i, int j)
     {
+        if (currentTile.i + i < 0 ||
+            currentTile.i + i > board.grid.GetLength(0) - 1 ||
+            currentTile.j + j < 0 ||
+            currentTile.j + j  > board.grid.GetLength(0) - 1)
+                return;
+
         hintTile = board.grid[currentTile.i + i, currentTile.j + j];
 
         if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())

@@ -52,12 +52,6 @@ public abstract class Piece
         UpdateLegalMoves();
     }
 
-    protected void TryToAddLegalMove(int i, int j)
-    {
-        try { AddLegalMove(i, j); }
-        catch (IndexOutOfRangeException) { return; }
-    }
-
     protected abstract void AddLegalMove(int i, int j);
 
     private void HandlePositionChange()

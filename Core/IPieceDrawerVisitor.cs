@@ -1,4 +1,6 @@
-namespace Chess.Core.Pieces;
+using Chess.Core.Pieces;
+
+namespace Chess.Core;
 
 public interface IPieceDrawerVisitor
 {

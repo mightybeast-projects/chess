@@ -12,18 +12,21 @@ public abstract class SlidingPiece : Piece
 
         for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
-                TryToAddLegalMove(x * i, y * i);
-    }
-
-    private new void TryToAddLegalMove(int i, int j)
-    {
-        try { AddLegalMove(i, j); }
-        catch (IndexOutOfRangeException) { pathBlocked = true; }
+                AddLegalMove(x * i, y * i);
     }
 
     protected override void AddLegalMove(int i, int j)
     {
-        hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+        if (currentTile.i + i < 0 ||
+            currentTile.i + i > board.grid.GetLength(0) - 1 ||
+            currentTile.j + j < 0 ||
+            currentTile.j + j  > board.grid.GetLength(0) - 1)
+                return;
+
+        int clampedI = Math.Clamp(currentTile.i + i, 0, board.grid.GetLength(0) - 1);
+        int clampedJ = Math.Clamp(currentTile.j + j, 0, board.grid.GetLength(0) - 1);
+
+        hintTile = board.grid[clampedI, clampedJ];
 
         if (!hintTile.isEmpty)
             HandleOccupiedHintTile();

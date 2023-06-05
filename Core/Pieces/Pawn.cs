@@ -22,24 +22,27 @@ public class Pawn : Piece
 
     private void UpdatePawnHints(int colorMultiplier, int pawnRowIndex)
     {
-        TryToAddCaptureLegalMove(colorMultiplier * 1, -1);
-        TryToAddCaptureLegalMove(colorMultiplier * 1, 1);
+        AddCaptureLegalMove(colorMultiplier * 1, -1);
+        AddCaptureLegalMove(colorMultiplier * 1, 1);
 
-        TryToAddLegalMove(colorMultiplier * 1, 0);
+        AddLegalMove(colorMultiplier * 1, 0);
 
         if (!pathBlocked && currentTile.i == pawnRowIndex)
-            TryToAddLegalMove(colorMultiplier * 2, 0);
-    }
-
-    private void TryToAddCaptureLegalMove(int i, int j)
-    {
-        try { AddCaptureLegalMove(i, j); }
-        catch (IndexOutOfRangeException) { return; }
+            AddLegalMove(colorMultiplier * 2, 0);
     }
 
     private void AddCaptureLegalMove(int i, int j)
     {
-        hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+        if (currentTile.i + i < 0 ||
+            currentTile.i + i > board.grid.GetLength(0) - 1 ||
+            currentTile.j + j < 0 ||
+            currentTile.j + j  > board.grid.GetLength(0) - 1)
+                return;
+
+        int clampedI = Math.Clamp(currentTile.i + i, 0, board.grid.GetLength(0) - 1);
+        int clampedJ = Math.Clamp(currentTile.j + j, 0, board.grid.GetLength(0) - 1);
+
+        hintTile = board.grid[clampedI, clampedJ];
 
         if (HintTileIsOccupiedByEnemy())
             _legalMoves.Add(hintTile);
@@ -47,7 +50,16 @@ public class Pawn : Piece
 
     protected override void AddLegalMove(int i, int j)
     {
-        hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+        if (currentTile.i + i < 0 ||
+            currentTile.i + i > board.grid.GetLength(0) - 1 ||
+            currentTile.j + j < 0 ||
+            currentTile.j + j  > board.grid.GetLength(0) - 1)
+                return;
+
+        int clampedI = Math.Clamp(currentTile.i + i, 0, board.grid.GetLength(0) - 1);
+        int clampedJ = Math.Clamp(currentTile.j + j, 0, board.grid.GetLength(0) - 1);
+
+        hintTile = board.grid[clampedI, clampedJ];
 
         if (!hintTile.isEmpty)
             pathBlocked = true;

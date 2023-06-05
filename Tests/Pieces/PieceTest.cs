@@ -46,5 +46,6 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
             pieceLegalMoves[i] = piece.legalMoves[i].notation;
             
         Assert.That(legalMoves, Is.SubsetOf(pieceLegalMoves));
+        Assert.AreEqual(legalMoves.Length, pieceLegalMoves.Length);
     }
 }
