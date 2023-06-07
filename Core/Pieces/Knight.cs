@@ -26,12 +26,12 @@ public class Knight : Piece
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (HintTileIsBeyondTheBoard(currentTile.i + i, currentTile.j + j))
+        if (TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
-        hintTile = board.grid[currentTile.i + i, currentTile.j + j];
+        Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
-        if (hintTile.isEmpty || HintTileIsOccupiedByEnemy())
+        if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
             _legalMoves.Add(hintTile);
     }
 }

@@ -17,20 +17,20 @@ public abstract class SlidingPiece : Piece
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (HintTileIsBeyondTheBoard(currentTile.i + i, currentTile.j + j))
+        if (TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
-        hintTile = GetClampedHintTile(currentTile.i + i, currentTile.j + j);
+        Tile hintTile = GetClampedTile(tile.i + i, tile.j + j);
 
         if (!hintTile.isEmpty)
-            HandleOccupiedHintTile();
+            HandleOccupiedHintTile(hintTile);
         else
             _legalMoves.Add(hintTile);
     }
 
-    private void HandleOccupiedHintTile()
+    private void HandleOccupiedHintTile(Tile hintTile)
     {
-        if (HintTileIsOccupiedByEnemy())
+        if (TileIsOccupiedByEnemy(hintTile))
             _legalMoves.Add(hintTile);
         
         pathBlocked = true;

@@ -61,7 +61,7 @@ public class TerminalPieceDrawerVisitor : IPieceDrawerVisitor
     private void DrawTilePiece(Piece piece)
     {
         currentPiece = piece;
-        currentTile = piece.currentTile;
+        currentTile = piece.tile;
 
         if (CurrentTileAndPieceColorsAre(Color.BLACK, Color.WHITE))
             DrawPiece(ConsoleColor.White, filledPieceStr);

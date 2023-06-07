@@ -26,7 +26,7 @@ public class Board
 
     public void SetUp() => piecesDirector.SetupPieces();
 
-    public Piece AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
+    public void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
 
     private void InitializeGrid()
     {

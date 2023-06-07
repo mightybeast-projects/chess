@@ -47,7 +47,7 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
         Tile pieceTile = board.GetTile(tileNotation);
 
         Assert.AreEqual(board, piece.board);
-        Assert.AreEqual(pieceTile, piece.currentTile);
+        Assert.AreEqual(pieceTile, piece.tile);
         Assert.AreEqual(pieceTile.piece, piece);
         Assert.AreEqual(pieceColor, piece.color);
         Assert.IsFalse(pieceTile.isEmpty);

@@ -20,7 +20,7 @@ internal class MoveTests : BoardTestDataBuilder
 
         Assert.IsTrue(board.GetTile("d2").isEmpty);
         Assert.IsNull(board.GetTile("d2").piece);
-        Assert.AreEqual(board.GetTile("d3"), piece.currentTile);
+        Assert.AreEqual(board.GetTile("d3"), piece.tile);
         Assert.IsFalse(board.GetTile("d3").isEmpty);
         Assert.AreEqual(board.GetTile("d3").piece, piece);
         Assert.AreNotEqual(preMoveHintTiles, piece.legalMoves);
@@ -36,7 +36,7 @@ internal class MoveTests : BoardTestDataBuilder
 
         Assert.IsFalse(board.GetTile("d2").isEmpty);
         Assert.IsNotNull(board.GetTile("d2").piece);
-        Assert.AreNotEqual(board.GetTile("a3"), piece.currentTile);
+        Assert.AreNotEqual(board.GetTile("a3"), piece.tile);
         Assert.IsTrue(board.GetTile("a3").isEmpty);
         Assert.AreNotEqual(board.GetTile("a3").piece, piece);
         Assert.AreEqual(preMoveHintTiles, piece.legalMoves);
@@ -51,7 +51,7 @@ internal class MoveTests : BoardTestDataBuilder
         piece.Move("e5");
 
         Assert.AreEqual(1, board.pieces.Count);
-        Assert.AreEqual(board.GetTile("e5"), piece.currentTile);
+        Assert.AreEqual(board.GetTile("e5"), piece.tile);
         Assert.AreEqual(board.GetTile("e5").piece, piece);
     }
 }

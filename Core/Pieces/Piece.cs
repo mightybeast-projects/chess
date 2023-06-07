@@ -5,7 +5,7 @@ namespace Chess.Core.Pieces;
 public abstract class Piece
 {
     public readonly Color color;
-    public Tile currentTile { get; protected set; }
+    public Tile tile { get; protected set; }
     public Board board { get; private set; }
     public List<Tile> legalMoves {
         get
@@ -17,22 +17,20 @@ public abstract class Piece
     }
 
     protected List<Tile> _legalMoves;
-    protected Tile hintTile;
 
     private Tile targetTile;
 
     public Piece(Tile tile, Color color)
     {
-        this.currentTile = tile;
+        this.tile = tile;
         this.color = color;
 
-        tile.SetPiece(this);
+        this.tile.SetPiece(this);
     }
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
-    protected virtual void UpdateLegalMoves() =>
-        _legalMoves = new List<Tile>();
+    protected virtual void UpdateLegalMoves() => _legalMoves = new List<Tile>();
 
     public void SetBoard(Board board)
     {
@@ -70,12 +68,12 @@ public abstract class Piece
 
     private void ChangeCurrentPosition()
     {
-        currentTile.SetPiece(null!);
-        currentTile = targetTile;
-        currentTile.SetPiece(this);
+        tile.SetPiece(null!);
+        tile = targetTile;
+        tile.SetPiece(this);
     }
 
-    protected Tile GetClampedHintTile(int i, int j)
+    protected Tile GetClampedTile(int i, int j)
     {
         int clampedI = Math.Clamp(i, 0, board.grid.GetLength(0) - 1);
         int clampedJ = Math.Clamp(j, 0, board.grid.GetLength(0) - 1);
@@ -83,10 +81,10 @@ public abstract class Piece
         return board.grid[clampedI, clampedJ];
     }
 
-    protected bool HintTileIsBeyondTheBoard(int i, int j) =>
+    protected bool TileIndexesAreBeyondTheBoard(int i, int j) =>
         i < 0 || i > board.grid.GetLength(0) - 1 ||
         j < 0 || j  > board.grid.GetLength(0) - 1;
 
-    protected bool HintTileIsOccupiedByEnemy() =>
-        !hintTile.isEmpty && hintTile.piece.color != color;
+    protected bool TileIsOccupiedByEnemy(Tile tile) =>
+        !tile.isEmpty && tile.piece.color != color;
 }

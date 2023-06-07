@@ -16,12 +16,10 @@ public class PiecesDirector
         grid = board.grid;
     }
 
-    public Piece AddPiece(Piece piece)
+    public void AddPiece(Piece piece)
     {
         piece.SetBoard(board);
         pieces.Add(piece);
-
-        return piece;
     }
 
     public void SetupPieces()

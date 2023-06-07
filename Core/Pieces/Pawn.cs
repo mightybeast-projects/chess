@@ -27,27 +27,27 @@ public class Pawn : Piece
 
         AddLegalMove(colorMultiplier * 1, 0);
 
-        if (!pathBlocked && currentTile.i == pawnRowIndex)
+        if (!pathBlocked && tile.i == pawnRowIndex)
             AddLegalMove(colorMultiplier * 2, 0);
     }
 
     private void AddCaptureLegalMove(int i, int j)
     {
-        if (HintTileIsBeyondTheBoard(currentTile.i + i, currentTile.j + j))
+        if (TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
-        hintTile = GetClampedHintTile(currentTile.i + i, currentTile.j + j);
+        Tile hintTile = GetClampedTile(tile.i + i, tile.j + j);
 
-        if (HintTileIsOccupiedByEnemy())
+        if (TileIsOccupiedByEnemy(hintTile))
             _legalMoves.Add(hintTile);
     }
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (HintTileIsBeyondTheBoard(currentTile.i + i, currentTile.j + j))
+        if (TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
-        hintTile = GetClampedHintTile(currentTile.i + i, currentTile.j + j);
+        Tile hintTile = GetClampedTile(tile.i + i, tile.j + j);
 
         if (!hintTile.isEmpty)
             pathBlocked = true;
