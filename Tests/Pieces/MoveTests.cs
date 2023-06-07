@@ -1,5 +1,6 @@
 using Chess.Core;
 using Chess.Core.Exceptions;
+using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
@@ -12,7 +13,7 @@ internal class MoveTests : BoardTestDataBuilder
     [Test]
     public void PieceCanMakeLegalMove()
     {
-        CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
+        Piece piece = CreatePiece(typeof(Pawn), "d2", Color.WHITE);
         preMoveHintTiles = piece.legalMoves;
 
         piece.Move("d3");
@@ -28,7 +29,7 @@ internal class MoveTests : BoardTestDataBuilder
     [Test]
     public void PieceThrowsExceptionOnIllegalMove()
     {
-        CreateAndAddPiece(typeof(Pawn), "d2", Color.WHITE);
+        Piece piece = CreatePiece(typeof(Pawn), "d2", Color.WHITE);
         preMoveHintTiles = piece.legalMoves;
 
         Assert.Throws<IllegalMoveException>(() => piece.Move("a3"));
@@ -44,8 +45,8 @@ internal class MoveTests : BoardTestDataBuilder
     [Test]
     public void PieceWillCaptureEnemyIfTargetTileIsOccupiedByThem()
     {
-        CreateAndAddPiece(typeof(Pawn), "e5", Color.BLACK);
-        CreateAndAddPiece(typeof(Pawn), "d4", Color.WHITE);
+        CreatePiece(typeof(Pawn), "e5", Color.BLACK);
+        Piece piece = CreatePiece(typeof(Pawn), "d4", Color.WHITE);
 
         piece.Move("e5");
 

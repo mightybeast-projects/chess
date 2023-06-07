@@ -7,20 +7,19 @@ namespace Chess.Tests;
 [TestFixture]
 internal class BoardSetupTests : BoardTestDataBuilder
 {
-    private char letter;
-    private string tileName;
+    private Color color;
 
     [Test]
     public void BoardSetupIsCorrect()
     {
         board.SetUp();
 
-        AssertPieceRows(Color.WHITE, 2, 1);
-        AssertPieceRows(Color.BLACK, 7, 8);
+        AssertPieces(Color.WHITE, 2, 1);
+        AssertPieces(Color.BLACK, 7, 8);
         Assert.AreEqual(32, board.pieces.Count);
     }
 
-    private void AssertPieceRows(Color color, int pawnRowIndex, int pieceRowIndex)
+    private void AssertPieces(Color color, int pawnRowIndex, int pieceRowIndex)
     {
         this.color = color;
         AssertPawnRow(pawnRowIndex);
@@ -42,16 +41,16 @@ internal class BoardSetupTests : BoardTestDataBuilder
 
     private void AssertPawnInRow(int letterIndex, int rowIndex)
     {
-        letter = (char) (letterIndex+ 65);
-        tileName = letter.ToString().ToLower() + rowIndex;
+        char letter = (char) (letterIndex+ 65);
+        string tileName = letter.ToString().ToLower() + rowIndex;
 
         AssertSetupPiece(typeof(Pawn), tileName);
     }
 
     private void AssertSetupPiece(Type pieceType, string tileName)
     {
-        tile = board.GetTile(tileName);
-        piece = tile.piece;
+        Tile tile = board.GetTile(tileName);
+        Piece piece = tile.piece;
 
         Assert.IsFalse(tile.isEmpty);
         Assert.AreEqual(pieceType, piece.GetType());

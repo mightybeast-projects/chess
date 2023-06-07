@@ -7,9 +7,6 @@ namespace Chess.Tests;
 [TestFixture]
 internal class BoardNotationTests : BoardTestDataBuilder
 {
-    private char letter;
-    private string tileName;
-
     [Test]
     public void TileIsInBoardGrid() => AssertBoardTileNotation(0, 0);
 
@@ -34,9 +31,9 @@ internal class BoardNotationTests : BoardTestDataBuilder
 
     private void AssertBoardTileNotation(int i, int j)
     {
-        letter = (char)(j + 65);
-        tileName = letter.ToString().ToLower() + (i + 1);
-        tile = board.GetTile(tileName);
+        char letter = (char)(j + 65);
+        string tileName = letter.ToString().ToLower() + (i + 1);
+        Tile tile = board.GetTile(tileName);
 
         Assert.AreEqual(board.grid[i, j], tile);
     }

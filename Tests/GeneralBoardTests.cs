@@ -9,11 +9,12 @@ internal class GeneralBoardTests : BoardTestDataBuilder
     private Color evenColor;
     private Color oddColor;
     private int i;
-    private int j;
 
     [Test]
     public void TileInitialization()
     {
+        Tile tile = new Tile(0, 0, Color.BLACK);
+
         Assert.IsTrue(tile.isEmpty);
         Assert.IsNull(tile.piece);
     }
@@ -62,18 +63,15 @@ internal class GeneralBoardTests : BoardTestDataBuilder
 
     private void AssertPosition(int j)
     {
-        this.j = j;
+        Color color;
 
         if (j % 2 == 0)
             color = evenColor;
         else
             color = oddColor;
 
-        AssertExpectedColor(i, j);
-    }
-
-    private void AssertExpectedColor(int i, int j) => 
         Assert.AreEqual(color, board.grid[i, j].color);
+    }
 
     private static TestCaseData[] tileColorCases =
     {

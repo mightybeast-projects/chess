@@ -12,18 +12,21 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
     [Test]
     public void PieceInitialization()
     {
-        CreateAndAddPiece(typeof(TPiece), "d4", pieceColor);
+        Type pieceType = typeof(TPiece);
+        string tileNotation = "d4";
 
-        AssertPiece();
+        Piece piece = CreatePiece(pieceType, tileNotation, pieceColor);
+
+        AssertPiece(piece, tileNotation);
     }
 
     public virtual void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
         string[] legalMoves)
     {
-        CreateAndAddPiece(typeof(TPiece), piecePosition, pieceColor);
+        Piece piece = CreatePiece(typeof(TPiece), piecePosition, pieceColor);
 
-        AssertPieceLegalMoves(legalMoves);
+        AssertPieceLegalMoves(piece, legalMoves);
     }
 
     public virtual void PieceHasCorrectLegalMoves_InEdgeCases(
@@ -33,13 +36,25 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
         string[] legalMoves)
     {
         foreach (string pawnPos in blockerPawnsPos)
-            CreateAndAddPiece(typeof(Pawn), pawnPos, blockerPawnsColor);
-        CreateAndAddPiece(typeof(TPiece), piecePos, pieceColor);
+            CreatePiece(typeof(Pawn), pawnPos, blockerPawnsColor);
+        Piece piece = CreatePiece(typeof(TPiece), piecePos, pieceColor);
 
-        AssertPieceLegalMoves(legalMoves);
+        AssertPieceLegalMoves(piece, legalMoves);
     }
 
-    private void AssertPieceLegalMoves(string[] legalMoves)
+    private void AssertPiece(Piece piece, string tileNotation)
+    {
+        Tile pieceTile = board.GetTile(tileNotation);
+
+        Assert.AreEqual(board, piece.board);
+        Assert.AreEqual(pieceTile, piece.currentTile);
+        Assert.AreEqual(pieceTile.piece, piece);
+        Assert.AreEqual(pieceColor, piece.color);
+        Assert.IsFalse(pieceTile.isEmpty);
+        Assert.IsTrue(board.pieces.Contains(piece));
+    }
+
+    private void AssertPieceLegalMoves(Piece piece, string[] legalMoves)
     {
         string[] pieceLegalMoves = new string[piece.legalMoves.Count];
         for (int i = 0; i < piece.legalMoves.Count; i++)
