@@ -33,6 +33,6 @@ public class Knight : Piece
         Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            _legalMoves.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 }

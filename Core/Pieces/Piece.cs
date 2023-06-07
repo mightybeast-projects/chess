@@ -6,20 +6,10 @@ public abstract class Piece
 {
     public readonly Board board;
     public readonly Color color;
+    public List<Tile> legalMoves => _legalMoves;
     public Tile tile { get; protected set; }
-    
-    public List<Tile> legalMoves
-    {
-        get
-        {
-            UpdateLegalMoves();
-            return _legalMoves;
-        }
-        protected set => _legalMoves = value;
-    }
 
-    protected List<Tile> _legalMoves;
-
+    private List<Tile> _legalMoves;
     private Tile targetTile;
 
     public Piece(Board board, Tile tile, Color color)

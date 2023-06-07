@@ -26,13 +26,13 @@ public abstract class SlidingPiece : Piece
         if (!hintTile.isEmpty)
             HandleOccupiedHintTile(hintTile);
         else
-            _legalMoves.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 
     private void HandleOccupiedHintTile(Tile hintTile)
     {
         if (TileIsOccupiedByEnemy(hintTile))
-            _legalMoves.Add(hintTile);
+            legalMoves.Add(hintTile);
         
         pathBlocked = true;
     }

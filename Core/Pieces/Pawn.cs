@@ -40,7 +40,7 @@ public class Pawn : Piece
         Tile hintTile = GetClampedTile(tile.i + i, tile.j + j);
 
         if (TileIsOccupiedByEnemy(hintTile))
-            _legalMoves.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 
     protected override void AddLegalMove(int i, int j)
@@ -53,6 +53,6 @@ public class Pawn : Piece
         if (!hintTile.isEmpty)
             pathBlocked = true;
         else
-            _legalMoves.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 }

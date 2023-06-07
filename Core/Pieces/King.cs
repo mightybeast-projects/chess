@@ -40,6 +40,6 @@ public class King : Piece
         Tile hintTile = GetClampedTile(tile.i + i, tile.j + j);
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            _legalMoves.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 }
