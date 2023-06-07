@@ -2,7 +2,8 @@ namespace Chess.Core.Pieces;
 
 public class Queen : SlidingPiece
 {
-    public Queen(Tile tile, Color color) : base(tile, color) { }
+    public Queen(Board board, Tile tile, Color color) :
+        base(board, tile, color) { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitQueen(this);

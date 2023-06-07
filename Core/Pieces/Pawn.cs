@@ -5,7 +5,8 @@ public class Pawn : Piece
 {
     private bool pathBlocked;
 
-    public Pawn(Tile tile, Color color) : base (tile, color) { }
+    public Pawn(Board board, Tile tile, Color color) :
+        base(board, tile, color) { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitPawn(this);

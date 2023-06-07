@@ -16,12 +16,14 @@ internal class BoardTestDataBuilder
     protected Piece CreatePiece(Type pieceType, string tileName, Color color)
     {
         Tile tile = board.GetTile(tileName);
+
         Type[] ctorTypes = new[] {
-            typeof(Tile), typeof(Color)
+            typeof(Board), typeof(Tile), typeof(Color)
         };
         object[] ctorArgs = new object[] {
-            tile, color
+            board, tile, color
         };
+        
         ConstructorInfo ctor = pieceType.GetConstructor(ctorTypes);
         object pieceObj = ctor?.Invoke(ctorArgs);
         Piece piece = (Piece)pieceObj!;

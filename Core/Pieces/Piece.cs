@@ -4,10 +4,12 @@ namespace Chess.Core.Pieces;
 
 public abstract class Piece
 {
+    public readonly Board board;
     public readonly Color color;
     public Tile tile { get; protected set; }
-    public Board board { get; private set; }
-    public List<Tile> legalMoves {
+    
+    public List<Tile> legalMoves
+    {
         get
         {
             UpdateLegalMoves();
@@ -20,23 +22,19 @@ public abstract class Piece
 
     private Tile targetTile;
 
-    public Piece(Tile tile, Color color)
+    public Piece(Board board, Tile tile, Color color)
     {
+        this.board = board;
         this.tile = tile;
         this.color = color;
 
         this.tile.SetPiece(this);
+        UpdateLegalMoves();
     }
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
     protected virtual void UpdateLegalMoves() => _legalMoves = new List<Tile>();
-
-    public void SetBoard(Board board)
-    {
-        this.board = board;
-        UpdateLegalMoves();
-    }
 
     public void Move(string tileName)
     {

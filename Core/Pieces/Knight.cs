@@ -2,7 +2,8 @@ namespace Chess.Core.Pieces;
 
 public class Knight : Piece
 {
-    public Knight(Tile tile, Color color) : base(tile, color) { }
+    public Knight(Board board, Tile tile, Color color) :
+        base(board, tile, color) { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKnight(this);

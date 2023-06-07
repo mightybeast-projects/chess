@@ -16,11 +16,7 @@ public class PiecesDirector
         grid = board.grid;
     }
 
-    public void AddPiece(Piece piece)
-    {
-        piece.SetBoard(board);
-        pieces.Add(piece);
-    }
+    public void AddPiece(Piece piece) => pieces.Add(piece);
 
     public void SetupPieces()
     {
@@ -31,15 +27,15 @@ public class PiecesDirector
     private void SetUpPieces(Color color, int pawnRowIndex, int pieceRowIndex)
     {
         for (int i = 0; i < grid.GetLength(0); i++)
-            AddPiece(new Pawn(grid[pawnRowIndex, i], color));
+            AddPiece(new Pawn(board, grid[pawnRowIndex, i], color));
 
-        AddPiece(new Rook(grid[pieceRowIndex, 0], color));
-        AddPiece(new Knight(grid[pieceRowIndex, 1], color));
-        AddPiece(new Bishop(grid[pieceRowIndex, 2], color));
-        AddPiece(new Queen(grid[pieceRowIndex, 3], color));
-        AddPiece(new King(grid[pieceRowIndex, 4], color));
-        AddPiece(new Bishop(grid[pieceRowIndex, 5], color));
-        AddPiece(new Knight(grid[pieceRowIndex, 6], color));
-        AddPiece(new Rook(grid[pieceRowIndex, 7], color));
+        AddPiece(new Rook(board, grid[pieceRowIndex, 0], color));
+        AddPiece(new Knight(board, grid[pieceRowIndex, 1], color));
+        AddPiece(new Bishop(board, grid[pieceRowIndex, 2], color));
+        AddPiece(new Queen(board, grid[pieceRowIndex, 3], color));
+        AddPiece(new King(board, grid[pieceRowIndex, 4], color));
+        AddPiece(new Bishop(board, grid[pieceRowIndex, 5], color));
+        AddPiece(new Knight(board, grid[pieceRowIndex, 6], color));
+        AddPiece(new Rook(board, grid[pieceRowIndex, 7], color));
     }
 }

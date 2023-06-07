@@ -4,7 +4,8 @@ public abstract class SlidingPiece : Piece
 {
     private bool pathBlocked;
 
-    protected SlidingPiece(Tile tile, Color color) : base(tile, color) { }
+    public SlidingPiece(Board board, Tile tile, Color color) :
+        base(board, tile, color) { }
 
     protected void AddLegalMovesInDirection(int x, int y)
     {
