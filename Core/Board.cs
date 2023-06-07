@@ -18,15 +18,23 @@ public class Board
         InitializeGrid();
     }
 
+    public void SetUp() => piecesDirector.SetupPieces();
+
     public Tile GetTile(string tileName)
     {
         try { return ParseTileName(tileName); }
         catch (Exception) { throw new IncorrectTileNotationException(); }
     }
 
-    public void SetUp() => piecesDirector.SetupPieces();
+    internal Tile GetClampedTile(int i, int j)
+    {
+        int clampedI = Math.Clamp(i, 0, grid.GetLength(0) - 1);
+        int clampedJ = Math.Clamp(j, 0, grid.GetLength(0) - 1);
 
-    public void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
+        return grid[clampedI, clampedJ];
+    }
+
+    internal void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
 
     private void InitializeGrid()
     {
@@ -55,6 +63,10 @@ public class Board
         
         return grid[numberIndex - 1, symbolIndex - 1];
     }
+
+    internal bool TileIndexesAreBeyondTheBoard(int i, int j) =>
+        i < 0 || i > grid.GetLength(0) - 1 ||
+        j < 0 || j  > grid.GetLength(0) - 1;
 
     private bool RowOrColIsOddWhileOtherIsNot(int i, int j) =>
         j % 2 == 0 && i % 2 > 0 ||

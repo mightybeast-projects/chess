@@ -27,7 +27,7 @@ public class Knight : Piece
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
+        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
         Tile hintTile = board.grid[tile.i + i, tile.j + j];

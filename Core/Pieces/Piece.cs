@@ -61,18 +61,6 @@ public abstract class Piece
         tile.SetPiece(this);
     }
 
-    protected Tile GetClampedTile(int i, int j)
-    {
-        int clampedI = Math.Clamp(i, 0, board.grid.GetLength(0) - 1);
-        int clampedJ = Math.Clamp(j, 0, board.grid.GetLength(0) - 1);
-
-        return board.grid[clampedI, clampedJ];
-    }
-
-    protected bool TileIndexesAreBeyondTheBoard(int i, int j) =>
-        i < 0 || i > board.grid.GetLength(0) - 1 ||
-        j < 0 || j  > board.grid.GetLength(0) - 1;
-
     protected bool TileIsOccupiedByEnemy(Tile tile) =>
         !tile.isEmpty && tile.piece.color != color;
 }

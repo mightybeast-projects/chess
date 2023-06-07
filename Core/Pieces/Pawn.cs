@@ -34,10 +34,10 @@ public class Pawn : Piece
 
     private void AddCaptureLegalMove(int i, int j)
     {
-        if (TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
+        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
-        Tile hintTile = GetClampedTile(tile.i + i, tile.j + j);
+        Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
         if (TileIsOccupiedByEnemy(hintTile))
             legalMoves.Add(hintTile);
@@ -45,10 +45,10 @@ public class Pawn : Piece
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
+        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
-        Tile hintTile = GetClampedTile(tile.i + i, tile.j + j);
+        Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
         if (!hintTile.isEmpty)
             pathBlocked = true;

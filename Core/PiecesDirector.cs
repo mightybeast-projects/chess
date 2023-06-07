@@ -2,23 +2,23 @@ using Chess.Core.Pieces;
 
 namespace Chess.Core;
 
-public class PiecesDirector
+internal class PiecesDirector
 {
-    public readonly List<Piece> pieces;
+    internal readonly List<Piece> pieces;
 
     private Board board;
     private Tile[,] grid;
 
-    public PiecesDirector(Board board)
+    internal PiecesDirector(Board board)
     {
         pieces = new List<Piece>();
         this.board = board;
         grid = board.grid;
     }
 
-    public void AddPiece(Piece piece) => pieces.Add(piece);
+    internal void AddPiece(Piece piece) => pieces.Add(piece);
 
-    public void SetupPieces()
+    internal void SetupPieces()
     {
         SetUpPieces(Color.WHITE, 1, 0);
         SetUpPieces(Color.BLACK, 6, 7);
