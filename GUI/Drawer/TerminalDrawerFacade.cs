@@ -12,7 +12,8 @@ public class TerminalDrawerFacade
 
     public void Draw()
     {
-        Console.OutputEncoding = System.Text.Encoding.Unicode;
+        if (OperatingSystem.IsWindows())
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
 
         boardDrawer.DrawBoard();
 
