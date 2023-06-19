@@ -70,8 +70,33 @@ internal class GameTests
     public void Check_ForWhiteKing()
     {
         Game game = new Game();
+        Board board = game.board;
 
-        game.StartNoSetUp();
+        game.currentPlayer = game.blackPlayer;
 
+        board.AddPiece(new King(board, board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new King(board, board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board, board.GetTile("b3"), Color.BLACK));
+
+        game.HandlePlayerMove("b3", "b2");
+
+        Assert.IsTrue(game.whiteKing.isChecked);
+    }
+
+    [Test]
+    public void Check_ForBlackKing()
+    {
+        Game game = new Game();
+        Board board = game.board;
+
+        game.currentPlayer = game.whitePlayer;
+
+        board.AddPiece(new King(board, board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new King(board, board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board, board.GetTile("b6"), Color.WHITE));
+
+        game.HandlePlayerMove("b6", "b7");
+
+        Assert.IsTrue(game.blackKing.isChecked);
     }
 }

@@ -2,6 +2,8 @@ namespace Chess.Core.Pieces;
 
 public class King : Piece
 {
+    public bool isChecked;
+
     public King(Board board, Tile tile, Color color) :
         base(board, tile, color) { }
 
