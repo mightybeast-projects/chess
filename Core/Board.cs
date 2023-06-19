@@ -9,6 +9,9 @@ public class Board
     public List<Piece> whitePieces => piecesDirector.whitePieces;
     public List<Piece> blackPieces => piecesDirector.blackPieces;
 
+    internal King whiteKing => (King)whitePieces[0];
+    internal King blackKing => (King)blackPieces[0];
+
     private readonly PiecesDirector piecesDirector;
 
     public Board()
@@ -37,6 +40,12 @@ public class Board
 
     internal void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
 
+    internal void ChangeKingsCheckStatus()
+    {
+        blackKing.isChecked = CheckForCheck(blackKing, whitePieces);
+        whiteKing.isChecked = CheckForCheck(whiteKing, blackPieces);
+    }
+
     private void InitializeGrid()
     {
         for (int i = 0; i < grid.GetLength(0); i++)
@@ -63,6 +72,15 @@ public class Board
         int numberIndex = tileName[1] - '0';
         
         return grid[numberIndex - 1, symbolIndex - 1];
+    }
+
+    private bool CheckForCheck(King king, List<Piece> enemyPieces)
+    {
+        foreach (Piece enemyPiece in enemyPieces.Skip(1))
+            foreach (Tile move in enemyPiece.legalMoves)
+                if (king.tile == move)
+                    return true;
+        return false;
     }
 
     internal bool TileIndexesAreBeyondTheBoard(int i, int j) =>

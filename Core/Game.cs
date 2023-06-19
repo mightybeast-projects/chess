@@ -10,8 +10,6 @@ public class Game
 
     internal Player whitePlayer;
     internal Player blackPlayer;
-    internal King whiteKing => (King)board.whitePieces[0];
-    internal King blackKing => (King)board.blackPieces[0];
 
     public Game()
     {
@@ -28,7 +26,7 @@ public class Game
 
     public void HandlePlayerMove(string piecePosition, string targetPosition)
     {
-        Piece piece = board.GetTile(piecePosition).piece!;
+        Piece piece = board.GetTile(piecePosition).piece;
 
         if (piece is null)
             return;
@@ -38,29 +36,11 @@ public class Game
 
         piece.Move(targetPosition);
 
-        if (currentPlayer.color == Color.WHITE)
-            CheckForCheck(board.whitePieces, blackKing);
-        else
-            CheckForCheck(board.blackPieces, whiteKing);
+        board.ChangeKingsCheckStatus();
 
         if (currentPlayer == whitePlayer)
             currentPlayer = blackPlayer;
         else
             currentPlayer = whitePlayer;
-    }
-
-    public void CheckForCheck(List<Piece> pieces, King enemyKing)
-    {
-        foreach (Piece blackPiece in pieces)
-        {
-            foreach (Tile move in blackPiece.legalMoves)
-            {
-                if (enemyKing.tile == move)
-                {
-                    enemyKing.isChecked = true;
-                    return;
-                }
-            }
-        }
     }
 }
