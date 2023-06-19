@@ -8,18 +8,18 @@ public class TerminalBoardDrawer
     public Piece hintPiece;
 
     private IPieceDrawerVisitor pieceDrawerVisitor;
-    private TerminalDrawerDecorator drawerDecorator;
+    private TerminalDrawerDecorator decorator;
     private Board board;
     private Tile currentTile;
     private ConsoleColor bgColor;
     private int tileColorIndex;
 
-    public TerminalBoardDrawer(Board board)
+    public TerminalBoardDrawer(Board board, TerminalDrawerDecorator decorator)
     {
         this.board = board;
+        this.decorator = decorator;
 
         pieceDrawerVisitor = new TerminalPieceDrawerVisitor();
-        drawerDecorator = new TerminalDrawerDecorator(board);
     }
 
     public void DrawBoard()
@@ -35,7 +35,7 @@ public class TerminalBoardDrawer
     private void DrawBoardRow(int i)
     {
         if (i == 7)
-            drawerDecorator.DrawLetterLine();
+            decorator.DrawLetterLine();
 
         for (int j = 0; j < board.grid.GetLength(1); j++)
             HandleGridPosition(i, j);
@@ -43,18 +43,18 @@ public class TerminalBoardDrawer
         Console.WriteLine();
 
         if (i == 0)
-            drawerDecorator.DrawLetterLine();
+            decorator.DrawLetterLine();
     }
 
     private void HandleGridPosition(int i, int j)
     {
         if (j == 0)
-            drawerDecorator.DrawNumber(i);
+            decorator.DrawNumber(i);
         
         DrawTile(i, j);
 
         if (j == 7)
-            drawerDecorator.DrawNumber(i);
+            decorator.DrawNumber(i);
     }
 
     private void DrawTile(int i, int j)

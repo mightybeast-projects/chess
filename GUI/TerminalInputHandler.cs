@@ -7,13 +7,13 @@ namespace Chess.GUI;
 public class TerminalInputHandler
 {
     private TerminalDrawerFacade drawer;
-    private Board board;
+    private Game game;
     private Piece chosenPiece;
     private string input;
 
-    public TerminalInputHandler(Board board, TerminalDrawerFacade drawer)
+    public TerminalInputHandler(Game game, TerminalDrawerFacade drawer)
     {
-        this.board = board;
+        this.game = game;
         this.drawer = drawer;
     }
 
@@ -37,12 +37,12 @@ public class TerminalInputHandler
     {
         if (input.Length == 0) return;
 
-        chosenPiece = board.GetTile(input.Substring(0, 2)).piece;
+        chosenPiece = game.board.GetTile(input.Substring(0, 2)).piece;
 
-        if (input.Length == 2 || InputHaveHintCommand())
+        if (input.Length == 2 || InputIsHintCommand())
             drawer.EnableHintsForPiece(chosenPiece);
-        else if (InputHaveMoveCommand())
-            chosenPiece.Move(input.Substring(6, 2));
+        else if (InputIsMoveCommand())
+            game.HandlePlayerMove(input.Substring(0, 2), input.Substring(6, 2));
     }
 
     private void HandleException(Exception e)
@@ -54,7 +54,7 @@ public class TerminalInputHandler
         Console.ResetColor();
     }
 
-    private bool InputHaveMoveCommand() => input.Length == 8 && input[4] == 'm';
+    private bool InputIsHintCommand() => input.Length == 5 && input[4] == 'h';
 
-    private bool InputHaveHintCommand() => input.Length == 5 && input[4] == 'h';
+    private bool InputIsMoveCommand() => input.Length == 8 && input[4] == 'm';
 }

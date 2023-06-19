@@ -1,5 +1,4 @@
 using Chess.Core;
-using Chess.Core.Pieces;
 using Chess.GUI;
 using Chess.GUI.Drawer;
 
@@ -7,15 +6,15 @@ public class Terminal
 {
     private TerminalDrawerFacade drawer;
     private TerminalInputHandler inputHandler;
-    private Board board;
+    private Game game;
 
     public void Run()
     {
-        board = new Board();
-        drawer = new TerminalDrawerFacade(board);
-        inputHandler = new TerminalInputHandler(board, drawer);
+        game = new Game();
+        drawer = new TerminalDrawerFacade(game);
+        inputHandler = new TerminalInputHandler(game, drawer);
 
-        board.SetUp();
+        game.Start();
         drawer.Draw();
 
         while (true)

@@ -5,10 +5,17 @@ namespace Chess.GUI.Drawer;
 
 public class TerminalDrawerFacade
 {
+    private TerminalDrawerDecorator decorator;
     private TerminalBoardDrawer boardDrawer;
+    private Game game;
 
-    public TerminalDrawerFacade(Board board) =>
-        boardDrawer = new TerminalBoardDrawer(board);
+    public TerminalDrawerFacade(Game game)
+    {
+        this.game = game;
+
+        decorator = new TerminalDrawerDecorator(game);
+        boardDrawer = new TerminalBoardDrawer(game.board, decorator);
+    }
 
     public void Draw()
     {
@@ -17,7 +24,7 @@ public class TerminalDrawerFacade
 
         boardDrawer.DrawBoard();
 
-        Console.WriteLine("Waiting for input...");
+        decorator.DrawCurrentPlayerInfo();
     }
 
     public void EnableHintsForPiece(Piece piece) =>

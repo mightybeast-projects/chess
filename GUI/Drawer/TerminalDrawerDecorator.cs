@@ -4,9 +4,19 @@ namespace Chess.GUI.Drawer;
 
 public class TerminalDrawerDecorator
 {
-    private Board board;
+    private Game game;
 
-    public TerminalDrawerDecorator(Board board) => this.board = board;
+    public TerminalDrawerDecorator(Game game) => this.game = game;
+
+    public void DrawCurrentPlayerInfo()
+    {
+        string currentPlayerStr =
+            (game.currentPlayer.color == Color.WHITE) ? "♟ " : "♙ ";
+
+        Console.WriteLine(currentPlayerStr + "'s turn.");
+
+        Console.WriteLine("Waiting for input...");
+    }
 
     public void DrawNumber(int i)
     {
@@ -18,7 +28,7 @@ public class TerminalDrawerDecorator
     {
         Console.ResetColor();
 
-        for (int i = 0; i < board.grid.GetLength(0) + 1; i++)
+        for (int i = 0; i < game.board.grid.GetLength(0) + 1; i++)
             HandleLetterLinePosition(i);
 
         Console.WriteLine();
