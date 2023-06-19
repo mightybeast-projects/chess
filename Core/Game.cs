@@ -1,3 +1,6 @@
+using chess.Core.Exceptions;
+using Chess.Core.Pieces;
+
 namespace Chess.Core;
 
 public class Game
@@ -19,5 +22,22 @@ public class Game
     {
         board.SetUp();
         currentPlayer = whitePlayer;
+    }
+
+    public void HandlePlayerMove(string piecePosition, string targetPosition)
+    {
+        Piece piece = board.GetTile(piecePosition).piece!;
+        if (piece is null)
+            return;
+
+        if (piece.color != currentPlayer.color)
+            throw new CannotMoveEnemyPieceException();
+        
+        piece.Move(targetPosition);
+
+        if (currentPlayer == whitePlayer)
+            currentPlayer = blackPlayer;
+        else
+            currentPlayer = whitePlayer;
     }
 }
