@@ -40,4 +40,6 @@ public class Game
         else
             currentPlayer = whitePlayer;
     }
+
+    internal void StartNoSetUp() => currentPlayer = whitePlayer;
 }

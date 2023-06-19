@@ -16,7 +16,10 @@ internal class BoardSetupTests : BoardTestDataBuilder
 
         AssertPieces(Color.WHITE, 2, 1);
         AssertPieces(Color.BLACK, 7, 8);
-        Assert.AreEqual(32, board.pieces.Count);
+        Assert.AreEqual(16, board.whitePieces.Count);
+        Assert.AreEqual(16, board.blackPieces.Count);
+        Assert.IsInstanceOf<King>(board.whitePieces[0]);
+        Assert.IsInstanceOf<King>(board.blackPieces[0]);
     }
 
     private void AssertPieces(Color color, int pawnRowIndex, int pieceRowIndex)

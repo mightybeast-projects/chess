@@ -6,7 +6,8 @@ namespace Chess.Core;
 public class Board
 {
     public readonly Tile[,] grid;
-    public List<Piece> pieces => piecesDirector.pieces;
+    public List<Piece> whitePieces => piecesDirector.whitePieces;
+    public List<Piece> blackPieces => piecesDirector.blackPieces;
 
     private readonly PiecesDirector piecesDirector;
 

@@ -1,5 +1,6 @@
 using chess.Core.Exceptions;
 using Chess.Core;
+using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests;
@@ -17,7 +18,8 @@ internal class GameTests
         
         game.Start();
 
-        Assert.IsNotEmpty(game.board.pieces);
+        Assert.IsNotEmpty(game.board.whitePieces);
+        Assert.IsNotEmpty(game.board.blackPieces);
         Assert.IsNotNull(game.whitePlayer);
         Assert.IsNotNull(game.blackPlayer);
         Assert.AreEqual(game.currentPlayer.color, Color.WHITE);
@@ -62,5 +64,14 @@ internal class GameTests
         Assert.IsNotNull(game.board.GetTile("d7").piece);
         Assert.IsNull(game.board.GetTile("d6").piece);
         Assert.AreEqual(game.currentPlayer.color, Color.WHITE);
+    }
+
+    [Test]
+    public void Check_ForWhiteKing()
+    {
+        Game game = new Game();
+
+        game.StartNoSetUp();
+
     }
 }

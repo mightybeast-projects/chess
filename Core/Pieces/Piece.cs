@@ -50,7 +50,13 @@ public abstract class Piece
 
     private void HandleOccupiedTargetTile()
     {
-        board.pieces.Remove(targetTile.piece);
+        Piece targetPiece = targetTile.piece;
+        
+        if (targetPiece.color == Color.WHITE)
+            board.whitePieces.Remove(targetPiece);
+        else
+            board.blackPieces.Remove(targetPiece);
+
         ChangeCurrentPosition();
     }
 

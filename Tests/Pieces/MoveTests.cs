@@ -50,7 +50,8 @@ internal class MoveTests : BoardTestDataBuilder
 
         piece.Move("e5");
 
-        Assert.AreEqual(1, board.pieces.Count);
+        Assert.AreEqual(1, board.whitePieces.Count);
+        Assert.AreEqual(0, board.blackPieces.Count);
         Assert.AreEqual(board.GetTile("e5"), piece.tile);
         Assert.AreEqual(board.GetTile("e5").piece, piece);
     }
