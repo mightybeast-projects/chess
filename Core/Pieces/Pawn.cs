@@ -12,7 +12,7 @@ public class Pawn : Piece
 
     internal override void UpdateLegalMoves()
     {
-        base.UpdateLegalMoves();
+        legalMovesList = new List<Tile>();
 
         if (color == Color.WHITE)
             UpdatePawnHints(1, 1);

@@ -31,7 +31,7 @@ public abstract class Piece
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
-    internal virtual void UpdateLegalMoves() => legalMovesList = new List<Tile>();
+    internal abstract void UpdateLegalMoves();
 
     public void Move(string tileName)
     {

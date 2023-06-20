@@ -9,7 +9,7 @@ public class Knight : Piece
 
     internal override void UpdateLegalMoves()
     {
-        base.UpdateLegalMoves();
+        legalMovesList = new List<Tile>();
 
         AddLegalMove(2, -1);
         AddLegalMove(2, 1);

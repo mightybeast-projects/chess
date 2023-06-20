@@ -9,7 +9,7 @@ public class Queen : SlidingPiece
 
     internal override void UpdateLegalMoves()
     {
-        base.UpdateLegalMoves();
+        legalMovesList = new List<Tile>();
 
         AddDiagonalLegalMoves();
         AddAxisLegalMoves();

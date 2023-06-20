@@ -9,7 +9,7 @@ public class Bishop : SlidingPiece
 
     internal override void UpdateLegalMoves()
     {
-        base.UpdateLegalMoves();
+        legalMovesList = new List<Tile>();
 
         AddLegalMovesInDirection(1, 1);
         AddLegalMovesInDirection(1, -1);

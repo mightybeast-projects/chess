@@ -11,7 +11,7 @@ public class King : Piece
 
     internal override void UpdateLegalMoves()
     {
-        base.UpdateLegalMoves();
+        legalMovesList = new List<Tile>();
 
         AddDiagonalLegalMoves();
         AddAxisLegalMoves();
