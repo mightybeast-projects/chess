@@ -48,20 +48,8 @@ public abstract class Piece
 
     private void HandlePositionChange()
     {
-        if (targetTile.isEmpty)
-            ChangeCurrentPosition();
-        else
-            HandleOccupiedTargetTile();
-    }
-
-    private void HandleOccupiedTargetTile()
-    {
-        Piece targetPiece = targetTile.piece;
-
-        if (targetPiece.color == Color.WHITE)
-            board.whitePieces.Remove(targetPiece);
-        else
-            board.blackPieces.Remove(targetPiece);
+        if (!targetTile.isEmpty)
+            board.RemovePiece(targetTile.piece);
 
         ChangeCurrentPosition();
     }
