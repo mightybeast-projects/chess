@@ -40,12 +40,6 @@ public class Board
 
     internal void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
 
-    internal void ChangeKingsCheckStatus()
-    {
-        blackKing.isChecked = CheckForCheck(blackKing, whitePieces);
-        whiteKing.isChecked = CheckForCheck(whiteKing, blackPieces);
-    }
-
     private void InitializeGrid()
     {
         for (int i = 0; i < grid.GetLength(0); i++)
@@ -70,22 +64,13 @@ public class Board
     {
         int symbolIndex = ((int)char.ToUpper(tileName[0])) - 64;
         int numberIndex = tileName[1] - '0';
-        
-        return grid[numberIndex - 1, symbolIndex - 1];
-    }
 
-    private bool CheckForCheck(King king, List<Piece> enemyPieces)
-    {
-        foreach (Piece enemyPiece in enemyPieces.Skip(1))
-            foreach (Tile move in enemyPiece.legalMoves)
-                if (king.tile == move)
-                    return true;
-        return false;
+        return grid[numberIndex - 1, symbolIndex - 1];
     }
 
     internal bool TileIndexesAreBeyondTheBoard(int i, int j) =>
         i < 0 || i > grid.GetLength(0) - 1 ||
-        j < 0 || j  > grid.GetLength(0) - 1;
+        j < 0 || j > grid.GetLength(0) - 1;
 
     private bool RowOrColIsOddWhileOtherIsNot(int i, int j) =>
         j % 2 == 0 && i % 2 > 0 ||

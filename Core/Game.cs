@@ -36,8 +36,6 @@ public class Game
 
         piece.Move(targetPosition);
 
-        board.ChangeKingsCheckStatus();
-
         if (currentPlayer == whitePlayer)
             currentPlayer = blackPlayer;
         else

@@ -2,7 +2,7 @@ namespace Chess.Core.Pieces;
 
 public class King : Piece
 {
-    public bool isChecked;
+    public bool isChecked => CheckForCheck();
 
     public King(Board board, Tile tile, Color color) :
         base(board, tile, color)
@@ -17,6 +17,17 @@ public class King : Piece
 
         AddDiagonalLegalMoves();
         AddAxisLegalMoves();
+    }
+
+    protected override void AddLegalMove(int i, int j)
+    {
+        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
+            return;
+
+        Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
+
+        if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
+            legalMovesList.Add(hintTile);
     }
 
     private void AddDiagonalLegalMoves()
@@ -35,14 +46,15 @@ public class King : Piece
         AddLegalMove(0, -1);
     }
 
-    protected override void AddLegalMove(int i, int j)
+    private bool CheckForCheck()
     {
-        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
-            return;
+        List<Piece> enemyPieces =
+            (color == Color.WHITE) ? board.blackPieces : board.whitePieces;
 
-        Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
-
-        if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            legalMovesList.Add(hintTile);
+        foreach (Piece enemyPiece in enemyPieces.Skip(1))
+            foreach (Tile move in enemyPiece.legalMoves)
+                if (tile == move)
+                    return true;
+        return false;
     }
 }
