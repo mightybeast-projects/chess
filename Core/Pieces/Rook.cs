@@ -9,7 +9,7 @@ public class Rook : SlidingPiece
 
     internal override void UpdateLegalMoves()
     {
-        legalMovesList = new List<Tile>();
+        legalMoves = new List<Tile>();
 
         AddLegalMovesInDirection(1, 0);
         AddLegalMovesInDirection(-1, 0);

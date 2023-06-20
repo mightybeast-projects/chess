@@ -9,7 +9,7 @@ public class Knight : Piece
 
     internal override void UpdateLegalMoves()
     {
-        legalMovesList = new List<Tile>();
+        legalMoves = new List<Tile>();
 
         AddLegalMove(2, -1);
         AddLegalMove(2, 1);
@@ -32,6 +32,6 @@ public class Knight : Piece
         Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            legalMovesList.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 }

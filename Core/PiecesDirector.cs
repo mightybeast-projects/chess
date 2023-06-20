@@ -21,7 +21,6 @@ internal class PiecesDirector
     internal void AddPiece(Piece piece)
     {
         piece.board = board;
-        piece.UpdateLegalMoves();
 
         if (piece.color == Color.WHITE)
             whitePieces.Add(piece);

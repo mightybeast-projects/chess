@@ -11,7 +11,7 @@ public class King : Piece
 
     internal override void UpdateLegalMoves()
     {
-        legalMovesList = new List<Tile>();
+        legalMoves = new List<Tile>();
 
         AddDiagonalLegalMoves();
         AddAxisLegalMoves();
@@ -25,7 +25,7 @@ public class King : Piece
         Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            legalMovesList.Add(hintTile);
+            legalMoves.Add(hintTile);
     }
 
     private void AddDiagonalLegalMoves()
@@ -50,7 +50,7 @@ public class King : Piece
             (color == Color.WHITE) ? board.blackPieces : board.whitePieces;
 
         foreach (Piece enemyPiece in enemyPieces.Skip(1))
-            foreach (Tile move in enemyPiece.legalMoves)
+            foreach (Tile move in enemyPiece.LegalMoves)
                 if (tile == move)
                     return true;
         return false;

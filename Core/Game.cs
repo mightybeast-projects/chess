@@ -8,8 +8,8 @@ public class Game
     public readonly Board board;
     public Player currentPlayer;
 
-    internal Player whitePlayer;
-    internal Player blackPlayer;
+    internal readonly Player whitePlayer;
+    internal readonly Player blackPlayer;
 
     public Game()
     {

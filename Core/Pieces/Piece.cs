@@ -6,18 +6,18 @@ public abstract class Piece
 {
     public readonly Color color;
 
-    public Board board;
-    public List<Tile> legalMoves
+    public Tile tile { get; protected set; }
+    public Board board { get; internal set; }
+    public List<Tile> LegalMoves
     {
         get
         {
             UpdateLegalMoves();
-            return legalMovesList;
+            return legalMoves;
         }
     }
 
-    public Tile tile { get; protected set; }
-    protected List<Tile> legalMovesList;
+    protected List<Tile> legalMoves;
 
     private Tile targetTile;
 
@@ -31,17 +31,17 @@ public abstract class Piece
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
-    internal abstract void UpdateLegalMoves();
-
     public void Move(string tileName)
     {
         targetTile = board.GetTile(tileName);
 
-        if (legalMovesList.Contains(targetTile))
+        if (LegalMoves.Contains(targetTile))
             HandlePositionChange();
         else
             throw new IllegalMoveException();
     }
+
+    internal abstract void UpdateLegalMoves();
 
     protected abstract void AddLegalMove(int i, int j);
 

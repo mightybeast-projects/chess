@@ -28,7 +28,7 @@ public class TerminalBoardDrawer
 
         for (int i = board.grid.GetLength(0) - 1; i >= 0; i--)
             DrawBoardRow(i);
-        
+
         DisableHints();
     }
 
@@ -50,7 +50,7 @@ public class TerminalBoardDrawer
     {
         if (j == 0)
             decorator.DrawNumber(i);
-        
+
         DrawTile(i, j);
 
         if (j == 7)
@@ -93,5 +93,5 @@ public class TerminalBoardDrawer
 
     private bool CurrentTileIsAHint() =>
         hintPiece != null &&
-        hintPiece.legalMoves.Contains(currentTile);
+        hintPiece.LegalMoves.Contains(currentTile);
 }
