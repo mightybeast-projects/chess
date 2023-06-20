@@ -5,7 +5,8 @@ public class King : Piece
     public bool isChecked;
 
     public King(Board board, Tile tile, Color color) :
-        base(board, tile, color) { }
+        base(board, tile, color)
+    { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKing(this);
@@ -38,10 +39,10 @@ public class King : Piece
     {
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
-    
+
         Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            legalMoves.Add(hintTile);
+            legalMovesList.Add(hintTile);
     }
 }

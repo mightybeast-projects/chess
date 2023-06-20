@@ -6,7 +6,8 @@ public class Pawn : Piece
     private bool pathBlocked;
 
     public Pawn(Board board, Tile tile, Color color) :
-        base(board, tile, color) { }
+        base(board, tile, color)
+    { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitPawn(this);
@@ -40,7 +41,7 @@ public class Pawn : Piece
         Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
         if (TileIsOccupiedByEnemy(hintTile))
-            legalMoves.Add(hintTile);
+            legalMovesList.Add(hintTile);
     }
 
     protected override void AddLegalMove(int i, int j)
@@ -53,6 +54,6 @@ public class Pawn : Piece
         if (!hintTile.isEmpty)
             pathBlocked = true;
         else
-            legalMoves.Add(hintTile);
+            legalMovesList.Add(hintTile);
     }
 }

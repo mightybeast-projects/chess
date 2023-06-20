@@ -6,10 +6,18 @@ public abstract class Piece
 {
     public readonly Board board;
     public readonly Color color;
-    public List<Tile> legalMoves => _legalMoves;
-    public Tile tile { get; protected set; }
+    public List<Tile> legalMoves
+    {
+        get
+        {
+            UpdateLegalMoves();
+            return legalMovesList;
+        }
+    }
 
-    private List<Tile> _legalMoves;
+    public Tile tile { get; protected set; }
+    protected List<Tile> legalMovesList;
+
     private Tile targetTile;
 
     public Piece(Board board, Tile tile, Color color)
@@ -24,18 +32,16 @@ public abstract class Piece
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
-    protected virtual void UpdateLegalMoves() => _legalMoves = new List<Tile>();
+    protected virtual void UpdateLegalMoves() => legalMovesList = new List<Tile>();
 
     public void Move(string tileName)
     {
         targetTile = board.GetTile(tileName);
 
-        if (_legalMoves.Contains(targetTile))
+        if (legalMovesList.Contains(targetTile))
             HandlePositionChange();
         else
             throw new IllegalMoveException();
-
-        UpdateLegalMoves();
     }
 
     protected abstract void AddLegalMove(int i, int j);
@@ -51,7 +57,7 @@ public abstract class Piece
     private void HandleOccupiedTargetTile()
     {
         Piece targetPiece = targetTile.piece;
-        
+
         if (targetPiece.color == Color.WHITE)
             board.whitePieces.Remove(targetPiece);
         else

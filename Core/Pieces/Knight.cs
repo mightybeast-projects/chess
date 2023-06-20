@@ -3,7 +3,8 @@ namespace Chess.Core.Pieces;
 public class Knight : Piece
 {
     public Knight(Board board, Tile tile, Color color) :
-        base(board, tile, color) { }
+        base(board, tile, color)
+    { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKnight(this);
@@ -14,13 +15,13 @@ public class Knight : Piece
 
         AddLegalMove(2, -1);
         AddLegalMove(2, 1);
-        
+
         AddLegalMove(1, 2);
         AddLegalMove(-1, 2);
-        
+
         AddLegalMove(-2, -1);
         AddLegalMove(-2, 1);
-        
+
         AddLegalMove(1, -2);
         AddLegalMove(-1, -2);
     }
@@ -33,6 +34,6 @@ public class Knight : Piece
         Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            legalMoves.Add(hintTile);
+            legalMovesList.Add(hintTile);
     }
 }

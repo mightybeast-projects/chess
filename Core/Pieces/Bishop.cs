@@ -3,7 +3,8 @@ namespace Chess.Core.Pieces;
 public class Bishop : SlidingPiece
 {
     public Bishop(Board board, Tile tile, Color color) :
-        base(board, tile, color) { }
+        base(board, tile, color)
+    { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitBishop(this);

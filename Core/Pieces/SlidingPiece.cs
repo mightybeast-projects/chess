@@ -5,7 +5,8 @@ public abstract class SlidingPiece : Piece
     private bool pathBlocked;
 
     public SlidingPiece(Board board, Tile tile, Color color) :
-        base(board, tile, color) { }
+        base(board, tile, color)
+    { }
 
     protected void AddLegalMovesInDirection(int x, int y)
     {
@@ -26,14 +27,14 @@ public abstract class SlidingPiece : Piece
         if (!hintTile.isEmpty)
             HandleOccupiedHintTile(hintTile);
         else
-            legalMoves.Add(hintTile);
+            legalMovesList.Add(hintTile);
     }
 
     private void HandleOccupiedHintTile(Tile hintTile)
     {
         if (TileIsOccupiedByEnemy(hintTile))
-            legalMoves.Add(hintTile);
-        
+            legalMovesList.Add(hintTile);
+
         pathBlocked = true;
     }
 }

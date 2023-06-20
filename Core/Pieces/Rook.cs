@@ -3,7 +3,8 @@ namespace Chess.Core.Pieces;
 public class Rook : SlidingPiece
 {
     public Rook(Board board, Tile tile, Color color) :
-        base(board, tile, color) { }
+        base(board, tile, color)
+    { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitRook(this);
