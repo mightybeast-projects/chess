@@ -10,9 +10,9 @@ public class Pawn : Piece
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitPawn(this);
 
-    internal override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
-        legalMoves = new List<Tile>();
+        legalMovesList = new List<Tile>();
 
         if (color == Color.WHITE)
             UpdatePawnHints(1, 1);
@@ -39,7 +39,7 @@ public class Pawn : Piece
         Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
         if (TileIsOccupiedByEnemy(hintTile))
-            legalMoves.Add(hintTile);
+            legalMovesList.Add(hintTile);
     }
 
     protected override void AddLegalMove(int i, int j)
@@ -52,6 +52,6 @@ public class Pawn : Piece
         if (!hintTile.isEmpty)
             pathBlocked = true;
         else
-            legalMoves.Add(hintTile);
+            legalMovesList.Add(hintTile);
     }
 }

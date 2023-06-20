@@ -8,16 +8,16 @@ public abstract class Piece
 
     public Tile tile { get; protected set; }
     public Board board { get; internal set; }
-    public List<Tile> LegalMoves
+    public List<Tile> legalMoves
     {
         get
         {
             UpdateLegalMoves();
-            return legalMoves;
+            return legalMovesList;
         }
     }
 
-    protected List<Tile> legalMoves;
+    protected List<Tile> legalMovesList;
 
     private Tile targetTile;
 
@@ -35,13 +35,13 @@ public abstract class Piece
     {
         targetTile = board.GetTile(tileName);
 
-        if (LegalMoves.Contains(targetTile))
+        if (legalMoves.Contains(targetTile))
             HandlePositionChange();
         else
             throw new IllegalMoveException();
     }
 
-    internal abstract void UpdateLegalMoves();
+    protected abstract void UpdateLegalMoves();
 
     protected abstract void AddLegalMove(int i, int j);
 

@@ -7,9 +7,9 @@ public class Queen : SlidingPiece
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitQueen(this);
 
-    internal override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
-        legalMoves = new List<Tile>();
+        legalMovesList = new List<Tile>();
 
         AddDiagonalLegalMoves();
         AddAxisLegalMoves();

@@ -7,9 +7,9 @@ public class Rook : SlidingPiece
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitRook(this);
 
-    internal override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
-        legalMoves = new List<Tile>();
+        legalMovesList = new List<Tile>();
 
         AddLegalMovesInDirection(1, 0);
         AddLegalMovesInDirection(-1, 0);

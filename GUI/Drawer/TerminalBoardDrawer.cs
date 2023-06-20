@@ -93,5 +93,5 @@ public class TerminalBoardDrawer
 
     private bool CurrentTileIsAHint() =>
         hintPiece != null &&
-        hintPiece.LegalMoves.Contains(currentTile);
+        hintPiece.legalMoves.Contains(currentTile);
 }

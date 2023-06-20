@@ -7,9 +7,9 @@ public class Bishop : SlidingPiece
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitBishop(this);
 
-    internal override void UpdateLegalMoves()
+    protected override void UpdateLegalMoves()
     {
-        legalMoves = new List<Tile>();
+        legalMovesList = new List<Tile>();
 
         AddLegalMovesInDirection(1, 1);
         AddLegalMovesInDirection(1, -1);
