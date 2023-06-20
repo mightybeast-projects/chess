@@ -40,13 +40,7 @@ public class Board
 
     internal void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
 
-    internal void RemovePiece(Piece piece)
-    {
-        if (piece.color == Color.WHITE)
-            whitePieces.Remove(piece);
-        else
-            blackPieces.Remove(piece);
-    }
+    internal void RemovePiece(Piece piece) => piecesDirector.RemovePiece(piece);
 
     private void InitializeGrid()
     {

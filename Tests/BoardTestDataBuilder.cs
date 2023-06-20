@@ -18,12 +18,12 @@ internal class BoardTestDataBuilder
         Tile tile = board.GetTile(tileName);
 
         Type[] ctorTypes = new[] {
-            typeof(Board), typeof(Tile), typeof(Color)
+            typeof(Tile), typeof(Color)
         };
         object[] ctorArgs = new object[] {
-            board, tile, color
+            tile, color
         };
-        
+
         ConstructorInfo ctor = pieceType.GetConstructor(ctorTypes);
         object pieceObj = ctor?.Invoke(ctorArgs);
         Piece piece = (Piece)pieceObj!;

@@ -15,9 +15,9 @@ public class CheckTests
 
         game.currentPlayer = game.blackPlayer;
 
-        board.AddPiece(new King(board, board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new King(board, board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board, board.GetTile("b3"), Color.BLACK));
+        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
 
         game.HandlePlayerMove("b3", "b2");
 
@@ -32,9 +32,9 @@ public class CheckTests
 
         game.currentPlayer = game.whitePlayer;
 
-        board.AddPiece(new King(board, board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new King(board, board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board, board.GetTile("b6"), Color.WHITE));
+        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board.GetTile("b6"), Color.WHITE));
 
         game.HandlePlayerMove("b6", "b7");
 
@@ -49,9 +49,9 @@ public class CheckTests
 
         game.currentPlayer = game.blackPlayer;
 
-        board.AddPiece(new King(board, board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new King(board, board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board, board.GetTile("b3"), Color.BLACK));
+        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
 
         game.HandlePlayerMove("b3", "b2");
         game.HandlePlayerMove("a1", "a2");
@@ -67,9 +67,9 @@ public class CheckTests
 
         game.currentPlayer = game.whitePlayer;
 
-        board.AddPiece(new King(board, board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new King(board, board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board, board.GetTile("b6"), Color.WHITE));
+        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board.GetTile("b6"), Color.WHITE));
 
         game.HandlePlayerMove("b6", "b7");
         game.HandlePlayerMove("a8", "a7");

@@ -4,14 +4,12 @@ public class King : Piece
 {
     public bool isChecked => CheckForCheck();
 
-    public King(Board board, Tile tile, Color color) :
-        base(board, tile, color)
-    { }
+    public King(Tile tile, Color color) : base(tile, color) { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKing(this);
 
-    protected override void UpdateLegalMoves()
+    internal override void UpdateLegalMoves()
     {
         base.UpdateLegalMoves();
 
