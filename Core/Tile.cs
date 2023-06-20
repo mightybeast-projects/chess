@@ -7,7 +7,7 @@ public class Tile
     public readonly Color color;
     public readonly int i;
     public readonly int j;
-    public Piece piece { get; private set; }
+    public Piece piece { get; internal set; }
     public string notation { get; private set; }
     public bool isEmpty => piece is null;
 

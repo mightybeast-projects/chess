@@ -2,7 +2,7 @@ using Chess.Core;
 using Chess.Core.Pieces;
 using NUnit.Framework;
 
-namespace Chess.Tests;
+namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
 public class CheckTests

@@ -57,7 +57,7 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
             Assert.IsTrue(board.blackPieces.Contains(piece));
     }
 
-    private void AssertPieceLegalMoves(Piece piece, string[] legalMoves)
+    protected void AssertPieceLegalMoves(Piece piece, string[] legalMoves)
     {
         string[] pieceLegalMoves = new string[piece.legalMoves.Count];
         for (int i = 0; i < piece.legalMoves.Count; i++)

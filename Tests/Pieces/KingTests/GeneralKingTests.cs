@@ -2,10 +2,10 @@ using Chess.Core;
 using Chess.Core.Pieces;
 using NUnit.Framework;
 
-namespace Chess.Tests.Pieces;
+namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
-internal class KingTests : PieceTest<King>
+internal class GeneralKingTests : PieceTest<King>
 {
     protected override Color pieceColor => Color.WHITE;
 
@@ -52,7 +52,7 @@ internal class KingTests : PieceTest<King>
                 "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
             },
             "d4", new string[] {
-                "c4", "e4", "d5", "d3", "c5", "e5", "c3", "e3"
+                "c5", "d5", "e5", "c3", "e3"
         })
     };
 }
