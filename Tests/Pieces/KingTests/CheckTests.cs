@@ -23,6 +23,11 @@ public class CheckTests
         game.HandlePlayerMove("b3", "b2");
 
         Assert.IsTrue(game.board.whiteKing.isChecked);
+        Assert.That(board.whiteKing.legalMoves, Is.SubsetOf(new[] {
+            board.GetTile("a2"),
+            board.GetTile("b2"),
+            board.GetTile("b1")
+        }));
     }
 
     [Test]
@@ -40,6 +45,11 @@ public class CheckTests
         game.HandlePlayerMove("b6", "b7");
 
         Assert.IsTrue(game.board.blackKing.isChecked);
+        Assert.That(board.blackKing.legalMoves, Is.SubsetOf(new[] {
+            board.GetTile("a7"),
+            board.GetTile("b7"),
+            board.GetTile("b8")
+        }));
     }
 
     [Test]
