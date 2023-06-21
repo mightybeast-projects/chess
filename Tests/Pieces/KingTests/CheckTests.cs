@@ -1,4 +1,5 @@
 using Chess.Core;
+using Chess.Core.Exceptions;
 using Chess.Core.Pieces;
 using NUnit.Framework;
 
@@ -8,7 +9,7 @@ namespace Chess.Tests.Pieces.KingTests;
 public class CheckTests
 {
     [Test]
-    public void Check_ForWhiteKing()
+    public void WhiteKing_IsChecked()
     {
         Game game = new Game();
         Board board = game.board;
@@ -25,7 +26,7 @@ public class CheckTests
     }
 
     [Test]
-    public void Check_ForBlackKing()
+    public void BlackKing_IsChecked()
     {
         Game game = new Game();
         Board board = game.board;
@@ -42,7 +43,7 @@ public class CheckTests
     }
 
     [Test]
-    public void AvoidedCheck_ForWhiteKing()
+    public void WhiteKing_AvoidedCheck()
     {
         Game game = new Game();
         Board board = game.board;
@@ -60,7 +61,7 @@ public class CheckTests
     }
 
     [Test]
-    public void AvoidedCheck_ForBlackKing()
+    public void BlackKing_AvoidedCheck()
     {
         Game game = new Game();
         Board board = game.board;

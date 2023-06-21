@@ -3,7 +3,6 @@ namespace Chess.Core.Pieces;
 public class King : Piece
 {
     public bool isChecked => CheckForCheck();
-    private static bool breakLegalMoveCycle;
 
     public King(Tile tile, Color color) : base(tile, color) { }
 
@@ -28,9 +27,8 @@ public class King : Piece
         if (TileIsOccupiedByAlly(hintTile))
             return;
 
-        if (!breakLegalMoveCycle)
-            if (TileIsUnderAttack(hintTile))
-                return;
+        if (TileIsUnderAttack(hintTile))
+            return;
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
             legalMovesList.Add(hintTile);
@@ -63,6 +61,9 @@ public class King : Piece
 
     private bool TileIsUnderAttack(Tile tile)
     {
+        if (breakLegalMoveCycle)
+            return false;
+
         breakLegalMoveCycle = true;
 
         Piece enemyPiece = null;

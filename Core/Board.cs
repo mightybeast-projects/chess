@@ -9,8 +9,8 @@ public class Board
     public List<Piece> whitePieces => piecesDirector.whitePieces;
     public List<Piece> blackPieces => piecesDirector.blackPieces;
 
-    internal King whiteKing => (King)whitePieces[0];
-    internal King blackKing => (King)blackPieces[0];
+    internal King whiteKing => whitePieces.OfType<King>().FirstOrDefault();
+    internal King blackKing => blackPieces.OfType<King>().FirstOrDefault();
 
     private readonly PiecesDirector piecesDirector;
 

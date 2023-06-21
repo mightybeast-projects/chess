@@ -4,6 +4,7 @@ namespace Chess.Core.Pieces;
 
 public abstract class Piece
 {
+    protected static bool breakLegalMoveCycle;
     public readonly Color color;
 
     public Tile tile { get; protected set; }
@@ -62,4 +63,7 @@ public abstract class Piece
 
     protected bool TileIsOccupiedByEnemy(Tile tile) =>
         !tile.isEmpty && tile.piece.color != color;
+
+    private King GetAllyKing() =>
+        color == Color.WHITE ? board.whiteKing : board.blackKing;
 }
