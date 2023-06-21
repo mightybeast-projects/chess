@@ -14,24 +14,23 @@ public class King : Piece
     {
         legalMovesList = new List<Tile>();
 
-
-
         AddDiagonalLegalMoves();
         AddAxisLegalMoves();
     }
 
     protected override void AddLegalMove(int i, int j)
     {
-        if (breakLegalMoveCycle)
-            return;
-
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
         Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
-        if (TileIsOccupiedByAlly(hintTile) || TileIsUnderAttack(hintTile))
+        if (TileIsOccupiedByAlly(hintTile))
             return;
+
+        if (!breakLegalMoveCycle)
+            if (TileIsUnderAttack(hintTile))
+                return;
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
             legalMovesList.Add(hintTile);
