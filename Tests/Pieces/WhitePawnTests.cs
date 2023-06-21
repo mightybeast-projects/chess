@@ -1,4 +1,5 @@
 using Chess.Core;
+using Chess.Core.Pieces;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
@@ -24,14 +25,14 @@ internal class WhitePawnTests : PieceTest<Pawn>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
-    private static TestCaseData[] generalCases = 
+    private static TestCaseData[] generalCases =
     {
         new TestCaseData("d4", new[] { "d5" }),
         new TestCaseData("d2", new[] { "d3", "d4" }),
         new TestCaseData("d8", new string[] { })
     };
 
-    private static TestCaseData[] edgeCases = 
+    private static TestCaseData[] edgeCases =
     {
         new TestCaseData(
             Color.BLACK, new[] { "d3" },

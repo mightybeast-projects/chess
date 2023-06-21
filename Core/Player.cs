@@ -1,4 +1,4 @@
-using Chess.Core;
+namespace Chess.Core;
 
 public class Player
 {

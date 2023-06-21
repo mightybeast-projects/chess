@@ -1,5 +1,4 @@
-using Chess.Core;
-using Chess.Core.Pieces;
+namespace Chess.Core.Pieces;
 
 public class Pawn : Piece
 {
