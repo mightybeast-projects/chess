@@ -1,10 +1,22 @@
+using System.Numerics;
+
 namespace Chess.Core.Pieces;
 
 public abstract class SlidingPiece : Piece
 {
+    protected abstract List<Vector2> tilesDirections { get; }
+
     private bool pathBlocked;
 
     public SlidingPiece(Tile tile, Color color) : base(tile, color) { }
+
+    protected override void UpdateLegalMoves()
+    {
+        legalMovesList = new List<Tile>();
+
+        foreach (Vector2 direction in tilesDirections)
+            AddLegalMovesInDirection((int)direction.X, (int)direction.Y);
+    }
 
     protected void AddLegalMovesInDirection(int x, int y)
     {

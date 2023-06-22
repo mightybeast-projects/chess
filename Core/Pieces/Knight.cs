@@ -4,11 +4,6 @@ namespace Chess.Core.Pieces;
 
 public class Knight : Piece
 {
-    public Knight(Tile tile, Color color) : base(tile, color) { }
-
-    public override void Accept(IPieceDrawerVisitor visitor) =>
-        visitor.VisitKnight(this);
-
     private List<Vector2> tilesDirections => new List<Vector2>()
     {
         new Vector2(2, -1),
@@ -20,6 +15,11 @@ public class Knight : Piece
         new Vector2(1, -2),
         new Vector2(-1, -2),
     };
+
+    public Knight(Tile tile, Color color) : base(tile, color) { }
+
+    public override void Accept(IPieceDrawerVisitor visitor) =>
+        visitor.VisitKnight(this);
 
     protected override void UpdateLegalMoves()
     {

@@ -5,11 +5,6 @@ public class King : Piece
 {
     public bool isChecked => CheckForCheck();
 
-    public King(Tile tile, Color color) : base(tile, color) { }
-
-    public override void Accept(IPieceDrawerVisitor visitor) =>
-        visitor.VisitKing(this);
-
     private List<Vector2> tilesDirections => new List<Vector2>()
     {
         new Vector2(1, -1),
@@ -21,6 +16,11 @@ public class King : Piece
         new Vector2(-1, 0),
         new Vector2(0, -1),
     };
+
+    public King(Tile tile, Color color) : base(tile, color) { }
+
+    public override void Accept(IPieceDrawerVisitor visitor) =>
+        visitor.VisitKing(this);
 
     protected override void UpdateLegalMoves()
     {
