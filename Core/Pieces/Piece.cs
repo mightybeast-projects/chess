@@ -4,7 +4,6 @@ namespace Chess.Core.Pieces;
 
 public abstract class Piece
 {
-    protected static bool breakLegalMoveCycle;
     public readonly Color color;
 
     public Tile tile { get; protected set; }

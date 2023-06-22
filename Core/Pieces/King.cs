@@ -58,8 +58,8 @@ public class King : Piece
 
     private bool CheckForCheck()
     {
-        foreach (Piece enemyPiece in GetEnemyPieces().Skip(1))
-            foreach (Tile move in enemyPiece.legalMoves)
+        foreach (Piece enemyPiece in GetEnemyPieces())
+            foreach (Tile move in enemyPiece.tilesUnderAttack)
                 if (tile == move)
                     return true;
         return false;
@@ -67,38 +67,11 @@ public class King : Piece
 
     private bool TileIsUnderAttack(Tile tile)
     {
-        if (breakLegalMoveCycle)
-            return false;
-
-        breakLegalMoveCycle = true;
-
-        Piece enemyPiece = null;
-        if (TileIsOccupiedByEnemy(tile))
-        {
-            enemyPiece = tile.piece;
-            board.RemovePiece(tile.piece);
-        }
-
-        bool tileIsUnderAttack = false;
-        Pawn pawn = new Pawn(tile, color);
-        board.AddPiece(pawn);
-
         foreach (Piece piece in GetEnemyPieces())
-        {
-            if (piece.legalMoves.Contains(tile))
-            {
-                tileIsUnderAttack = true;
-                break;
-            }
-        }
+            if (piece.tilesUnderAttack.Contains(tile))
+                return true;
 
-        board.RemovePiece(pawn);
-        if (enemyPiece is not null)
-            board.AddPiece(enemyPiece);
-
-        breakLegalMoveCycle = false;
-
-        return tileIsUnderAttack;
+        return false;
     }
 
     private bool TileIsOccupiedByAlly(Tile tile) =>

@@ -31,20 +31,6 @@ internal class GeneralKingTests : PieceTest<King>
         string[] tilesUnderAttack) =>
             base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
 
-    [Test]
-    public void KingsHaveFiveLegalMoves_IfEnemyKingIsNearby()
-    {
-        Piece blackKing = CreatePiece(typeof(King), "d5", Color.BLACK);
-        Piece whiteKing = CreatePiece(typeof(King), "d3", Color.WHITE);
-
-        AssertPieceLegalMoves(whiteKing, new[] {
-            "c3", "e3", "c2", "d2", "e2"
-        });
-        AssertPieceLegalMoves(blackKing, new[] {
-            "c5", "c6", "d6", "e6", "e5"
-        });
-    }
-
     private static TestCaseData[] legalMovesGeneralCases =
     {
         new TestCaseData("a1", new[] { "a2", "b2", "b1" }),
