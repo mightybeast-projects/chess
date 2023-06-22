@@ -21,23 +21,21 @@ public class Knight : Piece
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKnight(this);
 
-    protected override void UpdateLegalMoves()
-    {
-        legalMovesList = new List<Tile>();
+    protected override IEnumerable<Tile> GetLegalMoves() =>
+        tilesDirections.ConvertAll(direction =>
+            GetLegalMove((int)direction.X, (int)direction.Y));
 
-        foreach (Vector2 direction in tilesDirections)
-            AddLegalMove((int)direction.X, (int)direction.Y);
-    }
-
-    protected override void AddLegalMove(int i, int j)
+    protected override Tile GetLegalMove(int i, int j)
     {
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
-            return;
+            return null;
 
         Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            legalMovesList.Add(hintTile);
+            return hintTile;
+
+        return null;
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>

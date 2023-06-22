@@ -9,27 +9,25 @@ public class Pawn : Piece
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitPawn(this);
 
-    protected override void UpdateLegalMoves()
-    {
-        legalMovesList = new List<Tile>();
+    protected override IEnumerable<Tile> GetLegalMoves() =>
+        color == Color.WHITE ?
+            GetPawnHints(1, 1) :
+            GetPawnHints(-1, 6);
 
-        if (color == Color.WHITE)
-            UpdatePawnHints(1, 1);
-        else
-            UpdatePawnHints(-1, 6);
-    }
-
-    protected override void AddLegalMove(int i, int j)
+    protected override Tile GetLegalMove(int i, int j)
     {
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
-            return;
+            return null;
 
         Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
         if (!hintTile.isEmpty)
+        {
             pathBlocked = true;
+            return null;
+        }
         else
-            legalMovesList.Add(hintTile);
+            return hintTile;
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>
@@ -45,22 +43,23 @@ public class Pawn : Piece
         return board.grid[tile.i + i, tile.j + j];
     }
 
-    private void UpdatePawnHints(int colorMultiplier, int pawnRowIndex)
+    private IEnumerable<Tile> GetPawnHints(int colorMultiplier, int pawnRowIndex)
     {
-        AddLegalMove(colorMultiplier, 0);
+        List<Tile> pawnHints = new List<Tile>();
+
+        pawnHints.Add(GetLegalMove(colorMultiplier, 0));
 
         if (!pathBlocked && tile.i == pawnRowIndex)
-            AddLegalMove(colorMultiplier * 2, 0);
+            pawnHints.Add(GetLegalMove(colorMultiplier * 2, 0));
 
-        AddCaptureLegalMoves();
+        pawnHints.AddRange(GetCaptureLegalMoves());
+
+        return pawnHints;
     }
 
-    private void AddCaptureLegalMoves()
-    {
-        foreach (Tile tile in tilesUnderAttack)
-            if (TileIsOccupiedByEnemy(tile))
-                legalMovesList.Add(tile);
-    }
+    private IEnumerable<Tile> GetCaptureLegalMoves() =>
+        tilesUnderAttack.ConvertAll(tile =>
+            TileIsOccupiedByEnemy(tile) ? tile : null);
 
     private IEnumerable<Tile> GetPawnTilesUnderAttack(int colorMultiplier) =>
     new Tile[]

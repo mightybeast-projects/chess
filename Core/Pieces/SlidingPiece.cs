@@ -10,25 +10,24 @@ public abstract class SlidingPiece : Piece
 
     public SlidingPiece(Tile tile, Color color) : base(tile, color) { }
 
-    protected override void UpdateLegalMoves()
-    {
-        legalMovesList = new List<Tile>();
+    protected override IEnumerable<Tile> GetLegalMoves() =>
+        tilesDirections.SelectMany(direction =>
+            GetLegalMovesInDirection((int)direction.X, (int)direction.Y));
 
-        foreach (Vector2 direction in tilesDirections)
-            AddLegalMovesInDirection((int)direction.X, (int)direction.Y);
-    }
-
-    protected override void AddLegalMove(int i, int j)
+    protected override Tile GetLegalMove(int i, int j)
     {
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
-            return;
+            return null;
 
         Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
 
         if (!hintTile.isEmpty)
-            HandleOccupiedHintTile(hintTile);
-        else
-            legalMovesList.Add(hintTile);
+            pathBlocked = true;
+
+        if (!hintTile.isEmpty && !TileIsOccupiedByEnemy(hintTile))
+            return null;
+
+        return hintTile;
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>
@@ -48,13 +47,19 @@ public abstract class SlidingPiece : Piece
         return hintTile;
     }
 
-    private void AddLegalMovesInDirection(int x, int y)
+    private IEnumerable<Tile> GetLegalMovesInDirection(int x, int y)
     {
+        List<Tile> legalMovesInDirection = new List<Tile>();
+
         pathBlocked = false;
 
         for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
-                AddLegalMove(x * i, y * i);
+                legalMovesInDirection.Add(
+                    GetLegalMove(x * i, y * i)
+                );
+
+        return legalMovesInDirection;
     }
 
     private IEnumerable<Tile> GetTilesUnderAttackInDirection(int x, int y)
@@ -66,16 +71,9 @@ public abstract class SlidingPiece : Piece
         for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
                 tilesUnderAttackInDirection.Add(
-                    GetTileUnderAttack(x * i, y * i));
+                    GetTileUnderAttack(x * i, y * i)
+                );
 
         return tilesUnderAttackInDirection;
-    }
-
-    private void HandleOccupiedHintTile(Tile hintTile)
-    {
-        if (TileIsOccupiedByEnemy(hintTile))
-            legalMovesList.Add(hintTile);
-
-        pathBlocked = true;
     }
 }
