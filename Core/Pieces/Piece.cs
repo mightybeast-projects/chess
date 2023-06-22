@@ -9,6 +9,8 @@ public abstract class Piece
 
     public Tile tile { get; protected set; }
     public Board board { get; internal set; }
+    public List<Tile> tilesUnderAttack =>
+        GetTilesUnderAttack().Where(tile => tile != null).ToList();
     public List<Tile> legalMoves
     {
         get
@@ -45,6 +47,10 @@ public abstract class Piece
     protected abstract void UpdateLegalMoves();
 
     protected abstract void AddLegalMove(int i, int j);
+
+    protected virtual IEnumerable<Tile> GetTilesUnderAttack() { return null; }
+
+    protected virtual Tile GetTileUnderAttack(int i, int j) { return null; }
 
     private void HandlePositionChange()
     {

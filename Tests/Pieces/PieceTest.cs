@@ -42,6 +42,15 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
         AssertPieceLegalMoves(piece, legalMoves);
     }
 
+    public virtual void PieceHasCorrectTilesUnderAttack(
+        string piecePosition,
+        string[] tilesUnderAttack)
+    {
+        Piece piece = CreatePiece(typeof(TPiece), piecePosition, pieceColor);
+
+        AssertPieceTilesUnderAttack(piece, tilesUnderAttack);
+    }
+
     private void AssertPiece(Piece piece, string tileNotation)
     {
         Tile pieceTile = board.GetTile(tileNotation);
@@ -57,13 +66,23 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
             Assert.IsTrue(board.blackPieces.Contains(piece));
     }
 
-    protected void AssertPieceLegalMoves(Piece piece, string[] legalMoves)
+    protected void AssertPieceLegalMoves(Piece piece, string[] legalMovesArr)
     {
         string[] pieceLegalMoves = new string[piece.legalMoves.Count];
         for (int i = 0; i < piece.legalMoves.Count; i++)
             pieceLegalMoves[i] = piece.legalMoves[i].notation;
 
-        Assert.That(legalMoves, Is.SubsetOf(pieceLegalMoves));
-        Assert.AreEqual(legalMoves.Length, pieceLegalMoves.Length);
+        Assert.That(pieceLegalMoves, Is.SubsetOf(legalMovesArr));
+        Assert.AreEqual(legalMovesArr.Length, pieceLegalMoves.Length);
+    }
+
+    private void AssertPieceTilesUnderAttack(Piece piece, string[] tilesArr)
+    {
+        string[] pieceTilesUnderAttack = new string[piece.tilesUnderAttack.Count];
+        for (int i = 0; i < piece.tilesUnderAttack.Count; i++)
+            pieceTilesUnderAttack[i] = piece.tilesUnderAttack[i].notation;
+
+        Assert.That(pieceTilesUnderAttack, Is.SubsetOf(tilesArr));
+        Assert.AreEqual(tilesArr.Length, pieceTilesUnderAttack.Length);
     }
 }

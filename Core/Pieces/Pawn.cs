@@ -19,28 +19,6 @@ public class Pawn : Piece
             UpdatePawnHints(-1, 6);
     }
 
-    private void UpdatePawnHints(int colorMultiplier, int pawnRowIndex)
-    {
-        AddCaptureLegalMove(colorMultiplier * 1, -1);
-        AddCaptureLegalMove(colorMultiplier * 1, 1);
-
-        AddLegalMove(colorMultiplier * 1, 0);
-
-        if (!pathBlocked && tile.i == pawnRowIndex)
-            AddLegalMove(colorMultiplier * 2, 0);
-    }
-
-    private void AddCaptureLegalMove(int i, int j)
-    {
-        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
-            return;
-
-        Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
-
-        if (TileIsOccupiedByEnemy(hintTile))
-            legalMovesList.Add(hintTile);
-    }
-
     protected override void AddLegalMove(int i, int j)
     {
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
@@ -53,4 +31,41 @@ public class Pawn : Piece
         else
             legalMovesList.Add(hintTile);
     }
+
+    protected override IEnumerable<Tile> GetTilesUnderAttack() =>
+        color == Color.WHITE ?
+            GetPawnTilesUnderAttack(1) :
+            GetPawnTilesUnderAttack(-1);
+
+    protected override Tile GetTileUnderAttack(int i, int j)
+    {
+        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
+            return null;
+
+        return board.GetClampedTile(tile.i + i, tile.j + j);
+    }
+
+    private void UpdatePawnHints(int colorMultiplier, int pawnRowIndex)
+    {
+        AddLegalMove(colorMultiplier, 0);
+
+        if (!pathBlocked && tile.i == pawnRowIndex)
+            AddLegalMove(colorMultiplier * 2, 0);
+
+        AddCaptureLegalMoves();
+    }
+
+    private void AddCaptureLegalMoves()
+    {
+        foreach (Tile tile in tilesUnderAttack)
+            if (TileIsOccupiedByEnemy(tile))
+                legalMovesList.Add(tile);
+    }
+
+    private IEnumerable<Tile> GetPawnTilesUnderAttack(int colorMultiplier) =>
+        new Tile[]
+        {
+            GetTileUnderAttack(colorMultiplier, -1),
+            GetTileUnderAttack(colorMultiplier, 1)
+        };
 }

@@ -2,21 +2,21 @@ using Chess.Core;
 using Chess.Core.Pieces;
 using NUnit.Framework;
 
-namespace Chess.Tests.Pieces;
+namespace Chess.Tests.Pieces.PawnTests;
 
 [TestFixture]
 internal class WhitePawnTests : PieceTest<Pawn>
 {
     protected override Color pieceColor => Color.WHITE;
 
-    [TestCaseSource(nameof(generalCases))]
+    [TestCaseSource(nameof(legalMovesGeneralCases))]
     public override void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
         string[] legalMoves) =>
             base.PieceHasCorrectLegalMoves_InGeneralCases(
                 piecePosition, legalMoves);
 
-    [TestCaseSource(nameof(edgeCases))]
+    [TestCaseSource(nameof(legalMovesEdgeCases))]
     public override void PieceHasCorrectLegalMoves_InEdgeCases(
         Color blockerPawnsColor,
         string[] blockerPawnsPos,
@@ -25,14 +25,20 @@ internal class WhitePawnTests : PieceTest<Pawn>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
-    private static TestCaseData[] generalCases =
+    [TestCaseSource(nameof(tilesUnderAttackCases))]
+    public override void PieceHasCorrectTilesUnderAttack(
+        string piecePosition,
+        string[] tilesUnderAttack) =>
+            base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
+
+    private static TestCaseData[] legalMovesGeneralCases =
     {
         new TestCaseData("d4", new[] { "d5" }),
         new TestCaseData("d2", new[] { "d3", "d4" }),
         new TestCaseData("d8", new string[] { })
     };
 
-    private static TestCaseData[] edgeCases =
+    private static TestCaseData[] legalMovesEdgeCases =
     {
         new TestCaseData(
             Color.BLACK, new[] { "d3" },
@@ -54,5 +60,12 @@ internal class WhitePawnTests : PieceTest<Pawn>
             Color.BLACK, new[] { "c5", "d5", "e5" },
             "d4", new string[] { "c5", "e5" }
         )
+    };
+
+    private static TestCaseData[] tilesUnderAttackCases =
+    {
+        new TestCaseData("d4", new[] { "c5", "e5", }),
+        new TestCaseData("a4", new[] { "b5" }),
+        new TestCaseData("h4", new[] { "g5" })
     };
 }
