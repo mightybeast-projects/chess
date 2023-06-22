@@ -43,7 +43,7 @@ public abstract class Piece
 
     protected abstract Tile GetTileUnderAttack(int i, int j);
 
-    private void HandlePositionChange()
+    protected virtual void HandlePositionChange()
     {
         if (!targetTile.isEmpty)
             board.RemovePiece(targetTile.piece);

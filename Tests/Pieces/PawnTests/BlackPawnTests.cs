@@ -31,9 +31,22 @@ internal class BlackPawnTests : PieceTest<Pawn>
         string[] tilesUnderAttack) =>
             base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
 
+    [Test]
+    public void BlackPawnHasOneLegalMove_AfterOneMove()
+    {
+        Pawn pawn = new Pawn(board.GetTile("d7"), pieceColor);
+        board.AddPiece(pawn);
+
+        pawn.Move("d6");
+
+        Assert.IsTrue(pawn.hasMoved);
+        Assert.That(pawn.legalMoves, Is.SubsetOf(new Tile[] {
+            board.GetTile("d5")
+        }));
+    }
+
     private static TestCaseData[] legalMovesGeneralCases =
     {
-        new TestCaseData("d5", new[] { "d4" }),
         new TestCaseData("d7", new[] { "d6", "d5" }),
         new TestCaseData("d1", new string[] { })
     };

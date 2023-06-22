@@ -31,7 +31,7 @@ public class King : Piece
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return null;
 
-        Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
+        Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
         if (TileIsOccupiedByAlly(hintTile) || TileIsUnderAttack(hintTile))
             return null;
@@ -60,6 +60,7 @@ public class King : Piece
             foreach (Tile move in enemyPiece.tilesUnderAttack)
                 if (tile == move)
                     return true;
+
         return false;
     }
 

@@ -55,9 +55,7 @@ public abstract class SlidingPiece : Piece
 
         for (int i = 1; i < board.grid.GetLength(0); i++)
             if (!pathBlocked)
-                legalMovesInDirection.Add(
-                    GetLegalMove(x * i, y * i)
-                );
+                legalMovesInDirection.Add(GetLegalMove(x * i, y * i));
 
         return legalMovesInDirection;
     }

@@ -2,6 +2,8 @@ namespace Chess.Core.Pieces;
 
 public class Pawn : Piece
 {
+    public bool hasMoved;
+
     private bool pathBlocked;
 
     public Pawn(Tile tile, Color color) : base(tile, color) { }
@@ -11,8 +13,8 @@ public class Pawn : Piece
 
     protected override IEnumerable<Tile> GetLegalMoves() =>
         color == Color.WHITE ?
-            GetPawnHints(1, 1) :
-            GetPawnHints(-1, 6);
+            GetPawnHints(1) :
+            GetPawnHints(-1);
 
     protected override Tile GetLegalMove(int i, int j)
     {
@@ -43,13 +45,19 @@ public class Pawn : Piece
         return board.grid[tile.i + i, tile.j + j];
     }
 
-    private IEnumerable<Tile> GetPawnHints(int colorMultiplier, int pawnRowIndex)
+    protected override void HandlePositionChange()
+    {
+        base.HandlePositionChange();
+        hasMoved = true;
+    }
+
+    private IEnumerable<Tile> GetPawnHints(int colorMultiplier)
     {
         List<Tile> pawnHints = new List<Tile>();
 
         pawnHints.Add(GetLegalMove(colorMultiplier, 0));
 
-        if (!pathBlocked && tile.i == pawnRowIndex)
+        if (!pathBlocked && !hasMoved)
             pawnHints.Add(GetLegalMove(colorMultiplier * 2, 0));
 
         pawnHints.AddRange(GetCaptureLegalMoves());

@@ -31,9 +31,22 @@ internal class WhitePawnTests : PieceTest<Pawn>
         string[] tilesUnderAttack) =>
             base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
 
+    [Test]
+    public void WhitePawnHasOneLegalMove_AfterOneMove()
+    {
+        Pawn pawn = new Pawn(board.GetTile("d2"), pieceColor);
+        board.AddPiece(pawn);
+
+        pawn.Move("d3");
+
+        Assert.IsTrue(pawn.hasMoved);
+        Assert.That(pawn.legalMoves, Is.SubsetOf(new Tile[] {
+            board.GetTile("d4")
+        }));
+    }
+
     private static TestCaseData[] legalMovesGeneralCases =
     {
-        new TestCaseData("d4", new[] { "d5" }),
         new TestCaseData("d2", new[] { "d3", "d4" }),
         new TestCaseData("d8", new string[] { })
     };
