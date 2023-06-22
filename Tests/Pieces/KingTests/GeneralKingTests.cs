@@ -9,14 +9,14 @@ internal class GeneralKingTests : PieceTest<King>
 {
     protected override Color pieceColor => Color.WHITE;
 
-    [TestCaseSource(nameof(generalCases))]
+    [TestCaseSource(nameof(legalMovesGeneralCases))]
     public override void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
         string[] legalMoves) =>
             base.PieceHasCorrectLegalMoves_InGeneralCases(
                 piecePosition, legalMoves);
 
-    [TestCaseSource(nameof(edgeCases))]
+    [TestCaseSource(nameof(legalMovesEdgeCases))]
     public override void PieceHasCorrectLegalMoves_InEdgeCases(
         Color blockerPawnsColor,
         string[] blockerPawnsPos,
@@ -45,7 +45,7 @@ internal class GeneralKingTests : PieceTest<King>
         });
     }
 
-    private static TestCaseData[] generalCases =
+    private static TestCaseData[] legalMovesGeneralCases =
     {
         new TestCaseData("a1", new[] { "a2", "b2", "b1" }),
         new TestCaseData("a8", new[] { "a7", "b8", "b7" }),
@@ -59,7 +59,7 @@ internal class GeneralKingTests : PieceTest<King>
         })
     };
 
-    private static TestCaseData[] edgeCases =
+    private static TestCaseData[] legalMovesEdgeCases =
     {
         new TestCaseData(
             Color.WHITE, new[] {
