@@ -79,6 +79,7 @@ internal class GeneralKingTests : PieceTest<King>
     private static TestCaseData[] tilesUnderAttackCases =
     {
         new TestCaseData("d4",
-            new[] { "c5", "d5", "e5", "e4", "e3", "d3", "c3", "c4" })
+            new[] { "c5", "d5", "e5", "e4", "e3", "d3", "c3", "c4" }
+        )
     };
 }

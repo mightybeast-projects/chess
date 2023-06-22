@@ -25,6 +25,14 @@ internal class BishopTests : PieceTest<Bishop>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
+    [TestCaseSource(nameof(tilesUnderAttackCases))]
+    public override void SlidingPieceHasCorrectTilesUnderAttack(
+        string piecePosition,
+        string[] tilesUnderAttack,
+        string[] blockerPawnsPos) =>
+            base.SlidingPieceHasCorrectTilesUnderAttack(
+                piecePosition, tilesUnderAttack, blockerPawnsPos);
+
     public static TestCaseData[] generalCases =
     {
         new TestCaseData("a1", new[] {
@@ -54,8 +62,16 @@ internal class BishopTests : PieceTest<Bishop>
             "d4", new string[] { }
         ),
         new TestCaseData(
-            Color.BLACK, new[] { "e5", "c3", "c5", "e3" },
-            "d4", new[] { "e5", "c3", "c5", "e3" }
+            Color.BLACK, new[] { "b2", "b6", "f2", "f6"},
+            "d4", new[] { "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2" }
+        )
+    };
+
+    private static TestCaseData[] tilesUnderAttackCases =
+    {
+        new TestCaseData(
+            "d4", new[] { "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2" },
+            new[] { "b2", "b6", "f2", "f6"}
         )
     };
 }
