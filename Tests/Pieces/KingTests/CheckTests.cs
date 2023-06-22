@@ -22,7 +22,7 @@ public class CheckTests
 
         game.HandlePlayerMove("b3", "b2");
 
-        Assert.IsTrue(game.board.whiteKing.isChecked);
+        Assert.IsTrue(board.whiteKing.isChecked);
         Assert.That(board.whiteKing.legalMoves, Is.SubsetOf(new[] {
             board.GetTile("a2"),
             board.GetTile("b2"),
@@ -44,7 +44,7 @@ public class CheckTests
 
         game.HandlePlayerMove("b6", "b7");
 
-        Assert.IsTrue(game.board.blackKing.isChecked);
+        Assert.IsTrue(board.blackKing.isChecked);
         Assert.That(board.blackKing.legalMoves, Is.SubsetOf(new[] {
             board.GetTile("a7"),
             board.GetTile("b7"),
@@ -67,7 +67,7 @@ public class CheckTests
         game.HandlePlayerMove("b3", "b2");
         game.HandlePlayerMove("a1", "a2");
 
-        Assert.IsFalse(game.board.whiteKing.isChecked);
+        Assert.IsFalse(board.whiteKing.isChecked);
     }
 
     [Test]
@@ -85,6 +85,66 @@ public class CheckTests
         game.HandlePlayerMove("b6", "b7");
         game.HandlePlayerMove("a8", "a7");
 
-        Assert.IsFalse(game.board.blackKing.isChecked);
+        Assert.IsFalse(board.blackKing.isChecked);
+    }
+
+    [Test]
+    public void PlayerCannotMoveAllyPiece_IfKingIsStillUnderCheck_AfterMoveIsMade()
+    {
+        Game game = new Game();
+        Board board = game.board;
+
+        game.currentPlayer = game.blackPlayer;
+
+        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new Pawn(board.GetTile("b4"), Color.WHITE));
+
+        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
+
+        game.HandlePlayerMove("b3", "b2");
+
+        Assert.Throws<IllegalMoveException>(
+            () => game.HandlePlayerMove("b4", "b5")
+        );
+    }
+
+    [Test]
+    public void PlayerCanMoveAllyPiece_IfKingIsNotInCheck_AfterMoveIsMade()
+    {
+        Game game = new Game();
+        Board board = game.board;
+
+        Piece bishop = new Bishop(board.GetTile("h8"), Color.WHITE);
+        Piece knight = new Knight(board.GetTile("d1"), Color.WHITE);
+        Piece rook = new Rook(board.GetTile("b1"), Color.WHITE);
+        Piece queen = new Rook(board.GetTile("h2"), Color.WHITE);
+
+        game.currentPlayer = game.blackPlayer;
+
+        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(new Pawn(board.GetTile("b4"), Color.WHITE));
+        board.AddPiece(bishop);
+        board.AddPiece(knight);
+        board.AddPiece(rook);
+        board.AddPiece(queen);
+
+        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
+        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
+
+        game.HandlePlayerMove("b3", "b2");
+
+        Assert.That(bishop.legalMoves, Is.SubsetOf(new Tile[] {
+            board.GetTile("b2")
+        }));
+        Assert.That(knight.legalMoves, Is.SubsetOf(new Tile[] {
+            board.GetTile("b2")
+        }));
+        Assert.That(rook.legalMoves, Is.SubsetOf(new Tile[] {
+            board.GetTile("b2")
+        }));
+        Assert.That(queen.legalMoves, Is.SubsetOf(new Tile[] {
+            board.GetTile("b2")
+        }));
     }
 }

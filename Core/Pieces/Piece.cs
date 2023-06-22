@@ -20,7 +20,7 @@ public abstract class Piece
         this.tile = tile;
         this.color = color;
 
-        this.tile.SetPiece(this);
+        this.tile.piece = this;
     }
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
@@ -48,14 +48,42 @@ public abstract class Piece
         if (!targetTile.isEmpty)
             board.RemovePiece(targetTile.piece);
 
-        ChangeCurrentPosition();
+        ChangeCurrentPosition(targetTile);
     }
 
-    private void ChangeCurrentPosition()
+    protected bool KingIsUnderCheckAfterMoveOn(Tile tile)
     {
-        tile.SetPiece(null!);
+        if (GetAllyKing() is null || !GetAllyKing().isChecked)
+            return false;
+
+        Tile originalTile = this.tile;
+
+        Piece enemyPiece = null;
+        if (tile.piece is not null)
+        {
+            enemyPiece = tile.piece;
+            board.RemovePiece(enemyPiece);
+        }
+
+        ChangeCurrentPosition(tile);
+
+        bool kingIsUnderCheck = GetAllyKing().isChecked;
+
+        ChangeCurrentPosition(originalTile);
+        if (enemyPiece is not null)
+        {
+            tile.piece = enemyPiece;
+            board.AddPiece(enemyPiece);
+        }
+
+        return kingIsUnderCheck;
+    }
+
+    private void ChangeCurrentPosition(Tile targetTile)
+    {
+        tile.piece = null;
         tile = targetTile;
-        tile.SetPiece(this);
+        tile.piece = this;
     }
 
     protected bool TileIsOccupiedByEnemy(Tile tile) =>

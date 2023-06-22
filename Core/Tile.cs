@@ -7,7 +7,7 @@ public class Tile
     public readonly Color color;
     public readonly int i;
     public readonly int j;
-    public Piece piece { get; internal set; }
+    public Piece piece;
     public string notation { get; private set; }
     public bool isEmpty => piece is null;
 
@@ -19,8 +19,6 @@ public class Tile
 
         ParseNotation(i, j);
     }
-
-    public void SetPiece(Piece piece) => this.piece = piece;
 
     private void ParseNotation(int i, int j)
     {

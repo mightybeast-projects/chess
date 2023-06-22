@@ -32,6 +32,9 @@ public class Knight : Piece
 
         Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
+        if (KingIsUnderCheckAfterMoveOn(hintTile))
+            return null;
+
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
             return hintTile;
 

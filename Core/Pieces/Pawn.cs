@@ -28,8 +28,11 @@ public class Pawn : Piece
             pathBlocked = true;
             return null;
         }
-        else
-            return hintTile;
+
+        if (KingIsUnderCheckAfterMoveOn(hintTile))
+            return null;
+
+        return hintTile;
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>
