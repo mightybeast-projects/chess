@@ -51,18 +51,6 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
         AssertPieceTilesUnderAttack(piece, tilesUnderAttack);
     }
 
-    public virtual void SlidingPieceHasCorrectTilesUnderAttack(
-        string piecePosition,
-        string[] tilesUnderAttack,
-        string[] blockerPawnsPos)
-    {
-        Piece piece = CreatePiece(typeof(TPiece), piecePosition, pieceColor);
-        foreach (string pawnPos in blockerPawnsPos)
-            CreatePiece(typeof(Pawn), pawnPos, pieceColor);
-
-        AssertPieceTilesUnderAttack(piece, tilesUnderAttack);
-    }
-
     private void AssertPiece(Piece piece, string tileNotation)
     {
         Tile pieceTile = board.GetTile(tileNotation);
@@ -88,7 +76,7 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
         Assert.AreEqual(legalMovesArr.Length, pieceLegalMoves.Length);
     }
 
-    private void AssertPieceTilesUnderAttack(Piece piece, string[] tilesArr)
+    protected void AssertPieceTilesUnderAttack(Piece piece, string[] tilesArr)
     {
         string[] pieceTilesUnderAttack = new string[piece.tilesUnderAttack.Count];
         for (int i = 0; i < piece.tilesUnderAttack.Count; i++)

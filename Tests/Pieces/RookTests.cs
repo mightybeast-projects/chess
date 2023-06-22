@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces;
 
 [TestFixture]
-internal class RookTests : PieceTest<Rook>
+internal class RookTests : SlidingPieceTest<Rook>
 {
     protected override Color pieceColor => Color.WHITE;
 
