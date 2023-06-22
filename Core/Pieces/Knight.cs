@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Chess.Core.Pieces;
 
 public class Knight : Piece
@@ -7,21 +9,24 @@ public class Knight : Piece
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitKnight(this);
 
+    private List<Vector2> tilesDirections => new List<Vector2>()
+    {
+        new Vector2(2, -1),
+        new Vector2(2, 1),
+        new Vector2(1, 2),
+        new Vector2(-1, 2),
+        new Vector2(-2, -1),
+        new Vector2(-2, 1),
+        new Vector2(1, -2),
+        new Vector2(-1, -2),
+    };
+
     protected override void UpdateLegalMoves()
     {
         legalMovesList = new List<Tile>();
 
-        AddLegalMove(2, -1);
-        AddLegalMove(2, 1);
-
-        AddLegalMove(1, 2);
-        AddLegalMove(-1, 2);
-
-        AddLegalMove(-2, -1);
-        AddLegalMove(-2, 1);
-
-        AddLegalMove(1, -2);
-        AddLegalMove(-1, -2);
+        foreach (Vector2 direction in tilesDirections)
+            AddLegalMove((int)direction.X, (int)direction.Y);
     }
 
     protected override void AddLegalMove(int i, int j)
@@ -33,5 +38,17 @@ public class Knight : Piece
 
         if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
             legalMovesList.Add(hintTile);
+    }
+
+    protected override IEnumerable<Tile> GetTilesUnderAttack() =>
+        tilesDirections.ConvertAll(direction =>
+            GetTileUnderAttack((int)direction.X, (int)direction.Y));
+
+    protected override Tile GetTileUnderAttack(int i, int j)
+    {
+        if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
+            return null;
+
+        return board.grid[tile.i + i, tile.j + j];
     }
 }

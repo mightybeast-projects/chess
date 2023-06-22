@@ -25,6 +25,12 @@ internal class KnightTests : PieceTest<Knight>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
+    [TestCaseSource(nameof(tilesUnderAttackCases))]
+    public override void PieceHasCorrectTilesUnderAttack(
+        string piecePosition,
+        string[] tilesUnderAttack) =>
+            base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
+
     private static TestCaseData[] generalCases =
     {
         new TestCaseData("a1", new[] { "b3", "c2" }),
@@ -63,5 +69,15 @@ internal class KnightTests : PieceTest<Knight>
                 "c2", "e2",
                 "b3", "b5"
         }),
+    };
+
+    private static TestCaseData[] tilesUnderAttackCases =
+    {
+        new TestCaseData("d4", new[] {
+            "c6", "e6",
+            "f5", "f3",
+            "c2", "e2",
+            "b3", "b5"
+        })
     };
 }
