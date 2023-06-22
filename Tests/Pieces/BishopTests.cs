@@ -62,7 +62,7 @@ internal class BishopTests : PieceTest<Bishop>
             "d4", new string[] { }
         ),
         new TestCaseData(
-            Color.BLACK, new[] { "b2", "b6", "f2", "f6"},
+            Color.BLACK, new[] { "b2", "b6", "f2", "f6" },
             "d4", new[] { "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2" }
         )
     };
@@ -71,7 +71,7 @@ internal class BishopTests : PieceTest<Bishop>
     {
         new TestCaseData(
             "d4", new[] { "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2" },
-            new[] { "b2", "b6", "f2", "f6"}
+            new[] { "b2", "b6", "f2", "f6" }
         )
     };
 }
