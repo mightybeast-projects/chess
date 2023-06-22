@@ -24,7 +24,7 @@ public class Pawn : Piece
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return;
 
-        Tile hintTile = board.GetClampedTile(tile.i + i, tile.j + j);
+        Tile hintTile = board.grid[tile.i + i, tile.j + j];
 
         if (!hintTile.isEmpty)
             pathBlocked = true;
@@ -42,7 +42,7 @@ public class Pawn : Piece
         if (board.TileIndexesAreBeyondTheBoard(tile.i + i, tile.j + j))
             return null;
 
-        return board.GetClampedTile(tile.i + i, tile.j + j);
+        return board.grid[tile.i + i, tile.j + j];
     }
 
     private void UpdatePawnHints(int colorMultiplier, int pawnRowIndex)
@@ -63,9 +63,9 @@ public class Pawn : Piece
     }
 
     private IEnumerable<Tile> GetPawnTilesUnderAttack(int colorMultiplier) =>
-        new Tile[]
-        {
-            GetTileUnderAttack(colorMultiplier, -1),
-            GetTileUnderAttack(colorMultiplier, 1)
-        };
+    new Tile[]
+    {
+        GetTileUnderAttack(colorMultiplier, -1),
+        GetTileUnderAttack(colorMultiplier, 1)
+    };
 }

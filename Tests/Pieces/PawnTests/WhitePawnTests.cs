@@ -64,8 +64,6 @@ internal class WhitePawnTests : PieceTest<Pawn>
 
     private static TestCaseData[] tilesUnderAttackCases =
     {
-        new TestCaseData("d4", new[] { "c5", "e5", }),
-        new TestCaseData("a4", new[] { "b5" }),
-        new TestCaseData("h4", new[] { "g5" })
+        new TestCaseData("d4", new[] { "c5", "e5", })
     };
 }

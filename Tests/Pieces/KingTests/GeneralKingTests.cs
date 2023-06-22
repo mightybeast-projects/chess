@@ -25,6 +25,12 @@ internal class GeneralKingTests : PieceTest<King>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
+    [TestCaseSource(nameof(tilesUnderAttackCases))]
+    public override void PieceHasCorrectTilesUnderAttack(
+        string piecePosition,
+        string[] tilesUnderAttack) =>
+            base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
+
     [Test]
     public void KingsHaveFiveLegalMoves_IfEnemyKingIsNearby()
     {
@@ -68,5 +74,11 @@ internal class GeneralKingTests : PieceTest<King>
             "d4", new string[] {
                 "c5", "d5", "e5", "c3", "e3"
         })
+    };
+
+    private static TestCaseData[] tilesUnderAttackCases =
+    {
+        new TestCaseData("d4",
+            new[] { "c5", "d5", "e5", "e4", "e3", "d3", "c3", "c4" })
     };
 }
