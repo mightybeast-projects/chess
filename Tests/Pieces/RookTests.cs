@@ -25,7 +25,15 @@ internal class RookTests : PieceTest<Rook>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
 
-    private static TestCaseData[] generalCases = 
+    [TestCaseSource(nameof(tilesUnderAttackCases))]
+    public override void SlidingPieceHasCorrectTilesUnderAttack(
+        string piecePosition,
+        string[] tilesUnderAttack,
+        string[] blockerPawnsPos) =>
+            base.SlidingPieceHasCorrectTilesUnderAttack(
+                piecePosition, tilesUnderAttack, blockerPawnsPos);
+
+    private static TestCaseData[] generalCases =
     {
         new TestCaseData(
             "a1", new[] {
@@ -46,15 +54,23 @@ internal class RookTests : PieceTest<Rook>
         })
     };
 
-    private static TestCaseData[] edgeCases = 
+    private static TestCaseData[] edgeCases =
     {
         new TestCaseData(
             Color.WHITE, new[] { "d5", "d3", "e4","c4" },
             "d4", new string[] { }
         ),
         new TestCaseData(
-            Color.BLACK, new[] { "d5", "d3", "e4","c4" },
-            "d4", new string[] { "d5", "d3", "e4","c4" }
+            Color.BLACK, new[] { "d2", "d6", "b4", "f4" },
+            "d4", new[] { "d5", "d6", "e4", "f4", "d3", "d2", "c4", "b4" }
+        )
+    };
+
+    private static TestCaseData[] tilesUnderAttackCases =
+    {
+        new TestCaseData(
+            "d4", new[] { "d5", "d6", "e4", "f4", "d3", "d2", "c4", "b4" },
+            new[] { "d2", "d6", "b4", "f4" }
         )
     };
 }
