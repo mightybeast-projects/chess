@@ -64,10 +64,10 @@ public class King : Piece
 
     private bool CheckForCheckmate()
     {
-        if (!isChecked || legalMoves.Count > 0)
+        if (!isChecked)
             return false;
 
-        foreach (Piece allyPiece in GetAllyPieces().Skip(1))
+        foreach (Piece allyPiece in GetAllyPieces())
             if (allyPiece.legalMoves.Count > 0)
                 return false;
 

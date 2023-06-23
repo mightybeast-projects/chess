@@ -53,15 +53,18 @@ public abstract class Piece
 
     protected bool KingIsUnderCheckAfterMoveOn(Tile tile)
     {
-        King allyKing = GetAllyKing();
+        if (GetAllyKing() is null)
+            return false;
 
-        if (allyKing is null || !allyKing.isChecked)
+        bool allyKingIsChecked = GetAllyKing().isChecked;
+
+        if (!allyKingIsChecked)
             return false;
 
         Tile originalTile = this.tile;
 
         Piece enemyPiece = null;
-        if (tile.piece is not null)
+        if (TileIsOccupiedByEnemy(tile))
         {
             enemyPiece = tile.piece;
             board.RemovePiece(enemyPiece);
@@ -69,7 +72,7 @@ public abstract class Piece
 
         ChangeCurrentPosition(tile);
 
-        bool kingIsUnderCheck = GetAllyKing().isChecked;
+        allyKingIsChecked = GetAllyKing().isChecked;
 
         ChangeCurrentPosition(originalTile);
         if (enemyPiece is not null)
@@ -78,7 +81,7 @@ public abstract class Piece
             board.AddPiece(enemyPiece);
         }
 
-        return kingIsUnderCheck;
+        return allyKingIsChecked;
     }
 
     private void ChangeCurrentPosition(Tile targetTile)
@@ -87,6 +90,9 @@ public abstract class Piece
         tile = targetTile;
         tile.piece = this;
     }
+
+    protected bool TileIsOccupiedByEnemy(Tile tile) =>
+        !tile.isEmpty && tile.piece.color != color;
 
     protected bool TileIsOccupiedByAlly(Tile tile) =>
         !tile.isEmpty && tile.piece.color == color;
