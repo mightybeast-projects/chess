@@ -68,21 +68,21 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
 
     protected void AssertPieceLegalMoves(Piece piece, string[] legalMovesArr)
     {
-        string[] pieceLegalMoves = new string[piece.legalMoves.Count];
+        Tile[] expectedLegalMoves = new Tile[piece.legalMoves.Count];
         for (int i = 0; i < piece.legalMoves.Count; i++)
-            pieceLegalMoves[i] = piece.legalMoves[i].notation;
+            expectedLegalMoves[i] = board.GetTile(legalMovesArr[i]);
 
-        Assert.That(pieceLegalMoves, Is.SubsetOf(legalMovesArr));
-        Assert.AreEqual(legalMovesArr.Length, pieceLegalMoves.Length);
+        Assert.That(piece.legalMoves, Is.EquivalentTo(expectedLegalMoves));
     }
 
     protected void AssertPieceTilesUnderAttack(Piece piece, string[] tilesArr)
     {
-        string[] pieceTilesUnderAttack = new string[piece.tilesUnderAttack.Count];
+        Tile[] expectedTilesUnderAttack = new Tile[piece.tilesUnderAttack.Count];
         for (int i = 0; i < piece.tilesUnderAttack.Count; i++)
-            pieceTilesUnderAttack[i] = piece.tilesUnderAttack[i].notation;
+            expectedTilesUnderAttack[i] = board.GetTile(tilesArr[i]);
 
-        Assert.That(pieceTilesUnderAttack, Is.SubsetOf(tilesArr));
-        Assert.AreEqual(tilesArr.Length, pieceTilesUnderAttack.Length);
+        Assert.That(piece.tilesUnderAttack,
+            Is.EquivalentTo(expectedTilesUnderAttack)
+        );
     }
 }

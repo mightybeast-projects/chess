@@ -40,9 +40,7 @@ internal class BlackPawnTests : PieceTest<Pawn>
         pawn.Move("d6");
 
         Assert.IsTrue(pawn.hasMoved);
-        Assert.That(pawn.legalMoves, Is.SubsetOf(new Tile[] {
-            board.GetTile("d5")
-        }));
+        AssertPieceLegalMoves(pawn, new[] { "d5" });
     }
 
     private static TestCaseData[] legalMovesGeneralCases =

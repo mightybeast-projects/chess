@@ -134,16 +134,16 @@ public class CheckTests
 
         game.HandlePlayerMove("b3", "b2");
 
-        Assert.That(bishop.legalMoves, Is.SubsetOf(new Tile[] {
+        Assert.That(bishop.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
-        Assert.That(knight.legalMoves, Is.SubsetOf(new Tile[] {
+        Assert.That(knight.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
-        Assert.That(rook.legalMoves, Is.SubsetOf(new Tile[] {
+        Assert.That(rook.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
-        Assert.That(queen.legalMoves, Is.SubsetOf(new Tile[] {
+        Assert.That(queen.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
     }
