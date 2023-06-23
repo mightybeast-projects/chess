@@ -37,10 +37,7 @@ public class King : Piece
         if (TileIsOccupiedByAlly(hintTile) || TileIsUnderAttack(hintTile))
             return null;
 
-        if (hintTile.isEmpty || TileIsOccupiedByEnemy(hintTile))
-            return hintTile;
-
-        return null;
+        return hintTile;
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>
@@ -85,9 +82,6 @@ public class King : Piece
 
         return false;
     }
-
-    private bool TileIsOccupiedByAlly(Tile tile) =>
-        !tile.isEmpty && tile.piece.color == color;
 
     private List<Piece> GetEnemyPieces() =>
         color == Color.WHITE ? board.blackPieces : board.whitePieces;

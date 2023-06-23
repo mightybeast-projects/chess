@@ -9,14 +9,14 @@ internal class BishopTests : SlidingPieceTest<Bishop>
 {
     protected override Color pieceColor => Color.WHITE;
 
-    [TestCaseSource(nameof(generalCases))]
+    [TestCaseSource(nameof(legalMovesGeneralCases))]
     public override void PieceHasCorrectLegalMoves_InGeneralCases(
         string piecePosition,
         string[] legalMoves) =>
             base.PieceHasCorrectLegalMoves_InGeneralCases(
                 piecePosition, legalMoves);
 
-    [TestCaseSource(nameof(edgeCases))]
+    [TestCaseSource(nameof(legalMovesEdgeCases))]
     public override void PieceHasCorrectLegalMoves_InEdgeCases(
         Color blockerPawnsColor,
         string[] blockerPawnsPos,
@@ -33,7 +33,7 @@ internal class BishopTests : SlidingPieceTest<Bishop>
             base.SlidingPieceHasCorrectTilesUnderAttack(
                 piecePosition, tilesUnderAttack, blockerPawnsPos);
 
-    public static TestCaseData[] generalCases =
+    public static TestCaseData[] legalMovesGeneralCases =
     {
         new TestCaseData("a1", new[] {
             "b2", "c3", "d4", "e5", "f6", "g7", "h8"
@@ -55,7 +55,7 @@ internal class BishopTests : SlidingPieceTest<Bishop>
         }),
     };
 
-    private static TestCaseData[] edgeCases =
+    private static TestCaseData[] legalMovesEdgeCases =
     {
         new TestCaseData(
             Color.WHITE, new[] { "e5", "c3", "c5", "e3" },

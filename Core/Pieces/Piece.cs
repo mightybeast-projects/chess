@@ -88,8 +88,8 @@ public abstract class Piece
         tile.piece = this;
     }
 
-    protected bool TileIsOccupiedByEnemy(Tile tile) =>
-        !tile.isEmpty && tile.piece.color != color;
+    protected bool TileIsOccupiedByAlly(Tile tile) =>
+        !tile.isEmpty && tile.piece.color == color;
 
     private King GetAllyKing() =>
         color == Color.WHITE ? board.whiteKing : board.blackKing;

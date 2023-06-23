@@ -24,10 +24,8 @@ public abstract class SlidingPiece : Piece
         if (!hintTile.isEmpty)
             pathBlocked = true;
 
-        if (!hintTile.isEmpty && !TileIsOccupiedByEnemy(hintTile))
-            return null;
-
-        if (KingIsUnderCheckAfterMoveOn(hintTile))
+        if (TileIsOccupiedByAlly(hintTile) ||
+            KingIsUnderCheckAfterMoveOn(hintTile))
             return null;
 
         return hintTile;

@@ -78,4 +78,7 @@ public class Pawn : Piece
         GetTileUnderAttack(colorMultiplier, -1),
         GetTileUnderAttack(colorMultiplier, 1)
     };
+
+    private bool TileIsOccupiedByEnemy(Tile tile) =>
+        !tile.isEmpty && tile.piece.color != color;
 }
