@@ -53,7 +53,9 @@ public abstract class Piece
 
     protected bool KingIsUnderCheckAfterMoveOn(Tile tile)
     {
-        if (GetAllyKing() is null || !GetAllyKing().isChecked)
+        King allyKing = GetAllyKing();
+
+        if (allyKing is null || !allyKing.isChecked)
             return false;
 
         Tile originalTile = this.tile;

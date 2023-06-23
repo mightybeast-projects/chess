@@ -4,6 +4,7 @@ namespace Chess.Core.Pieces;
 public class King : Piece
 {
     public bool isChecked => CheckForCheck();
+    public bool isCheckmated => CheckForCheckmate();
 
     private List<Vector2> tilesDirections => new List<Vector2>()
     {
@@ -64,6 +65,18 @@ public class King : Piece
         return false;
     }
 
+    private bool CheckForCheckmate()
+    {
+        if (!isChecked || legalMoves.Count > 0)
+            return false;
+
+        foreach (Piece allyPiece in GetAllyPieces().Skip(1))
+            if (allyPiece.legalMoves.Count > 0)
+                return false;
+
+        return true;
+    }
+
     private bool TileIsUnderAttack(Tile tile)
     {
         foreach (Piece piece in GetEnemyPieces())
@@ -78,4 +91,7 @@ public class King : Piece
 
     private List<Piece> GetEnemyPieces() =>
         color == Color.WHITE ? board.blackPieces : board.whitePieces;
+
+    private List<Piece> GetAllyPieces() =>
+        color == Color.WHITE ? board.whitePieces : board.blackPieces;
 }

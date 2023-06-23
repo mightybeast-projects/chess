@@ -26,6 +26,7 @@ public class CheckTests
         blackPawn.Move("b2");
 
         Assert.IsTrue(board.whiteKing.isChecked);
+        Assert.IsFalse(board.whiteKing.isCheckmated);
         Assert.That(board.whiteKing.legalMoves, Is.EquivalentTo(new[] {
             board.GetTile("a2"),
             board.GetTile("b2"),
