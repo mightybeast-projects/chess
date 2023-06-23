@@ -8,22 +8,25 @@ namespace Chess.Tests.Pieces.KingTests;
 [TestFixture]
 public class CheckTests
 {
+    private Board board;
+
+    [SetUp]
+    public void SetUp() => board = new Board();
+
     [Test]
     public void WhiteKing_IsChecked()
     {
-        Game game = new Game();
-        Board board = game.board;
-
-        game.currentPlayer = game.blackPlayer;
+        Piece blackPawn = new Pawn(board.GetTile("b3"), Color.BLACK);
 
         board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
         board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
 
-        game.HandlePlayerMove("b3", "b2");
+        board.AddPiece(blackPawn);
+
+        blackPawn.Move("b2");
 
         Assert.IsTrue(board.whiteKing.isChecked);
-        Assert.That(board.whiteKing.legalMoves, Is.SubsetOf(new[] {
+        Assert.That(board.whiteKing.legalMoves, Is.EquivalentTo(new[] {
             board.GetTile("a2"),
             board.GetTile("b2"),
             board.GetTile("b1")
@@ -33,19 +36,17 @@ public class CheckTests
     [Test]
     public void BlackKing_IsChecked()
     {
-        Game game = new Game();
-        Board board = game.board;
-
-        game.currentPlayer = game.whitePlayer;
+        Piece whitePawn = new Pawn(board.GetTile("b6"), Color.WHITE);
 
         board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
         board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board.GetTile("b6"), Color.WHITE));
 
-        game.HandlePlayerMove("b6", "b7");
+        board.AddPiece(whitePawn);
+
+        whitePawn.Move("b7");
 
         Assert.IsTrue(board.blackKing.isChecked);
-        Assert.That(board.blackKing.legalMoves, Is.SubsetOf(new[] {
+        Assert.That(board.blackKing.legalMoves, Is.EquivalentTo(new[] {
             board.GetTile("a7"),
             board.GetTile("b7"),
             board.GetTile("b8")
@@ -55,17 +56,15 @@ public class CheckTests
     [Test]
     public void WhiteKing_AvoidedCheck()
     {
-        Game game = new Game();
-        Board board = game.board;
+        Piece whiteKing = new King(board.GetTile("a1"), Color.WHITE);
+        Piece blackPawn = new Pawn(board.GetTile("b3"), Color.BLACK);
 
-        game.currentPlayer = game.blackPlayer;
-
-        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
+        board.AddPiece(whiteKing);
         board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
+        board.AddPiece(blackPawn);
 
-        game.HandlePlayerMove("b3", "b2");
-        game.HandlePlayerMove("a1", "a2");
+        blackPawn.Move("b2");
+        whiteKing.Move("a2");
 
         Assert.IsFalse(board.whiteKing.isChecked);
     }
@@ -73,17 +72,15 @@ public class CheckTests
     [Test]
     public void BlackKing_AvoidedCheck()
     {
-        Game game = new Game();
-        Board board = game.board;
-
-        game.currentPlayer = game.whitePlayer;
+        Piece blackKing = new King(board.GetTile("a8"), Color.BLACK);
+        Piece whitePawn = new Pawn(board.GetTile("b6"), Color.WHITE);
 
         board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board.GetTile("b6"), Color.WHITE));
+        board.AddPiece(blackKing);
+        board.AddPiece(whitePawn);
 
-        game.HandlePlayerMove("b6", "b7");
-        game.HandlePlayerMove("a8", "a7");
+        whitePawn.Move("b7");
+        blackKing.Move("a7");
 
         Assert.IsFalse(board.blackKing.isChecked);
     }
@@ -91,36 +88,30 @@ public class CheckTests
     [Test]
     public void PlayerCannotMoveAllyPiece_IfKingIsStillUnderCheck_AfterMoveIsMade()
     {
-        Game game = new Game();
-        Board board = game.board;
-
-        game.currentPlayer = game.blackPlayer;
+        Piece whitePawn = new Pawn(board.GetTile("b4"), Color.WHITE);
+        Piece blackPawn = new Pawn(board.GetTile("b3"), Color.BLACK);
 
         board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new Pawn(board.GetTile("b4"), Color.WHITE));
+        board.AddPiece(whitePawn);
 
         board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
+        board.AddPiece(blackPawn);
 
-        game.HandlePlayerMove("b3", "b2");
+        blackPawn.Move("b2");
 
         Assert.Throws<IllegalMoveException>(
-            () => game.HandlePlayerMove("b4", "b5")
+            () => whitePawn.Move("b5")
         );
     }
 
     [Test]
     public void PlayerCanMoveAllyPiece_IfKingIsNotInCheck_AfterMoveIsMade()
     {
-        Game game = new Game();
-        Board board = game.board;
-
         Piece bishop = new Bishop(board.GetTile("h8"), Color.WHITE);
         Piece knight = new Knight(board.GetTile("d1"), Color.WHITE);
         Piece rook = new Rook(board.GetTile("b1"), Color.WHITE);
         Piece queen = new Rook(board.GetTile("h2"), Color.WHITE);
-
-        game.currentPlayer = game.blackPlayer;
+        Piece blackPawn = new Pawn(board.GetTile("b3"), Color.BLACK);
 
         board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
         board.AddPiece(new Pawn(board.GetTile("b4"), Color.WHITE));
@@ -130,9 +121,9 @@ public class CheckTests
         board.AddPiece(queen);
 
         board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
-        board.AddPiece(new Pawn(board.GetTile("b3"), Color.BLACK));
+        board.AddPiece(blackPawn);
 
-        game.HandlePlayerMove("b3", "b2");
+        blackPawn.Move("b2");
 
         Assert.That(bishop.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
