@@ -25,7 +25,7 @@ internal class KnightTests : PieceTest<Knight>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
                 piecePos, legalMoves, blockerPawnsColor, blockerPawnsPos);
 
-    [TestCaseSource(nameof(tilesUnderAttackCases))]
+    [TestCaseSource(nameof(legalMovesGeneralCases))]
     public override void PieceHasCorrectTilesUnderAttack(
         string piecePosition,
         string[] tilesUnderAttack) =>
@@ -37,31 +37,21 @@ internal class KnightTests : PieceTest<Knight>
         new TestCaseData("h1", new[] { "g3", "f2" }),
         new TestCaseData("a8", new[] { "b6", "c7" }),
         new TestCaseData("h8", new[] { "g6", "f7" }),
-        new TestCaseData(
-            "d4", new[] { "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5" }
-        ),
+        new TestCaseData("d4", d4TilesUnderAttack),
     };
 
     private static TestCaseData[] legalMovesEdgeCases =
     {
         new TestCaseData(
             "d4", new string[] { },
-            Color.WHITE, new[] {
-                "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5"
-            }
+            Color.WHITE, d4TilesUnderAttack
         ),
         new TestCaseData(
-            "d4", new[] { "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5" },
-            Color.BLACK, new[] {
-                "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5"
-            }
+            "d4", d4TilesUnderAttack,
+            Color.BLACK, d4TilesUnderAttack
         ),
     };
 
-    private static TestCaseData[] tilesUnderAttackCases =
-    {
-        new TestCaseData(
-            "d4", new[] { "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5" }
-        )
-    };
+    private static string[] d4TilesUnderAttack =>
+        new[] { "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5" };
 }

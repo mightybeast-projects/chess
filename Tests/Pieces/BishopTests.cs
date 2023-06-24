@@ -35,26 +35,9 @@ internal class BishopTests : SlidingPieceTest<Bishop>
 
     public static TestCaseData[] legalMovesGeneralCases =
     {
-        new TestCaseData(
-            "a1", new[] { "b2", "c3", "d4", "e5", "f6", "g7", "h8" }
-        ),
-        new TestCaseData(
-            "a8", new[] { "h1", "g2", "f3", "e4", "d5", "c6", "b7" }
-        ),
-        new TestCaseData(
-            "h1", new[] { "g2", "f3", "e4", "d5", "c6", "b7", "a8" }
-        ),
-        new TestCaseData(
-            "h8", new[] { "a1", "b2", "c3", "d4", "e5", "f6", "g7" }
-        ),
-        new TestCaseData(
-            "d4", new[] {
-                "e5", "f6", "g7", "h8",
-                "e3", "f2", "g1",
-                "c3", "b2", "a1",
-                "c5", "b6", "a7"
-            }
-        ),
+        new TestCaseData("d1", d1LegalMoves),
+        new TestCaseData("d8", d8LegalMoves),
+        new TestCaseData("d4", d4LegalMoves),
     };
 
     private static TestCaseData[] legalMovesEdgeCases =
@@ -64,16 +47,38 @@ internal class BishopTests : SlidingPieceTest<Bishop>
             Color.WHITE, new[] { "e5", "c3", "c5", "e3" }
         ),
         new TestCaseData(
-            "d4", new[] { "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2" },
-            Color.BLACK, new[] { "b2", "b6", "f2", "f6" }
+            "d4", d4BlockedTilesUnderAttack,
+            Color.BLACK, d4BlockerPawnsPositions
         )
     };
 
     private static TestCaseData[] tilesUnderAttackCases =
     {
+        new TestCaseData("d1", d1LegalMoves, null),
+        new TestCaseData("d8", d8LegalMoves, null),
+        new TestCaseData("d4", d4LegalMoves, null),
         new TestCaseData(
-            "d4", new[] { "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2" },
-            new[] { "b2", "b6", "f2", "f6" }
+            "d4", d4BlockedTilesUnderAttack, d4BlockerPawnsPositions
         )
     };
+
+    private static string[] d1LegalMoves =>
+        new[] { "c2", "b3", "a4", "e2", "f3", "g4", "h5" };
+
+    private static string[] d8LegalMoves =>
+        new[] { "c7", "b6", "a5", "e7", "f6", "g5", "h4" };
+
+    private static string[] d4LegalMoves => new[]
+    {
+        "e5", "f6", "g7", "h8",
+        "e3", "f2", "g1",
+        "c3", "b2", "a1",
+        "c5", "b6", "a7"
+    };
+
+    private static string[] d4BlockedTilesUnderAttack =>
+        new[] { "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2" };
+
+    private static string[] d4BlockerPawnsPositions =>
+        new[] { "b2", "b6", "f2", "f6" };
 }

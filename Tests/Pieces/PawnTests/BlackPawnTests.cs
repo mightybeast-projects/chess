@@ -74,6 +74,8 @@ internal class BlackPawnTests : PieceTest<Pawn>
 
     private static TestCaseData[] tilesUnderAttackCases =
     {
-        new TestCaseData("d5", new[] { "c4", "e4", })
+        new TestCaseData("a5", new[] { "b4" }),
+        new TestCaseData("h5", new[] { "g4" }),
+        new TestCaseData("d5", new[] { "c4", "e4" })
     };
 }

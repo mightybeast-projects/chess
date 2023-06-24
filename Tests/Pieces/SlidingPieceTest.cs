@@ -12,8 +12,10 @@ internal abstract class SlidingPieceTest<TSlidingPiece> : PieceTest<TSlidingPiec
     {
         Piece slidingPiece =
             CreatePiece(typeof(TSlidingPiece), piecePosition, pieceColor);
-        foreach (string pawnPos in blockerPawnsPos)
-            CreatePiece(typeof(Pawn), pawnPos, pieceColor);
+
+        if (blockerPawnsPos is not null)
+            foreach (string pawnPos in blockerPawnsPos)
+                CreatePiece(typeof(Pawn), pawnPos, pieceColor);
 
         AssertPieceTilesUnderAttack(slidingPiece, tilesUnderAttack);
     }
