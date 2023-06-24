@@ -30,6 +30,14 @@ public class Board
         catch (Exception) { throw new IncorrectTileNotationException(); }
     }
 
+    public bool Contains(Piece piece)
+    {
+        if (piece.color == Color.WHITE)
+            return whitePieces.Contains(piece);
+
+        return blackPieces.Contains(piece);
+    }
+
     internal Tile GetClampedTile(int i, int j)
     {
         int clampedI = Math.Clamp(i, 0, grid.GetLength(0) - 1);

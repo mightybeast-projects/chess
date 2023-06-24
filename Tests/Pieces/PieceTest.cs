@@ -60,10 +60,7 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
         Assert.AreEqual(pieceTile.piece, piece);
         Assert.AreEqual(pieceColor, piece.color);
         Assert.IsFalse(pieceTile.isEmpty);
-        if (piece.color == Color.WHITE)
-            Assert.IsTrue(board.whitePieces.Contains(piece));
-        else
-            Assert.IsTrue(board.blackPieces.Contains(piece));
+        Assert.IsTrue(board.Contains(piece));
     }
 
     protected void AssertPieceLegalMoves(Piece piece, string[] legalMovesArr)
