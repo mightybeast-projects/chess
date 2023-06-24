@@ -47,8 +47,6 @@ internal class PiecesDirector
 
     private void SetUpPieces(Color color, int pawnRowIndex, int pieceRowIndex)
     {
-        AddPiece(new King(grid[pieceRowIndex, 4], color));
-
         for (int i = 0; i < grid.GetLength(0); i++)
             AddPiece(new Pawn(grid[pawnRowIndex, i], color));
 
@@ -56,6 +54,7 @@ internal class PiecesDirector
         AddPiece(new Knight(grid[pieceRowIndex, 1], color));
         AddPiece(new Bishop(grid[pieceRowIndex, 2], color));
         AddPiece(new Queen(grid[pieceRowIndex, 3], color));
+        AddPiece(new King(grid[pieceRowIndex, 4], color));
         AddPiece(new Bishop(grid[pieceRowIndex, 5], color));
         AddPiece(new Knight(grid[pieceRowIndex, 6], color));
         AddPiece(new Rook(grid[pieceRowIndex, 7], color));

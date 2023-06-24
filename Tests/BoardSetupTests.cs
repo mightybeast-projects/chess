@@ -18,8 +18,8 @@ internal class BoardSetupTests : BoardTestDataBuilder
         AssertPieces(Color.BLACK, 7, 8);
         Assert.AreEqual(16, board.whitePieces.Count);
         Assert.AreEqual(16, board.blackPieces.Count);
-        Assert.IsInstanceOf<King>(board.whitePieces[0]);
-        Assert.IsInstanceOf<King>(board.blackPieces[0]);
+        Assert.NotNull(board.whiteKing);
+        Assert.NotNull(board.blackKing);
     }
 
     private void AssertPieces(Color color, int pawnRowIndex, int pieceRowIndex)
@@ -44,7 +44,7 @@ internal class BoardSetupTests : BoardTestDataBuilder
 
     private void AssertPawnInRow(int letterIndex, int rowIndex)
     {
-        char letter = (char) (letterIndex+ 65);
+        char letter = (char)(letterIndex + 65);
         string tileName = letter.ToString().ToLower() + rowIndex;
 
         AssertSetupPiece(typeof(Pawn), tileName);

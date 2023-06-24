@@ -7,35 +7,36 @@ namespace Chess.Tests.Pieces.KingTests;
 [TestFixture]
 public class CheckmateTests
 {
-    [Test]
-    public void WhiteKing_IsCheckmated()
+    private Game game;
+
+    [SetUp]
+    public void SetUp()
     {
-        Board board = new Board();
+        game = new Game();
 
-        King whiteKing = new King(board.GetTile("h1"), Color.WHITE);
-
-        board.AddPiece(whiteKing);
-        board.AddPiece(new Pawn(board.GetTile("h2"), Color.WHITE));
-
-        board.AddPiece(new King(board.GetTile("b8"), Color.BLACK));
-        board.AddPiece(new Bishop(board.GetTile("e4"), Color.BLACK));
-        board.AddPiece(new Rook(board.GetTile("g6"), Color.BLACK));
-
-        Assert.IsTrue(whiteKing.isCheckmated);
+        game.Start();
     }
 
     [Test]
     public void FoolsMate()
     {
-        Game game = new Game();
-
-        game.Start();
-
         game.HandlePlayerMove("f2", "f3");
         game.HandlePlayerMove("e7", "e5");
         game.HandlePlayerMove("g2", "g4");
         game.HandlePlayerMove("d8", "h4");
 
         Assert.IsTrue(game.board.whiteKing.isCheckmated);
+    }
+
+    [Test]
+    public void ReversedFoolsMate()
+    {
+        game.HandlePlayerMove("e2", "e4");
+        game.HandlePlayerMove("f7", "f6");
+        game.HandlePlayerMove("d2", "d4");
+        game.HandlePlayerMove("g7", "g5");
+        game.HandlePlayerMove("d1", "h5");
+
+        Assert.IsTrue(game.board.blackKing.isCheckmated);
     }
 }
