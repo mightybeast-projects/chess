@@ -5,6 +5,7 @@ public class King : Piece
 {
     public bool isChecked => CheckForCheck();
     public bool isCheckmated => CheckForCheckmate();
+    public bool isInStalemate => CheckForStalemate();
 
     private List<Vector2> tilesDirections => new List<Vector2>()
     {
@@ -67,11 +68,15 @@ public class King : Piece
         if (!isChecked)
             return false;
 
-        foreach (Piece allyPiece in GetAllyPieces())
-            if (allyPiece.legalMoves.Count > 0)
-                return false;
+        return AllyPiecesDoNotHaveAnyLegalMoves();
+    }
 
-        return true;
+    private bool CheckForStalemate()
+    {
+        if (isChecked)
+            return false;
+
+        return AllyPiecesDoNotHaveAnyLegalMoves();
     }
 
     private bool TileIsUnderAttack(Tile tile)
@@ -82,6 +87,16 @@ public class King : Piece
 
         return false;
     }
+
+    private bool AllyPiecesDoNotHaveAnyLegalMoves()
+    {
+        foreach (Piece allyPiece in GetAllyPieces())
+            if (allyPiece.legalMoves.Count > 0)
+                return false;
+
+        return true;
+    }
+
 
     private List<Piece> GetEnemyPieces() =>
         color == Color.WHITE ? board.blackPieces : board.whitePieces;
