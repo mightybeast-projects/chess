@@ -18,12 +18,12 @@ internal class QueenTests : SlidingPieceTest<Queen>
 
     [TestCaseSource(nameof(legalMovesEdgeCases))]
     public override void PieceHasCorrectLegalMoves_InEdgeCases(
-        Color blockerPawnsColor,
-        string[] blockerPawnsPos,
         string piecePos,
-        string[] legalMoves) =>
+        string[] legalMoves,
+        Color blockerPawnsColor,
+        string[] blockerPawnsPos) =>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
-                blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
+                piecePos, legalMoves, blockerPawnsColor, blockerPawnsPos);
 
     [TestCaseSource(nameof(tilesUnderAttackCases))]
     public override void SlidingPieceHasCorrectTilesUnderAttack(
@@ -60,19 +60,20 @@ internal class QueenTests : SlidingPieceTest<Queen>
     private static TestCaseData[] legalMovesEdgeCases =
     {
         new TestCaseData(
+            "d4", new string[] { },
             Color.WHITE, new[] {
                 "e5", "e3", "c3", "c5", "d5", "d3", "e4", "c4"
-            },
-            "d4", new string[] { }
+            }
         ),
         new TestCaseData(
-            Color.BLACK, new[] {
-                "b2", "b6", "f2", "f6", "d2", "d6", "b4", "f4"
-            },
             "d4", new[] {
                 "c5", "e5", "e3", "c3", "b6", "f6", "f2", "b2",
                 "d5", "d6", "e4", "f4", "d3", "d2", "c4", "b4"
-        })
+            },
+            Color.BLACK, new[] {
+                "b2", "b6", "f2", "f6", "d2", "d6", "b4", "f4"
+            }
+        )
     };
 
     private static TestCaseData[] tilesUnderAttackCases =

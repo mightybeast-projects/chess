@@ -18,12 +18,12 @@ internal class BlackPawnTests : PieceTest<Pawn>
 
     [TestCaseSource(nameof(legalMovesEdgeCases))]
     public override void PieceHasCorrectLegalMoves_InEdgeCases(
-        Color blockerPawnsColor,
-        string[] blockerPawnsPos,
         string piecePos,
-        string[] legalMoves) =>
+        string[] legalMoves,
+        Color blockerPawnsColor,
+        string[] blockerPawnsPos) =>
             base.PieceHasCorrectLegalMoves_InEdgeCases(
-                blockerPawnsColor, blockerPawnsPos, piecePos, legalMoves);
+                piecePos, legalMoves, blockerPawnsColor, blockerPawnsPos);
 
     [TestCaseSource(nameof(tilesUnderAttackCases))]
     public override void PieceHasCorrectTilesUnderAttack(
@@ -51,24 +51,24 @@ internal class BlackPawnTests : PieceTest<Pawn>
     private static TestCaseData[] legalMovesEdgeCases =
     {
         new TestCaseData(
-            Color.WHITE, new[] { "d6" },
-            "d7", new string[] { }
+            "d7", new string[] { },
+            Color.WHITE, new[] { "d6" }
         ),
         new TestCaseData(
-            Color.WHITE, new[] { "d5" },
-            "d7", new[] { "d6" }
+            "d7", new[] { "d6" },
+            Color.WHITE, new[] { "d5" }
         ),
         new TestCaseData(
-            Color.WHITE, new[] { "a4", "b4" },
-            "a5", new[] { "b4" }
+            "a5", new[] { "b4" },
+            Color.WHITE, new[] { "a4", "b4" }
         ),
         new TestCaseData(
-            Color.WHITE, new[] { "h4", "g4" },
-            "h5", new[] { "g4" }
+            "h5", new[] { "g4" },
+            Color.WHITE, new[] { "h4", "g4" }
         ),
         new TestCaseData(
-            Color.WHITE, new[] { "c4", "d4", "e4" },
-            "d5", new[] { "c4", "e4" }
+            "d5", new[] { "c4", "e4" },
+            Color.WHITE, new[] { "c4", "d4", "e4" }
         )
     };
 

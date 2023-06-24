@@ -30,10 +30,11 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
     }
 
     public virtual void PieceHasCorrectLegalMoves_InEdgeCases(
-        Color blockerPawnsColor,
-        string[] blockerPawnsPos,
         string piecePos,
-        string[] legalMoves)
+        string[] legalMoves,
+        Color blockerPawnsColor,
+        string[] blockerPawnsPos
+        )
     {
         foreach (string pawnPos in blockerPawnsPos)
             CreatePiece(typeof(Pawn), pawnPos, blockerPawnsColor);
