@@ -53,11 +53,8 @@ internal class GeneralKingTests : PieceTest<King>
         new TestCaseData("h1", new[] { "h2", "g2", "g1" }),
         new TestCaseData("h8", new[] { "h7", "g8", "g7" }),
         new TestCaseData(
-            "d4", new[] {
-                "c5", "c4", "c3",
-                "d5", "d3",
-                "e5", "e4", "e3"
-        })
+            "d4", new[] { "c5", "c4", "c3", "d5", "d3", "e5", "e4", "e3" }
+        )
     };
 
     private static TestCaseData[] legalMovesEdgeCases =

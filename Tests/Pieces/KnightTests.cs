@@ -46,11 +46,15 @@ internal class KnightTests : PieceTest<Knight>
     {
         new TestCaseData(
             "d4", new string[] { },
-            Color.WHITE, new[] { "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5" }
+            Color.WHITE, new[] {
+                "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5"
+            }
         ),
         new TestCaseData(
             "d4", new[] { "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5" },
-            Color.BLACK, new[] { "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5" }
+            Color.BLACK, new[] {
+                "c6", "e6", "f5", "f3", "c2", "e2", "b3", "b5"
+            }
         ),
     };
 
