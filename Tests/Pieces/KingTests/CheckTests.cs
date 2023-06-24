@@ -99,6 +99,7 @@ public class CheckTests
 
         blackPawn.Move("b2");
 
+        Assert.IsEmpty(whitePawn.legalMoves);
         Assert.Throws<IllegalMoveException>(
             () => whitePawn.Move("b5")
         );
@@ -107,14 +108,17 @@ public class CheckTests
     [Test]
     public void PlayerCanMoveAllyPiece_IfKingIsNotInCheck_AfterMoveIsMade()
     {
+        Piece whiteKing = new King(board.GetTile("a1"), Color.WHITE);
+        Piece whitePawn = new Pawn(board.GetTile("b4"), Color.WHITE);
         Piece bishop = new Bishop(board.GetTile("h8"), Color.WHITE);
         Piece knight = new Knight(board.GetTile("d1"), Color.WHITE);
         Piece rook = new Rook(board.GetTile("b1"), Color.WHITE);
         Piece queen = new Rook(board.GetTile("h2"), Color.WHITE);
+
         Piece blackPawn = new Pawn(board.GetTile("b3"), Color.BLACK);
 
-        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new Pawn(board.GetTile("b4"), Color.WHITE));
+        board.AddPiece(whiteKing);
+        board.AddPiece(whitePawn);
         board.AddPiece(bishop);
         board.AddPiece(knight);
         board.AddPiece(rook);
@@ -125,6 +129,10 @@ public class CheckTests
 
         blackPawn.Move("b2");
 
+        Assert.That(whiteKing.legalMoves, Is.EquivalentTo(new Tile[] {
+            board.GetTile("a2"),
+            board.GetTile("b2")
+        }));
         Assert.That(bishop.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
@@ -137,5 +145,6 @@ public class CheckTests
         Assert.That(queen.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
+        Assert.IsEmpty(whitePawn.legalMoves);
     }
 }

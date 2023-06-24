@@ -31,6 +31,21 @@ internal class GeneralKingTests : PieceTest<King>
         string[] tilesUnderAttack) =>
             base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
 
+    [Test]
+    public void KingsDoesNotHaveAnyLoseConditions()
+    {
+        King whiteKing = (King)CreatePiece(typeof(King), "e1", Color.WHITE);
+        King blackKing = (King)CreatePiece(typeof(King), "e8", Color.BLACK);
+
+        Assert.IsFalse(whiteKing.isChecked);
+        Assert.IsFalse(whiteKing.isCheckmated);
+        Assert.IsFalse(whiteKing.isInStalemate);
+
+        Assert.IsFalse(blackKing.isChecked);
+        Assert.IsFalse(blackKing.isCheckmated);
+        Assert.IsFalse(blackKing.isInStalemate);
+    }
+
     private static TestCaseData[] legalMovesGeneralCases =
     {
         new TestCaseData("a1", new[] { "a2", "b2", "b1" }),

@@ -34,8 +34,7 @@ internal class WhitePawnTests : PieceTest<Pawn>
     [Test]
     public void WhitePawnHasOneLegalMove_AfterOneMove()
     {
-        Pawn pawn = new Pawn(board.GetTile("d2"), pieceColor);
-        board.AddPiece(pawn);
+        Pawn pawn = (Pawn)CreatePiece(typeof(Pawn), "d2", pieceColor);
 
         pawn.Move("d3");
 

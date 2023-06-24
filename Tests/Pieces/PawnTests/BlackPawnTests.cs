@@ -34,8 +34,7 @@ internal class BlackPawnTests : PieceTest<Pawn>
     [Test]
     public void BlackPawnHasOneLegalMove_AfterOneMove()
     {
-        Pawn pawn = new Pawn(board.GetTile("d7"), pieceColor);
-        board.AddPiece(pawn);
+        Pawn pawn = (Pawn)CreatePiece(typeof(Pawn), "d7", pieceColor);
 
         pawn.Move("d6");
 
