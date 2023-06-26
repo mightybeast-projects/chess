@@ -45,7 +45,7 @@ public class CastlingTests
             board.GetTile("e2"),
             board.GetTile("f2"),
             board.GetTile("f1"),
-            board.GetTile("b1"),
+            board.GetTile("c1"),
             board.GetTile("g1"),
         }));
     }

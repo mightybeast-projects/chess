@@ -25,14 +25,12 @@ public class King : Piece
             new CastlingMoveData()
             {
                 rookPositionStr = "h1",
-                passingTiles = new[] { "f1", "g1" },
-                destinationTileStr = "g1"
+                passingTiles = new[] { "f1", "g1" }
             },
             new CastlingMoveData()
             {
                 rookPositionStr = "a1",
-                passingTiles = new[] { "d1", "c1", "b1" },
-                destinationTileStr = "b1"
+                passingTiles = new[] { "d1", "c1" }
             }
         };
 
@@ -85,14 +83,12 @@ public class King : Piece
         Tile rookTile = board.GetTile(castlingMoveData.rookPositionStr);
         Piece rook = rookTile.piece;
 
-        if (rook is null ||
-            rook.GetType() != typeof(Rook) ||
-            rook.hasMoved ||
+        if (RookCannotCastle(rook) ||
             castlingMoveData.passingTiles
                 .Any(tile => TileIsNotPassable(board.GetTile(tile))))
             return null;
 
-        return board.GetTile(castlingMoveData.destinationTileStr);
+        return board.GetTile(castlingMoveData.passingTiles[1]);
     }
 
     private bool CheckForCheck()
@@ -145,6 +141,11 @@ public class King : Piece
     private List<Piece> GetAllyPieces() =>
         color == Color.WHITE ? board.whitePieces : board.blackPieces;
 
+    private bool RookCannotCastle(Piece rook) =>
+        rook is null ||
+        rook.GetType() != typeof(Rook) ||
+        rook.hasMoved;
+
     private bool TileIsNotPassable(Tile tile) =>
         !tile.isEmpty || TileIsUnderAttack(tile);
 
@@ -152,6 +153,5 @@ public class King : Piece
     {
         internal string rookPositionStr;
         internal string[] passingTiles;
-        internal string destinationTileStr;
     }
 }
