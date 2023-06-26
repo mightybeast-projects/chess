@@ -32,7 +32,7 @@ internal class WhitePawnTests : PieceTest<Pawn>
             base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
 
     [Test]
-    public void WhitePawnHasOneLegalMove_AfterOneMove()
+    public void WhitePawn_HasOneLegalMove_AfterOneMove()
     {
         Pawn pawn = new Pawn(board.GetTile("d2"), pieceColor);
 

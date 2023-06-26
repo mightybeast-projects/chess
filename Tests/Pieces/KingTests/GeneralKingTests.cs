@@ -32,7 +32,7 @@ internal class GeneralKingTests : PieceTest<King>
             base.PieceHasCorrectTilesUnderAttack(piecePosition, tilesUnderAttack);
 
     [Test]
-    public void KingsDoesNotHaveAnyLoseConditions()
+    public void Kings_DoesNotHaveAnyLoseConditions()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
         King blackKing = new King(board.GetTile("e8"), Color.BLACK);
