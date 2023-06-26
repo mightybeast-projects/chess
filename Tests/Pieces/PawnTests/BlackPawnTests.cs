@@ -38,7 +38,6 @@ internal class BlackPawnTests : PieceTest<Pawn>
 
         pawn.Move("d6");
 
-        Assert.IsTrue(pawn.hasMoved);
         AssertPieceLegalMoves(pawn, new[] { "d5" });
     }
 

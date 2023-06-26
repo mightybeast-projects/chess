@@ -23,6 +23,7 @@ internal class MoveTests : BoardTestDataBuilder
         Assert.AreEqual(board.GetTile("d3"), piece.tile);
         Assert.IsFalse(board.GetTile("d3").isEmpty);
         Assert.AreEqual(board.GetTile("d3").piece, piece);
+        Assert.IsTrue(piece.hasMoved);
         Assert.AreNotEqual(preMoveHintTiles, piece.legalMoves);
     }
 

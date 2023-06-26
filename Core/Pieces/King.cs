@@ -25,8 +25,10 @@ public class King : Piece
         visitor.VisitKing(this);
 
     protected override IEnumerable<Tile> GetLegalMoves() =>
-        tilesDirections.ConvertAll(direction =>
-            GetLegalMove((int)direction.X, (int)direction.Y));
+        tilesDirections
+        .ConvertAll(direction =>
+            GetLegalMove((int)direction.X, (int)direction.Y))
+        .Union(GetCastlingMoves());
 
     protected override Tile GetLegalMove(int i, int j)
     {
@@ -51,6 +53,34 @@ public class King : Piece
             return null;
 
         return board.grid[tile.i + i, tile.j + j];
+    }
+
+    private List<Tile> GetCastlingMoves()
+    {
+        if (hasMoved || isChecked)
+            return new List<Tile>();
+
+        return
+            new List<Tile>()
+            .Append(GetCastlingMove("h1", new[] { "f1", "g1" }, "g1"))
+            .ToList();
+    }
+
+    private Tile GetCastlingMove(
+        string rookPositionStr,
+        string[] passingTiles,
+        string destinationTileStr)
+    {
+        Tile kingSideRookTile = board.GetTile(rookPositionStr);
+        Piece kingSideRook = kingSideRookTile.piece;
+
+        if (kingSideRook is null ||
+            kingSideRook.GetType() != typeof(Rook) ||
+            kingSideRook.hasMoved ||
+            passingTiles.Any(tile => TileIsNotPassable(board.GetTile(tile))))
+            return null;
+
+        return board.GetTile(destinationTileStr);
     }
 
     private bool CheckForCheck()
@@ -97,10 +127,12 @@ public class King : Piece
         return true;
     }
 
-
     private List<Piece> GetEnemyPieces() =>
         color == Color.WHITE ? board.blackPieces : board.whitePieces;
 
     private List<Piece> GetAllyPieces() =>
         color == Color.WHITE ? board.whitePieces : board.blackPieces;
+
+    private bool TileIsNotPassable(Tile tile) =>
+        !tile.isEmpty || TileIsUnderAttack(tile);
 }

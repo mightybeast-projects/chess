@@ -2,8 +2,6 @@ namespace Chess.Core.Pieces;
 
 public class Pawn : Piece
 {
-    public bool hasMoved;
-
     private bool pathBlocked;
 
     public Pawn(Tile tile, Color color) : base(tile, color) { }
@@ -46,12 +44,6 @@ public class Pawn : Piece
             return null;
 
         return board.grid[tile.i + i, tile.j + j];
-    }
-
-    protected override void HandlePositionChange()
-    {
-        base.HandlePositionChange();
-        hasMoved = true;
     }
 
     private IEnumerable<Tile> GetPawnHints(int colorMultiplier)

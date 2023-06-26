@@ -12,6 +12,7 @@ public abstract class Piece
         GetLegalMoves().Where(tile => tile != null).ToList();
     public List<Tile> tilesUnderAttack =>
         GetTilesUnderAttack().Where(tile => tile != null).ToList();
+    public bool hasMoved;
 
     private Tile targetTile;
 
@@ -43,12 +44,14 @@ public abstract class Piece
 
     protected abstract Tile GetTileUnderAttack(int i, int j);
 
-    protected virtual void HandlePositionChange()
+    private void HandlePositionChange()
     {
         if (!targetTile.isEmpty)
             board.RemovePiece(targetTile.piece);
 
         ChangeCurrentPosition(targetTile);
+
+        hasMoved = true;
     }
 
     protected bool KingIsUnderCheckAfterMoveOn(Tile tile)
