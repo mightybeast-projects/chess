@@ -1,13 +1,13 @@
 using Chess.Core;
 using Chess.Core.Pieces;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces.KingTests.CastlingTests;
 
 [TestFixture]
-internal class BlackKingCastlingTests
+internal class BlackKingCastlingTests : BoardTestFixtureSetUp
 {
-    private Board board;
     private King king;
     private Rook queenSideRook;
     private Rook kingSideRook;
@@ -20,9 +20,6 @@ internal class BlackKingCastlingTests
         board.GetTile("f7"),
         board.GetTile("f8")
     };
-
-    [SetUp]
-    public void SetUp() => board = new Board();
 
     [Test]
     public void BlackKing_DoesNotHaveAnyCaslingMoves_OnEmptyBoard()

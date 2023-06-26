@@ -1,17 +1,16 @@
 using Chess.Core;
 using Chess.Core.Pieces;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
-internal class StalemateTests
+internal class StalemateTests : BoardTestFixtureSetUp
 {
     [Test]
     public void WhiteKing_IsInStalemate()
     {
-        Board board = new Board();
-
         King whiteKing = new King(board.GetTile("h1"), Color.WHITE);
 
         board.AddPiece(whiteKing);
@@ -25,8 +24,6 @@ internal class StalemateTests
     [Test]
     public void BlackKing_IsInStalemate()
     {
-        Board board = new Board();
-
         King blackKing = new King(board.GetTile("a8"), Color.BLACK);
 
         board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));

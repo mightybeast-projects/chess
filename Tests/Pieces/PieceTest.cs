@@ -1,10 +1,12 @@
+using System.Reflection;
 using Chess.Core;
 using Chess.Core.Pieces;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
-internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
+internal abstract class PieceTest<TPiece> : BoardTestFixtureSetUp
     where TPiece : Piece
 {
     protected abstract Color pieceColor { get; }
@@ -50,6 +52,26 @@ internal abstract class PieceTest<TPiece> : BoardTestDataBuilder
         Piece piece = CreatePiece(typeof(TPiece), piecePosition, pieceColor);
 
         AssertPieceTilesUnderAttack(piece, tilesUnderAttack);
+    }
+
+    protected Piece CreatePiece(Type pieceType, string tileName, Color color)
+    {
+        Tile tile = board.GetTile(tileName);
+
+        Type[] ctorTypes = new[] {
+            typeof(Tile), typeof(Color)
+        };
+        object[] ctorArgs = new object[] {
+            tile, color
+        };
+
+        ConstructorInfo ctor = pieceType.GetConstructor(ctorTypes);
+        object pieceObj = ctor?.Invoke(ctorArgs);
+        Piece piece = (Piece)pieceObj!;
+
+        board.AddPiece(piece);
+
+        return piece;
     }
 
     private void AssertPiece(Piece piece, string tileNotation)

@@ -1,25 +1,20 @@
 using Chess.Core;
 using Chess.Core.Exceptions;
 using Chess.Core.Pieces;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
-internal class CheckTests
+internal class CheckTests : BoardTestFixtureSetUp
 {
-    private Board board;
-
-    [SetUp]
-    public void SetUp() => board = new Board();
-
     [Test]
     public void WhiteKing_IsChecked()
     {
         Piece blackPawn = new Pawn(board.GetTile("b3"), Color.BLACK);
 
         board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
-        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
 
         board.AddPiece(blackPawn);
 
@@ -38,7 +33,6 @@ internal class CheckTests
     {
         Piece whitePawn = new Pawn(board.GetTile("b6"), Color.WHITE);
 
-        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
         board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
 
         board.AddPiece(whitePawn);
@@ -60,7 +54,6 @@ internal class CheckTests
         Piece blackPawn = new Pawn(board.GetTile("b3"), Color.BLACK);
 
         board.AddPiece(whiteKing);
-        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
         board.AddPiece(blackPawn);
 
         blackPawn.Move("b2");
@@ -75,7 +68,6 @@ internal class CheckTests
         Piece blackKing = new King(board.GetTile("a8"), Color.BLACK);
         Piece whitePawn = new Pawn(board.GetTile("b6"), Color.WHITE);
 
-        board.AddPiece(new King(board.GetTile("a1"), Color.WHITE));
         board.AddPiece(blackKing);
         board.AddPiece(whitePawn);
 
@@ -124,7 +116,6 @@ internal class CheckTests
         board.AddPiece(rook);
         board.AddPiece(queen);
 
-        board.AddPiece(new King(board.GetTile("a8"), Color.BLACK));
         board.AddPiece(blackPawn);
 
         blackPawn.Move("b2");
@@ -133,6 +124,7 @@ internal class CheckTests
             board.GetTile("a2"),
             board.GetTile("b2")
         }));
+        Assert.IsEmpty(whitePawn.legalMoves);
         Assert.That(bishop.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
@@ -145,6 +137,5 @@ internal class CheckTests
         Assert.That(queen.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("b2")
         }));
-        Assert.IsEmpty(whitePawn.legalMoves);
     }
 }

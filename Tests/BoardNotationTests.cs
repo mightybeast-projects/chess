@@ -1,35 +1,33 @@
 using Chess.Core;
 using Chess.Core.Exceptions;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests;
 
 [TestFixture]
-internal class BoardNotationTests : BoardTestDataBuilder
+internal class BoardNotationTests : BoardTestFixtureSetUp
 {
     [Test]
-    public void TileIsInBoardGrid() => AssertBoardTileNotation(0, 0);
+    public void Board_ContainsTile() => AssertTileNotation(0, 0);
 
-    [Test, TestCaseSource(nameof(tileColorCases))]
-    public Color TestTileColor(string tileStr) => board.GetTile(tileStr).color;
-
-    [Test, TestCaseSource(nameof(correctTileNotationCases))]
-    public string BoardTileHasCorrectNotation(int i, int j) =>
+    [TestCaseSource(nameof(correctTileNotationCases))]
+    public string Tile_HasCorrectNotation(int i, int j) =>
         board.grid[i, j].notation;
 
-    [Test, TestCaseSource(nameof(incorrectTileNotationCases))]
-    public void TileHasIncorrectNotation(string tileStr) =>
+    [TestCaseSource(nameof(incorrectTileNotationCases))]
+    public void Tile_HasIncorrectNotation(string tileStr) =>
         AssertIncorrectTileNotation(tileStr);
 
     [Test]
-    public void BoardHasCorrectNotation()
+    public void Board_HasCorrectNotation()
     {
         for (int i = 0; i < board.grid.GetLength(0); i++)
             for (int j = 0; j < board.grid.GetLength(1); j++)
-                AssertBoardTileNotation(i, j);
+                AssertTileNotation(i, j);
     }
 
-    private void AssertBoardTileNotation(int i, int j)
+    private void AssertTileNotation(int i, int j)
     {
         char letter = (char)(j + 65);
         string tileName = letter.ToString().ToLower() + (i + 1);
@@ -42,14 +40,6 @@ internal class BoardNotationTests : BoardTestDataBuilder
         Assert.Throws<IncorrectTileNotationException>(
             () => board.GetTile(notation)
         );
-
-    private static TestCaseData[] tileColorCases =
-    {
-        new TestCaseData("d4").Returns(Color.BLACK),
-        new TestCaseData("c3").Returns(Color.BLACK),
-        new TestCaseData("e4").Returns(Color.WHITE),
-        new TestCaseData("d3").Returns(Color.WHITE)
-    };
 
     private static TestCaseData[] correctTileNotationCases =
     {

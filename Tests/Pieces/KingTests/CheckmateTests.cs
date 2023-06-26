@@ -1,21 +1,12 @@
 using Chess.Core;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
-internal class CheckmateTests
+internal class CheckmateTests : GameTestFixtureSetUp
 {
-    private Game game;
-
-    [SetUp]
-    public void SetUp()
-    {
-        game = new Game();
-
-        game.Start();
-    }
-
     [Test]
     public void FoolsMate()
     {

@@ -1,20 +1,24 @@
 using Chess.Core;
 using Chess.Core.Exceptions;
 using Chess.Core.Pieces;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests.Pieces;
 
 [TestFixture]
-internal class MoveTests : BoardTestDataBuilder
+internal class MoveTests : BoardTestFixtureSetUp
 {
-    private List<Tile> preMoveHintTiles;
+    private List<Tile> preMoveLegalMoves;
 
     [Test]
     public void PieceCanMakeLegalMove()
     {
-        Piece piece = CreatePiece(typeof(Pawn), "d2", Color.WHITE);
-        preMoveHintTiles = piece.legalMoves;
+        Piece piece = new Pawn(board.GetTile("d2"), Color.WHITE);
+
+        board.AddPiece(piece);
+
+        preMoveLegalMoves = piece.legalMoves;
 
         piece.Move("d3");
 
@@ -24,14 +28,17 @@ internal class MoveTests : BoardTestDataBuilder
         Assert.IsFalse(board.GetTile("d3").isEmpty);
         Assert.AreEqual(board.GetTile("d3").piece, piece);
         Assert.IsTrue(piece.hasMoved);
-        Assert.AreNotEqual(preMoveHintTiles, piece.legalMoves);
+        Assert.AreNotEqual(piece.legalMoves, preMoveLegalMoves);
     }
 
     [Test]
-    public void PieceThrowsExceptionOnIllegalMove()
+    public void PieceThrowsException_OnIllegalMove()
     {
-        Piece piece = CreatePiece(typeof(Pawn), "d2", Color.WHITE);
-        preMoveHintTiles = piece.legalMoves;
+        Piece piece = new Pawn(board.GetTile("d2"), Color.WHITE);
+
+        board.AddPiece(piece);
+
+        preMoveLegalMoves = piece.legalMoves;
 
         Assert.Throws<IllegalMoveException>(() => piece.Move("a3"));
 
@@ -40,14 +47,16 @@ internal class MoveTests : BoardTestDataBuilder
         Assert.AreNotEqual(board.GetTile("a3"), piece.tile);
         Assert.IsTrue(board.GetTile("a3").isEmpty);
         Assert.AreNotEqual(board.GetTile("a3").piece, piece);
-        Assert.AreEqual(preMoveHintTiles, piece.legalMoves);
+        Assert.AreEqual(preMoveLegalMoves, piece.legalMoves);
     }
 
     [Test]
-    public void PieceWillCaptureEnemyIfTargetTileIsOccupiedByThem()
+    public void PieceWillCaptureEnemy_IfTargetTileIsOccupiedByThem()
     {
-        CreatePiece(typeof(Pawn), "e5", Color.BLACK);
-        Piece piece = CreatePiece(typeof(Pawn), "d4", Color.WHITE);
+        Piece piece = new Pawn(board.GetTile("d4"), Color.WHITE);
+
+        board.AddPiece(piece);
+        board.AddPiece(new Pawn(board.GetTile("e5"), Color.BLACK));
 
         piece.Move("e5");
 

@@ -1,10 +1,11 @@
 using Chess.Core;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests;
 
 [TestFixture]
-internal class GeneralBoardTests : BoardTestDataBuilder
+internal class GeneralBoardTests : BoardTestFixtureSetUp
 {
     private Color evenColor;
     private Color oddColor;
@@ -23,20 +24,20 @@ internal class GeneralBoardTests : BoardTestDataBuilder
     public void BoardGridInitialization() => Assert.IsNotNull(board.grid);
 
     [Test]
-    public void BoardIsEightByEightSquare()
+    public void Board_IsEightByEightSquare()
     {
         Assert.AreEqual(8, board.grid.GetLength(0));
         Assert.AreEqual(8, board.grid.GetLength(1));
     }
 
     [Test(ExpectedResult = typeof(Tile))]
-    public Type BoardGridIsTileMatrix() => board.grid[0, 0].GetType();
+    public Type BoardGrid_IsTileMatrix() => board.grid[0, 0].GetType();
 
     [Test, TestCaseSource(nameof(tileColorCases))]
-    public Color TileIsOfColor(int i, int j) => board.grid[i, j].color;
+    public Color Tile_HasCorrectColor(int i, int j) => board.grid[i, j].color;
 
     [Test]
-    public void BoardTileColorsAreCorrect()
+    public void Board_ColorsAreCorrect()
     {
         for (int i = 0; i < board.grid.GetLength(0); i++)
             AssertLine(i);
@@ -56,7 +57,7 @@ internal class GeneralBoardTests : BoardTestDataBuilder
     {
         this.evenColor = evenColor;
         this.oddColor = oddColor;
-        
+
         for (int j = 0; j < board.grid.GetLength(1); j++)
             AssertPosition(j);
     }

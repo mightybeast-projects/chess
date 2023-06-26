@@ -1,11 +1,12 @@
 using Chess.Core;
 using Chess.Core.Pieces;
+using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
 namespace Chess.Tests;
 
 [TestFixture]
-internal class BoardSetupTests : BoardTestDataBuilder
+internal class BoardSetupTests : BoardTestFixtureSetUp
 {
     private Color color;
 

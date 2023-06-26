@@ -34,8 +34,11 @@ internal class GeneralKingTests : PieceTest<King>
     [Test]
     public void KingsDoesNotHaveAnyLoseConditions()
     {
-        King whiteKing = (King)CreatePiece(typeof(King), "e1", Color.WHITE);
-        King blackKing = (King)CreatePiece(typeof(King), "e8", Color.BLACK);
+        King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
+        King blackKing = new King(board.GetTile("e8"), Color.BLACK);
+
+        board.AddPiece(whiteKing);
+        board.AddPiece(blackKing);
 
         Assert.IsFalse(whiteKing.isChecked);
         Assert.IsFalse(whiteKing.isCheckmated);
