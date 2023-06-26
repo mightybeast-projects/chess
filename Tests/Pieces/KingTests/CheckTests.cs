@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
-public class CheckTests
+internal class CheckTests
 {
     private Board board;
 

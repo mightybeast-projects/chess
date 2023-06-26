@@ -24,13 +24,15 @@ public class King : Piece
         {
             new CastlingMoveData()
             {
-                rookPositionStr = "h1",
-                passingTiles = new[] { "f1", "g1" }
+                colorK = color == Color.WHITE ? 1 : 8,
+                rookPositionCol = "h",
+                passingTilesCols = new[] { "f", "g" }
             },
             new CastlingMoveData()
             {
-                rookPositionStr = "a1",
-                passingTiles = new[] { "d1", "c1" }
+                colorK = color == Color.WHITE ? 1 : 8,
+                rookPositionCol = "a",
+                passingTilesCols = new[] { "d", "c" }
             }
         };
 
@@ -80,15 +82,20 @@ public class King : Piece
 
     private Tile GetCastlingMove(CastlingMoveData castlingMoveData)
     {
-        Tile rookTile = board.GetTile(castlingMoveData.rookPositionStr);
+        string rookPositionStr =
+            castlingMoveData.rookPositionCol + castlingMoveData.colorK;
+
+        Tile rookTile = board.GetTile(rookPositionStr);
         Piece rook = rookTile.piece;
 
         if (RookCannotCastle(rook) ||
-            castlingMoveData.passingTiles
-                .Any(tile => TileIsNotPassable(board.GetTile(tile))))
+            castlingMoveData.passingTilesCols
+                .Any(tile => TileIsNotPassable(
+                    board.GetTile(tile + castlingMoveData.colorK))))
             return null;
 
-        return board.GetTile(castlingMoveData.passingTiles[1]);
+        return board.GetTile(
+            castlingMoveData.passingTilesCols[1] + castlingMoveData.colorK);
     }
 
     private bool CheckForCheck()
@@ -151,7 +158,8 @@ public class King : Piece
 
     private struct CastlingMoveData
     {
-        internal string rookPositionStr;
-        internal string[] passingTiles;
+        internal int colorK;
+        internal string rookPositionCol;
+        internal string[] passingTilesCols;
     }
 }

@@ -2,10 +2,10 @@ using Chess.Core;
 using Chess.Core.Pieces;
 using NUnit.Framework;
 
-namespace Chess.Tests.Pieces.KingTests;
+namespace Chess.Tests.Pieces.KingTests.CastlingTests;
 
 [TestFixture]
-public class CastlingTests
+internal class WhiteKingCastlingTests
 {
     private Board board;
 
@@ -29,7 +29,7 @@ public class CastlingTests
     }
 
     [Test]
-    public void WhiteKing_HasCastlingMoves()
+    public void WhiteKing_HaveCastlingMoves()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
         Rook whiteQueenSideRook = new Rook(board.GetTile("a1"), Color.WHITE);
@@ -96,7 +96,7 @@ public class CastlingTests
     }
 
     [Test]
-    public void WhiteKing_DoesNotHaveCastlingMoves_IfRookHasMoved()
+    public void WhiteKing_DoesNotHaveCastlingMove_IfRookHasMoved()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
         Rook whiteQueenSideRook = new Rook(board.GetTile("a1"), Color.WHITE);
@@ -132,7 +132,8 @@ public class CastlingTests
     public void WhiteKing_DoesNotHaveCastlingMoves_IfPassingTilesAreUnderAttack()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
-        Rook whiteRook = new Rook(board.GetTile("h1"), Color.WHITE);
+        Rook whiteQueenSideRook = new Rook(board.GetTile("a1"), Color.WHITE);
+        Rook whiteKingSideRook = new Rook(board.GetTile("h1"), Color.WHITE);
 
         Queen blackQueen = new Queen(board.GetTile("b1"), Color.BLACK);
         Bishop blackBishop1 = new Bishop(board.GetTile("h3"), Color.BLACK);
@@ -141,7 +142,8 @@ public class CastlingTests
         Rook blackRook2 = new Rook(board.GetTile("d8"), Color.BLACK);
 
         board.AddPiece(whiteKing);
-        board.AddPiece(whiteRook);
+        board.AddPiece(whiteQueenSideRook);
+        board.AddPiece(whiteKingSideRook);
         board.AddPiece(blackQueen);
         board.AddPiece(blackBishop1);
         board.AddPiece(blackBishop2);

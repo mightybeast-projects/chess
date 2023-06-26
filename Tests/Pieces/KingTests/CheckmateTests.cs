@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
-public class CheckmateTests
+internal class CheckmateTests
 {
     private Game game;
 

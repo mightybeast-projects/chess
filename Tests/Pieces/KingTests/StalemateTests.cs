@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Chess.Tests.Pieces.KingTests;
 
 [TestFixture]
-public class StalemateTests
+internal class StalemateTests
 {
     [Test]
     public void WhiteKing_IsInStalemate()
