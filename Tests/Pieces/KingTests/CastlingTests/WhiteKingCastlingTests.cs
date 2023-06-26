@@ -22,13 +22,13 @@ internal class WhiteKingCastlingTests : BoardTestFixtureSetUp
     };
 
     [Test]
-    public void WhiteKing_DoesNotHaveAnyCaslingMoves_OnEmptyBoard()
+    public void WhiteKing_DoesNotHaveCaslingMoves_OnEmptyBoard()
     {
-        king = new King(board.GetTile("e1"), Color.WHITE);
+        board.AddPiece(new King(board.GetTile("e1"), Color.WHITE));
 
-        board.AddPiece(king);
-
-        Assert.That(king.legalMoves, Is.EquivalentTo(defaultLegalMoves));
+        Assert.That(board.whiteKing.legalMoves,
+            Is.EquivalentTo(defaultLegalMoves)
+        );
     }
 
     [Test]
