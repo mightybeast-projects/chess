@@ -19,6 +19,23 @@ public class King : Piece
         new Vector2(0, -1),
     };
 
+    private List<CastlingMoveData> castlingMovesDatas =>
+        new List<CastlingMoveData>()
+        {
+            new CastlingMoveData()
+            {
+                rookPositionStr = "h1",
+                passingTiles = new[] { "f1", "g1" },
+                destinationTileStr = "g1"
+            },
+            new CastlingMoveData()
+            {
+                rookPositionStr = "a1",
+                passingTiles = new[] { "d1", "c1", "b1" },
+                destinationTileStr = "b1"
+            }
+        };
+
     public King(Tile tile, Color color) : base(tile, color) { }
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
@@ -60,27 +77,22 @@ public class King : Piece
         if (hasMoved || isChecked)
             return new List<Tile>();
 
-        return
-            new List<Tile>()
-            .Append(GetCastlingMove("h1", new[] { "f1", "g1" }, "g1"))
-            .ToList();
+        return castlingMovesDatas.ConvertAll(data => GetCastlingMove(data));
     }
 
-    private Tile GetCastlingMove(
-        string rookPositionStr,
-        string[] passingTiles,
-        string destinationTileStr)
+    private Tile GetCastlingMove(CastlingMoveData castlingMoveData)
     {
-        Tile kingSideRookTile = board.GetTile(rookPositionStr);
-        Piece kingSideRook = kingSideRookTile.piece;
+        Tile rookTile = board.GetTile(castlingMoveData.rookPositionStr);
+        Piece rook = rookTile.piece;
 
-        if (kingSideRook is null ||
-            kingSideRook.GetType() != typeof(Rook) ||
-            kingSideRook.hasMoved ||
-            passingTiles.Any(tile => TileIsNotPassable(board.GetTile(tile))))
+        if (rook is null ||
+            rook.GetType() != typeof(Rook) ||
+            rook.hasMoved ||
+            castlingMoveData.passingTiles
+                .Any(tile => TileIsNotPassable(board.GetTile(tile))))
             return null;
 
-        return board.GetTile(destinationTileStr);
+        return board.GetTile(castlingMoveData.destinationTileStr);
     }
 
     private bool CheckForCheck()
@@ -135,4 +147,11 @@ public class King : Piece
 
     private bool TileIsNotPassable(Tile tile) =>
         !tile.isEmpty || TileIsUnderAttack(tile);
+
+    private struct CastlingMoveData
+    {
+        internal string rookPositionStr;
+        internal string[] passingTiles;
+        internal string destinationTileStr;
+    }
 }

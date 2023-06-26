@@ -29,13 +29,15 @@ public class CastlingTests
     }
 
     [Test]
-    public void WhiteKing_HasKingSideCastlingMove()
+    public void WhiteKing_HasCastlingMoves()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
-        Rook whiteRook = new Rook(board.GetTile("h1"), Color.WHITE);
+        Rook whiteQueenSideRook = new Rook(board.GetTile("a1"), Color.WHITE);
+        Rook whiteKingSideRook = new Rook(board.GetTile("h1"), Color.WHITE);
 
         board.AddPiece(whiteKing);
-        board.AddPiece(whiteRook);
+        board.AddPiece(whiteQueenSideRook);
+        board.AddPiece(whiteKingSideRook);
 
         Assert.That(whiteKing.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("d1"),
@@ -43,6 +45,7 @@ public class CastlingTests
             board.GetTile("e2"),
             board.GetTile("f2"),
             board.GetTile("f1"),
+            board.GetTile("b1"),
             board.GetTile("g1"),
         }));
     }
@@ -51,10 +54,12 @@ public class CastlingTests
     public void WhiteKing_DoesNotHaveCastlingMoves_IfItHasMoved()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
-        Rook whiteRook = new Rook(board.GetTile("h1"), Color.WHITE);
+        Rook whiteQueenSideRook = new Rook(board.GetTile("a1"), Color.WHITE);
+        Rook whiteKingSideRook = new Rook(board.GetTile("h1"), Color.WHITE);
 
         board.AddPiece(whiteKing);
-        board.AddPiece(whiteRook);
+        board.AddPiece(whiteQueenSideRook);
+        board.AddPiece(whiteKingSideRook);
 
         whiteKing.Move("e2");
         whiteKing.Move("e1");
@@ -72,12 +77,14 @@ public class CastlingTests
     public void WhiteKing_DoesNotHaveCastlingMoves_IfItIsInCheck()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
-        Rook whiteRook = new Rook(board.GetTile("h1"), Color.WHITE);
+        Rook whiteQueenSideRook = new Rook(board.GetTile("a1"), Color.WHITE);
+        Rook whiteKingSideRook = new Rook(board.GetTile("h1"), Color.WHITE);
 
         Queen blackQueen = new Queen(board.GetTile("e8"), Color.BLACK);
 
         board.AddPiece(whiteKing);
-        board.AddPiece(whiteRook);
+        board.AddPiece(whiteQueenSideRook);
+        board.AddPiece(whiteKingSideRook);
         board.AddPiece(blackQueen);
 
         Assert.That(whiteKing.legalMoves, Is.EquivalentTo(new Tile[] {
@@ -92,13 +99,17 @@ public class CastlingTests
     public void WhiteKing_DoesNotHaveCastlingMoves_IfRookHasMoved()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
-        Rook whiteRook = new Rook(board.GetTile("h1"), Color.WHITE);
+        Rook whiteQueenSideRook = new Rook(board.GetTile("a1"), Color.WHITE);
+        Rook whiteKingSideRook = new Rook(board.GetTile("h1"), Color.WHITE);
 
         board.AddPiece(whiteKing);
-        board.AddPiece(whiteRook);
+        board.AddPiece(whiteQueenSideRook);
+        board.AddPiece(whiteKingSideRook);
 
-        whiteRook.Move("h2");
-        whiteRook.Move("h1");
+        whiteQueenSideRook.Move("a2");
+        whiteQueenSideRook.Move("a1");
+        whiteKingSideRook.Move("h2");
+        whiteKingSideRook.Move("h1");
 
         Assert.That(whiteKing.legalMoves, Is.EquivalentTo(new Tile[] {
             board.GetTile("d1"),
@@ -110,47 +121,35 @@ public class CastlingTests
     }
 
     [Test]
-    public void WhiteKing_DoesNotHaveKingSideCastlingMove_IfPassingTilesAreNotEmpty()
+    public void WhiteKing_DoesNotHaveCastlingMoves_IfPassingTilesAreNotEmpty()
     {
-        King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
-        Bishop whiteBishop = new Bishop(board.GetTile("f1"), Color.WHITE);
-        Knight whiteKnight = new Knight(board.GetTile("g1"), Color.WHITE);
-        Rook whiteRook = new Rook(board.GetTile("h1"), Color.WHITE);
+        board.SetUp();
 
-        board.AddPiece(whiteKing);
-        board.AddPiece(whiteBishop);
-        board.AddPiece(whiteKnight);
-        board.AddPiece(whiteRook);
-
-        Assert.That(whiteKing.legalMoves, Is.EquivalentTo(new Tile[] {
-            board.GetTile("d1"),
-            board.GetTile("d2"),
-            board.GetTile("e2"),
-            board.GetTile("f2"),
-        }));
+        Assert.IsEmpty(board.whiteKing.legalMoves);
     }
 
     [Test]
     public void WhiteKing_DoesNotHaveCastlingMoves_IfPassingTilesAreUnderAttack()
     {
         King whiteKing = new King(board.GetTile("e1"), Color.WHITE);
-        Pawn whitePawn = new Pawn(board.GetTile("e2"), Color.WHITE);
         Rook whiteRook = new Rook(board.GetTile("h1"), Color.WHITE);
 
-        Queen blackQueen = new Queen(board.GetTile("e8"), Color.BLACK);
+        Queen blackQueen = new Queen(board.GetTile("b1"), Color.BLACK);
         Bishop blackBishop1 = new Bishop(board.GetTile("h3"), Color.BLACK);
         Bishop blackBishop2 = new Bishop(board.GetTile("h2"), Color.BLACK);
+        Rook blackRook1 = new Rook(board.GetTile("c8"), Color.BLACK);
+        Rook blackRook2 = new Rook(board.GetTile("d8"), Color.BLACK);
 
         board.AddPiece(whiteKing);
         board.AddPiece(whiteRook);
-        board.AddPiece(whitePawn);
         board.AddPiece(blackQueen);
         board.AddPiece(blackBishop1);
         board.AddPiece(blackBishop2);
+        board.AddPiece(blackRook1);
+        board.AddPiece(blackRook2);
 
         Assert.That(whiteKing.legalMoves, Is.EquivalentTo(new Tile[] {
-            board.GetTile("d1"),
-            board.GetTile("d2"),
+            board.GetTile("e2"),
             board.GetTile("f2")
         }));
     }
