@@ -24,9 +24,9 @@ public class Board
 
     public void SetUp() => piecesDirector.SetupPieces();
 
-    public Tile GetTile(string tileName)
+    public Tile GetTile(string tileNotation)
     {
-        try { return ParseTileName(tileName); }
+        try { return ParseTileName(tileNotation); }
         catch (Exception) { throw new IncorrectTileNotationException(); }
     }
 

@@ -101,8 +101,10 @@ public class King : Piece
                     board.GetTile(tile + castlingMoveData.colorK))))
             return null;
 
-        return board.GetTile(
-            castlingMoveData.passingTilesCols[1] + castlingMoveData.colorK);
+        string castlingMoveNotation =
+            castlingMoveData.passingTilesCols[1] + castlingMoveData.colorK;
+
+        return board.GetTile(castlingMoveNotation);
     }
 
     private void CheckForCastlingMove()
@@ -118,8 +120,6 @@ public class King : Piece
         if (data.Equals(default(CastlingMoveData)))
             return;
 
-        Tile kingTargetTile =
-            board.GetTile(data.passingTilesCols[1] + data.colorK);
         Tile rookOriginalTile =
             board.GetTile(data.rookPositionCol + data.colorK);
         Tile rookTargetTile =
@@ -127,7 +127,7 @@ public class King : Piece
 
         Piece rook = rookOriginalTile.piece;
 
-        if (tile != kingTargetTile || RookCannotCastle(rook))
+        if (RookCannotCastle(rook))
             return;
 
         rook.ChangeTile(rookTargetTile);
