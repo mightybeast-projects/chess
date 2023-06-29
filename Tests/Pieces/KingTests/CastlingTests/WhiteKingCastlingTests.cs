@@ -1,4 +1,5 @@
 using Chess.Core;
+using Chess.Core.Exceptions;
 using Chess.Core.Pieces;
 using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
@@ -110,14 +111,48 @@ internal class WhiteKingCastlingTests : BoardTestFixtureSetUp
     }
 
     [Test]
-    public void Rook_ChangedPosition_OnSuccessfulCastling()
+    public void KingSideRook_ChangedPosition_OnSuccessfulCastlingMove()
     {
         AddKingAndRooks();
 
         king.Move("g1");
 
-        Assert.AreEqual(board.GetTile("g1"), king.tile);
         Assert.AreEqual(board.GetTile("f1"), kingSideRook.tile);
+    }
+
+    [Test]
+    public void QueenSideRook_ChangedPostion_OnSuccessfulCastlingMove()
+    {
+        AddKingAndRooks();
+
+        king.Move("c1");
+
+        Assert.AreEqual(board.GetTile("d1"), queenSideRook.tile);
+    }
+
+    [Test]
+    public void KingSideRook_DidNotChangePosition_OnNonCastlingMove()
+    {
+        AddKingAndRooks();
+
+        king.Move("f1");
+        king.Move("g2");
+
+        Assert.AreEqual(board.GetTile("h1"), kingSideRook.tile);
+    }
+
+    [Test]
+    public void QueenSideRook_DidNotChangePosition_OnNonCastlingMove()
+    {
+        AddKingAndRooks();
+
+        queenSideRook.Move("a2");
+        queenSideRook.Move("a1");
+
+        king.Move("d1");
+        king.Move("c1");
+
+        Assert.AreEqual(board.GetTile("a1"), queenSideRook.tile);
     }
 
     private void AddKingAndRooks()
