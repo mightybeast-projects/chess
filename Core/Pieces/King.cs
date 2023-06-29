@@ -72,6 +72,13 @@ public class King : Piece
         return board.grid[tile.i + i, tile.j + j];
     }
 
+    protected override void HandlePositionChange()
+    {
+        base.HandlePositionChange();
+
+        CheckForCastlingMove();
+    }
+
     private List<Tile> GetCastlingMoves()
     {
         if (hasMoved || isChecked)
@@ -96,6 +103,34 @@ public class King : Piece
 
         return board.GetTile(
             castlingMoveData.passingTilesCols[1] + castlingMoveData.colorK);
+    }
+
+    private void CheckForCastlingMove()
+    {
+        if (hasMoved)
+            return;
+
+        CastlingMoveData data =
+            castlingMovesDatas
+            .Find(data =>
+                data.passingTilesCols[1] + data.colorK == tile.notation);
+
+        if (data.Equals(default(CastlingMoveData)))
+            return;
+
+        Tile kingTargetTile =
+            board.GetTile(data.passingTilesCols[1] + data.colorK);
+        Tile rookOriginalTile =
+            board.GetTile(data.rookPositionCol + data.colorK);
+        Tile rookTargetTile =
+            board.GetTile(data.passingTilesCols[0] + data.colorK);
+
+        Piece rook = rookOriginalTile.piece;
+
+        if (tile != kingTargetTile || RookCannotCastle(rook))
+            return;
+
+        rook.ChangeTile(rookTargetTile);
     }
 
     private bool CheckForCheck()

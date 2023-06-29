@@ -109,6 +109,17 @@ internal class WhiteKingCastlingTests : BoardTestFixtureSetUp
         }));
     }
 
+    [Test]
+    public void Rook_ChangedPosition_OnSuccessfulCastling()
+    {
+        AddKingAndRooks();
+
+        king.Move("g1");
+
+        Assert.AreEqual(board.GetTile("g1"), king.tile);
+        Assert.AreEqual(board.GetTile("f1"), kingSideRook.tile);
+    }
+
     private void AddKingAndRooks()
     {
         king = new King(board.GetTile("e1"), Color.WHITE);

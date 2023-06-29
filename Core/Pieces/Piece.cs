@@ -34,6 +34,15 @@ public abstract class Piece
             HandlePositionChange();
         else
             throw new IllegalMoveException();
+
+        hasMoved = true;
+    }
+
+    internal void ChangeTile(Tile tile)
+    {
+        this.tile.piece = null;
+        this.tile = tile;
+        this.tile.piece = this;
     }
 
     protected abstract IEnumerable<Tile> GetLegalMoves();
@@ -44,14 +53,12 @@ public abstract class Piece
 
     protected abstract Tile GetTileUnderAttack(int i, int j);
 
-    private void HandlePositionChange()
+    protected virtual void HandlePositionChange()
     {
         if (!targetTile.isEmpty)
             board.RemovePiece(targetTile.piece);
 
-        ChangeCurrentPosition(targetTile);
-
-        hasMoved = true;
+        ChangeTile(targetTile);
     }
 
     protected bool KingIsUnderCheckAfterMoveOn(Tile tile)
@@ -73,11 +80,11 @@ public abstract class Piece
             board.RemovePiece(enemyPiece);
         }
 
-        ChangeCurrentPosition(tile);
+        ChangeTile(tile);
 
         allyKingIsChecked = GetAllyKing().isChecked;
 
-        ChangeCurrentPosition(originalTile);
+        ChangeTile(originalTile);
         if (enemyPiece is not null)
         {
             tile.piece = enemyPiece;
@@ -85,13 +92,6 @@ public abstract class Piece
         }
 
         return allyKingIsChecked;
-    }
-
-    private void ChangeCurrentPosition(Tile targetTile)
-    {
-        tile.piece = null;
-        tile = targetTile;
-        tile.piece = this;
     }
 
     protected bool TileIsOccupiedByEnemy(Tile tile) =>
