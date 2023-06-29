@@ -109,6 +109,51 @@ internal class BlackKingCastlingTests : BoardTestFixtureSetUp
         }));
     }
 
+    [Test]
+    public void KingSideRook_ChangedPosition_OnSuccessfulCastlingMove()
+    {
+        AddKingAndRooks();
+
+        king.Move("g8");
+
+        Assert.AreEqual(board.GetTile("f8"), kingSideRook.tile);
+    }
+
+    [Test]
+    public void QueenSideRook_ChangedPostion_OnSuccessfulCastlingMove()
+    {
+        AddKingAndRooks();
+
+        king.Move("c8");
+
+        Assert.AreEqual(board.GetTile("d8"), queenSideRook.tile);
+    }
+
+    [Test]
+    public void KingSideRook_DidNotChangePosition_OnNonCastlingMove()
+    {
+        AddKingAndRooks();
+
+        king.Move("f8");
+        king.Move("g8");
+
+        Assert.AreEqual(board.GetTile("h8"), kingSideRook.tile);
+    }
+
+    [Test]
+    public void QueenSideRook_DidNotChangePosition_OnNonCastlingMove()
+    {
+        AddKingAndRooks();
+
+        queenSideRook.Move("a7");
+        queenSideRook.Move("a8");
+
+        king.Move("d8");
+        king.Move("c8");
+
+        Assert.AreEqual(board.GetTile("a8"), queenSideRook.tile);
+    }
+
     private void AddKingAndRooks()
     {
         king = new King(board.GetTile("e8"), Color.BLACK);

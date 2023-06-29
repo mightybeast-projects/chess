@@ -136,7 +136,7 @@ internal class WhiteKingCastlingTests : BoardTestFixtureSetUp
         AddKingAndRooks();
 
         king.Move("f1");
-        king.Move("g2");
+        king.Move("g1");
 
         Assert.AreEqual(board.GetTile("h1"), kingSideRook.tile);
     }
