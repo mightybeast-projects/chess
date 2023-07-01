@@ -9,13 +9,23 @@ namespace Chess.Tests;
 internal class GameTests : GameTestFixtureSetUp
 {
     [Test]
-    public void GameStartSetUp_IsCorrect()
+    public void DefaultGameStartSetUp_IsCorrect()
     {
         Assert.IsNotEmpty(game.board.whitePieces);
         Assert.IsNotEmpty(game.board.blackPieces);
         Assert.IsNotNull(game.whitePlayer);
         Assert.IsNotNull(game.blackPlayer);
         Assert.AreEqual(game.currentPlayer.color, Color.WHITE);
+    }
+
+    [Test]
+    public void CustomGameSetUp_IsCorrect()
+    {
+        Board board = new Board();
+        Game game = new Game(board, Color.BLACK);
+
+        Assert.AreEqual(game.board, board);
+        Assert.AreEqual(game.currentPlayer.color, Color.BLACK);
     }
 
     [Test]
