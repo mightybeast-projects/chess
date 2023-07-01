@@ -1,3 +1,6 @@
+using System.Reflection;
+using Chess.Core.Exceptions;
+
 namespace Chess.Core.Pieces;
 
 public class Pawn : Piece
@@ -8,6 +11,32 @@ public class Pawn : Piece
 
     public override void Accept(IPieceDrawerVisitor visitor) =>
         visitor.VisitPawn(this);
+
+    public void Promote(Type pieceType)
+    {
+        if (PawnCannotBePromoted() ||
+            pieceType == typeof(Pawn) ||
+            pieceType == typeof(King))
+            throw new CannotPromotePawnException();
+
+        Tile pawnTile = tile;
+        Board pawnBoard = board;
+
+        board.RemovePiece(this);
+
+        Type[] ctorTypes = new[] {
+            typeof(Tile), typeof(Color)
+        };
+        object[] ctorArgs = new object[] {
+            pawnTile, color
+        };
+
+        ConstructorInfo ctor = pieceType.GetConstructor(ctorTypes);
+        object pieceObj = ctor?.Invoke(ctorArgs);
+        Piece piece = (Piece)pieceObj!;
+
+        pawnBoard.AddPiece(piece);
+    }
 
     protected override IEnumerable<Tile> GetLegalMoves() =>
         color == Color.WHITE ?
@@ -70,4 +99,9 @@ public class Pawn : Piece
         GetTileUnderAttack(colorMultiplier, -1),
         GetTileUnderAttack(colorMultiplier, 1)
     };
+
+    private bool PawnCannotBePromoted() =>
+        color == Color.WHITE ?
+            tile.i != 7 :
+            tile.i != 0;
 }
