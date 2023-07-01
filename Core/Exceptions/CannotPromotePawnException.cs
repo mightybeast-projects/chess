@@ -3,5 +3,5 @@ namespace Chess.Core.Exceptions;
 internal class CannotPromotePawnException : Exception
 {
     public CannotPromotePawnException()
-         : base("Cannot promote chosen pawn.") { }
+         : base("Chosen pawn cannot be promoted to chosen piece.") { }
 }
