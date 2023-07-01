@@ -1,4 +1,4 @@
-namespace chess.Core.Exceptions;
+namespace Chess.Core.Exceptions;
 
 internal class CannotMoveEnemyPieceException : Exception
 {

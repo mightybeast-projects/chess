@@ -1,12 +1,12 @@
-using chess.Core.Exceptions;
+using Chess.Core.Exceptions;
 using Chess.Core;
 using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 
-namespace Chess.Tests;
+namespace Chess.Tests.GameTests;
 
 [TestFixture]
-internal class GameTests : GameTestFixtureSetUp
+internal class GeneralGameTests : GameTestFixtureSetUp
 {
     [Test]
     public void DefaultGameStartSetUp_IsCorrect()
@@ -16,16 +16,6 @@ internal class GameTests : GameTestFixtureSetUp
         Assert.IsNotNull(game.whitePlayer);
         Assert.IsNotNull(game.blackPlayer);
         Assert.AreEqual(game.currentPlayer.color, Color.WHITE);
-    }
-
-    [Test]
-    public void CustomGameSetUp_IsCorrect()
-    {
-        Board board = new Board();
-        Game game = new Game(board, Color.BLACK);
-
-        Assert.AreEqual(game.board, board);
-        Assert.AreEqual(game.currentPlayer.color, Color.BLACK);
     }
 
     [Test]
