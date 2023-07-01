@@ -14,9 +14,7 @@ internal class PromotionTests : BoardTestFixtureSetUp
     [Test]
     public void WhitePawn_Throws_CannotBePromotedException()
     {
-        pawn = new Pawn(board.GetTile("a2"), Color.WHITE);
-
-        board.AddPiece(pawn);
+        AddWhitePawn();
 
         AssertPawnThrowsExceptionOnPromotion();
     }
@@ -68,28 +66,53 @@ internal class PromotionTests : BoardTestFixtureSetUp
     [Test]
     public void BlackPawn_Throws_CannotBePromotedException()
     {
-        pawn = new Pawn(board.GetTile("a7"), Color.BLACK);
-
-        board.AddPiece(pawn);
+        AddBlackPawn();
 
         AssertPawnThrowsExceptionOnPromotion();
     }
 
     [Test]
-    public void BlackPawn_SuccessfullyPromoted()
+    public void BlackPawn_SuccessfullyPromoted_ToQueen()
     {
-        pawn = new Pawn(board.GetTile("a2"), Color.BLACK);
-
-        board.AddPiece(pawn);
+        AddBlackPawn();
 
         pawn.Move("a1");
-
         pawn.Promote(typeof(Queen));
 
-        Assert.IsFalse(board.whitePieces.Contains(pawn));
-        Assert.IsFalse(board.GetTile("a1").isEmpty);
-        Assert.IsInstanceOf<Queen>(board.GetTile("a1").piece);
-        Assert.AreEqual(1, board.blackPieces.Count);
+        AssertBlackPawnPromotionIsSuccessful<Queen>();
+    }
+
+    [Test]
+    public void BlackPawn_SuccessfullyPromoted_ToBishop()
+    {
+        AddBlackPawn();
+
+        pawn.Move("a1");
+        pawn.Promote(typeof(Bishop));
+
+        AssertBlackPawnPromotionIsSuccessful<Bishop>();
+    }
+
+    [Test]
+    public void BlackPawn_SuccessfullyPromoted_ToKnight()
+    {
+        AddBlackPawn();
+
+        pawn.Move("a1");
+        pawn.Promote(typeof(Knight));
+
+        AssertBlackPawnPromotionIsSuccessful<Knight>();
+    }
+
+    [Test]
+    public void BlackPawn_SuccessfullyPromoted_ToRook()
+    {
+        AddBlackPawn();
+
+        pawn.Move("a1");
+        pawn.Promote(typeof(Rook));
+
+        AssertBlackPawnPromotionIsSuccessful<Rook>();
     }
 
     private void AssertPawnThrowsExceptionOnPromotion()
@@ -108,7 +131,6 @@ internal class PromotionTests : BoardTestFixtureSetUp
     private void AddWhitePawn()
     {
         pawn = new Pawn(board.GetTile("a7"), Color.WHITE);
-
         board.AddPiece(pawn);
     }
 
@@ -118,5 +140,19 @@ internal class PromotionTests : BoardTestFixtureSetUp
         Assert.IsFalse(board.GetTile("a8").isEmpty);
         Assert.IsInstanceOf<T>(board.GetTile("a8").piece);
         Assert.AreEqual(1, board.whitePieces.Count);
+    }
+
+    private void AddBlackPawn()
+    {
+        pawn = new Pawn(board.GetTile("a2"), Color.BLACK);
+        board.AddPiece(pawn);
+    }
+
+    private void AssertBlackPawnPromotionIsSuccessful<T>()
+    {
+        Assert.IsFalse(board.whitePieces.Contains(pawn));
+        Assert.IsFalse(board.GetTile("a1").isEmpty);
+        Assert.IsInstanceOf<T>(board.GetTile("a1").piece);
+        Assert.AreEqual(1, board.blackPieces.Count);
     }
 }
