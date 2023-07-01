@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Chess.Core.Exceptions;
 using Chess.Core.Pieces;
 
@@ -7,6 +8,7 @@ public class Game
 {
     public readonly Board board;
     public Player currentPlayer;
+    public Piece lastMovedPiece;
 
     internal readonly Player whitePlayer;
     internal readonly Player blackPlayer;
@@ -35,6 +37,9 @@ public class Game
 
     public void HandlePlayerMove(string piecePosition, string targetPosition)
     {
+        if (LastMovedPieceIsAPawnAvailableForPromotion())
+            throw new MovedPawnIsAvailableForPromotionException();
+
         Piece piece = board.GetTile(piecePosition).piece;
 
         if (piece is null)
@@ -44,7 +49,29 @@ public class Game
             throw new CannotMoveEnemyPieceException();
 
         piece.Move(targetPosition);
+        lastMovedPiece = piece;
 
+        if (!LastMovedPieceIsAPawnAvailableForPromotion())
+            SwitchCurrentPlayer();
+    }
+
+    public void PromoteMovedPawnTo(Type promotionPieceType)
+    {
+        Tile pieceTile = lastMovedPiece.tile;
+
+        ((Pawn)lastMovedPiece).Promote(promotionPieceType);
+        lastMovedPiece = pieceTile.piece;
+
+        SwitchCurrentPlayer();
+    }
+
+    public bool LastMovedPieceIsAPawnAvailableForPromotion() =>
+        lastMovedPiece is not null &&
+        lastMovedPiece.GetType() == typeof(Pawn) &&
+        ((Pawn)lastMovedPiece).IsAvailableForPromotion();
+
+    private void SwitchCurrentPlayer()
+    {
         if (currentPlayer == whitePlayer)
             currentPlayer = blackPlayer;
         else

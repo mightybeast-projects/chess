@@ -26,6 +26,7 @@ internal class GeneralGameTests : GameTestFixtureSetUp
         Assert.IsNull(game.board.GetTile("d2").piece);
         Assert.IsNotNull(game.board.GetTile("d4").piece);
         Assert.AreEqual(game.currentPlayer.color, Color.BLACK);
+        Assert.AreEqual(game.lastMovedPiece, game.board.GetTile("d4").piece);
     }
 
     [Test]

@@ -26,7 +26,7 @@ public abstract class Piece
 
     public abstract void Accept(IPieceDrawerVisitor visitor);
 
-    public void Move(string tileName)
+    internal void Move(string tileName)
     {
         targetTile = board.GetTile(tileName);
 

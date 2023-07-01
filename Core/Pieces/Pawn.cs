@@ -14,7 +14,7 @@ public class Pawn : Piece
 
     public void Promote(Type pieceType)
     {
-        if (PawnCannotBePromoted() ||
+        if (!IsAvailableForPromotion() ||
             pieceType == typeof(Pawn) ||
             pieceType == typeof(King))
             throw new CannotPromotePawnException();
@@ -37,6 +37,11 @@ public class Pawn : Piece
 
         pawnBoard.AddPiece(piece);
     }
+
+    internal bool IsAvailableForPromotion() =>
+        color == Color.WHITE ?
+            tile.i == 7 :
+            tile.i == 0;
 
     protected override IEnumerable<Tile> GetLegalMoves() =>
         color == Color.WHITE ?
@@ -99,9 +104,4 @@ public class Pawn : Piece
         GetTileUnderAttack(colorMultiplier, -1),
         GetTileUnderAttack(colorMultiplier, 1)
     };
-
-    private bool PawnCannotBePromoted() =>
-        color == Color.WHITE ?
-            tile.i != 7 :
-            tile.i != 0;
 }
