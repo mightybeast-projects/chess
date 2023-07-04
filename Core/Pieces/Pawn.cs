@@ -33,9 +33,10 @@ public class Pawn : Piece
 
         ConstructorInfo ctor = pieceType.GetConstructor(ctorTypes);
         object pieceObj = ctor?.Invoke(ctorArgs);
-        Piece piece = (Piece)pieceObj!;
+        Piece newPiece = (Piece)pieceObj!;
 
-        pawnBoard.AddPiece(piece);
+        pawnBoard.AddPiece(newPiece);
+        newPiece.board.lastMovedPiece = newPiece;
     }
 
     internal bool IsAvailableForPromotion() =>

@@ -8,6 +8,7 @@ public class Board
     public readonly Tile[,] grid;
     public List<Piece> whitePieces => piecesDirector.whitePieces;
     public List<Piece> blackPieces => piecesDirector.blackPieces;
+    public Piece lastMovedPiece;
 
     internal King whiteKing => whitePieces.OfType<King>().FirstOrDefault();
     internal King blackKing => blackPieces.OfType<King>().FirstOrDefault();
@@ -38,6 +39,11 @@ public class Board
 
         return blackPieces.Contains(piece);
     }
+
+    public bool LastMovedPieceIsAPawnAvailableForPromotion() =>
+        lastMovedPiece is not null &&
+        lastMovedPiece.GetType() == typeof(Pawn) &&
+        ((Pawn)lastMovedPiece).IsAvailableForPromotion();
 
     internal Tile GetClampedTile(int i, int j)
     {

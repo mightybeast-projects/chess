@@ -8,7 +8,6 @@ public class Game
 {
     public readonly Board board;
     public Player currentPlayer;
-    public Piece lastMovedPiece;
 
     internal readonly Player whitePlayer;
     internal readonly Player blackPlayer;
@@ -37,7 +36,7 @@ public class Game
 
     public void HandlePlayerMove(string piecePosition, string targetPosition)
     {
-        if (LastMovedPieceIsAPawnAvailableForPromotion())
+        if (board.LastMovedPieceIsAPawnAvailableForPromotion())
             throw new MovedPawnIsAvailableForPromotionException();
 
         Piece piece = board.GetTile(piecePosition).piece;
@@ -49,26 +48,19 @@ public class Game
             throw new CannotMoveEnemyPieceException();
 
         piece.Move(targetPosition);
-        lastMovedPiece = piece;
 
-        if (!LastMovedPieceIsAPawnAvailableForPromotion())
+        if (!board.LastMovedPieceIsAPawnAvailableForPromotion())
             SwitchCurrentPlayer();
     }
 
     public void PromoteMovedPawnTo(Type promotionPieceType)
     {
-        Tile pieceTile = lastMovedPiece.tile;
+        Tile pieceTile = board.lastMovedPiece.tile;
 
-        ((Pawn)lastMovedPiece).Promote(promotionPieceType);
-        lastMovedPiece = pieceTile.piece;
+        ((Pawn)board.lastMovedPiece).Promote(promotionPieceType);
 
         SwitchCurrentPlayer();
     }
-
-    public bool LastMovedPieceIsAPawnAvailableForPromotion() =>
-        lastMovedPiece is not null &&
-        lastMovedPiece.GetType() == typeof(Pawn) &&
-        ((Pawn)lastMovedPiece).IsAvailableForPromotion();
 
     private void SwitchCurrentPlayer()
     {

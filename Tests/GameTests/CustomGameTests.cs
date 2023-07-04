@@ -43,11 +43,15 @@ internal class CustomGameTests : BoardTestFixtureSetUp
 
         game.HandlePlayerMove("a6", "a7");
 
-        Assert.IsFalse(game.LastMovedPieceIsAPawnAvailableForPromotion());
+        Assert.IsFalse(
+            game.board.LastMovedPieceIsAPawnAvailableForPromotion()
+        );
 
         game.HandlePlayerMove("h8", "h7");
 
-        Assert.IsFalse(game.LastMovedPieceIsAPawnAvailableForPromotion());
+        Assert.IsFalse(
+            game.board.LastMovedPieceIsAPawnAvailableForPromotion()
+        );
     }
 
     [Test]
