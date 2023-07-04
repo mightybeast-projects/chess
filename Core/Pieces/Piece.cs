@@ -55,6 +55,8 @@ public abstract class Piece
 
     protected virtual void HandlePositionChange()
     {
+        board.previousState = board;
+
         if (!targetTile.isEmpty)
             board.RemovePiece(targetTile.piece);
 

@@ -9,6 +9,7 @@ namespace Chess.Tests.Pieces;
 [TestFixture]
 internal class MoveTests : BoardTestFixtureSetUp
 {
+    private Board preMoveBoardState;
     private List<Tile> preMoveLegalMoves;
 
     [Test]
@@ -18,6 +19,7 @@ internal class MoveTests : BoardTestFixtureSetUp
 
         board.AddPiece(piece);
 
+        preMoveBoardState = board;
         preMoveLegalMoves = piece.legalMoves;
 
         piece.Move("d3");
@@ -29,6 +31,7 @@ internal class MoveTests : BoardTestFixtureSetUp
         Assert.AreEqual(board.GetTile("d3").piece, piece);
         Assert.IsTrue(piece.hasMoved);
         Assert.AreNotEqual(piece.legalMoves, preMoveLegalMoves);
+        Assert.AreEqual(preMoveBoardState, board.previousState);
     }
 
     [Test]
@@ -38,6 +41,7 @@ internal class MoveTests : BoardTestFixtureSetUp
 
         board.AddPiece(piece);
 
+        preMoveBoardState = board;
         preMoveLegalMoves = piece.legalMoves;
 
         Assert.Throws<IllegalMoveException>(() => piece.Move("a3"));
@@ -49,6 +53,7 @@ internal class MoveTests : BoardTestFixtureSetUp
         Assert.AreNotEqual(board.GetTile("a3").piece, piece);
         Assert.IsFalse(piece.hasMoved);
         Assert.AreEqual(preMoveLegalMoves, piece.legalMoves);
+        Assert.AreNotEqual(preMoveBoardState, board.previousState);
     }
 
     [Test]

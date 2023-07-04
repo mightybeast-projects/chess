@@ -21,6 +21,7 @@ internal class BoardSetupTests : BoardTestFixtureSetUp
         Assert.AreEqual(16, board.blackPieces.Count);
         Assert.NotNull(board.whiteKing);
         Assert.NotNull(board.blackKing);
+        Assert.IsNull(board.previousState);
     }
 
     private void AssertPieces(Color color, int pawnRowIndex, int pieceRowIndex)
