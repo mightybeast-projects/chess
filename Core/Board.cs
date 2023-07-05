@@ -12,7 +12,6 @@ public class Board
 
     internal King whiteKing => whitePieces.OfType<King>().FirstOrDefault();
     internal King blackKing => blackPieces.OfType<King>().FirstOrDefault();
-    internal Board previousState;
 
     private readonly PiecesDirector piecesDirector;
 

@@ -31,7 +31,6 @@ internal class MoveTests : BoardTestFixtureSetUp
         Assert.AreEqual(board.GetTile("d3").piece, piece);
         Assert.IsTrue(piece.hasMoved);
         Assert.AreNotEqual(piece.legalMoves, preMoveLegalMoves);
-        Assert.AreEqual(preMoveBoardState, board.previousState);
     }
 
     [Test]
@@ -53,7 +52,6 @@ internal class MoveTests : BoardTestFixtureSetUp
         Assert.AreNotEqual(board.GetTile("a3").piece, piece);
         Assert.IsFalse(piece.hasMoved);
         Assert.AreEqual(preMoveLegalMoves, piece.legalMoves);
-        Assert.AreNotEqual(preMoveBoardState, board.previousState);
     }
 
     [Test]
