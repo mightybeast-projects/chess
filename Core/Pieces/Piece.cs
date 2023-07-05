@@ -5,16 +5,15 @@ namespace Chess.Core.Pieces;
 public abstract class Piece
 {
     public readonly Color color;
-
     public Tile tile { get; internal set; }
     public Board board { get; internal set; }
-    public bool hasMoved { get; internal set; }
+    public bool hasMoved { get; private set; }
     public List<Tile> legalMoves =>
         GetLegalMoves().Where(tile => tile != null).ToList();
     public List<Tile> tilesUnderAttack =>
         GetTilesUnderAttack().Where(tile => tile != null).ToList();
 
-    protected Tile targetTile;
+    private Tile targetTile;
 
     public Piece(Tile tile, Color color)
     {

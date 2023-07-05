@@ -7,8 +7,8 @@ public class Tile
     public readonly Color color;
     public readonly int i;
     public readonly int j;
-    public Piece piece;
-    public string notation { get; private set; }
+    public readonly string notation;
+    public Piece piece { get; internal set; }
     public bool isEmpty => piece is null;
 
     public Tile(int i, int j, Color color)
@@ -17,11 +17,6 @@ public class Tile
         this.j = j;
         this.color = color;
 
-        ParseNotation(i, j);
-    }
-
-    private void ParseNotation(int i, int j)
-    {
         char letter = (char)(j + 65);
         int number = i + 1;
         notation = letter.ToString().ToLower() + number;

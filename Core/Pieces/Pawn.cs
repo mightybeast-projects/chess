@@ -5,7 +5,7 @@ namespace Chess.Core.Pieces;
 
 public class Pawn : Piece
 {
-    internal bool hasMovedTwoTiles;
+    internal bool hasMovedTwoTiles { get; private set; }
 
     private int colorMultiplier => color == Color.WHITE ? 1 : -1;
     private bool pathBlocked;

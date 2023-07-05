@@ -7,7 +7,7 @@ namespace Chess.Core;
 public class Game
 {
     public readonly Board board;
-    public Player currentPlayer;
+    public Player currentPlayer { get; private set; }
 
     internal readonly Player whitePlayer;
     internal readonly Player blackPlayer;

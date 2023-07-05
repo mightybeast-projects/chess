@@ -8,7 +8,7 @@ public class Board
     public readonly Tile[,] grid;
     public List<Piece> whitePieces => piecesDirector.whitePieces;
     public List<Piece> blackPieces => piecesDirector.blackPieces;
-    public Piece lastMovedPiece;
+    public Piece lastMovedPiece { get; internal set; }
 
     internal King whiteKing => whitePieces.OfType<King>().FirstOrDefault();
     internal King blackKing => blackPieces.OfType<King>().FirstOrDefault();
