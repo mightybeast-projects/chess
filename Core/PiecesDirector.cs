@@ -30,7 +30,6 @@ internal class PiecesDirector
 
     internal void RemovePiece(Piece piece)
     {
-        piece.board = null;
         piece.tile.piece = null;
 
         if (piece.color == Color.WHITE)

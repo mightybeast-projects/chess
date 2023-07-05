@@ -6,7 +6,7 @@ public abstract class Piece
 {
     public readonly Color color;
 
-    public Tile tile { get; protected set; }
+    public Tile tile { get; internal set; }
     public Board board { get; internal set; }
     public bool hasMoved { get; internal set; }
     public List<Tile> legalMoves =>

@@ -24,17 +24,17 @@ public class King : Piece
         {
             new CastlingMoveData()
             {
-                colorK = color == Color.WHITE ? 1 : 8,
-                rookPositionCol = "h",
-                passingTilesCols = new[] { "f", "g" }
+                rookPositionCol = "h" + colorK,
+                passingTilesCols = new[] { "f" + colorK, "g" + colorK }
             },
             new CastlingMoveData()
             {
-                colorK = color == Color.WHITE ? 1 : 8,
-                rookPositionCol = "a",
-                passingTilesCols = new[] { "d", "c" }
+                rookPositionCol = "a" + colorK,
+                passingTilesCols = new[] { "d" + colorK, "c" + colorK }
             }
         };
+
+    private int colorK => color == Color.WHITE ? 1 : 8;
 
     public King(Tile tile, Color color) : base(tile, color) { }
 
@@ -89,20 +89,13 @@ public class King : Piece
 
     private Tile GetCastlingMove(CastlingMoveData castlingMoveData)
     {
-        string rookPositionStr =
-            castlingMoveData.rookPositionCol + castlingMoveData.colorK;
+        string rookPositionStr = castlingMoveData.rookPositionCol;
+        Piece piece = board.GetTile(rookPositionStr).piece;
 
-        Tile rookTile = board.GetTile(rookPositionStr);
-        Piece rook = rookTile.piece;
-
-        if (RookCannotCastle(rook) ||
-            castlingMoveData.passingTilesCols
-                .Any(tile => TileIsNotPassable(
-                    board.GetTile(tile + castlingMoveData.colorK))))
+        if (RookCannotCastle(piece) || AnyTileIsNotPassableIn(castlingMoveData))
             return null;
 
-        string castlingMoveNotation =
-            castlingMoveData.passingTilesCols[1] + castlingMoveData.colorK;
+        string castlingMoveNotation = castlingMoveData.passingTilesCols[1];
 
         return board.GetTile(castlingMoveNotation);
     }
@@ -114,16 +107,13 @@ public class King : Piece
 
         CastlingMoveData data =
             castlingMovesDatas
-            .Find(data =>
-                data.passingTilesCols[1] + data.colorK == tile.notation);
+            .Find(data => data.passingTilesCols[1] == tile.notation);
 
         if (data.Equals(default(CastlingMoveData)))
             return;
 
-        Tile rookOriginalTile =
-            board.GetTile(data.rookPositionCol + data.colorK);
-        Tile rookTargetTile =
-            board.GetTile(data.passingTilesCols[0] + data.colorK);
+        Tile rookOriginalTile = board.GetTile(data.rookPositionCol);
+        Tile rookTargetTile = board.GetTile(data.passingTilesCols[0]);
 
         Piece rook = rookOriginalTile.piece;
 
@@ -136,8 +126,8 @@ public class King : Piece
     private bool CheckForCheck()
     {
         foreach (Piece enemyPiece in GetEnemyPieces())
-            foreach (Tile move in enemyPiece.tilesUnderAttack)
-                if (tile == move)
+            foreach (Tile tileUnderAttack in enemyPiece.tilesUnderAttack)
+                if (tile == tileUnderAttack)
                     return true;
 
         return false;
@@ -183,17 +173,20 @@ public class King : Piece
     private List<Piece> GetAllyPieces() =>
         color == Color.WHITE ? board.whitePieces : board.blackPieces;
 
-    private bool RookCannotCastle(Piece rook) =>
-        rook is null ||
-        rook.GetType() != typeof(Rook) ||
-        rook.hasMoved;
+    private bool AnyTileIsNotPassableIn(CastlingMoveData data) =>
+        data.passingTilesCols.Any(tile =>
+            TileIsNotPassable(board.GetTile(tile)));
+
+    private bool RookCannotCastle(Piece piece) =>
+        piece is null ||
+        piece.GetType() != typeof(Rook) ||
+        piece.hasMoved;
 
     private bool TileIsNotPassable(Tile tile) =>
         !tile.isEmpty || TileIsUnderAttack(tile);
 
     private struct CastlingMoveData
     {
-        internal int colorK;
         internal string rookPositionCol;
         internal string[] passingTilesCols;
     }

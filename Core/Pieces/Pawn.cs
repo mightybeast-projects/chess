@@ -24,22 +24,13 @@ public class Pawn : Piece
             throw new CannotPromotePawnException();
 
         Tile pawnTile = tile;
-        Board pawnBoard = board;
 
         board.RemovePiece(this);
 
-        Type[] ctorTypes = new[] {
-            typeof(Tile), typeof(Color)
-        };
-        object[] ctorArgs = new object[] {
-            pawnTile, color
-        };
+        Piece newPiece = GetPromotionPiece(pieceType, pawnTile);
 
-        ConstructorInfo ctor = pieceType.GetConstructor(ctorTypes);
-        object pieceObj = ctor?.Invoke(ctorArgs);
-        Piece newPiece = (Piece)pieceObj!;
+        board.AddPiece(newPiece);
 
-        pawnBoard.AddPiece(newPiece);
         newPiece.board.lastMovedPiece = newPiece;
     }
 
@@ -69,7 +60,7 @@ public class Pawn : Piece
 
         if (NeighbourPawnIsCapturableEnPassant(0, 1))
             pawnHints.Add(GetTileUnderAttack(colorMultiplier, 1));
-        if (NeighbourPawnIsCapturableEnPassant(0, -1))
+        else if (NeighbourPawnIsCapturableEnPassant(0, -1))
             pawnHints.Add(GetTileUnderAttack(colorMultiplier, -1));
 
         return pawnHints;
@@ -111,6 +102,19 @@ public class Pawn : Piece
     private IEnumerable<Tile> GetCaptureLegalMoves() =>
         tilesUnderAttack.ConvertAll(tile =>
             TileIsOccupiedByEnemy(tile) ? tile : null);
+
+    private Piece GetPromotionPiece(Type pieceType, Tile pawnTile)
+    {
+        Type[] ctorTypes = new[] {
+            typeof(Tile), typeof(Color)
+        };
+        object[] ctorArgs = new object[] {
+            pawnTile, color
+        };
+
+        ConstructorInfo ctor = pieceType.GetConstructor(ctorTypes);
+        return (Piece)ctor?.Invoke(ctorArgs);
+    }
 
     private bool NeighbourPawnIsCapturableEnPassant(int i, int j)
     {
