@@ -8,11 +8,11 @@ public abstract class Piece
 
     public Tile tile { get; protected set; }
     public Board board { get; internal set; }
+    public bool hasMoved { get; internal set; }
     public List<Tile> legalMoves =>
         GetLegalMoves().Where(tile => tile != null).ToList();
     public List<Tile> tilesUnderAttack =>
         GetTilesUnderAttack().Where(tile => tile != null).ToList();
-    public bool hasMoved;
 
     private Tile targetTile;
 
