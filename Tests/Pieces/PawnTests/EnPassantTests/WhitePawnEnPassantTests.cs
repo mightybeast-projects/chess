@@ -73,6 +73,47 @@ internal class WhitePawnEnPassantTests : BoardTestFixtureSetUp
         AssertLegalMovesDoesNotHaveEnPassant();
     }
 
+    [Test]
+    public void WhitePawn_CapturedRightEnemyPawn_OnSuccessfulEnPassantMove()
+    {
+        AddPawns();
+
+        c7blackPawn.Move("c5");
+        whitePawn.Move("c6");
+
+        Assert.AreEqual(1, board.blackPieces.Count);
+        Assert.IsTrue(board.GetTile("c5").isEmpty);
+    }
+
+    [Test]
+    public void WhitePawn_CapturedLeftEnemyPawn_OnSuccessfulEnPassantMove()
+    {
+        AddPawns();
+
+        a7blackPawn.Move("a5");
+        whitePawn.Move("a6");
+
+        Assert.AreEqual(1, board.blackPieces.Count);
+        Assert.IsTrue(board.GetTile("a5").isEmpty);
+    }
+
+    [Test]
+    public void WhitePawn_DoesNotCaptureEnemyPawn_OnNonEnPassantMove()
+    {
+        AddPawns();
+
+        Pawn c6blackPawn = new Pawn(board.GetTile("c6"), Color.BLACK);
+        Pawn c5blackPawn = new Pawn(board.GetTile("c5"), Color.BLACK);
+
+        board.AddPiece(c6blackPawn);
+        board.AddPiece(c5blackPawn);
+
+        whitePawn.Move("c6");
+
+        Assert.AreEqual(3, board.blackPieces.Count);
+        Assert.IsFalse(board.GetTile("c5").isEmpty);
+    }
+
     private void AddPawns()
     {
         whitePawn = new Pawn(board.GetTile("b5"), Color.WHITE);

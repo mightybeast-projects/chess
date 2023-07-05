@@ -1,4 +1,3 @@
-using System.Numerics;
 using System.Reflection;
 using Chess.Core.Exceptions;
 
@@ -39,12 +38,19 @@ public class Pawn : Piece
 
     protected override void HandlePositionChange()
     {
+        Piece preMoveLastMovedPiece = board.lastMovedPiece;
         Tile originalTile = tile;
 
         base.HandlePositionChange();
 
         if (Math.Abs(originalTile.i - tile.i) == 2)
             hasMovedTwoTiles = true;
+
+        board.lastMovedPiece = preMoveLastMovedPiece;
+
+        CheckForEnPassantMove();
+
+        board.lastMovedPiece = this;
     }
 
     protected override IEnumerable<Tile> GetLegalMoves()
@@ -97,6 +103,15 @@ public class Pawn : Piece
             return null;
 
         return board.grid[tile.i + i, tile.j + j];
+    }
+
+    private void CheckForEnPassantMove()
+    {
+        if (!NeighbourPawnIsCapturableEnPassant(-colorMultiplier, 0))
+            return;
+
+        Tile enemyPawnTile = board.grid[tile.i + (-colorMultiplier), tile.j];
+        board.RemovePiece(enemyPawnTile.piece);
     }
 
     private IEnumerable<Tile> GetCaptureLegalMoves() =>

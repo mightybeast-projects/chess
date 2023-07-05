@@ -14,7 +14,7 @@ public abstract class Piece
     public List<Tile> tilesUnderAttack =>
         GetTilesUnderAttack().Where(tile => tile != null).ToList();
 
-    private Tile targetTile;
+    protected Tile targetTile;
 
     public Piece(Tile tile, Color color)
     {
@@ -55,12 +55,12 @@ public abstract class Piece
 
     protected virtual void HandlePositionChange()
     {
-        board.lastMovedPiece = this;
-
         if (!targetTile.isEmpty)
             board.RemovePiece(targetTile.piece);
 
         ChangeTile(targetTile);
+
+        board.lastMovedPiece = this;
     }
 
     protected bool KingIsUnderCheckAfterMoveOn(Tile tile)
