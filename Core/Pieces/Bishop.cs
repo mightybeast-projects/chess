@@ -4,7 +4,7 @@ namespace Chess.Core.Pieces;
 
 public class Bishop : SlidingPiece
 {
-    protected override List<Vector2> tilesDirections => new List<Vector2>()
+    protected override List<Vector2> legalMovesDirections => new List<Vector2>()
     {
         new Vector2(1, 1),
         new Vector2(1, -1),

@@ -7,7 +7,7 @@ public class King : Piece
     public bool isCheckmated => CheckForCheckmate();
     public bool isInStalemate => CheckForStalemate();
 
-    private List<Vector2> tilesDirections => new List<Vector2>()
+    protected override List<Vector2> legalMovesDirections => new List<Vector2>()
     {
         new Vector2(1, -1),
         new Vector2(1, 1),
@@ -42,7 +42,7 @@ public class King : Piece
         visitor.VisitKing(this);
 
     protected override IEnumerable<Tile> GetLegalMoves() =>
-        tilesDirections
+        legalMovesDirections
         .ConvertAll(direction =>
             GetLegalMove((int)direction.X, (int)direction.Y))
         .Union(GetCastlingMoves());
@@ -61,7 +61,7 @@ public class King : Piece
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>
-        tilesDirections.ConvertAll(direction =>
+        legalMovesDirections.ConvertAll(direction =>
             GetTileUnderAttack((int)direction.X, (int)direction.Y));
 
     protected override Tile GetTileUnderAttack(int i, int j)

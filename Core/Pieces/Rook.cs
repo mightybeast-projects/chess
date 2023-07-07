@@ -4,7 +4,7 @@ namespace Chess.Core.Pieces;
 
 public class Rook : SlidingPiece
 {
-    protected override List<Vector2> tilesDirections => new List<Vector2>()
+    protected override List<Vector2> legalMovesDirections => new List<Vector2>()
     {
         new Vector2(1, 0),
         new Vector2(-1, 0),

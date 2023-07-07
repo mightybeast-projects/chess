@@ -4,7 +4,7 @@ namespace Chess.Core.Pieces;
 
 public class Knight : Piece
 {
-    private List<Vector2> tilesDirections => new List<Vector2>()
+    protected override List<Vector2> legalMovesDirections => new List<Vector2>()
     {
         new Vector2(2, -1),
         new Vector2(2, 1),
@@ -22,7 +22,7 @@ public class Knight : Piece
         visitor.VisitKnight(this);
 
     protected override IEnumerable<Tile> GetLegalMoves() =>
-        tilesDirections.ConvertAll(direction =>
+        legalMovesDirections.ConvertAll(direction =>
             GetLegalMove((int)direction.X, (int)direction.Y));
 
     protected override Tile GetLegalMove(int i, int j)
@@ -40,7 +40,7 @@ public class Knight : Piece
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>
-        tilesDirections.ConvertAll(direction =>
+        legalMovesDirections.ConvertAll(direction =>
             GetTileUnderAttack((int)direction.X, (int)direction.Y));
 
     protected override Tile GetTileUnderAttack(int i, int j)

@@ -1,3 +1,4 @@
+using System.Numerics;
 using Chess.Core.Exceptions;
 
 namespace Chess.Core.Pieces;
@@ -12,6 +13,8 @@ public abstract class Piece
         GetLegalMoves().Where(tile => tile != null).ToList();
     public List<Tile> tilesUnderAttack =>
         GetTilesUnderAttack().Where(tile => tile != null).ToList();
+
+    protected abstract List<Vector2> legalMovesDirections { get; }
 
     private Tile targetTile;
 

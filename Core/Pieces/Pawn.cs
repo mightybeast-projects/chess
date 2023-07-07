@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Reflection;
 using Chess.Core.Exceptions;
 
@@ -6,6 +7,12 @@ namespace Chess.Core.Pieces;
 public class Pawn : Piece
 {
     internal bool hasMovedTwoTiles { get; private set; }
+
+    protected override List<Vector2> legalMovesDirections => new List<Vector2>()
+    {
+        new Vector2(colorMultiplier, 0),
+        new Vector2(colorMultiplier * 2, 0)
+    };
 
     private int colorMultiplier => color == Color.WHITE ? 1 : -1;
     private bool pathBlocked;
@@ -57,10 +64,13 @@ public class Pawn : Piece
     {
         List<Tile> pawnHints = new List<Tile>();
 
-        pawnHints.Add(GetLegalMove(colorMultiplier, 0));
+        Vector2 oneTileMove = legalMovesDirections[0];
+        Vector2 twoTilesMove = legalMovesDirections[1];
+
+        pawnHints.Add(GetLegalMove((int)oneTileMove.X, (int)oneTileMove.Y));
 
         if (CanMoveTwoTiles())
-            pawnHints.Add(GetLegalMove(colorMultiplier * 2, 0));
+            pawnHints.Add(GetLegalMove((int)twoTilesMove.X, (int)twoTilesMove.Y));
 
         pawnHints.AddRange(GetCaptureLegalMoves());
 

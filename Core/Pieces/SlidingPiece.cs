@@ -4,14 +4,12 @@ namespace Chess.Core.Pieces;
 
 public abstract class SlidingPiece : Piece
 {
-    protected abstract List<Vector2> tilesDirections { get; }
-
     private bool pathBlocked;
 
     public SlidingPiece(Tile tile, Color color) : base(tile, color) { }
 
     protected override IEnumerable<Tile> GetLegalMoves() =>
-        tilesDirections.SelectMany(direction =>
+        legalMovesDirections.SelectMany(direction =>
             GetLegalMovesInDirection((int)direction.X, (int)direction.Y));
 
     protected override Tile GetLegalMove(int i, int j)
@@ -32,7 +30,7 @@ public abstract class SlidingPiece : Piece
     }
 
     protected override IEnumerable<Tile> GetTilesUnderAttack() =>
-        tilesDirections.SelectMany(direction =>
+        legalMovesDirections.SelectMany(direction =>
             GetTilesUnderAttackInDirection((int)direction.X, (int)direction.Y));
 
     protected override Tile GetTileUnderAttack(int i, int j)
