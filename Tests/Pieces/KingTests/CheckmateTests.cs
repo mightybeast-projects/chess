@@ -1,4 +1,3 @@
-using Chess.Core;
 using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
 

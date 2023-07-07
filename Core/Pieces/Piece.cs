@@ -14,7 +14,7 @@ public abstract class Piece
     public List<Tile> tilesUnderAttack =>
         GetTilesUnderAttack().Where(tile => tile != null).ToList();
 
-    protected abstract List<Vector2> legalMovesDirections { get; }
+    protected virtual List<Vector2> legalMovesDirections { get; }
 
     private Tile targetTile;
 

@@ -1,5 +1,3 @@
-using System.Numerics;
-
 namespace Chess.Core.Pieces;
 
 public abstract class SlidingPiece : Piece

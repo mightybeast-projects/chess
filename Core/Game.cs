@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Chess.Core.Exceptions;
 using Chess.Core.Pieces;
 

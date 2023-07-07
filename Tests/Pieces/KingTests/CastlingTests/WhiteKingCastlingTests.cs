@@ -1,5 +1,4 @@
 using Chess.Core;
-using Chess.Core.Exceptions;
 using Chess.Core.Pieces;
 using Chess.Tests.TestFixtureSetUps;
 using NUnit.Framework;
