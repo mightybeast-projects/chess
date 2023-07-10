@@ -25,6 +25,10 @@ public class Board
 
     public void SetUp() => piecesDirector.SetupPieces();
 
+    public void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
+
+    public void RemovePiece(Piece piece) => piecesDirector.RemovePiece(piece);
+
     public Tile GetTile(string tileNotation)
     {
         try { return ParseTileName(tileNotation); }
@@ -51,10 +55,6 @@ public class Board
 
         return grid[clampedI, clampedJ];
     }
-
-    internal void AddPiece(Piece piece) => piecesDirector.AddPiece(piece);
-
-    internal void RemovePiece(Piece piece) => piecesDirector.RemovePiece(piece);
 
     private void InitializeGrid()
     {
