@@ -14,15 +14,15 @@ public class Game
     public Game()
     {
         board = new Board();
-        whitePlayer = new Player(Color.WHITE);
-        blackPlayer = new Player(Color.BLACK);
+        whitePlayer = new Player(board, Color.WHITE);
+        blackPlayer = new Player(board, Color.BLACK);
     }
 
     public Game(Board board, Color currentPlayerColor)
     {
         this.board = board;
-        whitePlayer = new Player(Color.WHITE);
-        blackPlayer = new Player(Color.BLACK);
+        whitePlayer = new Player(board, Color.WHITE);
+        blackPlayer = new Player(board, Color.BLACK);
         currentPlayer = currentPlayerColor == Color.WHITE ?
             whitePlayer : blackPlayer;
     }
