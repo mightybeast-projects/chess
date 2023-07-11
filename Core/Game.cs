@@ -57,8 +57,6 @@ public class Game
 
     public void PromoteMovedPawnTo(Type promotionPieceType)
     {
-        Tile pieceTile = board.lastMovedPiece.tile;
-
         ((Pawn)board.lastMovedPiece).Promote(promotionPieceType);
 
         SwitchCurrentPlayer();
