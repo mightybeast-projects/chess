@@ -16,6 +16,7 @@ internal class GeneralGameTests : GameTestFixtureSetUp
         Assert.IsNotNull(game.whitePlayer);
         Assert.IsNotNull(game.blackPlayer);
         Assert.AreEqual(game.currentPlayer.color, Color.WHITE);
+        Assert.IsFalse(game.isOver);
     }
 
     [Test]

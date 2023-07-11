@@ -15,6 +15,7 @@ internal class CheckmateTests : GameTestFixtureSetUp
         game.HandlePlayerMove("d8", "h4");
 
         Assert.IsTrue(game.board.whiteKing.isCheckmated);
+        Assert.IsTrue(game.isOver);
     }
 
     [Test]
@@ -27,5 +28,6 @@ internal class CheckmateTests : GameTestFixtureSetUp
         game.HandlePlayerMove("d1", "h5");
 
         Assert.IsTrue(game.board.blackKing.isCheckmated);
+        Assert.IsTrue(game.isOver);
     }
 }

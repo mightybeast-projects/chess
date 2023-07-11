@@ -7,6 +7,9 @@ public class Game
 {
     public readonly Board board;
     public Player currentPlayer { get; private set; }
+    public bool isOver =>
+        currentPlayer.king.isCheckmated ||
+        currentPlayer.king.isInStalemate;
 
     internal readonly Player whitePlayer;
     internal readonly Player blackPlayer;
